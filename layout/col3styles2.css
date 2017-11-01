@@ -30,9 +30,13 @@ body {
 }
 
 /* Change color on hover */
-.topnav a:hover {
+.topnav a:hover:not(.active) {
     background-color: #ddd;
     color: black;
+}
+
+.active {
+    background-color: #4CAF50;
 }
 
 /* Create three equal columns that float next to each other */
