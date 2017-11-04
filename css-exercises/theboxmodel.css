@@ -1,5 +1,3 @@
-
-
 body {
   background-color: white;
   font-family: 'Raleway', sans-serif;
@@ -41,9 +39,12 @@ body {
 }
 
 #main {
+  margin: 0 auto;
   padding: 40px;
   text-align: center;
-  margin: 0 auto;
+  width: 400px;
+  height: 1000px;
+  overflow: scroll;
 }
 
 h1 {
@@ -76,15 +77,11 @@ p {
   line-height: 48px;
   margin-top: 60px;
   padding: 10px 20px;
-  min-width: 200px;
-  max-width: 800px;
-  min-height: 200px;
-  max-height: 300px;
 }
 
 .pull-quote {
-  width: 350px;
   margin: 0 auto;
+  width: 400px;
 }
 
 .byline {
