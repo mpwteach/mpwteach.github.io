@@ -2,6 +2,15 @@ h1 {
   text-align: center;
 }
 
+
+/* -- header -- */
+.header {
+  background-color: lightgray;  
+}
+
+
+/* -- nav bar styling -- */
+
 ul.topnav {
     list-style-type: none;
     margin: 0;
