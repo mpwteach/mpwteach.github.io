@@ -1,0 +1,10 @@
+/* CSS3 */
+.bgimage {
+  background: url("/images/") no-repeat center fixed;
+  
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  
+  background-size: cover;
+}
