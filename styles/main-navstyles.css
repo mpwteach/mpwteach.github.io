@@ -7,8 +7,7 @@ body {
 }
 
 h1 {
-  padding-top:20px;
-  text-align: center;
+  margin:0;
 }
 
 h2 {
@@ -16,11 +15,13 @@ h2 {
 }
 
 
-/* -- header -- */
+/* -- header box -- */
 .header {
   background-color: lightgray;  
+  text-align: center;
+  padding-top:10px;
+  padding-bottom:10px;
 }
-
 
 /* -- nav bar styling -- */
 
