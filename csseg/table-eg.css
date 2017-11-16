@@ -1,0 +1,34 @@
+/* basic table style with blac borders */
+.tablestyle1 {
+  border-collapse: collapse;
+  border: 1px solid gray;
+  width: 100%;
+}
+
+.tablestyle1 th, td {
+  border: 1px solid gray;
+  padding: 8px;
+}
+
+/* nicer table */
+.tablestyle2 {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tablestyle2 th, td {
+  border: 1px solid gray;
+  padding: 8px;
+} 
+
+.tablestyle2 th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+.tablestyle2 tr:nth-child(even) {
+  background-color: #dddddd;
+}
