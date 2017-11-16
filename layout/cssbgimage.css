@@ -1,6 +1,6 @@
 /* CSS3 */
 .bgimage {
-  background: url("/images/") no-repeat center fixed;
+  background: url("/images/cloud-backgrounds.jpg") no-repeat center fixed;
   
   -webkit-background-size: cover;
   -moz-background-size: cover;
