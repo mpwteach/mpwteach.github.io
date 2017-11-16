@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>cssboxlayout4</title>
+    <link rel="stylesheet" type="text/css" href="cssboxlayout-eg4.css">
+  </head>
+  
+  <body class=bodybox>
+
+    <h1>Box Layout Examples</h1>
+
+    <div class=topdiv>
+      <p>I'm in the top div</p>
+  
+      <div>
+         <p>i'm on my own</p>
+      </div>
+      
+      <div class="divbox divboxsized">
+         <p>i'm on my own<br>and sized</p>
+      </div>
+      
+      <div class="divbox divboxfit">
+         <p>i'm on my own<br>and fit</p>
+      </div>
+      
+      <div class="divbox divboxsized divboxcenter">
+         <p>i'm on my own<br>in the center</p>
+      </div>
+      
+      <h2>CSS - Using float/clear</h2>
+      <div class=floatcontainer>
+        <div class="divbox divboxsized divboxfloat"><p>i'm sized b1</p></div>     
+        <div class="divbox divboxsized divboxfloat"><p>i'm sized b2</p></div>
+        <div class="divbox divboxsized divboxfloat"><p>i'm sized b3</p></div>
+      </div>
+      
+      <h2>CSS - Using inline-block</h2>
+      <div class="divbox divboxsized divboxinline"><p>i'm sized b1</p></div>     
+      <div class="divbox divboxsized divboxinline"><p>i'm sized b2</p></div>
+      <div class="divbox divboxsized divboxinline"><p>i'm sized b3</p></div>
+
+      <h2>CSS3 - Using a Flexbox</h2>
+      <div class=boxcontainer>
+        <div class="left divbox divboxinline"><p>b1</p></div>     
+        <div class="middle divbox divboxinline"><p>b2</p></div>
+        <div class="right divbox divboxinline"><p>b3</p></div>
+      </div>
+      
+    </div>
+  </body>
+</html>
