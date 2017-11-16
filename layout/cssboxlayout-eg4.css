@@ -2,24 +2,31 @@
     box-sizing: border-box;
 }
 
-h1, h2 {
+h1 {
+  text-align: center;
+}
+
+h2 {
   padding-left: 10px;
 }
 
 .bodybox {
   border: 2px solid red;
+  margin: 0;
+  padding:0;
 }
 
 
 /* the main div in the body */
 .topdiv {
   border: 2px solid blue;
+  margin:5px;
 }
 
 /* basic div box */
 .divbox {
   border: 2px solid yellow;
-  margin:10px;
+  margin: 10px;
 }
 
 .divbox p {
@@ -29,15 +36,13 @@ h1, h2 {
 
 /* --- styles added to basic boxes --- */
 
-
 .divboxsized {
   width:200px;
-  height:75px;
+  height:100px;
 }
 
 .divboxfit {
   width:100%;
-  height:75px;
 }
 
 .divboxcenter {
@@ -49,36 +54,38 @@ h1, h2 {
 }
 
 /* -- using float/clear -- */
-.floatcontainer:after {
-    content: "";
-    display: table;
-    clear: both;
+.divboxfloat {
+  float: left;
 }
 
-.divboxfloat {
-  float:left;
+.floatclear {
+  clear: left;
 }
 
 /* -- using a flex box -- */
-.boxcontainer {
+.fboxcontainer {
   height: 100%;
   width: 100%;
   display: flex;
 }
 
-.left, .middle, .right {
+.fboxcenter {
+  justify-content: center;
+}
+
+.leftcol, .middlecol, .rightcol {
   margin:10px;
 }
-.left {
+.leftcol {
   width: 25%;
   background-color: blue;
 
 }
-.middle {
+.middlecol {
   width: 50%;
   background-color: green;
 }
-.right {
+.rightcol {
   width: 25%;
   background-color: yellow;
 }
