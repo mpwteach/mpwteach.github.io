@@ -3,10 +3,12 @@
 }
 
 body {
-  margin: 0;
+  margin: 0 auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 h1 {
+  color: #333333;
   margin:0;
 }
 
@@ -14,8 +16,9 @@ h2 {
   margin-left: 10px;
 }
 
+/* -- header and navbar -- */
 .bgimage {
-  background: url("/images/cloud-backgrounds.jpg") no-repeat center fixed;
+  background: url("https://mpwteach.github.io/images/cloud-backgrounds.jpg") no-repeat center fixed;
   
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -26,30 +29,29 @@ h2 {
 
 /* -- header box -- */
 .header {
-  background-color: lightgray;  
   text-align: center;
-  padding-top:20px;
+  padding-top:30px;
   padding-bottom:10px;
 }
 
 /* -- nav bar styling -- */
 
 ul.topnav {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 ul.topnav li {float: left;}
 
 ul.topnav li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 ul.topnav li a:hover:not(.active) {background-color: #111;}
@@ -59,6 +61,6 @@ ul.topnav li a.active {background-color: #4CAF50;}
 ul.topnav li.right {float: right;}
 
 @media screen and (max-width: 600px){
-    ul.topnav li.right, 
-    ul.topnav li {float: none;}
+  ul.topnav li.right, 
+  ul.topnav li {float: none;}
 }
