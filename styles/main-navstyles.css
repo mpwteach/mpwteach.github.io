@@ -14,6 +14,15 @@ h2 {
   margin-left: 10px;
 }
 
+.bgimage {
+  background: url("/images/cloud-backgrounds.jpg") no-repeat center fixed;
+  
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  
+  background-size: cover;
+}
 
 /* -- header box -- */
 .header {
