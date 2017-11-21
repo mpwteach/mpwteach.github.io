@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Muli|Quicksand');
+
+body {
+  margin: 100px;
+  font-family: Muli;
+}
+
+/*Subheading labels*/
+h4 {
+  font-family: Quicksand;
+}
+
+/*Table formatting*/
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: left;
+  padding: 10px;
+}
+
+table {
+  width: 100%
+}
+  
+th {
+  color: white;
+  background-color: #9966ff;
+}
+
+/*Main section heading*/
+.sectionheading {
+  font-family: Quicksand;
+  text-align: center;
+}
+
+/*Element heading*/
+.subheading {
+  font-family: Quicksand;
+  font-size: 20px;
+  color: white;
+  background-color: #9966ff;
+  padding: 10px;
+}
+
+/*Code block background*/
+.code {
+  background-color: #eee6ff;
+  border-left: 10px solid #b366ff;
+}
