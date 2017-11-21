@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>HTML Reference</title>
+  <link href="navigation.css" type="text/css" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="chang-htmlref.css">
+</head>
+
+<body>
+
+  <!--Navigation Bar-->
+  <ul class="navigation">
+    <li class="navigation"><a class="navigation" href="index.html">Home</a></li>
+    <li class="navigation"><a class="navigation" href="/exercises/index.html">Exercises</a></li>
+    <li class="navigation"><a class="navigation" href="/projects/index.html">Projects</a></li>
+    <li class="navigation"><a class="navigation active" href="html-reference.html">HTML Reference</a></li>
+    <li class="navigation"><a class="navigation" href="https://sites.google.com/sduhsd.net/ecsfall2017-changm3780/home" target="_blank">Portfolio</a></li>
+    <li class="navigation"><a class="navigation" href="https://www.w3schools.com/" target="_blank">W3 Schools</a></li>
+  </ul>
+  <!--End Navigation Bar-->
+
+  <h1 style="margin-top:80px;">HTML Reference</h1>
+  <p>This entire website is coded in HTML. But if you don't know HTML, you can't figure out how this website is made. For my own reference and yours, these are the basics of HTML.</p>
+
+<!-- This is the directory of HTML elements on this webpage -->
+  <h2>Directory</h2>
+  <table class="diref">
+
+    <tr>
+      <th>Name</th>
+      <th>Start Tag</th>
+      <th>End Tag</th>
+      <th>Example</th>
+    </tr>
+    <tr>
+      <td><a href="#boilerplate-code">Boilerplate Code</a></td>
+      <td><code>&lt;!DOCTYPE html> &lt;html> &lt;head> &lt;body></code></td>
+      <td><code>&lt;/html> &lt;/head> &lt;/body></code></td>
+      <td><a href="#boilerplate-code">See syntax example below.</a></td>
+    </tr>
+    <tr>
+      <td><a href="#body-commands">&lt;body> Commands</a></td>
+      <td><code>&lt;body></code></td>
+      <td><code>&lt;/body></code></td>
+      <td><code>&lt;body> &lt;p>This is a paragraph.&lt;/p> &lt;/body></code></td>
+    </tr>
+    <tr>
+      <td><a href="#headings">Headings</a></td>
+      <td><code>&lt;h1> &lt;h2> &lt;h3> &lt;h4> &lt;h5> &lt;h6></code></td>
+      <td><code>&lt;/h1> &lt;/h2> &lt;/h3> &lt;/h4> &lt;/h5> &lt;/h6></code></td>
+      <td><code>&lt;h1>This is a heading&lt;/h1></code></td>
+    </tr>
+    <tr>
+      <td><a href="#paragraphs">Paragraphs</a></td>
+      <td><code>&lt;p></code></td>
+      <td><code>&lt;/p></code></td>
+      <td><code>&lt;p>This is a paragraph.&lt;/p></code></td>
+    </tr>
+    <tr>
+      <td><a href="#comments">Comments</a></td>
+      <td><code>&lt;!--<code></td>
+      <td><code>--><code></td>
+      <td><code>&lt;!-- This is a comment! --></code></td>
+    </tr>
+    <tr>
+      <td><a href="#links">Links</a></td>
+      <td><code>&lt;a></code></td>
+      <td><code>&lt;/a></code></td>
+      <td><code>&lt;a href="https://iceila.github.io">Link&lt;/a></code></td>
+    </tr>
+    <tr>
+      <td><a href="#images">Images</a></td>
+      <td><code>&lt;img></code></td>
+      <td>none</td>
+      <td><code>&lt;img src="/images/Russet_potato_cultivar_with_sprouts.jpg"></code></td>
+    </tr>
+    <tr>
+      <td><a href="#lists">Lists</a></td>
+      <td><code>&lt;ol> &lt;ul> &lt;li></code></td>
+      <td><code>&lt;/ol> &lt;/ul> &lt;/li></code></td>
+      <td><code>&lt;ol> &lt;li>This is a list item.&lt;/li> &lt;/ol></code></td>
+    </tr>
+    <tr>
+      <td><a href="#tables">Tables</a></td>
+      <td><code>&lt;table> &lt;tr> &lt;th> &lt;td></code></td>
+      <td><code>&lt;/table> &lt;/tr> &lt;/th> &lt;/td></code></td>
+      <td><code>&lt;table> &lt;tr> &lt;th>This is a table header&lt;/th> &lt;/tr> &lt;/table></code></td>
+    </tr>
+    <tr>
+      <td><a href="#blocks">Blocks</a></td>
+      <td><code>&lt;div></code></td>
+      <td><code>&lt;/div></code></td>
+      <td><code>&lt;div> &lt;p>This paragraph is separated from other code by div.&lt;/p> &lt;/div></code></td>
+    </tr>
+
+  </table>
+<!-- End of directory table -->
+
+  <br>
+
+<!-- Standard HTML code beginnings -->
+
+  <h2 id="boilerplate-code">Boilerplate Code</h2> 
+    <a class="w3-link" href="https://www.w3schools.com/html/default.asp">https://www.w3schools.com/html/default.asp</a>
+  <p>The code below is the standard code needed to make anything related to HTML. It should be the first thing you type or paste into your HTML file.</p>
+  <pre>
+  <code>
+    &lt;!DOCTYPE html>
+    &lt;html>
+
+    &lt;head>
+      &lt;title>This is a Title&lt;/title>
+    &lt;/head>
+
+    &lt;body>
+
+      &lt;h1>This is a heading&lt;/h1>
+      &lt;p>This is a paragraph.&lt;/p>
+
+    &lt;/body>
+
+    &lt;/html>
+  </code>
+  </pre>
+  
+
+  <p>
+     <code>&lt;!DOCTYPE html></code> tells your HTML file that you'll be using HTML on this document.<br><br>
+     <code>&lt;html>&lt;/html></code> is the place you'll put all your HTML code in.<br><br>
+     <code>&lt;head>&lt;/head></code> is where all the elements that don't show up direcly on the page go.<br><br>
+     <code>&lt;title>&lt;/title></code> is one example of such an element. This page's title is HTML Reference.<br><br>
+     <code>&lt;body>&lt;/body></code> is where you find all the code that makes up the actual webpage.<br><br>
+  </p>
+
+  <hr>
+  
+<!-- Commands used in the body -->
+
+  <h2 id="body-commands">&lt;body> Commands</h2>
+  <p>All these commands allow you to add information to your site.</p>
+
+
+  <h4 id="headings">Headings &lt;h1>&lt;/h1></h4>
+  <a class="w3-link" href="https://www.w3schools.com/html/html_headings.asp">https://www.w3schools.com/html/html_headings.asp</a>
+  <p>The <code>&lt;h1></code> automatically format your text on your web page to be more noticable than a paragraph, by increasing the font size and bolding it. The text on the top of the page is an example of &lt;h1>. There are six heading styles, each
+    one progressively smaller than the last heading.</p>
+        <pre><code>&lt;h1>This is a heading&lt;/h1></code></pre><br>
+
+  <h4 id="paragraphs">Paragraphs &lt;p>&lt;/p></h4>
+    <a class="w3-link" href="https://www.w3schools.com/html/html_paragraphs.asp">https://www.w3schools.com/html/html_paragraphs.asp</a>
+  <p>This is a paragraph. Everything that's got normal text is a normal paragraph. Paragraphs have no font style, unless you <b>bold</b> the text on your own. Other ways you can style a paragraph is by <i>italicizing</i> or <u>underlining</u>.</p> <pre><code>&lt;p>This is a paragraph!&lt;/p></code></pre>
+  <p>This is a paragraph!</p><br>
+
+  <p><code>&lt;br></code> is another way to edit paragraph styles. It indents a line from the previous block of information.<br><br><u>This line is indented with the <code>&lt;br></code> command.</u></p><br>
+
+  <p>The <code>&lt;hr></code> command inserts a horizontal line across the page. You can use this to separate blocks of information. The line looks like so:<br>
+    <p>
+      <hr>
+
+
+      <h4 id="comments">Comments &lt;!-- --></h4>
+      
+      <a class="w3-link" href="https://www.w3schools.com/html/html_comments.asp">https://www.w3schools.com/html/html_comments.asp</a>
+          
+      <p>When you're coding, you'll often find you need to remind yourself of something, whether it's to fix a certain issue or to give a coworker clarificaiton. Comments are lines of code that the rendering software ignores, and is only visible in your
+        source code. HTML codes are specified as so:<br><br>
+        <pre><code>&lt;!-- This is a comment! --></code></pre></p><br>
+
+
+      <h4 id="links">Links &lt;a href="">&lt;/a></h4>
+      <a class="w3-link" href="https://www.w3schools.com/html/html_links.asp">https://www.w3schools.com/html/html_links.asp</a>
+      <p>This tag is also known as the anchor element. Adding the <code>href</code> attribute makes it linkable. You can link text, images, or just about anything you want in HTML. Navigation bars at the top of a webpage are made with links. This is the
+        syntax of the anchor tag:</p>
+      <pre><code>&lt;a href="index.html">This is a link to my homepage&lt;/a></code><br></pre>
+      <p>You put the URL or local link in between the quotations. <a href="index.html">This is a link to my homepage</a>.</p><br>
+
+
+      <h4 id="images">Images &lt;img src=""></h4>
+      <a class="w3-link" href="https://www.w3schools.com/html/html_images.asp">https://www.w3schools.com/html/html_images.asp</a>
+      <p>To embed images into the page using HTML, we use the <code>&lt;img></code> tag. If you want some visuals to break up the text on your website, images can help you do that. The basics you need for an image tag is the tag itself and the <code>src</code>        or source attribute. The source can be from inside your website or a URL from another website.</p>
+      <pre><code>&lt;img src="/images/Russet_potato_cultivar_with_sprouts.jpg" alt="Russet Potatoes" width="437.8" height="221.1"></code></pre><br>
+      <img src="/images/Russet_potato_cultivar_with_sprouts.jpg" alt="Russet Potatoes" width="437.8" height="221.1"><br>
+      <p>Other attributes that you can add to the <code>img</code> tag are the <code>alt</code> attribute, which makes text show up if the image does not load. In this case, it is "Russet Potatoes". The <code>width</code> and <code>height</code> attributes
+        allow you to resize the image on your website.</p><br>
+
+
+      <h4 id="lists">Lists &lt;ol>&lt;/ol>, &lt;ul>&lt;/ul>, &lt;li>&lt;/li></h4>
+      <a class="w3-link" href="https://www.w3schools.com/html/html_lists.asp">https://www.w3schools.com/html/html_lists.asp</a>
+      <p>HTML also offers the feature of lists. It automatically formats whatever you put so it looks like a list. If you make a navigation bar, you need a list. If you're just putting a bunch of links on your webpage, lists are good for organizing those
+        links. There are two types of lists. <code>&lt;ol></code> and <code>&lt;ul></code>. Ordered lists have numbers as their default list type. Unordered lists have a black circle, or bullet as their default list type. The <code>&lt;li></code> tag
+        separates each list item.<br><br>This is an ordered list:</p>
+
+      <pre>
+  <code>
+  &lt;ol>
+    &lt;li>This is list item number one.&lt;/li>
+    &lt;li>This is list item number two.&lt;/li>
+    &lt;li>This is list item number three.&lt;/li>
+  &lt;/ol>
+  </code>
+  </pre>
+
+      <ol>
+        <li>This is list item number one.</li>
+        <li>This is list item number two.</li>
+        <li>This is list item number three.</li>
+      </ol><br>
+
+      <p>This is an unordered list:</p>
+      <pre>
+  <code>
+  &lt;ul>
+    &lt;li>This is list item number one.&lt;/li>
+    &lt;li>This is list item number two.&lt;/li>
+    &lt;li>This is list item number three.&lt;/li>
+  &lt;/ul>
+  </code>
+  </pre>
+
+      <ul>
+        <li>This is list item number one.</li>
+        <li>This is list item number two.</li>
+        <li>This is list item number three.</li>
+      </ul><br>
+
+
+      <h4 id="tables">Tables &lt;table>&lt;/table>, &lt;tr>&lt;/tr>, &lt;th>&lt;/th, &lt;td>&lt;/td></h4>
+      <a class="w3-link" href="https://www.w3schools.com/html/html_tables.asp">https://www.w3schools.com/html/html_tables.asp</a>
+      <p>Another way to represent information is by table. The four commands above are needed to create a table. Tables are basically lists in a more structured format. You can have multiple columns of information. The code for a table is nested in the <code>&lt;table></code>        element. <code>&lt;tr></code> makes a new table row. Table headers are defined by the <code>&lt;th></code> tag. Finally, the <code>&lt;td></code> allows you to make a description for your table. All the elements together to make a table look something
+        like this:</p>
+
+      <pre>
+  <code>
+  &lt;table>
+
+    &lt;tr>
+      &lt;th>Heading 1&lt;/th>
+      &lt;th>Heading 2&lt;/th>
+      &lt;th>Heading 3&lt;/th>
+    &lt;/tr>
+    &lt;tr>
+      &lt;td>Description 1&lt;/td>
+      &lt;td>Description 2&lt;/td>
+      &lt;td>Description 3&lt;/td>
+    &lt;/tr>
+
+  &lt;/table>
+  </code>
+  </pre><br>
+
+      <table>
+
+        <tr>
+          <th>Heading 1</th>
+          <th>Heading 2</th>
+          <th>Heading 3</th>
+        </tr>
+        <tr>
+          <td>Description 1</td>
+          <td>Description 2</td>
+          <td>Description 3</td>
+        </tr>
+
+      </table><br>
+
+
+      <h4 id="blocks">Blocks &lt;div>&lt;/div></h4>
+      <a class="w3-link" href="https://www.w3schools.com/html/html_blocks.asp">https://www.w3schools.com/html/html_blocks.asp</a>
+      <p>Out of all of HTML's features, blocks might seem the most redundant. All it does is add some extra piece of code that doesn't show up on the browser. So why is it there?<br><br>Blocks let you separate pieces of code from others. We'll talk about
+        the <code>&lt;div></code> tag. Block tags let you style within the HTML document, or set it aside and style in CSS.</p>
+
+      <pre>
+        <code>
+        &lt;div>
+          &lt;h1>Hello World&lt;/h1>
+          &lt;p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et venenatis tellus, vitae tincidunt ligula. Nullam ante velit, dictum in posuere ac, ultrices vitae nulla. Mauris sed ultricies nunc. Maecenas mi justo, egestas et mattis vel, efficitur a justo. Phasellus quis neque tincidunt, luctus magna posuere, malesuada sem. Quisque tristique consectetur venenatis. Sed vel efficitur neque. Sed eu varius tellus. Nullam vulputate leo ex, at elementum lacus dapibus eget. Sed orci enim, feugiat nec urna et, varius fermentum massa. Maecenas ultrices fringilla turpis vitae lobortis. Nunc vitae placerat nulla.&lt;/p>
+        &lt;/div>
+        </code>
+      </pre>
+
+      <p>Now on its own, it's unremarkable. It just adds another line of code to your document. But now, you can style everything inside that div:</p>
+      <pre><code>&lt;div style="background-color:powderblue"></code></pre>
+      <p>Let's look at the differences!</p>
+
+
+      <div class="blocks">
+        <h1>Hello World</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et venenatis tellus, vitae tincidunt ligula. Nullam ante velit, dictum in posuere ac, ultrices vitae nulla. Mauris sed ultricies nunc. Maecenas mi justo, egestas et mattis vel, efficitur
+          a justo. Phasellus quis neque tincidunt, luctus magna posuere, malesuada sem. Quisque tristique consectetur venenatis. Sed vel efficitur neque. Sed eu varius tellus. Nullam vulputate leo ex, at elementum lacus dapibus eget. Sed orci enim, feugiat
+          nec urna et, varius fermentum massa. Maecenas ultrices fringilla turpis vitae lobortis. Nunc vitae placerat nulla.</p>
+      </div>
+
+</body>
+
+</html>
