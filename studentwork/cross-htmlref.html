@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html class=background>
+<head>
+<title>HTML Reference Page</title>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href= rel="stylesheet" type="text/css" "cross-htmlref.css">
+</head>
+    
+<body class= font>
+    <h1 class=center>HTML Reference Page</h1>
+<table align="center">
+  <!--use &lt; for closed arrow and &gt; for open arrow -->
+  <tr>
+    <th>Name</th>
+    <th>Start Tag</th>
+    <th>End Tag</th>
+    <th>Example</th>
+  </tr>
+  <tr>
+    <td><a href="#HTML">HTML</a></td>
+    <td>&lt;html&gt;</td>
+    <td>&lt;/html&gt;</td>
+    <td>&lt;html&gt;<br>&lt;/html&gt;</td>
+  </tr>
+  <tr>
+    <td><a href="#Head">Head</a></td>
+    <td>&lt;head&gt;</td>
+    <td>&lt;/head&gt;</td>
+    <td>&lt;head&gt;<br>&lt;/head&gt;</td>
+  </tr>
+  <tr>
+      <td><a href="#Title">Title</a></td>
+      <td>&lt;title&gt;</td>
+      <td>&lt;/title&gt;</td>
+      <td>&lt;title&gt;insert title&lt;/title&gt;</td>
+  </tr>
+  <tr>
+      <td><a href="#Body">Body</a></td>
+      <td>&lt;body&gt;</td>
+      <td>&lt;/body&gt;</td>
+      <td>&lt;body&gt;<br>&lt;/body&gt;</td>
+  </tr>
+  <tr>
+      <td><a href="#Heading">Headings</a></td>
+      <td>&lt;h1&gt;&lt;h2&gt;...</td>
+      <td>&lt;/h1&gt;&lt;/h2&gt;...</td>
+      <td>&lt;h1&gt;heading&lt;/h1&gt;</td>
+  </tr>
+  <tr>
+      <td><a href="#Paragraph">Paragraphs</a></td>
+      <td>&lt;p&gt;</td>
+      <td>&lt;/p&gt;</td>
+      <td>&lt;p&gt;paragraph&lt;/p&gt;</td>
+  </tr>
+  <tr>
+      <td><a href="#Breaks">Breaks</a></td>
+      <td>&lt;br&gt;</td>
+      <td>N/A</td>
+      <td>This is a &lt;br&gt; break.</td>
+  </tr>
+  <tr>
+      <td><a href="#Lines">Lines</a></td>
+      <td>&lt;hr&gt;</td>
+      <td>N/A</td>
+      <td>&lt;p&gt; This is the first paragraph.&lt;/p&gt; <br> &lt;hr&gt; <br> &lt;p&gt;This is the second paragraph.&lt;/p&gt;</td>
+  </tr>
+  <tr>
+      <td><a href="#Comments">Comments</a></td>
+      <td>&lt;!-- --&gt;</td>
+      <td>N/A</td>
+      <td>&lt;!-- comment --&gt;</td>
+  </tr>
+  <tr>
+      <td><a href="#Links">Links</a></td>
+      <td>&lt;a&gt;</td>
+      <td>&lt;/a&gt;</td>
+      <td>&lt;a href="https://url.com"&gt;Link.&lt;/a&gt;</td>
+  </tr>
+  <tr>
+      <td><a href="#Images">Images</a></td>
+      <td>&lt;img&gt;</td>
+      <td>N/A</td>
+      <td>&lt;img src="https://image.jpg"&gt;</td>
+  </tr>
+  <tr>
+      <td><a href="#Lists">Lists</a></td>
+      <td>&lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;</td>
+      <td>&lt;/ul&gt;, &lt;/ol&gt;, &lt;/li&gt;</td>
+      <td>&lt;ol&gt;<br>&lt;li&gt;Item 1&lt;/li&gt;<br>&lt;li>Item 2&lt;/li&gt;<br>&lt;li>Item 3&lt;/li&gt;<br>&lt;/ol&gt;</td>
+  </tr>
+  <tr>
+      <td><a href="#Tables">Tables</a></td>
+      <td>&lt;table&gt; (&lt;tr&gt;,&lt;th&gt;, &lt;td&gt;)</td>
+      <td>&lt;/table&gt; (&lt;/tr&gt;,&lt;/th&gt;, &lt;/td&gt;)</td>
+      <td>&lt;table&gt;<br>&lt;tr&gt;<br>&lt;th&gt;Color&lt;/th&gt;<br>&lt;th&gt;Meaning&lt;/th&gt;<br>&lt;/tr&gt;<br>&lt;tr&gt;<br>&lt;td&gt;Green&lt;/td&gt;<br>&lt;td&gt;Go&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;tr&gt;<br>&lt;td&gt;Red&lt;/td&gt;<br>&lt;td&gt;Stop&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;/table&gt;</td>
+  </tr>
+  <tr>
+      <td><a href="#Blocks">Blocks</a></td>
+      <td>&lt;div&gt;</td>
+      <td>&lt;/div&gt;</td>
+      <td>&lt;div style="color:#0000FF"&gt;<br>&lt;h3>This is a heading&lt;/h3&gt;<br>&lt;p>This is purple.&lt;/p&gt;<br>&lt;/div></td>
+  </tr>
+</table>
+
+<div class="border">
+  <h2 class=center>Necessities for a Valid HTML Page</h2>
+    <dl>
+      <dt>&lt;!DOCTYPE&gt; and &lt;/!DOCTYPE&gt;</dt> 
+      <dd>-define the document type</dd>
+      <dt>&lt;head&gt; and &lt;/head&gt;</dt>
+      <dd>-define information about the document</dd>
+      <dt>&lt;html&gt; and &lt;/html&gt;</dt>
+      <dd>-define the root of an HTML document</dd>
+      <dt>&lt;title&gt; and &lt;/title&gt;</dt>
+      <dd>-display a title for the page in search-engine results </dd>
+      <dt>&lt;body&gt; and &lt;/body&gt;</dt>
+      <dd>-define the body of the document</dd>
+    </dl>
+</div>
+
+<div class="border">
+  <h2 class=center><a name="HTML"></a>HTML</h2>
+    <p>The tag for HTML is &lt;html&gt;. Its purpose is to define the document type as an HTML. An  &lt;html&gt; tag is placed just before the head tag and its corresponding &lt;/html&gt; tag is placed just after the body.</p> 
+<div class="bgcolor">
+  <h3>Example:</h3>
+  <pre>
+  &lt;html&gt;
+  &lt;/html&gt;
+  </pre>
+</div>   
+  <a href="https://www.w3schools.com/tags/tag_html.asp">W3schools: HTML</a>
+</div>
+
+<div class="border">
+  <h2 class=center><a name="Head"></a>Head</h2>
+    <p>The tag for the head is &lt;head&gt;. This tag defines information about the document and is a container for metadata. A  &lt;head&gt; tag is located above the title tag where as a &lt;/head&gt; tag is under the title tag.</p> 
+<div class="bgcolor">
+  <h3>Example:</h3>
+  <pre>
+  &lt;head&gt;
+  &lt;/head&gt;
+  </pre>
+</div>
+  <a href="https://www.w3schools.com/tags/tag_head.asp">W3schools: Head</a>
+</div>
+
+<div class="border">
+  <h2 class=center><a name="Title"></a>Title</h2>
+    <p>The title tag is represented as &lt;title&gt;. It displays a title for the page in search-engine results and defines a title in the browser toolbar. A  &lt;title&gt; tag is located before the content in the title and the &lt;/title&gt; tag is located just after.</p> 
+<div class="bgcolor">
+  <h3>Example:</h3>
+  <pre>
+  &lt;title&gt;insert title here&lt;/title&gt;
+  </pre>
+</div>
+  <a href="https://www.w3schools.com/tags/tag_title.asp">W3schools: Title</a>
+</div>
+
+<div class="border">
+  <h2 class=center><a name="Body"></a>Body</h2>
+    <p>The tag for the body is &lt;body&gt;. It contains all of the information for the HTML document, including texts, images, lists, headings, etc. The &lt;body&gt; tag is placed after the end tag of the header and the &lt;/body&gt; tag is located right after, following the body's content.</p> 
+<div class="bgcolor">
+  <h3>Example:</h3>
+  <pre>
+  &lt;body&gt;
+  &lt;/body&gt;
+  </pre>
+</div>
+  <a href="https://www.w3schools.com/tags/tag_body.asp">W3schools: Body</a>
+</div>
+
+<div class="border">
+  <h2 class=center><a name="Heading"></a>Heading</h2>
+    <p>Heading tags are represented by &lt;h1&gt;, &lt;h2&gt;, etc. They are used for a range of reasons, such as to show document structure and allow search engines to index the structure and content of the webpage. The  &lt;h1&gt;, &lt;h2&gt;, etc. tag is placed in the body wherever a heading may be desired and their corresponding  &lt;/h1&gt;, &lt;/h2&gt;, etc. tag is placed directly after the heading. &lt;h1&gt; is used for the most important heading, &lt;h2&gt; for the next most important, and so on in this pattern.</p>
+<div class="bgcolor">
+  <h3>Example:</h3>
+  <pre>
+  &lt;h1&gt;Header 1&lt;/h1&gt;
+  &lt;h2&gt;Header 2&lt;/h2&gt;
+  &lt;h3&gt;Header 3&lt;/h3&gt;
+  &lt;h4&gt;Header 4&lt;/h4&gt;
+  &lt;h5&gt;Header 5&lt;/h5&gt;
+  &lt;h6&gt;Header 6&lt;/h6&gt;
+  </pre>
+</div>
+<div class="bg2color">
+  <h3>Display:</h3>
+    <h1>Header 1</h1>
+    <h2>Header 2</h2>
+    <h3>Header 3</h3>
+    <h4>Header 4</h4>
+    <h5>Header 5</h5>
+    <h6>Header 6</h6>
+</div>
+  <a href="https://www.w3schools.com/tags/tag_hn.asp">W3schools: Heading</a>
+</div>
+
+<div class="border">
+  <h2 class=center><a name="Paragraph"></a>Paragraph</h2>
+    <p>The tag for a paragraph is &lt;p&gt;. It defines a paragraph of text within the document. The &lt;p&gt; tag is placed anywhere in the body where the user may want to place a paragraph and the &lt;/p&gt; tag follows the paragraph's content.</p> 
+<div class="bgcolor">
+  <h3>Example:</h3>
+  <pre>
+  &lt;p&gt;This is an example paragraph using proper tags.&lt;/p&gt;
+  </pre>
+</div>
+<div class="bg2color">
+  <h3>Display:</h3>
+    <p>This is an example paragraph using proper tags.</p>
+</div>
+  <a href="https://www.w3schools.com/tags/tag_p.asp">W3schools: Paragraph</a>
+</div>
+
+<div class="border">
+  <h2 class=center><a name="Breaks"></a>Breaks</h2>
+    <p>Break tags are depicted as &lt;br&gt;. They insert a single line break and are especially useful for poems or addresses; they're located within the paragraph to split up text and do not contain end tags.</p> 
+<div class="bgcolor">
+  <h3>Example:</h3>
+  <pre>
+  &lt;p&gt;
+  The br element&lt;br&gt;is used&lt;br&gt;like this.
+  &lt;/p&gt;
+  </pre>
+</div>
+<div class="bg2color">
+  <h3>Display:</h3>
+    <p>
+    The br element<br>is used<br>like this.
+    </p>
+</div>
+  <a href="https://www.w3schools.com/tags/tag_br.asp">W3schools: Breaks</a>
+</div>
+
+<div class="border">
+  <h2 class=center><a name="Lines"></a>Lines</h2>
+    <p>Line tags are shown as &lt;hr&gt;. They define a thematic break and represent a horizontal rule. They may be found anywhere within the body where a seperation in text may be needed and do not contain end tags as well.</p>
+<div class="bgcolor">
+  <h3>Example:</h3>
+  <pre>
+  &lt;p&gt; This is the first paragraph.&lt;/p&gt;
+  &lt;hr&gt;
+  &lt;p&gt;This is the second paragraph.&lt;/p&gt;
+  </pre>
+</div>
+<div class="bg2color">
+  <h3>Display:</h3>
+    <p> This is the first paragraph.</p>
+    <hr>
+    <p>This is the second paragraph.</p>
+</div>
+  <a href="https://www.w3schools.com/tags/tag_hr.asp">W3schools: Lines</a>
+</div>
+
+<div class="border">
+  <h2 class=center><a name="Comments"></a>Comments</h2>
+    <p>To place a comment, the user would use the tag &lt;!-- --&gt;. They allow their users to place private comments, notifications, and reminders in their HTML that are not displayed on the browser. These tags do not have an end tag and may be located anywhere throughout the body.</p>
+<div class="bgcolor">
+  <h3>Example:</h3>
+  <pre>
+  &lt;!-- This is a comment --&gt;
+  </pre>
+</div>
+  <a href="https://www.w3schools.com/tags/tag_comment.asp">W3schools: Comments</a>
+</div>
+
+<div class="border">
+  <h2 class=center><a name="Links"></a>Links</h2>
+    <p>Links are represented using the tag &lt;a&gt;. With this tag, the user may insert hyperlinks that redirect to other webpages. The most important part of this tag is the 'href' attribute, which determines the link's destination. These tags may be found anywhere in the body block.</p>
+<div class="bgcolor">
+  <h3>Example:</h3>
+  <pre>
+  &lt;a href="https://alexacross.github.io"&gt;This is a link.&lt;/a&gt;
+  </pre>
+</div>
+<div class="bg2color">
+  <h3>Display:</h3>
+    <a href="https://alexacross.github.io">This is a link.</a>
+</div>
+  <a href="https://www.w3schools.com/tags/tag_a.asp">W3schools: Links</a>
+</div>
+
+<div class="border">
+  <h2 class=center><a name="Images"></a>Images</h2>
+    <p>The tags for images are  &lt;img&gt;. This tag is used to improve the design and appearence of the webpage by inserting an image. Images may be placed anywhere within the body where desired. This tag contains a src attribute which specifies the web address of the image, so ultimately, the tag looks like &lt;img src="url"&gt;. </p>
+<div class="bgcolor">
+  <h3>Example:</h3>
+  <pre>
+  &lt;img src="https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg"&gt;
+  </pre>
+</div>
+<div class="bg2color">
+  <h3>Display:</h3>
+    <img src="https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg" alt="Photo" width="100" height="55">
+</div>
+  <a href="https://www.w3schools.com/tags/tag_img.asp">W3schools: Images</a>
+</div>
+
+<div class="border">
+  <h2 class=center><a name="Lists"></a>Lists</h2>
+    <p>List tags are shown as  &lt;ul&gt;, &lt;ol&gt;, and &lt;li&gt;. &lt;ul&gt; defines an unordered list that uses bullet points, &lt;ol&gt; defines an ordered list using numbers, and &lt;li&gt; tag defines the list item. After every list item follows the corresponding &lt;li&gt; tag and after the last list item follows the &lt;/ul&gt; or &lt;/ol&gt; tag, depending on which start tag was used. A list may be found anywhere in the body.</p>
+<div class="bgcolor">
+  <h3>Example:</h3>
+  <pre>
+  &lt;ol&gt;
+  &lt;li&gt;Apples&lt;/li&gt;
+  &lt;li>Oranges&lt;/li&gt;
+  &lt;li>Lemons&lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;ul&gt;
+  &lt;li&gt;Apples&lt;/li&gt;
+  &lt;li&gt;Oranges&lt;/li&gt;
+  &lt;li&gt;Lemons&lt;/li&gt;
+  &lt;/ul&gt;
+  </pre>
+</div>
+<div class="bg2color">
+<h3>Display:</h3>
+<ol>
+  <li>Apples</li>
+  <li>Oranges</li>
+  <li>Lemons</li>
+</ol>
+
+<ul>
+  <li>Apples</li>
+  <li>Oranges</li>
+  <li>Lemons</li>
+</ul>
+</div>
+  <a href="https://www.w3schools.com/tags/tag_li.asp">W3schools: Lists</a>
+</div>
+
+<div class="border">
+  <h2 class=center><a name="Tables"></a>Tables</h2>
+    <p>The tags for tables are represented as &lt;table&gt;. This tag defines an HTML table in the document; the table must also have a &lt;tr&gt;,&lt;th&gt;, and/or a &lt;td&gt; tag along with the &lt;table&gt; element. The &lt;tr&gt; element defines a table row, the &lt;th&gt; element defines a table header, and the &lt;td&gt; element defines a table cell. They may be located throughout the body block where needed, and contain a corresponding &lt;/table&gt; end tag. </p>
+<div class="bgcolor">
+  <h3>Example:</h3>
+  <pre>
+  &lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Color&lt;/th&gt;
+    &lt;th&gt;Meaning&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Green&lt;/td&gt;
+    &lt;td&gt;Go&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Red&lt;/td&gt;
+    &lt;td&gt;Stop&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;/table&gt;
+  </pre>
+</div>
+<div class="bg2color">
+<h3>Display:</h3>
+<table>
+  <tr>
+    <th>Color</th>
+    <th>Meaning</th>
+  </tr>
+  <tr>
+    <td>Green</td>
+    <td>Go</td>
+  </tr>
+  <tr>
+    <td>Red</td>
+    <td>Stop</td>
+  </tr>
+</table>
+</div>
+  <a href="https://www.w3schools.com/tags/tag_table.asp">W3schools: Tables</a>
+</div>
+
+<div class="border">
+  <h2 class=center><a name="Blocks"></a>Blocks</h2>
+    <p>Block tags are represented as &lt;div&gt;. This tag defines a division or a section in an HTML document and is often used to group block-elements to format them with CSS/style. They could be placed anywhere within the body where the user may want to group block-elements. The end &lt;/div&gt; is placed at the end of the division or section made.</p>
+<div class="bgcolor">
+  <h3>Example:</h3>
+  <pre>
+  &lt;div style="color:#0000FF"&gt;
+  &lt;h3>This is a heading&lt;/h3&gt;
+  &lt;p>This is purple.&lt;/p&gt;
+  &lt;/div>
+  </pre>
+</div>
+<div class="bg2color">
+  <h3>Display:</h3>
+  <p>This is located before the block tag.</p>
+<div style="color:indigo">
+  <h3>This is a heading</h3>
+  <p>This is purple.</p>
+</div>
+  <p>This is located after the block tag.</p>
+</div>   
+  <a href="https://www.w3schools.com/tags/tag_div.asp">W3schools: Blocks</a>
+</div>
+
+<a href="https://alexacross.github.io">Home</a>
+  
+</body>
+</html>
