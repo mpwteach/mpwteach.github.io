@@ -1,0 +1,36 @@
+.background {
+   background-color: mintcream;
+   padding: 5px
+}
+table, td {
+    border: 5px dotted rgb(149, 195, 206);
+    padding: 5px;
+    border-collapse: collapse;
+    background-color: white;
+    font: bold;
+    font-size: 15px
+}
+th {
+    background-color: rgb(149, 195, 206);
+    padding: 5px;
+    border: 5px dotted rgb(149, 195, 206);
+    border-collapse: collapse;
+    width: 100px;
+    font: bold;
+    font-size: 15;
+}
+.bgcolor {
+   background-color: rgb(242, 213, 210);
+}
+.bg2color {
+   background-color: rgb(149, 195, 206);
+}
+.border {
+    border-bottom: 15px solid white;
+}
+.font {
+   font-family: "Courier New", Courier, Monospace 
+}
+.center {
+   text-align: center;
+}
