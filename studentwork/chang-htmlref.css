@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans');
+a {
+  text-decoration: underline;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 10px;
+}
+
+.diref {
+  width: 100%;
+}
+
+th {
+  background-color: #FFB9AA;
+}
+
+td {
+  text-align: center;
+}
+
+code {
+  background-color: #F8F8F8;
+}
+pre {
+  white-space: pre-wrap;
+  border-left: 10px solid #FFB9AA;
+  background-color: #F8F8F8;
+  padding: 5px;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 100px;
+}
+
+.w3-link {
+  text-decoration: none;
+  font-size: 12px;
+}
+
+h4 {
+  font-family: 'Pt Sans',sans-serif;
+}
+
+.blocks {
+  background-color: powderblue;
+  padding: 30px;
+}
