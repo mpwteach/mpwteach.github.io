@@ -11,12 +11,15 @@
 
    <h2>This image is choosen according to the size of the viewport with sizes attr</h2>
 
+ <!-- NOTE - not sure if we need the sizes attr...
+     - need to research what this means... -->
+
     <div>
       <img src='/images/sunset2-jpg-hq-1000w.jpg'
          srcset='/images/sunset2-jpg-hq-3500w.jpg 3500w,
                  /images/sunset2-jpg-hq-2000w.jpg 2000w,
                  /images/sunset2-jpg-hq-1000w.jpg 1000w'
-         sizes='(min-width: 800px) 50vw, 100vw'>
+         sizes='(min-width: 960px) 960px, 100vw'>
     </div>
 
   </body>
