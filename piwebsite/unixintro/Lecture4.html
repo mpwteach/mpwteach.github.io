@@ -1,0 +1,283 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <title>Introduction to UNIX and Linux: Lecture 4</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.75 [en] (X11; U; Linux 2.2.16-3 i686) [Netscape]">
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000EF" vlink="#51188E" alink="#FF0000" background="purplebg.gif">
+
+<hr WIDTH="100%">
+<center><table BORDER=0 CELLSPACING=0 WIDTH="100%" BGCOLOR="#3333FF" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE>
+<center><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+4>Introduction
+to UNIX:&nbsp;</font></font></font>
+<br><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+4>Lecture
+Four</font></font></font></center>
+</td>
+
+<td>
+<div align=right><img SRC="linux-logica-small.gif" height=167 width=133></div>
+</td>
+</tr>
+</table></center>
+
+<hr WIDTH="100%">
+<br>&nbsp;
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>4.1
+Objectives</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote><font size=+1>This lecture covers:</font>
+<ul>
+<li>
+<font size=+1>The concept of a process.</font></li>
+
+<li>
+<font size=+1>Passing output from one process as input to another using
+pipes.</font></li>
+
+<li>
+<font size=+1>Redirecting process input and output.</font></li>
+
+<li>
+<font size=+1>Controlling processes associated with the current shell.</font></li>
+
+<li>
+<font size=+1>Controlling other processes.</font></li>
+</ul>
+</blockquote>
+
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>4.2
+Processes</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote><font size=+1>A <b><font color="#3333FF">process</font></b>
+is a program in execution. Every time you invoke a system utility or an
+application program from a shell, one or more "child" processes are created
+by the shell in response to your command. All UNIX processes are identified
+by a unique process identifier or PID. An important process that is always
+present is the <tt>init</tt> process. This is the first process to be created
+when a UNIX system starts up and usually has a PID of 1. All other processes
+are said to be "descendants" of <tt>init</tt>.</font></blockquote>
+
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>4.3
+Pipes</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote><font size=+1>The pipe ('<tt>|</tt>') operator is used to create
+concurrently executing processes that pass data directly to one another.
+It is useful for combining system utilities to perform more complex functions.
+For example:</font>
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ cat hello.txt | sort | uniq</font></tt><img SRC="enter.gif" height=15 width=27>
+<p><font size=+1>creates three processes (corresponding to <tt>cat</tt>,
+<tt>sort
+</tt>and
+<tt>uniq</tt>)
+which execute concurrently. As they execute, the output of the who process
+is passed on to the <tt>sort </tt>process which is in turn passed on to
+the <tt>uniq</tt> process. <tt>uniq</tt> displays its output on the screen
+(a sorted list of users with duplicate lines removed). Similarly:</font>
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ cat hello.txt | grep "dog" |
+grep -v "cat"</font></tt><img SRC="enter.gif" height=15 width=27>
+<p><font size=+1>finds all lines in <tt>hello.txt</tt> that contain the
+string "<tt>dog</tt>" but do not contain the string "<tt>cat</tt>".</font></blockquote>
+
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>4.4
+Redirecting input and output</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote><font size=+1>The output from programs is usually written to
+the screen, while their input usually comes from the keyboard (if no file
+arguments are given). In technical terms, we say that processes usually
+write to <b><font color="#3333FF">standard output </font></b>(the screen)
+and take their input from <b><font color="#3333FF">standard input </font></b>(the
+keyboard). There is in fact another output channel called <b><font color="#3333FF">standard
+error</font></b>, where processes write their error messages; by default
+error messages are also sent to the screen.</font>
+<p><font size=+1>To redirect standard output to a file instead of the screen,
+we use the
+<tt>> </tt>operator:</font>
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ echo hello</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; hello</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ echo hello > output</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ cat output</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; hello</font></tt>
+<p><font size=+1>In this case, the contents of the file <tt>output</tt>
+will be destroyed if the file already exists. If instead we want to append
+the output of the echo command to the file, we can use the >> operator:</font>
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ echo bye >> output</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ cat output</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; hello</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; bye</font></tt>
+<p><font size=+1>To capture standard error, prefix the <tt>></tt> operator
+with a 2 (in UNIX the file numbers 0, 1 and 2 are assigned to standard
+input, standard output and standard error respectively), e.g.:</font>
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ cat nonexistent 2>errors</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ cat errors</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; cat: nonexistent: No such file
+or directory</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; $</font></tt>
+<p><font size=+1>You can redirect standard error and standard output to
+two different files:</font>
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ find . -print 1>errors 2>files</font></tt><img SRC="enter.gif" height=15 width=27>
+<p><font size=+1>or to the same file:</font>
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ find . -print 1>output 2>output</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><font size=+1>or</font>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ find . -print >&amp; output</font></tt><img SRC="enter.gif" height=15 width=27>
+<p><font size=+1>Standard input can also be redirected using the <tt>&lt;</tt>
+operator, so that input is read from a file instead of the keyboard:</font>
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ cat &lt; output</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; hello</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; bye</font></tt>
+<p><font size=+1>You can combine input redirection with output redirection,
+but be careful not to use the same filename in both places. For example:</font>
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ cat &lt; output > output</font></tt><img SRC="enter.gif" height=15 width=27>
+<p><font size=+1>will destroy the contents of the file <tt>output</tt>.
+This is because the first thing the shell does when it sees the <tt>></tt>
+operator is to create an empty file ready for the output.</font>
+<p><font size=+1>One last point to note is that we can pass standard output
+to system utilities that require filenames as "<tt>-</tt>":</font>
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ cat package.tar.gz | gzip -d
+| tar tvf -</font></tt>
+<p><font size=+1>Here the output of the <tt>gzip -d</tt> command is used
+as the input file to the <tt>tar</tt> command.</font></blockquote>
+
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>4.5
+Controlling processes associated with the current shell</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote><font size=+1>Most shells provide sophisticated job control
+facilities that let you control many running jobs (i.e. processes) at the
+same time. This is useful if, for example, you are editing a text file
+and want ot interrupt your editing to do something else. With job control,
+you can suspend the editor, go back to the shell prompt, and start work
+on something else. When you are finished, you can switch back to the editor
+and continue as if you hadn't left.</font>
+<p><font size=+1>Jobs can either be in the <b><font color="#3333FF">foreground</font></b>
+or the <b><font color="#3333FF">background</font></b>. There can be only
+one job in the foreground at any time. The foreground job has control of
+the shell with which you interact - it receives input from the keyboard
+and sends output to the screen. Jobs in the background do not receive input
+from the terminal, generally running along quietly without the need for
+interaction (and drawing it to your attention if they do).</font>
+<p><font size=+1>The foreground job may be suspended, i.e. temporarily
+stopped, by pressing the Ctrl-Z key. A suspended job can be made to continue
+running in the foreground or background as needed by typing "<tt>fg</tt>"
+or "<tt>bg</tt>" respectively. Note that suspending a job is very different
+from interrupting a job (by pressing the interrupt key, usually Ctrl-C);
+interrupted jobs are killed off permanently and cannot be resumed.</font>
+<p><font size=+1>Background jobs can also be run directly from the command
+line, by appending a '<tt>&amp;</tt>' character to the command line. For
+example:</font>
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ find / -print 1>output 2>errors
+&amp;</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; [1] 27501</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; $</font></tt>
+<p><font size=+1>Here the <tt>[1]</tt> returned by the shell represents
+the job number of the background process, and the 27501 is the PID of the
+process. To see a list of all the jobs associated with the current shell,
+type <tt>jobs</tt>:</font>
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ jobs</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; [1]+&nbsp; Running&nbsp; find
+/ -print 1>output 2>errors &amp;</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; $</font></tt>
+<p><font size=+1>Note that if you have more than one job you can refer
+to the job as <tt>%n</tt> where <tt>n </tt>is the job number. So for example
+<tt>fg
+%3 </tt>resumes job number 3 in the foreground.</font>
+<p><font size=+1>To find out the process ID's of the underlying processes
+associated with the shell and its jobs, use <tt>ps </tt>(process show):</font>
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ ps</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PID TTY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+TIME CMD</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; 17717 pts/10&nbsp;&nbsp; 00:00:00
+bash</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; 27501 pts/10&nbsp;&nbsp; 00:00:01
+find</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; 27502 pts/10&nbsp;&nbsp; 00:00:00
+ps</font></tt>
+<p><font size=+1>So here the PID of the shell (<tt>bash</tt>) is 17717,
+the PID of <tt>find</tt> is 27501 and the PID of <tt>ps</tt> is 27502.</font>
+<p><font size=+1>To terminate a process or job abrubtly, use the <tt>kill</tt>
+command.
+<tt>kill</tt> allows&nbsp; jobs to referred to in two ways - by
+their PID or by their job number.<tt> </tt>So</font>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ kill %1</font></tt>
+<br><font size=+1>or</font>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ kill 27501</font></tt>
+<p><font size=+1>would terminate the <tt>find</tt> process. Actually kill
+only sends the process a signal requesting it shutdown and exit gracefully
+(the SIGTERM signal), so this may not always work. To force a process to
+terminate abruptly (and with a higher probability of sucess), use a <tt>-9</tt>
+option (the SIGKILL signal):</font>
+<p><font size=+1>&nbsp;<tt>&nbsp;&nbsp;&nbsp; $ kill -9 27501</tt></font>
+<p><font size=+1><tt>kill</tt> can be used to send many other types of
+signals to running processes. For example a <tt>-19</tt> option (SIGSTOP)
+will suspend a running process. To see a list of such signals, run <tt>kill
+-l.</tt></font></blockquote>
+
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>4.6
+Controlling other processes</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote><font size=+1>You can also use <tt>ps</tt> to show all processes
+running on the machine (not just the processes in your current shell):</font>
+<p><font size=+1><tt>&nbsp;&nbsp;&nbsp; $ ps -fae<img SRC="enter.gif" height=15 width=27></tt>(or
+<tt>ps
+-aux</tt> on BSD machines)</font>
+<p><font size=+1>&nbsp;<tt>ps -aeH</tt> displays a full process hierarchy
+(including the <tt>init</tt> process)<tt>.</tt></font>
+<p><font size=+1>Many UNIX versions have a system utility called <tt>top</tt>
+that provides an interactive way to monitor system activity. Detailed statistics
+about currently running processes are displayed and constantly refreshed.
+Processes are displayed in order of CPU utilization. Useful keys in
+<tt>top</tt>
+are:</font>
+<p><font size=+1><tt>&nbsp;&nbsp;&nbsp; s - </tt>set update frequency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<tt>k - </tt>kill process (by PID)</font>
+<br><font size=+1><tt>&nbsp;&nbsp;&nbsp; u - </tt>display processes of
+one user&nbsp;&nbsp;&nbsp;&nbsp; <tt>q - </tt>quit</font>
+<p><font size=+1>On some systems, the utility <tt>w</tt> is a non-interactive
+substitute for <tt>top</tt>.</font>
+<p><font size=+1>One other useful process control utility that can be found
+on most UNIX systems is the <tt>pkill</tt> command. You can use
+<tt>pkill</tt>
+to kill processes by name instead of PID or job number. So another way
+to kill off our background <tt>find</tt> process (along with any another
+<tt>find</tt>
+processes we are running) would be:</font>
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ pkill find</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; [1]+&nbsp; Terminated find / -print
+1>output 2>errors</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; $</font></tt>
+<p><font size=+1>Note that, for obvious security reasons, you can only
+kill processes that belong to you (unless you are the superuser).</font></blockquote>
+
+<BLOCKQUOTE><P><A HREF="http:./index.html">
+(BACK TO COURSE CONTENTS)</A></P></BLOCKQUOTE>
+
+<hr WIDTH="100%">
+<br><b>&copy; <i>September 2001 William Knottenbelt (wjk@doc.ic.ac.uk)</i></b>
+</body>
+</html>

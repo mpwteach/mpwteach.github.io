@@ -1,0 +1,795 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000EF" vlink="#51188E" alink="#FF0000" background="purplebg.gif">
+
+<hr WIDTH="100%">
+<center><table BORDER=0 CELLSPACING=0 WIDTH="100%" BGCOLOR="#3333FF" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE>
+<center><font face="Arial,Helvetica"><font size=+4><font color="#FFFFFF">Introduction
+to UNIX</font><font color="#FFFF00">:</font></font></font>
+<br><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+4>Lecture
+Five</font></font></font></center>
+</td>
+
+<td>
+<div align=right><img SRC="linux-logica-small.gif" height=167 width=133></div>
+</td>
+</tr>
+</table></center>
+
+<hr WIDTH="100%">
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>5.1
+Objectives</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote><font size=+1>This lecture introduces other useful UNIX system
+utilities and covers:</font>
+<ul>
+<li>
+<font size=+1>Connecting to remote machines.</font></li>
+
+<li>
+<font size=+1>Networking routing utilities.</font></li>
+
+<li>
+<font size=+1>Remote file transfer.</font></li>
+
+<li>
+<font size=+1>Other Internet-related utilities.</font></li>
+
+<li>
+<font size=+1>Facilities for user information and communication.</font></li>
+
+<li>
+<font size=+1>Printer control.</font></li>
+
+<li>
+<font size=+1>Email utilities.</font></li>
+
+<li>
+<font size=+1>Advanced text file processing with <tt>sed</tt> and <tt>awk</tt>.</font></li>
+
+<li>
+<font size=+1>Target directed compilation with <tt>make</tt>.</font></li>
+
+<li>
+<font size=+1>Version control with CVS.</font></li>
+
+<li>
+<font size=+1>C++ compilation facilities.</font></li>
+
+<li>
+<font size=+1>Manual pages.</font></li>
+</ul>
+</blockquote>
+
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>5.2
+Connecting to Remote Machines</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote>
+<ul>
+<li>
+<font size=+1><tt>telnet</tt> <i>machinename</i></font></li>
+
+<p><font size=+1><tt>telnet</tt> provides an insecure mechanism for logging
+into remote machines. It is insecure because all data (including your username
+and password) is passed in unencrypted format over the network. For this
+reason, <tt>telnet</tt> login access is disabled on most systems and where
+possible it should be avoided in favour of secure alternatives such as
+<tt>ssh</tt>.</font>
+<p><font size=+1><tt>telnet</tt> is still a useful utility, however, because,
+by specifying different port numbers, <tt>telnet </tt>can be used to connect
+to other services offered by remote machines besides remote login (e.g.
+web pages, email, etc.) and reveal the mechanisms behind how those services
+are offered. For example,</font>
+<p><tt><font size=+1>$ telnet www.doc.ic.ac.uk 80</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>Trying 146.169.1.10...</font></tt>
+<br><tt><font size=+1>Connected to seagull.doc.ic.ac.uk (146.169.1.10).</font></tt>
+<br><tt><font size=+1>Escape character is '^]'.</font></tt>
+<br><tt><font size=+1>GET / HTTP/1.0</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>HTTP/1.1 200 OK</font></tt>
+<br><tt><font size=+1>Date: Sun, 10 Dec 2000 21:06:34 GMT</font></tt>
+<br><tt><font size=+1>Server: Apache/1.3.14 (Unix)</font></tt>
+<br><tt><font size=+1>Last-Modified: Tue, 28 Nov 2000 16:09:20 GMT</font></tt>
+<br><tt><font size=+1>ETag: "23dcfd-3806-3a23d8b0"</font></tt>
+<br><tt><font size=+1>Accept-Ranges: bytes</font></tt>
+<br><tt><font size=+1>Content-Length: 14342</font></tt>
+<br><tt><font size=+1>Connection: close</font></tt>
+<br><tt><font size=+1>Content-Type: text/html</font></tt>
+<p><tt><font size=+1>&lt;HTML></font></tt>
+<br><tt><font size=+1>&lt;HEAD></font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp; &lt;TITLE>Department of Computing, Imperial
+College, London: Home Page&lt;/TITLE></font></tt>
+<br><tt><font size=+1>&lt;/HEAD></font></tt>
+<br><font size=+1>(etc)</font>
+<p><font size=+1>Here <tt>www.doc.ic.ac.uk</tt> is the name of the remote
+machine (in this case the web server for the Department of Computing at
+Imperial College in London). Like most web servers, it offers web page
+services on port 80 through the daemon <tt>httpd</tt> (to see what other
+services are potentially available on a machine, have a look at the file
+<tt>/etc/services</tt>;
+and to see what services are actually active, see
+<tt>/etc/inetd.conf)</tt>.
+By entering a valid HTTP GET command (HTTP is the protocol used to serve
+web pages) we obtain the top-level home page in HTML format. This is exactly
+the same process that is used by a web browser to access web pages.</font>
+<br>&nbsp;
+<li>
+<tt><font size=+1>rlogin, rsh</font></tt></li>
+
+<p><font size=+1><tt>rlogin </tt>and<tt> rsh </tt>are insecure facilities
+for logging into remote machines and for executing commands on remote machines
+respectively. Along with <tt>telnet</tt>, they have been superseded by
+<tt>ssh</tt>.</font>
+<br>&nbsp;
+<li>
+<font size=+1><tt>ssh </tt><i>machinename </i>(secure shell)</font></li>
+
+<p><font size=+1><tt>ssh </tt>is a secure alternative for remote login
+and also for executing commands in a remote machine. It is intended to
+replace <tt>rlogin</tt> and <tt>rsh</tt>, and provide secure encrypted
+communications between two untrusted hosts over an insecure network. X11
+connections (i.e. graphics) can also be forwarded over the secure channel
+(another advantage over <tt>telnet</tt>,
+<tt>rlogin</tt> and <tt>rsh</tt>).
+<tt>ssh</tt>
+is not a standard system utility, although it is a de facto standard. It
+can be obtained from <a href="http://www.ssh.org">http://www.ssh.org</a>.
+A good introduction page giving more background and showing you how to
+set up <tt>ssh</tt> is <a href="http://www.tac.nyc.ny.us/~kim/ssh/">http://www.tac.nyc.ny.us/~kim/ssh/</a>.</font>
+<p><font size=+1><tt>ssh</tt> clients are also available for Windows machines
+(e.g. there is a good <tt>ssh</tt> client called <tt>putty</tt>).</font></ul>
+</blockquote>
+
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>5.3
+Network routing utilities</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote>
+<ul>
+<li>
+<font size=+1><tt>ping</tt> <i>machinename</i></font></li>
+
+<p><font size=+1>The <tt>ping</tt> utility is useful for checking round-trip
+response time between machines. e.g.</font>
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ ping www.doc.ic.ac.uk</font></tt><img SRC="enter.gif" height=15 width=27>
+<p><font size=+1>measures the reponse time delay between the current machine
+and the web server at the Department of Computing at Imperial College.
+<tt>ping</tt>
+is also useful to check whether a machine is still "alive" in some sense.</font>
+<br>&nbsp;
+<li>
+<font size=+1><tt>traceroute </tt><i>machinename</i></font></li>
+
+<p><font size=+1><tt>traceroute </tt>shows the full path taken to reach
+a remote machine, including the delay to each machine along the route.
+This is particularly useful in tracking down the location of network problems.</font></ul>
+</blockquote>
+
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>5.4
+Remote File Transfer</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote>
+<ul>
+<li>
+<font size=+1><tt>ftp </tt><i>machinename</i> (file transfer protocol)</font></li>
+
+<p><font size=+1><tt>ftp</tt> is an insecure way of transferring files
+between computers. When you connect to a machine via ftp, you will be asked
+for your username and password. If you have an account on the machine,
+you can use it, or you can can often use the user "<tt>ftp</tt>" or "<tt>anonymous</tt>".
+Once logged in via FTP, you can list files (<tt>dir</tt>), receive files
+(<tt>get </tt>and<tt> mget</tt>) and send files (<tt>put</tt> and <tt>mput</tt>).
+(Unusually for UNIX) <tt>help </tt>will show you a list of available commands.
+Particularly useful are <tt>binary</tt> (transfer files preserving all
+8 bits) and <tt>prompt n</tt> (do not confirm each file on multiple file
+transfers). Type <tt>quit</tt> to leave <tt>ftp</tt> and return to the
+shell prompt.</font>
+<br>&nbsp;
+<li>
+<font size=+1><tt>scp</tt> <i>sourcefiles destination </i>(secure copy)</font></li>
+
+<p><font size=+1><tt>scp</tt> is a secure way of transferring files between
+computers. It works just like the UNIX <tt>cp</tt> command except that
+the arguments can specify a user and machine as well as files. For example:</font>
+<p><tt><font size=+1>&nbsp;&nbsp; $ scp will@rose.doc.ic.ac.uk:~/hello.txt
+<b>.&nbsp;</b></font></tt><img SRC="enter.gif" height=15 width=27>
+<p><font size=+1>will (subject to correct authentication) copy the file
+<tt>hello.txt</tt>
+from the user account <tt>will </tt>on the remote machine
+<tt>rose.doc.ic.ac.uk</tt>
+into the current directory (<tt>.</tt>) on the local machine.</font></ul>
+</blockquote>
+
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>5.5
+Other Internet-related utilities</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote>
+<ul>
+<li>
+<tt><font size=+1>netscape</font></tt></li>
+
+<p><font size=+1><tt>netscape </tt>is a fully-fledged graphical web browser
+(like Internet Explorer).</font>
+<br>&nbsp;
+<li>
+<tt><font size=+1>lynx</font></tt></li>
+
+<p><font size=+1><tt>lynx</tt> provides a way to browse the web on a text-only
+terminal.</font>
+<br>&nbsp;
+<li>
+<font size=+1><tt>wget</tt> <i>URL</i></font></li>
+
+<p><font size=+1><tt>wget </tt>provides a way to retrieve files from the
+web (using the HTTP protocol).&nbsp; <tt>wget</tt> is non-interactive,
+which means it can run in the background, while the user is not&nbsp; logged&nbsp;
+in (unlike&nbsp; most&nbsp; web browsers). The content retrieved by <tt>wget</tt>
+is stored as raw HTML text (which can be viewed later using a web browser).</font>
+<p><font size=+1>Note that <tt>netscape</tt>, <tt>lynx</tt> and <tt>wget</tt>
+are not standard UNIX system utilities, but are frequently-installed application
+packages.</font></ul>
+</blockquote>
+
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>5.6
+User Information and Communication</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote>
+<ul>
+<li>
+<font size=+1><tt>finger</tt>, <tt>who</tt></font></li>
+
+<p><font size=+1><tt>finger</tt> and <tt>who</tt> show the list of users
+logged into a machine, the terminal they are using, and the date they logged
+in on.</font>
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ who</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; will&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pts/2&nbsp;&nbsp;&nbsp; Dec&nbsp; 5 19:41</font></tt>
+<br><tt><font size=+1>&nbsp;&nbsp;&nbsp; $</font></tt>
+<br>&nbsp;
+<li>
+<font size=+1><tt>write</tt>, <tt>talk</tt></font></li>
+
+<p><font size=+1><tt>write</tt> is used by users on the same machine who
+want to talk to each other. You should specify the user and (optionally)
+the terminal they are on:</font>
+<p><tt><font size=+1>&nbsp;&nbsp; $ write will pts/2</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>&nbsp;&nbsp; hello will</font></tt><img SRC="enter.gif" height=15 width=27>
+<p><font size=+1>Lines are only transmitted when you press&nbsp;<img SRC="enter.gif" height=15 width=27>.
+To return to the shell prompt, press ctrl-d (the UNIX end of file marker).</font>
+<p><font size=+1><tt>talk</tt> is a more sophisticated interactive chat
+client that can be used between remote machines:</font>
+<p><tt><font size=+1>&nbsp;&nbsp;&nbsp; $ talk will@rose.doc.ic.ac.uk</font></tt><img SRC="enter.gif" height=15 width=27>
+<p><font size=+1>Unfortunately because of increasingly tight security restrictions,
+it is increasingly unlikely that <tt>talk</tt> will work (this is because
+it requires a special daemon called <tt>talkd</tt> to be running on the
+remote computer). Sometimes an application called <tt>ytalk</tt> will succeed
+if <tt>talk</tt> fails.</font></ul>
+</blockquote>
+
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>5.7
+Printer Control</font></font></font></b></td>
+</tr>
+</table>
+
+<ul>
+<ul>
+<li>
+<font size=+1><tt>lpr -P</tt><i>printqueue filename</i></font></li>
+
+<p><font size=+1><tt>lpr </tt>adds a document to a print queue, so that
+the document is printed when the printer is available. Look at <tt>/etc/printcap</tt>
+to find out what printers are available.</font>
+<br>&nbsp;
+<li>
+<font size=+1><tt>lpq -P</tt><i>printqueue</i></font></li>
+
+<p><font size=+1><tt>lpq </tt>checks the status of the specified print
+queue. Each job will have an associated job number.</font>
+<br>&nbsp;
+<li>
+<font size=+1><tt>lprm -P</tt><i>printqueue jobnumber</i></font></li>
+
+<p><font size=+1><tt>lprm</tt> removes the given job from the specified
+print queue.</font></ul>
+
+<p><font size=+1>Note that <tt>lpr</tt>, <tt>lpq</tt> and <tt>lprm</tt>
+are BSD-style print management utilities. If you are using a strict SYSV
+UNIX, you may need to use the SYSV equivalents <tt>lp</tt>, <tt>lpstat</tt>
+and
+<tt>cancel</tt>.</font></ul>
+
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>5.8
+Email Utilities</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote>
+<ul>
+<li>
+<tt><font size=+1>mail</font></tt></li>
+
+<p><font size=+1><tt>mail</tt> is the standard UNIX utility for sending
+and receiving email.</font>
+<p><tt><font size=+1>$ mail</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>Mail version 8.1 6/6/93.&nbsp; Type ? for help.</font></tt>
+<br><tt><font size=+1>"/var/spool/mail/will": 2 messages 2 new</font></tt>
+<br><tt><font size=+1>1 jack@sprat.com&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mon
+Dec 11 10:37 "Beanstalks"</font></tt>
+<br><tt><font size=+1>2 bill@whitehouse.gov Mon Dec 11 11:00 "Re: Monica"</font></tt>
+<br><tt><font size=+1>&amp;</font></tt>
+<p><font size=+1>Some of the more important commands (type <tt>?</tt> for
+a full list) are given below in Fig. 5.1. Here a <i>messagelist</i> is
+either a single message specified by a number (e.g. <tt>1</tt>) or a range
+(e.g. <tt>1-2</tt>). The special <i>messagelist</i> <tt>*</tt> matches
+all messages.</font>
+<br>&nbsp;
+<center><table BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH="90%" BGCOLOR="#66FFFF" NOSAVE >
+<tr>
+<td><tt><font size=+1>?</font></tt></td>
+
+<td><font size=+1>help</font></td>
+</tr>
+
+<tr>
+<td><tt><font size=+1>q</font></tt></td>
+
+<td><font size=+1>quit, saving changes to mailbox</font></td>
+</tr>
+
+<tr>
+<td><tt><font size=+1>x</font></tt></td>
+
+<td><font size=+1>quit, restoring mailbox to its original state</font></td>
+</tr>
+
+<tr NOSAVE>
+<td NOSAVE><font size=+1><tt>t </tt><i>messagelist</i></font></td>
+
+<td><font size=+1>displays messages&nbsp;</font></td>
+</tr>
+
+<tr NOSAVE>
+<td NOSAVE><tt><font size=+1>+/-</font></tt></td>
+
+<td><font size=+1>show next/previous message</font></td>
+</tr>
+
+<tr>
+<td><font size=+1><tt>d </tt><i>messagelist</i></font></td>
+
+<td><font size=+1>deletes messages</font></td>
+</tr>
+
+<tr>
+<td><font size=+1><tt>u </tt><i>messagelist</i></font></td>
+
+<td><font size=+1>undelete messages</font></td>
+</tr>
+
+<tr>
+<td><font size=+1><tt>m </tt><i>address</i></font></td>
+
+<td><font size=+1>send a new email&nbsp;</font></td>
+</tr>
+
+<tr>
+<td><font size=+1><tt>r </tt><i>messagelist</i></font></td>
+
+<td><font size=+1>reply to sender and other receipients</font></td>
+</tr>
+
+<tr>
+<td><font size=+1><tt>R </tt><i>messagelist</i></font></td>
+
+<td><font size=+1>reply only to sender</font></td>
+</tr>
+</table></center>
+
+<center><font size=+1><i>Fig. 5.1: Common</i> <tt>mail</tt> <i>commands</i></font></center>
+
+<p><font size=+1>You can also use <tt>mail </tt>to send email directly
+from the command line. For example:</font>
+<p><tt><font size=+1>$ mail -s "Hi" wjk@doc.ic.ac.uk &lt; message.txt</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>$</font></tt>
+<p><font size=+1>emails the contents of the (ASCII) file<tt> message.txt
+</tt>to
+the recipient<tt> wjk@doc.ic.ac.uk </tt>with the subject<tt> "Hi"</tt>.</font></ul>
+
+<ul>
+<li>
+<tt><font size=+1>mutt, elm, pine</font></tt></li>
+
+<p><font size=+1><tt>mutt</tt>,<tt> elm </tt>and<tt> pine</tt> are more
+friendly (but non-standard) email interfaces that you will probably prefer
+to use instead of <tt>mail</tt>. All have good in-built help facilities.</font>
+<br>&nbsp;
+<li>
+<tt><font size=+1>sendmail, exim</font></tt></li>
+
+<p><font size=+1>Email is actually sent using an Email Transfer Agent,
+which uses a protocol called SMTP (Simple Mail Transfer Protocol). The
+two most popular Email Transfer Agents are <tt>sendmail </tt>and <tt>exim</tt>.
+You can see how these agents work by using <tt>telnet</tt> to connect to
+port 25 of any mail server, for example:</font>
+<p><tt><font size=+1>$ telnet mail.doc.ic.ac.uk 25</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>Trying 146.169.1.47...</font></tt>
+<br><tt><font size=+1>Connected to diver.doc.ic.ac.uk (146.169.1.47).</font></tt>
+<br><tt><font size=+1>Escape character is '^]'.</font></tt>
+<br><tt><font size=+1>220 diver.doc.ic.ac.uk ESMTP Exim 3.16 #7</font></tt>
+<br><tt><font size=+1>HELP</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>214-Commands supported:</font></tt>
+<br><tt><font size=+1>214-&nbsp;&nbsp;&nbsp; HELO EHLO MAIL RCPT DATA AUTH</font></tt>
+<br><tt><font size=+1>214&nbsp;&nbsp;&nbsp;&nbsp; NOOP QUIT RSET HELP</font></tt>
+<br><tt><font size=+1>MAIL FROM: alien@xfiles.com</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>250 &lt;alien@xfiles.com> is syntactically correct</font></tt>
+<br><tt><font size=+1>RCPT TO: wjk@doc.ic.ac.uk</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>250 &lt;wjk@doc.ic.ac.uk> verified</font></tt>
+<br><tt><font size=+1>DATA</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>354 Enter message, ending with "." on a line</font></tt>
+<br><tt><font size=+1>Hi</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>This is a message from an alien</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>.</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>250 OK id=145UqB-0002t6-00</font></tt>
+<br><tt><font size=+1>QUIT</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>221 diver.doc.ic.ac.uk closing connection</font></tt>
+<br><tt><font size=+1>Connection closed by foreign host.</font></tt>
+<br><tt><font size=+1>$</font></tt>
+<p><font size=+1>This sends an email to <tt>wjk@doc.ic.ac.uk</tt>, apparently
+from
+<tt>alien@xfiles.com</tt>. Email advertisers (aka spammers) often
+use this technique to attempt to confuse recipients as to the true source
+of messages. Fortunately <tt>exim</tt> and <tt>sendmail</tt> include extensive
+header information when they forward email, including the IP address of
+the computer from where the message was sent.</font></ul>
+</blockquote>
+
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>5.9
+Advanced Text File Processing</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote>
+<ul>
+<li>
+<font size=+1><tt>sed </tt>(stream editor)</font></li>
+
+<p><font size=+1><tt>sed</tt> allows you to perform basic text transformations
+on an input stream (i.e. a file or input from a pipeline). For example,
+you can delete lines containing particular string of text, or you can substitute
+one pattern for another wherever it occurs in a file. Although <tt>sed
+</tt>is
+a mini-programming language all on its own and can execute entire scripts,
+its full language is obscure and probably best forgotten (being based on
+the old and esoteric UNIX line editor <tt>ed</tt>). <tt>sed</tt> is probably
+at its most useful when used directly from the command line with simple
+parameters:</font>
+<p><font size=+1><tt>$ sed "s/</tt><i>pattern1</i><tt>/</tt><i>pattern2</i><tt>/"
+</tt><i>inputfile</i><tt>
+> </tt><i>outputfile</i></font><img SRC="enter.gif" height=15 width=27>
+<br><font size=+1>(substitutes <i>pattern2</i> for <i>pattern1</i> once
+per line)</font>
+<p><font size=+1><tt>$ sed "s/</tt><i>pattern1</i>/<i>pattern2</i><tt>/g"
+</tt><i>inputfile</i><tt>
+> </tt><i>outputfile</i></font><img SRC="enter.gif" height=15 width=27>
+<br><font size=+1>(substitutes <i>pattern2</i> for <i>pattern1</i> for
+every <i>pattern1</i> per line)</font>
+<p><font size=+1><tt>$ sed "/</tt><i>pattern1</i><tt>/d" </tt><i>inputfile</i><tt>
+> </tt><i>outputfile</i></font><img SRC="enter.gif" height=15 width=27>
+<br><font size=+1>(deletes all lines containing <i>pattern1</i>)</font>
+<p><font size=+1><tt>$ sed "y/</tt><i>string1</i><tt>/</tt><i>string2</i><tt>/"
+</tt><i>inputfile</i><tt>
+> </tt><i>outputfile</i></font><img SRC="enter.gif" height=15 width=27>
+<br><font size=+1>(substitutes characters in <i>string2</i> for those in
+<i>string1</i>)</font>
+<br>&nbsp;
+<li>
+<font size=+1><tt>awk </tt>(Aho, Weinberger and Kernigan)</font></li>
+
+<p><font size=+1><tt>awk</tt> is useful for manipulating files that contain
+columns of data on a line by line basis. Like <tt>sed</tt>, you can either
+pass <tt>awk</tt> statements directly on the command line, or you can write
+a script file and let <tt>awk</tt> read the commands from the script.</font>
+<p><font size=+1>Say we have a file of cricket scores called <tt>cricket.dat</tt>
+containing columns for player number, name, runs and the way in which they
+were dismissed:</font>
+<p><tt><font size=+1>1 atherton&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; bowled</font></tt>
+<br><tt><font size=+1>2 hussain&nbsp;&nbsp;&nbsp;&nbsp; 20&nbsp;&nbsp;
+caught</font></tt>
+<br><tt><font size=+1>3 stewart&nbsp;&nbsp;&nbsp;&nbsp; 47&nbsp;&nbsp;
+stumped</font></tt>
+<br><tt><font size=+1>4 thorpe&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 33&nbsp;&nbsp;
+lbw</font></tt>
+<br><tt><font size=+1>5 gough&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+6&nbsp;&nbsp; run-out</font></tt>
+<p><font size=+1>To print out only the first and second columns we can say:</font>
+<p><tt><font size=+1>$ awk '{ print $1 " " $2 }' cricket.dat</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>atherton 0</font></tt>
+<br><tt><font size=+1>hussain 20</font></tt>
+<br><tt><font size=+1>stewart 47</font></tt>
+<br><tt><font size=+1>thorpe 33</font></tt>
+<br><tt><font size=+1>gough 6</font></tt>
+<br><tt><font size=+1>$</font></tt>
+<p><font size=+1>Here <tt>$</tt><i>n</i> stands for the <i>n</i>th field
+or column of each line in the data file. <tt>$0 </tt>can be used to denote
+the whole line.</font>
+<p><font size=+1>We can do much more with <tt>awk</tt>. For example, we
+can write a script <tt>cricket.awk</tt> to calculate the team's batting
+average and to check if Mike Atherton got another duck:</font>
+<p><tt><font size=+1>$ cat > cricket.awk</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>BEGIN { players = 0; runs = 0 }</font></tt>
+<br><tt><font size=+1>{ players++; runs +=$3 }</font></tt>
+<br><tt><font size=+1>/atherton/ { if (runs==0) print "atherton duck!"
+}</font></tt>
+<br><tt><font size=+1>END { print "the batting average is " runs/players
+}</font></tt>
+<br><font size=+1>(ctrl-d)</font>
+<br><font size=+1>$ <tt>awk -f cricket.awk cricket.dat</tt></font><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>atherton duck!</font></tt>
+<br><tt><font size=+1>the batting average is 21.2</font></tt>
+<br><tt><font size=+1>$</font></tt>
+<p><font size=+1>The <tt>BEGIN</tt> clause is executed once at the start
+of the script, the main clause once for every line, the <tt>/atherton/
+</tt>clause
+only if the word <tt>atherton </tt>occurs in the line and the
+<tt>END</tt>
+clause once at the end of the script.</font>
+<p><font size=+1><tt>awk</tt> can do a lot more. See the manual pages for
+details (type <tt>man awk</tt>).</font></ul>
+</blockquote>
+
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF">
+<font size=+2>
+<A NAME="make-5-10">
+5.10
+Target Directed Compilation</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote>
+<ul>
+<li>
+<tt><font size=+1>make</font></tt></li>
+
+<p><font size=+1><tt>make</tt> is a utility which can determine automatically
+which pieces of a large program need to be recompiled, and issue the commands&nbsp;
+to recompile them. To use make, you need to create a file called <tt>Makefile</tt>
+or <tt>makefile</tt> that describes&nbsp; the relationships among files
+in your program, and the states the commands for updating each file.</font>
+<p><font size=+1>Here is an example of a simple makefile:</font>
+<p><tt><font size=+1>scores.out: cricket.awk cricket.dat</font></tt>
+<br><font size=+1>[TAB]<tt>awk -f cricket.awk cricket.dat > scores.out</tt></font>
+<p><font size=+1>Here [TAB] indicates the TAB key. The interpretation of
+this makefile is as follows:</font>
+<ul>
+<li>
+<font size=+1><tt>scores.out</tt> is the target of the compilation</font></li>
+
+<li>
+<font size=+1><tt>scores.out</tt> depends on <tt>cricket.awk</tt> and <tt>cricket.dat</tt></font></li>
+
+<li>
+<font size=+1>if either <tt>cricket.awk</tt> or <tt>cricket.dat</tt> have
+been modified since <tt>scores.out </tt>was last modified or if <tt>scores.out</tt>
+does not exist, update <tt>scores.out</tt> by executing the command:</font></li>
+
+<br><tt><font size=+1>awk -f cricket.awk cricket.dat > scores.out<br>
+</font></tt></ul>
+<font size=+1><tt>make</tt> is invoked simply by typing</font>
+<p><tt><font size=+1>$ make</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>awk -f cricket.awk cricket.dat > scores.out</font></tt>
+<br><tt><font size=+1>$</font></tt>
+<p><font size=+1>Since <tt>scores.out</tt> did not exist, <tt>make</tt>
+executed the commands to create it. If we now invoke make again, nothing
+happens:</font>
+<p><tt><font size=+1>$ make</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>make: `scores.out' is up to date.</font></tt>
+<br><tt><font size=+1>$</font></tt>
+<p><font size=+1>But if we modify <tt>cricket.dat</tt> and then run <tt>make</tt>
+again, <tt>scores.out</tt> will be updated:</font>
+<p><font size=+1><tt>$ touch cricket.dat<img SRC="enter.gif" height=15 width=27></tt>(<tt>touch
+</tt>simulates
+file modification)</font>
+<br><tt><font size=+1>$ make</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>awk -f cricket.awk cricket.dat > scores.out</font></tt>
+<br><tt><font size=+1>$</font></tt>
+<p><font size=+1><tt>make</tt> is mostly used when compiling large C, C++
+or Java programs, but can (as we have seen) be used to automatically and
+intelligently produce a target file of any kind.</font></ul>
+</blockquote>
+
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>5.11
+Version control with CVS</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote>
+<ul>
+<li>
+<font size=+1><tt>cvs</tt> (Concurrent Versioning System)</font></li>
+
+<p><font size=+1><tt>cvs</tt> is a source code control system often used
+on large programming projects to control the concurrent editing of source
+files by multiple authors. It keeps old versions of files and maintains
+a log of when, and why changes occurred, and who made them.</font>
+<p><font size=+1><tt>cvs</tt> keeps a single copy of the master sources.
+This copy is called&nbsp; the source ``repository''; it contains all the
+information to permit extracting previous software releases at any time
+based on either a symbolic revision tag, or a date in the past.</font><font size=+1></font>
+<p><font size=+1><tt>cvs</tt> has a large number of commands (type <tt>info
+cvs</tt> for a full <tt>cvs</tt> tutorial, including how to set up a repository
+from scratch or from existing code). The most useful commands are:</font>
+<br><font size=+1></font>&nbsp;
+<ul>
+<li>
+<font size=+1><tt>cvs checkout </tt><i>modules<br>
+<br>
+</i>This gives you a private copy of source code that you can work on with
+without interfering with others.</font><br>
+</li>
+
+<li>
+<font size=+1><tt>cvs update<br>
+<br>
+</tt>This updates the code you have checked out, to reflect any changes
+that have subsequently been made by other developers.</font><br>
+</li>
+
+<li>
+<tt><font size=+1>cvs add</font></tt><font size=+1> <i>files<br>
+<br>
+</i>You can use this to add new files into a repository that you have checked-out.
+Does not actually affect the repository until a "<tt>cvs commit</tt>" is
+performed.</font><br>
+</li>
+
+<li>
+<font size=+1><tt>cvs remove </tt><i>files</i><br>
+<br>
+Removes files from a checked-out repository. Doesn't affect the repository
+until a "<tt>cvs commit</tt>" is performed.</font><br>
+</li>
+
+<li>
+<font size=+1><tt>cvs commit</tt> <i>files<br>
+<br>
+</i>This command publishes your changes to other developers by updating
+the source code in the central repository.</font></li>
+</ul>
+</ul>
+</blockquote>
+
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>5.12
+C/C++ compilation utilities</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote>
+<ul>
+<li>
+<tt><font size=+1>cc, gcc, CC, g++</font></tt></li>
+
+<p><font size=+1>UNIX installations usually come with a C and/or C++ compiler.
+The C compiler is usually called <tt>cc</tt> or <tt>gcc</tt>, and the C++
+compiler is usually called <tt>CC</tt> or <tt>g++</tt>. Most large C or
+C++ programs will come with a <tt>makefile</tt> and will support the
+<tt>configure</tt>
+utility, so that compiling and installing a package is often as simple
+as:</font>
+<p><tt><font size=+1>$ ./configure</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>$ make</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>$ make install</font></tt><img SRC="enter.gif" height=15 width=27>
+<p><font size=+1>However, there is nothing to prevent you from writing
+and compiling a simple C program yourself:</font>
+<p><tt><font size=+1>$ cat > hello.c</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>#include &lt;stdio.h></font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>int main() {</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>&nbsp; printf("hello world!\n");</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>&nbsp; return 0;</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>}</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><font size=+1>(ctrl-d)</font>
+<br><tt><font size=+1>$ cc hello.c -o hello</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>$ ./hello</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt><font size=+1>hello world!</font></tt>
+<br><tt><font size=+1>$</font></tt>
+<p><font size=+1>Here the C compiler (<tt>cc</tt>) takes as input the C
+source file <tt>hello.c</tt> and produces as output an executable program
+called
+<tt>hello</tt>. The program <tt>hello</tt> may then be executed
+(the <tt>./
+</tt>tells the shell to look in the current directory to find
+the <tt>hello</tt> program).</font></ul>
+</blockquote>
+
+<table BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+2>5.13
+Manual Pages</font></font></font></b></td>
+</tr>
+</table>
+
+<blockquote>
+<ul>
+<li>
+<tt><font size=+1>man</font></tt></li>
+
+<p><font size=+1>More information is available on most UNIX commands is
+available via the online manual pages, which are accessible through the
+<tt>man</tt>
+command. The online documentation is in fact divided into sections. Traditionally,
+they are</font>
+<p><tt><font size=+1>1 User-level commands</font></tt>
+<br><tt><font size=+1>2 System calls</font></tt>
+<br><tt><font size=+1>3 Library functions</font></tt>
+<br><tt><font size=+1>4 Devices and device drivers</font></tt>
+<br><tt><font size=+1>5 File formats</font></tt>
+<br><tt><font size=+1>6 Games</font></tt>
+<br><tt><font size=+1>7 Various miscellaneous stuff - macro packages etc.</font></tt>
+<br><tt><font size=+1>8 System maintenance and operation commands</font></tt>
+<p><font size=+1>Sometimes <tt>man</tt> gives you a manual page from the
+wrong section. For example, say you were writing a program and you needed
+to use the <tt>rmdir</tt> system call. <tt>man rmdir</tt> gives you the
+manual page for the user-level command <tt>rmdir</tt>. To force <tt>man</tt>
+to look in Section 2 of the manual instead, type <tt>man 2 rmdir</tt> (or<tt>man
+-s2 rmdir</tt> on some systems).</font>
+<p><font size=+1><tt>man</tt> can also find manual pages which mention
+a particular topic. For example, <tt>man -k postscript </tt>should produce
+a list of utilities that can produce and manipulate postscript files.</font>
+<br>&nbsp;
+<li>
+<tt><font size=+1>info</font></tt></li>
+
+<p><font size=+1><tt>info </tt>is an interactive, somewhat more friendly
+and helpful alternative to <tt>man</tt>. It may not be installed on all
+systems, however.</font></ul>
+</blockquote>
+
+<BLOCKQUOTE><P><A HREF="http:./index.html">
+(BACK TO COURSE CONTENTS)</A></P></BLOCKQUOTE>
+
+<hr WIDTH="100%">
+<br><b>&copy; <i>September 2001 William Knottenbelt (wjk@doc.ic.ac.uk)</i></b>
+</body>
+</html>

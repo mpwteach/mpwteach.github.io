@@ -1,0 +1,524 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.06 [en] (WinNT; I) [Netscape]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#0000EF" VLINK="#51188E" ALINK="#FF0000" BACKGROUND="purplebg.gif">
+
+<HR WIDTH="100%">
+<CENTER><TABLE BORDER=0 CELLSPACING=0 WIDTH="100%" BGCOLOR="#3333FF" NOSAVE >
+<TR NOSAVE>
+<TD NOSAVE>
+<CENTER><FONT FACE="Arial,Helvetica"><FONT COLOR="#FFFFFF"><FONT SIZE=+4>Introduction
+to UNIX:</FONT></FONT></FONT>
+<BR><FONT FACE="Arial,Helvetica"><FONT COLOR="#FFFFFF"><FONT SIZE=+4>Lecture
+Six</FONT></FONT></FONT></CENTER>
+</TD>
+
+<TD>
+<DIV ALIGN=right><IMG SRC="linux-logica-small.gif" HEIGHT=167 WIDTH=133></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+
+<HR WIDTH="100%">
+<TABLE BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<TR NOSAVE>
+<TD NOSAVE><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#FFFFFF"><FONT SIZE=+2>6.1
+Objectives</FONT></FONT></FONT></B></TD>
+</TR>
+</TABLE>
+
+<BLOCKQUOTE><FONT SIZE=+1>This lecture introduces the two most popular
+UNIX editors: <TT>vi </TT>and <TT>emacs</TT>. For each editor, it covers:</FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE>
+<UL>
+<LI>
+<FONT SIZE=+1>Basic text input and navigation.</FONT></LI>
+
+<LI>
+<FONT SIZE=+1>Moving and copying text.</FONT></LI>
+
+<LI>
+<FONT SIZE=+1>Searching for and replacing text.</FONT></LI>
+
+<LI>
+<FONT SIZE=+1>Other useful commands.</FONT></LI>
+
+<LI>
+<FONT SIZE=+1>A quick-reference chart.</FONT></LI>
+</UL>
+</BLOCKQUOTE>
+
+<TABLE BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<TR NOSAVE>
+<TD NOSAVE><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#FFFFFF">
+<FONT SIZE=+2>
+<A NAME="vi-6-2">
+6.2.1
+Introduction to vi
+</A>
+</FONT></FONT></FONT></B></TD>
+</TR>
+</TABLE>
+
+<BLOCKQUOTE><FONT SIZE=+1><TT>vi</TT> (pronounced "vee-eye", short for
+visual, or perhaps vile) is a display-oriented text editor based on an
+underlying line editor called <TT>ex</TT>. Although beginners usually find
+<TT>vi
+</TT>somewhat
+awkward to use, it is useful to learn because it is universally available
+(being supplied with all UNIX systems). It also uses standard alphanumeric
+keys for commands, so it can be used on almost any terminal or workstation
+without having to worry about unusual keyboard mappings. System administrators
+like users to use <TT>vi</TT> because it uses very few system resources.</FONT>
+<P><FONT SIZE=+1>To start <TT>vi</TT>, enter:</FONT>
+<P><FONT SIZE=+1><TT>&nbsp;&nbsp;&nbsp; $ vi </TT><I>filename</I></FONT><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<P><FONT SIZE=+1>where <I>filename</I> is the name of the file you want
+to edit. If the file doesn't exist, <TT>vi</TT> will create it for you.</FONT></BLOCKQUOTE>
+
+<TABLE BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<TR NOSAVE>
+<TD NOSAVE><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#FFFFFF"><FONT SIZE=+2>6.2.2
+Basic Text Input and Navigation in vi</FONT></FONT></FONT></B></TD>
+</TR>
+</TABLE>
+
+<BLOCKQUOTE><FONT SIZE=+1>The main feature that makes <TT>vi</TT> unique
+as an editor is its mode-based operation. <TT>vi</TT> has two modes: command
+mode and input mode. In command mode, characters you type perform actions
+(e.g. moving the cursor, cutting or copying text, etc.) In input mode,
+characters you type are inserted or overwrite existing text.</FONT>
+<P><FONT SIZE=+1>When you begin <TT>vi</TT>, it is in command mode. To
+put <TT>vi</TT> into input mode, press <TT>i </TT>(insert). You can then
+type text which is inserted at the current cursor location; you can correct
+mistakes with the backspace key as you type.To get back into command mode,
+press ESC (the escape key). Another way of inserting text, especially useful
+when you are at the end of a line is to press <TT>a</TT> (append).</FONT>
+<P><FONT SIZE=+1>In command mode, you are able to move the cursor around
+your document.
+<TT>h</TT>, <TT>j</TT>, <TT>k</TT> and <TT>l </TT>move the
+cursor left, down, up and right respectively (if you are lucky the arrow
+keys may also work). Other useful keys are <TT>^</TT> and <TT>$</TT> which
+move you to the beginning and end of a line respectively.
+<TT>w</TT> skips
+to the beginning of the next word and <TT>b</TT> skips back to the beginning
+of the previous word. To go right to the top of the document, press <TT>1</TT>
+and then <TT>G</TT>. To go the bottom of the document, press <TT>G</TT>.
+To skip forward a page, press <TT>^F</TT>, and to go back a page, press
+<TT>^B</TT>.
+To go to a particular line number, type the line number and press <TT>G</TT>,
+e.g. <TT>55G</TT> takes you to line 55.</FONT>
+<P><FONT SIZE=+1>To delete text, move the cursor over the first character
+of the group you want to delete and make sure you are in command mode.
+Press <TT>x</TT> to delete the current character, <TT>dw</TT> to delete
+the next word, <TT>d4w</TT> to delete the next 4 words, <TT>dd</TT> to
+delete the next line, <TT>4dd
+</TT>to delete the next 4 lines, <TT>d$</TT>
+to delete to the end of the line or even <TT>dG</TT> to delete to the end
+of the document. If you accidentally delete too much, pressing <TT>u</TT>
+will undo the last change.</FONT>
+<P><FONT SIZE=+1>Occasionally you will want to join two lines together.
+Press <TT>J</TT> to do this (trying to press backspace on the beginning
+of the second line does not have the intuitive effect!)</FONT></BLOCKQUOTE>
+
+<TABLE BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<TR NOSAVE>
+<TD NOSAVE><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#FFFFFF"><FONT SIZE=+2>6.2.3
+Moving and Copying Text in vi</FONT></FONT></FONT></B></TD>
+</TR>
+</TABLE>
+
+<BLOCKQUOTE><FONT SIZE=+1><TT>vi</TT> uses buffers to store text that is
+deleted. There are nine numbered buffers (1-9) as well as the undo buffer.
+Usually buffer 1 contains the most recent deletion, buffer 2 the next recent,
+etc.</FONT>
+<P><FONT SIZE=+1>To cut and paste in <TT>vi</TT>, delete the text (using
+e.g. <TT>5dd</TT> to delete 5 lines). Then move to the line where you want
+the text to appear and press <TT>p</TT>. If you delete something else before
+you paste, you can still retrieve the delete text by pasting the contents
+of the delete buffers. You can do this by typing <TT>"1p</TT>,<TT> "2p</TT>,
+etc.</FONT>
+<P><FONT SIZE=+1>To copy and paste, "yank" the text (using e.g. <TT>5yy</TT>
+to copy 5 lines). Then move to the line where you want the text to appear
+and press <TT>p</TT>.</FONT></BLOCKQUOTE>
+
+<TABLE BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<TR NOSAVE>
+<TD NOSAVE><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#FFFFFF"><FONT SIZE=+2>6.2.4
+Searching for and Replacing Text in vi</FONT></FONT></FONT></B></TD>
+</TR>
+</TABLE>
+
+<BLOCKQUOTE><FONT SIZE=+1>In command mode, you can search for text by specifying
+regular expressions. To search forward, type <TT>/</TT> and then a regular
+expression and press&nbsp;<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>. To
+search backwards, begin with a <TT>?</TT> instead of a <TT>/</TT>. To find
+the next text that matches your regular expression press <TT>n</TT>.</FONT>
+<P><FONT SIZE=+1>To search and replace all occurences of pattern1 with
+pattern2, type <TT>:%s/</TT><I>pattern1</I><TT>/</TT><I>pattern2</I><TT>/g<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></TT>.
+To be asked to confirm each replacement, add a <TT>c</TT> to this substitution
+command. Instead of the <TT>%</TT> you can also give a range of lines (e.g.
+1,17) over which you want the substitution to apply.</FONT></BLOCKQUOTE>
+
+<TABLE BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<TR NOSAVE>
+<TD NOSAVE><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#FFFFFF"><FONT SIZE=+2>6.2.5
+Other Useful vi Commands</FONT></FONT></FONT></B></TD>
+</TR>
+</TABLE>
+
+<BLOCKQUOTE><FONT SIZE=+1>Programmers might like the <TT>:set number<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></TT>
+command which displays line numbers (<TT>:set nonumbe</TT>r turns them
+off).</FONT>
+<P><FONT SIZE=+1>To save a file, type <TT>:w<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></TT>.
+To save and quit, type <TT>:wq<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></TT>
+or press <TT>ZZ</TT>. To force a quit without saving type <TT>:q!<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></TT>.</FONT>
+<P><FONT SIZE=+1>To start editing another file, type :e filename<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>.</FONT>
+<P><FONT SIZE=+1>To execute shell commands from within vi, and then return
+to vi afterwards, type <TT>:!</TT><I>shellcommand<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></I>.
+You can use the letter <TT>% </TT>as a substitute for the name of the file
+that you are editing (so <TT>:!echo %</TT> prints the name of the current
+file).</FONT>
+<P><FONT SIZE=+1><TT>.</TT> repeats the last command.</FONT></BLOCKQUOTE>
+
+<TABLE BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<TR NOSAVE>
+<TD NOSAVE><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#FFFFFF"><FONT SIZE=+2>6.2.6
+Quick reference for vi</FONT></FONT></FONT></B></TD>
+</TR>
+</TABLE>
+
+<BLOCKQUOTE>
+<UL><B><FONT SIZE=+1>Inserting and typing text:</FONT></B>
+<BR><TT><FONT SIZE=+1>i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+insert text (and enter input mode)</FONT></TT>
+<BR><TT><FONT SIZE=+1>$a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+append text (to end of line)</FONT></TT>
+<BR><TT><FONT SIZE=+1>ESC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; re-enter
+command mode</FONT></TT>
+<BR><TT><FONT SIZE=+1>J&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+join lines</FONT></TT>
+<P><B><FONT SIZE=+1>Cursor movement:</FONT></B>
+<BR><TT><FONT SIZE=+1>h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+left</FONT></TT>
+<BR><TT><FONT SIZE=+1>j&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+down</FONT></TT>
+<BR><TT><FONT SIZE=+1>k&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+up</FONT></TT>
+<BR><TT><FONT SIZE=+1>l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+right</FONT></TT>
+<BR><TT><FONT SIZE=+1>^&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+beginning of line</FONT></TT>
+<BR><TT><FONT SIZE=+1>$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+end of line</FONT></TT>
+<BR><TT><FONT SIZE=+1>1 G&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; top
+of document</FONT></TT>
+<BR><TT><FONT SIZE=+1>G&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+end of document</FONT></TT>
+<BR><TT><FONT SIZE=+1>&lt;n> G&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; go to line
+&lt;n></FONT></TT>
+<BR><TT><FONT SIZE=+1>^F&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+page forward</FONT></TT>
+<BR><TT><FONT SIZE=+1>^B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+page backward</FONT></TT>
+<BR><TT><FONT SIZE=+1>w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+word forwards</FONT></TT>
+<BR><TT><FONT SIZE=+1>b&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+word backwards</FONT></TT>
+<P><B><FONT SIZE=+1>Deleting and moving text:</FONT></B>
+<BR><TT><FONT SIZE=+1>Backspace&nbsp; delete character before cursor</FONT></TT>
+<BR><TT><FONT SIZE=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(only works in insert mode)</FONT></TT>
+<BR><TT><FONT SIZE=+1>x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+delete character under cursor</FONT></TT>
+<BR><TT><FONT SIZE=+1>dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+delete word</FONT></TT>
+<BR><TT><FONT SIZE=+1>dd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+delete line (restore with p or P)</FONT></TT>
+<BR><TT><FONT SIZE=+1>&lt;n> dd&nbsp;&nbsp;&nbsp;&nbsp; delete n lines</FONT></TT>
+<BR><TT><FONT SIZE=+1>d$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+delete to end of line</FONT></TT>
+<BR><TT><FONT SIZE=+1>dG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+delete to end of file</FONT></TT>
+<BR><TT><FONT SIZE=+1>yy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+yank/copy line (restore with p or P)</FONT></TT>
+<BR><TT><FONT SIZE=+1>&lt;n> yy&nbsp;&nbsp;&nbsp;&nbsp; yank/copy &lt;n>
+lines</FONT></TT>
+<P><B><FONT SIZE=+1>Search and replace:</FONT></B>
+<BR><TT><FONT SIZE=+1>%s/&lt;search string>/&lt;replace string>/g</FONT></TT><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<P><B><FONT SIZE=+1>Miscellaneous:</FONT></B>
+<BR><TT><FONT SIZE=+1>u&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+undo</FONT></TT>
+<BR><TT><FONT SIZE=+1>:w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+save file</FONT></TT>
+<BR><TT><FONT SIZE=+1>:wq&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; save
+file and quit</FONT></TT>
+<BR><TT><FONT SIZE=+1>ZZ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+save file and quit</FONT></TT>
+<BR><TT><FONT SIZE=+1>:q!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; quit
+without saving</FONT></TT></UL>
+</BLOCKQUOTE>
+
+<TABLE BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<TR NOSAVE>
+<TD NOSAVE><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#FFFFFF">
+<FONT SIZE=+2>
+<A NAME="emacs-6-3">
+6.3.1
+Introduction to emacs</A>
+</FONT></FONT></FONT></B></TD>
+</TR>
+</TABLE>
+
+
+<BLOCKQUOTE><FONT SIZE=+1><TT>emacs </TT>is a popular editor for UNIX,
+Windows and Macintosh systems. Unlike <TT>vi</TT>, it is not a standard
+UNIX system utility, but is available from the Free Software Foundation.</FONT>
+<P><FONT SIZE=+1>An<TT> emacs</TT> zealot will tell you how <TT>emacs</TT>
+provides advanced facilities that go beyond simple insertion and deletion
+of text: you can view two are more files at the same time, compile and
+debug programs in almost any programming language, typeset documents, run
+shell commands, read manual pages, email and news and even browse the web
+from inside <TT>emacs</TT>.
+<TT>emacs</TT> is also very flexible - you
+can redefine keystrokes and commands easily, and (for the more ambitious)
+you can even write Lisp programs to add new commands and display modes
+to <TT>emacs</TT>, since <TT>emacs</TT> has its own Lisp interpreter. In
+fact most of the editing commands of Emacs are written in Lisp already;
+the few exceptions are written in C for efficiency. However, users do not
+need to know how to program Lisp to use <TT>emacs</TT> (while it is true
+that only a programmer can write a substantial extension to <TT>emacs</TT>,
+it is easy for anyone to use it afterwards).</FONT>
+<P><FONT SIZE=+1>Critics of <TT>emacs</TT> point out that it uses a relatively
+large amount of system resources compared to <TT>vi</TT> and that it has
+quite a complicated command structure (joking that <TT>emacs</TT> stands
+for Escape-Meta-Alt-Control-Shift).</FONT>
+<P><FONT SIZE=+1>In practice most users tend to use both editors - <TT>vi</TT>
+to quickly edit short scripts and programs and <TT>emacs</TT> for more
+complex jobs that require reference to more than one file simultaneously.</FONT>
+<P><FONT SIZE=+1>On UNIX systems, <TT>emacs</TT> can run in graphical mode
+under the X Windows system, in which case some helpful menus and mouse
+button command mappings are provided. However, most of its facilities are
+also available on a text terminal.</FONT>
+<P><FONT SIZE=+1>To start <TT>emacs</TT>, enter:</FONT>
+<P><FONT SIZE=+1><TT>&nbsp;&nbsp;&nbsp; $ emacs </TT><I>filename</I></FONT><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<P><FONT SIZE=+1>where <I>filename</I> is the name of the file you want
+to edit. If the file doesn't exist, <TT>emacs</TT> will create it for you.</FONT></BLOCKQUOTE>
+
+<TABLE BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<TR NOSAVE>
+<TD NOSAVE><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#FFFFFF"><FONT SIZE=+2>6.3.2
+Basic Text Input and Navigation in emacs</FONT></FONT></FONT></B></TD>
+</TR>
+</TABLE>
+
+<BLOCKQUOTE><FONT SIZE=+1>Text input and navigation in <TT>emacs</TT> is
+mostly a matter of using the arrow keys to position the cursor and typing
+some text. Issuing more complex<TT> emacs</TT> commands usually involves
+pressing the Ctrl key (sometimes also labelled Control or Ctl) or the Meta
+key (sometimes also labelled Alt). <TT>emacs</TT> commands are usually
+described in this way:</FONT>
+<UL>
+<LI>
+<FONT SIZE=+1><TT>C-&lt;chr>&nbsp;</TT> means hold the Ctrl key while typing
+the character <TT>&lt;chr></TT>. Thus, <TT>C-f</TT> would be: hold the
+Ctrl key and type <TT>f</TT>.</FONT></LI>
+
+<LI>
+<FONT SIZE=+1><TT>M-&lt;chr></TT>&nbsp; means hold the Meta or Alt key
+down while typing <TT>&lt;chr></TT>. If there is no Meta or Alt key, instead
+press and release the ESC key and then type <TT>&lt;chr></TT>.</FONT></LI>
+</UL>
+<FONT SIZE=+1>One initially annoying feature of <TT>emacs</TT> is that
+its help facility has been installed on <TT>C-h</TT> (Ctrl h). Unfortunately
+this is also the code for the backspace key on most systems. You can, however,
+easily make the key work as expected by creating a <TT>.emacs</TT> file
+(a file always read on start up) in your home directory containing the
+following line:</FONT>
+<P><TT><FONT SIZE=+1>(global-set-key "\C-h" 'backward-delete-char-untabify)</FONT></TT>
+<P><FONT SIZE=+1><A HREF=".emacs">Here</A> is a <TT>.emacs</TT> file that
+contains this line as well as several other useful facilities (see Section
+6.3.6).</FONT>
+<P><FONT SIZE=+1>To access the help system you can still type <TT>M-x help<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></TT>
+or (for a comprehensive tutorial) <TT>M-x help-with-tutorial<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></TT>.</FONT>
+<P><FONT SIZE=+1>Useful navigation commands are <TT>C-a</TT> (beginning
+of line), <TT>C-e</TT> (end of line), <TT>C-v</TT> (forward page), <TT>M-v</TT>
+(backwards page), <TT>M-&lt;</TT> (beginning of document) and <TT>M-></TT>
+(end of document). <TT>C-d </TT>will delete the character under the cursor,
+while <TT>C-k</TT> will delete to the end of the line. Text deleted with
+<TT>C-k</TT>
+is placed in a buffer which can be "yanked" back later with
+<TT>C-y</TT>.</FONT></BLOCKQUOTE>
+
+<TABLE BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<TR NOSAVE>
+<TD NOSAVE><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#FFFFFF"><FONT SIZE=+2>6.3.3
+Moving and Copying Text in emacs</FONT></FONT></FONT></B></TD>
+</TR>
+</TABLE>
+
+<BLOCKQUOTE><FONT SIZE=+1>The easiest way to cut and paste text is to go
+to the start of the text and press <TT>C-k</TT> until you have deleted
+the text you want. Then move to the spot where you want to paste the text
+and press <TT>C-y</TT> to restore the text. If you make a mistake, <TT>C-u</TT>
+will undo the change (<TT>emacs</TT> supports several levels of undo).
+Another way to delete a chunk of text is to go the start of the text and
+press <TT>C-SPC</TT> (SPC is the spacebar; this sets a mark). Then go to
+the end of the text you wish to delete and press <TT>C-w</TT>. Restore
+the text in the right spot with <TT>C-y</TT>.</FONT>
+<P><FONT SIZE=+1>To copy and paste, delete the target text as above, and
+then use <TT>C-y</TT> twice (once to restore the original text, and once
+to create the copy).</FONT></BLOCKQUOTE>
+
+<TABLE BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<TR NOSAVE>
+<TD NOSAVE><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#FFFFFF"><FONT SIZE=+2>6.3.4
+Searching for and Replacing Text in emacs</FONT></FONT></FONT></B></TD>
+</TR>
+</TABLE>
+
+<BLOCKQUOTE><FONT SIZE=+1>To search forwards and backwards incrementally,
+use <TT>C-s</TT> and <TT>C-r</TT> respectively. Pressing <TT>C-s</TT> or
+<TT>C-r</TT>
+again will repeat the operation. When you have found the text you want,
+press&nbsp;<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>, or press
+<TT>C-g</TT>
+to cancel the operation and return your cursor to the position where the
+search started.</FONT>
+<P><FONT SIZE=+1>To replace a string, type <TT>M-x replace-string<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></TT>
+(you may want to modify your <TT>.emacs</TT> file so that this command
+is on <TT>C-x r</TT>). <TT>M-%</TT> performs a query search and replace.</FONT></BLOCKQUOTE>
+
+<TABLE BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<TR NOSAVE>
+<TD NOSAVE><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#FFFFFF"><FONT SIZE=+2>6.3.5
+Other Useful emacs Commands</FONT></FONT></FONT></B></TD>
+</TR>
+</TABLE>
+
+<BLOCKQUOTE><FONT SIZE=+1>Pressing <TT>C-g</TT> will cancel any <TT>emacs</TT>
+command in progress.</FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE=+1>To save a file, press <TT>C-x C-s</TT>. To start
+editing a new file, press <TT>C-x C-f</TT>.</FONT>
+<P><FONT SIZE=+1>To bring up two windows (or "buffers" in emacs-speak),
+press <TT>C-x 2</TT> (<TT>C-x 1</TT> gets you back to 1). <TT>C-x o</TT>
+switches between buffers on the same screen. <TT>C-x b</TT> lets you switch
+between all active buffers, whether you can see them or not. <TT>C-x C-k</TT>
+deletes a buffer that you are finished with.</FONT>
+<P><FONT SIZE=+1><TT>M-x shell<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></TT>
+brings up a UNIX shell inside a buffer (you may like to put this on <TT>C-x
+C-u</TT>).
+<TT>M-x goto-line<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></TT>
+skips to a particular line (you may like to put this on <TT>C-x g</TT>).
+<TT>M-x
+compile<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></TT> will attempt to compile
+a program (using the <TT>make</TT> utility or some other command that you
+can specify). If you are doing a lot of programming you will probably want
+to put this on a key like <TT>C-x c</TT>.</FONT>
+<P><FONT SIZE=+1><TT>M-q</TT> will reformat a paragraph.</FONT>
+<P><FONT SIZE=+1><TT>C-x C-c </TT>quits emacs.</FONT></BLOCKQUOTE>
+
+<TABLE BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<TR NOSAVE>
+<TD NOSAVE><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#FFFFFF"><FONT SIZE=+2>6.3.6
+Quick reference for emacs</FONT></FONT></FONT></B></TD>
+</TR>
+</TABLE>
+
+<BLOCKQUOTE>
+<BLOCKQUOTE><B><FONT SIZE=+1>Cursor movement:</FONT></B>
+<BR><TT><FONT SIZE=+1>C-a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+beginning of line</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-e&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+end of line</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-&lt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+top of document</FONT></TT>
+<BR><TT><FONT SIZE=+1>C->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+end of document</FONT></TT>
+<BR><TT><FONT SIZE=+1>M-x goto-line Go to line</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+page forward</FONT></TT>
+<BR><TT><FONT SIZE=+1>M-v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+page backward</FONT></TT>
+<P><B><FONT SIZE=+1>Deleting and moving text:</FONT></B>
+<BR><TT><FONT SIZE=+1>Backspace&nbsp;&nbsp;&nbsp;&nbsp; delete character
+before cursor</FONT></TT>
+<BR><TT><FONT SIZE=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(subject to modification of .emacs)</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-d&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+delete character under cursor</FONT></TT>
+<BR><TT><FONT SIZE=+1>M-d&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+delete word</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-k&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+delete to end of line(s)</FONT></TT>
+<BR><TT><FONT SIZE=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(restore with C-y)</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-SPC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+set mark</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+delete from mark to cursor</FONT></TT>
+<BR><TT><FONT SIZE=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(restore with C-y)</FONT></TT>
+<P><B><FONT SIZE=+1>Search and replace:</FONT></B>
+<BR><TT><FONT SIZE=+1>C-s&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+incremental search forward</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+incremental search backward</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+query replace</FONT></TT>
+<BR><TT><FONT SIZE=+1>M-x replace-string<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>&lt;searchstr><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>&lt;replstr></FONT></TT><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<P><B><FONT SIZE=+1>Miscellaneous:</FONT></B>
+<BR><TT><FONT SIZE=+1>C-x u&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+undo</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-x C-s&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; save
+file</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-x C-f&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; find
+file</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-x 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+2 windows</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-x 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1 window</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-x o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+switch between windows</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-x b&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+switch buffers</FONT></TT>
+<BR><TT><FONT SIZE=+1>M-q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+reformat paragraph</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-x C-c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; quit</FONT></TT>
+<P><B><FONT SIZE=+1>Useful customisable keys (configured using the provided
+<TT><A HREF=".emacs">.emacs</A></TT> file):</FONT></B>
+<BR><TT><FONT SIZE=+1>C-x g&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+goto line</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-x c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+compile program (useful with C-x 2)</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-x C-u&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; open
+Unix shell (useful with C-x 2)</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-x a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+repeat command</FONT></TT>
+<BR><TT><FONT SIZE=+1>C-x m&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+manual entry</FONT></TT></BLOCKQUOTE>
+</BLOCKQUOTE>
+
+<TABLE BORDER=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#000099" NOSAVE >
+<TR NOSAVE>
+<TD NOSAVE><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#FFFFFF"><FONT SIZE=+2>6.4
+Other UNIX editors</FONT></FONT></FONT></B></TD>
+</TR>
+</TABLE>
+
+<BLOCKQUOTE><FONT SIZE=+1>There are many other editors for UNIX systems.
+Two popular alternatives to <TT>vi</TT> and <TT>emacs</TT> are <TT>nedit
+</TT>and
+<TT>pico</TT>.</FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><P><A HREF="http:./index.html">
+(BACK TO COURSE CONTENTS)</A></P></BLOCKQUOTE>
+
+<HR WIDTH="100%">
+<BR><B><FONT SIZE=+1>&copy; <I>September 2001 William Knottenbelt (wjk@doc.ic.ac.uk)</I></FONT></B>
+</BODY>
+</HTML>

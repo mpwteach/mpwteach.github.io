@@ -1,0 +1,113 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <title>Introduction to UNIX and Linux: Exercise Sheet 4</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.75 [en] (X11; U; Linux 2.2.16-3 i686) [Netscape]">
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000" background="purplebg.gif">
+
+<hr WIDTH="100%">
+<center><table BORDER=0 CELLSPACING=0 WIDTH="100%" BGCOLOR="#3333FF" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE>
+<center><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+4>Introduction
+to UNIX:&nbsp;</font></font></font>
+<br><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+4>Exercise
+Sheet Four</font></font></font></center>
+</td>
+
+<td>
+<div align=right><img SRC="linux-logica-small.gif" height=167 width=133></div>
+</td>
+</tr>
+</table></center>
+
+<hr WIDTH="100%">
+<blockquote>
+<ol>
+<li>
+<font size=+1>Archive the contents of your home directory using <tt>tar</tt>.
+Compress the tar file with <tt>gzip</tt>. Now uncompress and unarchive
+the <tt>.tar.gz</tt> file using <tt>cat</tt>, <tt>tar</tt> and <tt>gzip</tt>
+on one command line.</font></li>
+
+<li>
+<font size=+1>Use <tt>find</tt> to compile a list of all directories in
+the system, redirecting the output so that the list of directories ends
+up in a file called <tt>directories.txt</tt> and the list of error messages
+ends up in a file called <tt>errors.txt</tt>.</font></li>
+
+<li>
+<font size=+1>Try the command <tt>sleep 5</tt>. What does this command
+do?</font></li>
+
+<li>
+<font size=+1>Run the command in the background using <tt>&amp;</tt>.</font></li>
+
+<li>
+<font size=+1>Run <tt>sleep 15</tt> in the foreground, suspend it with
+Ctrl-z and then put it into the background with <tt>bg</tt>. Type <tt>jobs</tt>.
+Type <tt>ps</tt>. Bring the job back into the foreground with <tt>fg</tt>.</font></li>
+
+<li>
+<font size=+1>Run <tt>sleep 15</tt> in the background using <tt>&amp;</tt>,
+and then use <tt>kill</tt> to terminate the process by its job number.
+Repeat, except this time kill the process by specifying its PID.</font></li>
+
+<li>
+<font size=+1>Run <tt>sleep 15</tt> in the background using <tt>&amp;</tt>,
+and then use <tt>kill</tt> to suspend the process. Use <tt>bg</tt> to continue
+running the process.</font></li>
+
+<li>
+<font size=+1>Startup a number of<tt> sleep 60</tt> processes in the background,
+and terminate them all at the same time using the <tt>pkill</tt> command.</font></li>
+
+<li>
+<font size=+1>Use <tt>ps</tt>, <tt>w</tt> and <tt>top</tt> to show all
+processes that are executing.</font></li>
+
+<li>
+<font size=+1>Use <tt>ps -aeH</tt> to display the process hierarchy. Look
+for the <tt>init</tt> process. See if you can identify important system
+daemons. Can you also identify your shell and its subprocesses?</font></li>
+
+<li>
+<font size=+1>Combine <tt>ps -fae</tt> with <tt>grep</tt> to show all processes
+that you are executing, with the exception of the <tt>ps -fae</tt> and
+<tt>grep</tt> commands.</font></li>
+
+<li>
+<font size=+1>Start a <tt>sleep 300</tt> process running in the background.
+Log off the server, and log back in again. List all the processes that
+you are running. What happened to your sleep process?&nbsp;Now repeat,
+except this time start by running <tt>nohup sleep 300</tt>.</font></li>
+
+<li>
+<font size=+1>Multiple jobs can be issued from the same command line using
+the operators <tt>;</tt>, <tt>&amp;&amp;</tt> and <tt>||</tt>. Try combining
+the commands <tt>cat nonexistent</tt>&nbsp;and <tt>echo hello</tt> using
+each of these operators. Reverse the order of the commands and try again.
+What are the rules about when the commands will be executed?</font></li>
+
+<li>
+<font size=+1>What does the <tt>xargs</tt> command do? Can you combine
+it with <tt>find</tt> and <tt>grep</tt> to find yet another way of searching
+all files in the <tt>/home</tt> subdirectory tree for the word <tt>hello</tt>?</font></li>
+
+<li>
+<font size=+1>What does the <tt>cut</tt> command do? Can you use it together
+with <tt>w</tt> to produce a list of login names and CPU&nbsp;times corresponding
+to each active process? Can you now (all on the same command line)&nbsp;use
+<tt>sort </tt>and <tt>head</tt> or <tt>tail</tt> to find the user whose
+process is using the most CPU?</font></li>
+</ol>
+</blockquote>
+
+<BLOCKQUOTE><P><A HREF="http:./index.html">
+(BACK TO COURSE CONTENTS)</A></P></BLOCKQUOTE>
+
+<hr WIDTH="100%"><b>&copy; <i>September 2001 William Knottenbelt (wjk@doc.ic.ac.uk)</i></b>
+</body>
+</html>

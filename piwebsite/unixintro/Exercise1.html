@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Introduction to UNIX and Linux: Exercise Sheet 1</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000" background="purplebg.gif">
+
+    <hr WIDTH="100%">
+    <center><table BORDER=0 CELLSPACING=0 WIDTH="100%" BGCOLOR="#3333FF" NOSAVE >
+	<tr NOSAVE>
+	  <td NOSAVE>
+	    <center><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+4>Introduction
+		    to UNIX:&nbsp;</font></font></font>
+	      <br><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+4>Exercise
+		    Sheet One</font></font></font></center>
+	  </td>
+
+	  <td>
+	    <div align=right><img SRC="linux-logica-small.gif" height=167 width=133></div>
+	  </td>
+	</tr>
+    </table></center>
+
+    <hr WIDTH="100%">
+    <blockquote>
+      <ol>
+	<li>
+	  <font size=+1>Log on a Linux machine or connect to one from a 
+	    Windows machine (e.g. click on the Exceed icon and then use putty to
+	    connect to the server <tt>kiwi</tt>.
+	    Enter your login (user name) and password at relevant prompts.</font></li>
+
+	<li>
+	  <font size=+1>Enter these commands at the UNIX prompt, and try to interpret
+	    the output. Ask questions and don't be afraid to experiment (as a normal
+	    user you cannot do much harm):</font></li>
+
+	<ul>
+	  <li>
+	    <tt><font size=+1>echo hello world</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>passwd</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>date</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>hostname</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>arch</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>uname -a</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <font size=+1><tt>dmesg | more<img SRC="enter.gif" height=15 width=27></tt>(you
+	      may need to press <tt>q</tt> to quit)</font></li>
+
+	  <li>
+	    <tt><font size=+1>uptime</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>who am i</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>who</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>id</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>last</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>finger</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>w</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>top<img SRC="enter.gif" height=15 width=27> </font></tt><font size=+1>(you
+	      may need to press <tt>q</tt> to quit)</font></li>
+
+	  <li>
+	    <tt><font size=+1>echo $SHELL</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>echo {con,pre}{sent,fer}{s,ed}</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>man "automatic door"</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>man ls<img SRC="enter.gif" height=15 width=27> </font></tt><font size=+1>(you
+	      may need to press <tt>q</tt> to quit)</font></li>
+
+	  <li>
+	    <tt><font size=+1>man who<img SRC="enter.gif" height=15 width=27> </font></tt><font size=+1>(you
+	      may need to press <tt>q</tt> to quit)</font></li>
+
+	  <li>
+	    <tt><font size=+1>who can tell me why i got divorced</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>lost</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>clear</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>cal 2000</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <font size=+1><tt>cal 9 1752<img SRC="enter.gif" height=15 width=27></tt>(do
+	      you notice anything unusual?)</font></li>
+
+	  <li>
+	    <font size=+1><tt>bc -l<img SRC="enter.gif" height=15 width=27></tt>(type
+	      <tt>quit<img SRC="enter.gif" height=15 width=27></tt>
+	      or press Ctrl-d to quit)</font></li>
+
+	  <li>
+	    <tt><font size=+1>echo 5+4 | bc -l</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <font size=+1><tt>yes please<img SRC="enter.gif" height=15 width=27></tt>(you
+	      may need to press Ctrl-c to quit)</font></li>
+
+	  <li>
+	    <tt><font size=+1>time sleep 5</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt><font size=+1>history</font></tt><img SRC="enter.gif" height=15 width=27></li>
+	</ul>
+      </ol>
+    </blockquote>
+
+    <BLOCKQUOTE><P><A HREF="http:./index.html">
+	  (BACK TO COURSE CONTENTS)</A></P></BLOCKQUOTE>
+
+  </body>
+</html>

@@ -1,0 +1,89 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <title>Introduction to UNIX and Linux: Exercise Sheet 7</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.75 [en] (X11; U; Linux 2.2.16-3 i686) [Netscape]">
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000" background="purplebg.gif">
+
+<hr WIDTH="100%">
+<center><table BORDER=0 CELLSPACING=0 WIDTH="100%" BGCOLOR="#3333FF" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE>
+<center><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+4>Introduction
+to UNIX:&nbsp;</font></font></font>
+<br><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+4>Exercise
+Sheet Seven</font></font></font></center>
+</td>
+
+<td>
+<div align=right><img SRC="linux-logica-small.gif" height=167 width=133></div>
+</td>
+</tr>
+</table></center>
+
+<hr WIDTH="100%">
+<blockquote><font size=+1>N.B. Please perform these tasks on your 
+home PC and take extra care when using the <tt>root</tt>
+account. Since your commands will be carried out without the safeguards
+that apply to ordinary users, you may do serious damage to the system.
+If in doubt, please ask (preferably before pressing&nbsp;<img SRC="enter.gif" height=15 width=27>!)</font></blockquote>
+
+<blockquote>
+<ol>
+<li>
+<font size=+1>Use <tt>su -</tt> to become <tt>root</tt>.</font></li>
+
+<li>
+<font size=+1>Add a new user of your choosing to the system. Set their
+password. Check that they can log in.</font></li>
+
+<li>
+<font size=+1>Add a new user group of your choosing to the system. Place
+yourself (i.e. your login, not <tt>root</tt>), and the user that you have
+added in the group. Check that you are both in the new group.</font></li>
+
+<li>
+<font size=+1>Remove the user that you added.</font></li>
+
+<li>
+<font size=+1>Make yourself a <tt>cron</tt> job that sends you a message&nbsp;(using
+<tt>write</tt>) every 10 minutes. Remove this when you start to find it
+irritating.</font></li>
+
+<li>
+<font size=+1>Discover how to restart the web server <tt>httpd</tt> (or
+any other system daemon).</font></li>
+
+<li>
+<font size=+1><A HREF="tinyhttpd.pl"><tt>tinyhttpd.pl</tt></A> is a mini-web
+server written in Perl. <b>Switch back to being a normal user</b>, and
+make a copy of <tt>tinyhttpd.pl </tt>in your home directory. Change the
+port number on which it operates&nbsp;to a port of your choice (currently
+8080, but use a different one that noone else will be using). Create a
+<tt>public_html</tt> directory in your home directory and create a home
+page file inside it called "<tt>index.html</tt>". Now run <tt>tinyhttpd.pl</tt>
+in the background and use <tt>telnet</tt> (<tt>telnet <i>machine</i> <i>port</i></tt>,
+where <i>machine</i> is the hostname and <i>port</i> is the port number, and then issue the HTTP command <tt>GET
+/ HTTP/1.0<img SRC="enter.gif" height=15 width=27><img SRC="enter.gif" height=15 width=27></tt>)
+or a web browser (call up <tt>http://<i>machine</i>:</tt><i>port</i>) to test
+that your home page file is in fact being served.</font></li>
+
+<li>
+<font size=+1>Switch back to being <tt>root</tt>. Add a line to <tt>/etc/inittab</tt>
+which will ensure that your mini web-server will respawn itself if it dies.
+Kill your web server (using <tt>kill</tt>) and see if the respawning works
+(<tt>init</tt> re-examines the <tt>/etc/inittab</tt> file whenever one
+of its descendant processes dies so you should not have long to wait for
+this to take effect). It may be helpful to monitor the system messages
+file with <tt>tail -f /var/log/messages</tt>.</font></li>
+</ol>
+</blockquote>
+
+<BLOCKQUOTE><P><A HREF="http:./index.html">
+(BACK TO COURSE CONTENTS)</A></P></BLOCKQUOTE>
+
+<hr WIDTH="100%"><b>&copy; <i>September 2001 William Knottenbelt (wjk@doc.ic.ac.uk)</i></b>
+</body>
+</html>

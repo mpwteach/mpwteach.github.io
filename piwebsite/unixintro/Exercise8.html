@@ -1,0 +1,79 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <title>Introduction to UNIX and Linux: Exercise Sheet 8</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.75 [en] (X11; U; Linux 2.2.16-3 i686) [Netscape]">
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000" background="purplebg.gif">
+
+<hr WIDTH="100%">
+<center><table BORDER=0 CELLSPACING=0 WIDTH="100%" BGCOLOR="#3333FF" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE>
+<center><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+4>Introduction
+to UNIX:&nbsp;</font></font></font>
+<br><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+4>Exercise
+Sheet Eight</font></font></font></center>
+</td>
+
+<td>
+<div align=right><img SRC="linux-logica-small.gif" height=167 width=133></div>
+</td>
+</tr>
+</table></center>
+
+<hr WIDTH="100%">
+<blockquote>
+<ol>
+<li>
+<font size=+1>Use your favourite UNIX editor to create the <tt>simple</tt>
+shell script given in Section 8.4 of the notes. Run it, and see how the
+contents of the script relates to the output.</font></li>
+
+<li>
+<font size=+1>Extend the script so that it generates a random secret number
+between 1 and 100 (c.f. Exercise Sheet 3, Question 16) and then keeps asking
+the user to guess the secret number until they guess correctly. The script
+should give the user hints such as "I'm sorry your guess is too low" or
+"I'm sorry your guess is too high".</font></li>
+
+<li>
+<font size=+1>Write a shell script which renames all <tt>.txt</tt> files
+as <tt>.text</tt> files. The command <tt>basename</tt> might help you here.</font></li>
+
+<li>
+<font size=+1>Write a shell script called <tt>pidof</tt> which takes a
+name as parameter and returns the PID(s) of processes with that name.</font></li>
+
+<li>
+<font size=+1>Shell scripts can also include functions. Functions are declared
+as:<br>
+<br>
+<tt>function </tt><i>funcname</i><tt>() {<br>
+</tt><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; statements<br>
+</i><tt>}<br>
+<br>
+</tt>and invoked as <i>funcname param1 param2</i>... The parameters passed
+to the function are accessible inside the function through the variables
+<tt>$1</tt>,
+<tt>$2</tt>, etc. Now add a <tt>usage()</tt> function to your <tt>pidof</tt>
+script which prints usage instructions. Call <tt>usage()</tt> if the wrong
+number of parameters is passed to the script.</font></li>
+
+<li>
+<font size=+1>Modify your <tt>.bash_profile</tt> script so that your <tt>PATH</tt>&nbsp;includes
+the current directory (<tt>.</tt>) and so that your environment variable
+<tt>EDITOR</tt>&nbsp;is set to <tt>emacs</tt> or <tt>vi </tt>(or whatever
+else you prefer to use). Run the modified script using <tt>source .bash_profile
+</tt>and check that the changes you made have been applied to the current
+shell (type <tt>set</tt>).</font></li>
+</ol>
+</blockquote>
+
+<BLOCKQUOTE><P><A HREF="http:./index.html">
+(BACK TO COURSE CONTENTS)</A></P></BLOCKQUOTE>
+
+<hr WIDTH="100%"><b>&copy; <i>September 2001 William Knottenbelt (wjk@doc.ic.ac.uk)</i></b>
+</body>
+</html>
