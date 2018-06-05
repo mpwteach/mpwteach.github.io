@@ -17,7 +17,7 @@
        if ($_SERVER["REQUEST_METHOD"] == "POST") {
          $arg1 = test_input($_POST["arg1"]);
          $arg2 = test_input($_POST["arg2"]);
-         $result = system( "/usr/lib/cgi-bin/pi/argtest2 " . $arg1 . " " . $arg2); 
+         exec( "/usr/lib/cgi-bin/pi/argtest2 " . $arg1 . " " . $arg2, $result); 
        }
 
        function test_input($data) {
@@ -41,9 +41,8 @@
        echo $arg2;
        echo "<br>";
        
-       echo "<h2>Calling C program</h2>";
-       echo $result;
-       
+       echo "<h2>C Program Output:</h2>";
+       echo $result[0];
      ?>
     
   </body>
