@@ -12,12 +12,12 @@
 
     <?php
        // define variables and set to empty values
-       $arg1 = $arg2 = $result = "";
+       $arg1 = $arg2 = $output = $retc = "";
 
        if ($_SERVER["REQUEST_METHOD"] == "POST") {
          $arg1 = test_input($_POST["arg1"]);
          $arg2 = test_input($_POST["arg2"]);
-         exec( "/usr/lib/cgi-bin/pi/argtest2 " . $arg1 . " " . $arg2, $result); 
+         exec("/usr/lib/cgi-bin/pi/argtest2 " . $arg1 . " " . $arg2, $output, $retc); 
        }
 
        function test_input($data) {
@@ -41,8 +41,15 @@
        echo $arg2;
        echo "<br>";
        
-       echo "<h2>C Program Output:</h2>";
-       echo $result[0];
+       echo "<h2>C Program Output (an array):</h2>";
+       foreach ($output as $line) {
+         echo $line;
+         echo "<br>";
+       }
+       
+       echo "<h2>C Program Return Code:</h2>";
+       echo $retc;
+      
      ?>
     
   </body>
