@@ -1,0 +1,115 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <link rel="stylesheet" type="text/css" href="mystyle.css">
+   <link rel="icon" href="https://sites.google.com/a/sduhsd.net/csp-yana2319/home/0-01-magic-square/planticon.jpg?attredirects=0">
+   <title>Introduction to UNIX and Linux: Exercise Sheet 3</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.75 [en] (X11; U; Linux 2.2.16-3 i686) [Netscape]">
+</head>
+<body>
+<hr WIDTH="100%">
+
+<h1> Introduction to UNIX: Exercise Sheet Three</h1>
+
+<div class="text">
+
+<ol>
+<li>
+Describe three different ways of setting the permissions
+on a file or directory to <tt>r--r--r--</tt>. Create a file and see if
+this works.</font></li>
+
+<li>
+Team up with a partner. Copy <tt>/bin/sh</tt> to your home
+directory. Type "<tt>chmod +s sh</tt>". Check the permissions on <tt>sh</tt>
+in the directory listing. Now ask your partner to change into your home
+directory and run the program <tt>./sh</tt>. Ask them to run the <tt>id</tt>
+command. What's happened?&nbsp; Your partner can type <tt>exit</tt> to
+return to their shell.</font></li>
+
+<li>
+What would happen if the system administrator created a <tt>sh</tt>
+file in this way? Why is it sometimes necessary for a system administrator
+to use this feature using programs other than <tt>sh</tt>?</font></li>
+
+<li>
+Delete <tt>sh</tt> from your home directory (or at least
+to do a <tt>chmod -s sh</tt>).</font></li>
+
+<li>
+Modify the permissions on your home directory to make it
+completely private. Check that your partner can't access your directory.
+Now put the permissions back to how they were.</font></li>
+
+<li>
+Type <tt>umask 000</tt> and then create a file called <tt>world.txt</tt>
+containing the words "<tt>hello world</tt>". Look at the permissions on
+the file. What's happened? Now type <tt>umask 022 </tt>and create a file
+called <tt>world2.txt</tt>. When might this feature be useful?</font></li>
+
+<li>
+Create a file called "<tt>hello.txt</tt>" in your home directory
+using the command <tt>cat -u >&nbsp;hello.txt</tt>. Ask your partner to
+change into your home directory and run <tt>tail -f hello.txt</tt>. Now
+type several lines into <tt>hello.txt</tt>. What appears on your partner's
+screen?</font></li>
+
+<li>
+Use <tt>find</tt> to display the names of all files in the
+<tt>/home</tt> subdirectory tree. Can you do this without displaying errors
+for files you can't read?</font></li>
+
+<li>
+Use <tt>find</tt> to display the names of all files in the
+system that are bigger than 1MB.</font></li>
+
+<li>
+Use <tt>find</tt> and <tt>file</tt> to display all files
+in the <tt>/home</tt> subdirectory tree, as well as a guess at what sort
+of a file they are. Do this in two different ways.</font></li>
+
+<li>
+Use <tt>grep</tt> to isolate the line in <tt>/etc/passwd</tt>
+that contains your login details.</font></li>
+
+<li>
+Use <tt>find</tt> and <tt>grep</tt> and <tt>sort</tt> to
+display a sorted list of all files in the <tt>/home</tt> subdirectory tree
+that contain the word <tt>hello </tt>somewhere inside them.</font></li>
+
+<li>
+Use <tt>locate</tt> to find all filenames that contain the
+word <tt>emacs</tt>. Can you combine this with <tt>grep</tt> to avoid displaying
+all filenames containing the word <tt>lib</tt>?</font></li>
+
+<li>
+Create a file containing some lines that you think would
+match the regular expression: <tt>(^[0-9]{1,5}[a-zA-z ]+$)|none</tt> and
+some lines that you think would not match. Use <tt>egrep</tt> to see if
+your intuition is correct.</font></li>
+
+<li>
+Archive the contents of your home directory (including any
+subdirectories) using <tt>tar</tt> and <tt>cpio</tt>. Compress the <tt>tar</tt>
+archive with <tt>compress</tt>, and the <tt>cpio</tt> archive with <tt>gzip</tt>.
+Now extract their contents.</font></li>
+
+<li>
+On Linux systems, the file <tt>/dev/urandom</tt> is a constantly
+generated random stream of characters. Can you use this file with <tt>od</tt>
+to printout a random decimal number?</font></li>
+
+<li>
+Type <tt>mount</tt> (with no parameters) and try to interpret
+the output.</font></li>
+</ol>
+</blockquote>
+
+<BLOCKQUOTE><P><A HREF="http:./index.html">
+(BACK TO COURSE CONTENTS)</A></P></BLOCKQUOTE>
+
+</div>
+
+</body>
+</html>

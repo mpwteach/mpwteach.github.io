@@ -1,0 +1,176 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<meta charset="utf-8">
+<link rel="icon"  href="https://sites.google.com/a/my.sduhsd.net/csp-yana2319/home/0-01-magic-square/planticon.jpg?attredirects=0">   
+<h1>Introduction to UNIX and Linux: Exercise Sheet 2</h1>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.75 [en] (X11; U; Linux 2.2.16-3 i686) [Netscape]">
+</head>
+
+<div class="text">
+<hr WIDTH="100%">
+<blockquote>
+<ol>
+<li>
+Try the following command sequence:</li>
+
+<ul>
+<li>
+<tt>cd</tt></li>
+
+<li>
+<tt>pwd</tt></li>
+
+<li>
+<tt>ls -al</tt></li>
+
+<li>
+<tt>cd .</tt></li>
+
+<li>
+<tt>pwd&nbsp;&nbsp;&nbsp;&nbsp; </tt>(where did that get
+you?)</li>
+
+<li>
+<tt>cd ..</tt></li>
+
+<li>
+<tt>pwd</tt></li>
+
+<li>
+<tt>ls -al</tt></li>
+
+<li>
+<tt>cd ..</tt></li>
+
+<li>
+<tt>pwd</tt></li>
+
+<li>
+<tt>ls -al</tt></li>
+
+<li>
+<tt>cd ..</tt></li>
+
+<li>
+<tt>pwd&nbsp;&nbsp;&nbsp;&nbsp; </tt>(what happens now)</li>
+
+<li>
+<tt>cd /etc</tt></li>
+
+<li>
+<tt>ls -al |&nbsp;more</tt></li>
+
+<li>
+<tt>cat passwd</tt></li>
+
+<li>
+<tt>cd -</tt></li>
+
+<li>
+<tt>pwd</tt></li>
+</ul>
+
+<li>
+Continue to explore the filesystem tree using <tt>cd</tt>,
+<tt>ls</tt>, <tt>pwd</tt> and <tt>cat</tt>. Look in <tt>/bin</tt>, <tt>/usr/bin</tt>,
+<tt>/sbin</tt>, <tt>/tmp</tt> and <tt>/boot</tt>. What do you see?</li>
+
+<li>
+Explore <tt>/dev</tt>. Can you identify what devices are
+available?&nbsp;Which are character-oriented and which are block-oriented?
+Can you identify your tty&nbsp;(terminal)&nbsp;device (typing <tt>who am
+i </tt>might help); who is the owner of your tty (use <tt>ls -l</tt>)?</li>
+
+<li>
+Explore <tt>/proc</tt>. Display the contents of the files
+<tt>interrupts</tt>, <tt>devices</tt>, <tt>cpuinfo</tt>, <tt>meminfo</tt>
+and <tt>uptime</tt> using <tt>cat</tt>. Can you see why we say <tt>/proc</tt>
+is a pseudo-filesystem which allows access to kernel data structures?</li>
+
+<li>
+Change to the home directory of another user directly, using
+<tt>cd ~username</tt>.</li>
+
+<li>
+Change back into your home directory.</li>
+
+<li>
+Make subdirectories called <tt>work</tt> and <tt>play</tt>.</li>
+
+<li>
+Delete the subdirectory called <tt>work</tt>.</li>
+
+<li>
+Copy the file <tt>/etc/passwd</tt> into your home directory.</li>
+
+<li>
+Move it into the subdirectory <tt>play</tt>.</li>
+
+<li>
+Change into subdirectory <tt>play</tt> and create a symbolic
+link called <tt>terminal</tt> that points to your tty device. What happens
+if you try to make a hard link to the tty device?</li>
+
+<li>
+What is the difference between listing the contents of directory
+play with <tt>ls -l</tt> and <tt>ls -L</tt>?</li>
+
+<li>
+Create a file called <tt>hello.txt</tt> that contains the
+words "<tt>hello world</tt>". Can you use "<tt>cp</tt>" using "<tt>terminal</tt>"
+as the source file to achieve the same effect?</li>
+
+<li>
+Copy <tt>hello.txt</tt> to <tt>terminal</tt>. What happens?</li>
+
+<li>
+Imagine you were working on a system and someone accidentally
+deleted the <tt>ls</tt> command (<tt>/bin/ls</tt>). How could you get a
+list of the files in the current directory? Try it.</li>
+
+<li>
+How would you create and then delete a file called "<tt>$SHELL</tt>"?
+Try it.</li>
+
+<li>
+How would you create and then delete a file that begins with
+the symbol <tt>#</tt>? Try it.</li>
+
+<li>
+How would you create and then delete a file that begins with
+the symbol <tt>-</tt>? Try it.</li>
+
+<li>
+What is the output of the command: <tt>echo&nbsp;{con,pre}{sent,fer}{s,ed}</tt>?
+Now, from your home directory, copy <tt>/etc/passwd</tt> and <tt>/etc/group</tt>
+into your home directory in one command given that you can only type <tt>/etc</tt>
+once.</li>
+
+<li>
+Still in your home directory, copy the entire directory <tt>play</tt>
+to a directory called <tt>work</tt>, preserving the symbolic link.</li>
+
+<li>
+Delete the <tt>work</tt> directory and its contents with
+one command. Accept no complaints or queries.</li>
+
+<li>
+Change into a directory that does not belong to you and try
+to delete all the files (avoid <tt>/proc</tt> or <tt>/dev</tt>, just in
+case!)</li>
+
+<li>
+Experiment with the options on the <tt>ls</tt> command. What
+do the <tt>d</tt>, <tt>i</tt>, <tt>R</tt> and <tt>F</tt> options do?</li>
+</ol>
+</blockquote>
+
+<BLOCKQUOTE><P><A HREF="http:./index.html">
+(BACK TO COURSE CONTENTS)</A></P></BLOCKQUOTE>
+
+</div>
+</body>
+</html>

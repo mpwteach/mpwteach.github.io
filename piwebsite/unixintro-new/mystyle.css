@@ -1,0 +1,64 @@
+h1 {
+    color: #AA0101;
+    font-family: Comic Sans MS;
+    font-size: 200%;
+}
+
+.table {
+	background-color: #000099;
+	margin-left: 2px;
+	margin-right: 2px;
+	padding-left: 5px;
+	padding-bottom: 5px;
+	padding-top: 2px;
+}
+
+table {
+	font-family: Comic Sans MS;
+	width: 50%;
+	font-size: 75%;
+	padding: 8px;
+	text-align: center;
+	background-color: #66FFFF;
+
+}
+
+th {
+	padding-left: 15 px;
+        padding-right: 15 px;
+        pading-top: 10px;
+        padding-bottom: 10px;
+        text-align: left;
+	font-style: underline;
+} 
+
+td {
+	padding-left: 15 px;
+	padding-right: 15 px;
+	pading-top: 10px;
+	padding-bottom: 10px;
+	text-align: left;
+}	
+
+.caption {
+	text-align: center;
+	font-family: Comic Sans MS;
+	font-style: italic;	
+}
+  
+.heading {
+	color: #ffffff;
+	font-family: Comic Sans MS;
+	font-size: 150%;
+}
+
+.text {
+	color: #831010;
+	font-family: Comic Sans MS;
+	font-size: 100%;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+body { background-color: #CCEAFF; } 
+

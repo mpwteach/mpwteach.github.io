@@ -1,0 +1,71 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <link rel="stylesheet" type="text/css" href="mystyle.css">
+   <link rel="icon" href="https://sites.google.com/a/my.sduhsd.net/csp-yana2319/home/0-01-magic-square/planticon.jpg?attredirects=0">
+   <title>Introduction to UNIX and Linux: Exercise Sheet 8</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.75 [en] (X11; U; Linux 2.2.16-3 i686) [Netscape]">
+</head>
+
+<body>
+<hr width="100%">
+
+<div class="text">
+
+<h1>Introduction to UNIX: Exercise Sheet Eight</h1>
+
+<blockquote>
+<ol>
+<li>
+Use your favourite UNIX editor to create the <tt>simple</tt>
+shell script given in Section 8.4 of the notes. Run it, and see how the
+contents of the script relates to the output.</font></li>
+
+<li>
+Extend the script so that it generates a random secret number
+between 1 and 100 (c.f. Exercise Sheet 3, Question 16) and then keeps asking
+the user to guess the secret number until they guess correctly. The script
+should give the user hints such as "I'm sorry your guess is too low" or
+"I'm sorry your guess is too high".</font></li>
+
+<li>
+Write a shell script which renames all <tt>.txt</tt> files
+as <tt>.text</tt> files. The command <tt>basename</tt> might help you here.</font></li>
+
+<li>
+Write a shell script called <tt>pidof</tt> which takes a
+name as parameter and returns the PID(s) of processes with that name.</font></li>
+
+<li>
+Shell scripts can also include functions. Functions are declared
+as:<br>
+<br>
+<tt>function </tt><i>funcname</i><tt>() {<br>
+</tt><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; statements<br>
+</i><tt>}<br>
+<br>
+</tt>and invoked as <i>funcname param1 param2</i>... The parameters passed
+to the function are accessible inside the function through the variables
+<tt>$1</tt>,
+<tt>$2</tt>, etc. Now add a <tt>usage()</tt> function to your <tt>pidof</tt>
+script which prints usage instructions. Call <tt>usage()</tt> if the wrong
+number of parameters is passed to the script.</font></li>
+
+<li>
+Modify your <tt>.bash_profile</tt> script so that your <tt>PATH</tt>&nbsp;includes
+the current directory (<tt>.</tt>) and so that your environment variable
+<tt>EDITOR</tt>&nbsp;is set to <tt>emacs</tt> or <tt>vi </tt>(or whatever
+else you prefer to use). Run the modified script using <tt>source .bash_profile
+</tt>and check that the changes you made have been applied to the current
+shell (type <tt>set</tt>).</font></li>
+</ol>
+</blockquote>
+
+<p><a href="http:./index.html">
+(BACK TO COURSE CONTENTS)</a></p>
+
+</div>
+
+</body>
+</html>

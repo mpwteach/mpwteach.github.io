@@ -1,0 +1,641 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <link rel="stylesheet" type="text/css" href="mystyle.css">
+   <h1>Introduction to UNIX: Lecture 3</h1>
+   <link rel="icon"  href="https://sites.google.com/a/my.sduhsd.net/csp-yana2319/home/0-01-magic-square/planticon.jpg?attredirects=0">
+   <title>Introduction to UNIX and Linux: Lecture 3</title>
+   <meta name="viewport" content="width=device-width"> 
+</head>
+
+
+<body>
+
+<div class="heading">
+<div class="table">
+3.1 Objectives
+</div>
+</div>
+
+<div class="text">
+
+This lecture covers:
+<ul>
+<li>
+File and directory permissions in more detail and how these
+can be changed.</li>
+
+<li>
+Ways to examine the contents of files.</li>
+
+<li>
+How to find files when you don't know how their exact location.</li>
+
+<li>
+Ways of searching files for text patterns.</li>
+
+<li>
+How to sort files.</li>
+
+<li>
+Tools for compressing files and making backups.</li>
+
+<li>
+Accessing floppy disks and other removable media.</li>
+</ul>
+
+</div>
+<br>
+
+<div class="heading">
+<div class="table">
+3.2 File and Directory Permissions
+</div>
+</div>
+
+<div class="text">
+<center><table>
+  <tr>
+  <th>Permission</th>
+  <th>File</th>
+  <th>Directory</th>
+  </tr>
+  <tr>
+    <td>read</td>
+    <td>User can look at the contents of the file</td>
+    <td>User can list the files in the directory</td>
+  </tr>
+  <tr>
+    <td>write</td>
+    <td>User can modify the contents of the file</td>
+    <td>User can create new files and remove existing files in the directory</td>
+  </tr>
+  <tr>
+    <td>execute</td>
+    <td>User can use the filename as a UNIX command</td>
+    <td>User can change into the directory, but cannoy list the files unless they have read permission. User can read files if they have read permission on them</td>
+</table></center>
+
+<div class="caption">Fig 3.1: Interpretation of permissions for files
+and directories</div>
+
+<br>
+
+As we have seen in the previous chapter, every
+file or directory on a UNIX system has three types of permissions, describing
+what operations can be performed on it by various categories of users.
+The permissions are read (<tt>r</tt>), write (<tt>w</tt>) and execute (<tt>x</tt>),
+and the three categories of users are user/owner (<tt>u</tt>), group (<tt>g</tt>)
+and others (<tt>o</tt>). Because files and directories are different entities,
+the interpretation of the permissions assigned to each differs slightly,
+as shown in Fig 3.1.
+
+File and directory permissions can only be modified
+by their owners, or by the superuser (<tt>root</tt>), by using the <tt>chmod</tt>
+system utility.
+<ul>
+<li>
+<tt>chmod </tt>(change [file or directory] mode)</li>
+
+<p><tt>&nbsp;&nbsp;&nbsp; $ chmod </tt><i>options files</i>
+<p><tt>chmod</tt> accepts options in two forms. Firstly,
+permissions may be specified as a sequence of 3 octal digits (octal is
+like decimal except that the digit range is 0 to 7 instead of 0 to 9).
+Each octal digit represents the access permissions for the user/owner,
+group and others respectively. The mappings of permissions onto their corresponding
+octal digits is as follows:
+
+<center><table>
+  <tr>
+    <td>---</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>--x</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>-w-</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>-wx</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>r--</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>r-x</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td>rw-</td>
+    <td>6</td>
+  </tr>
+  <tr>
+    <td>rwx</td>
+    <td>7</td>
+  </tr>
+</table></center>
+
+<p>For example the command:
+<p><tt>&nbsp;&nbsp;&nbsp; $ chmod 600 private.txt</tt>
+<p>sets the permissions on <tt>private.txt</tt> to <tt>rw-------</tt>
+(i.e. only the owner can read and write to the file).
+<p>Permissions may be specified symbolically, using the symbols
+<tt>u</tt>
+(user), <tt>g</tt> (group), <tt>o</tt> (other), <tt>a</tt> (all),
+<tt>r</tt>
+(read), <tt>w</tt> (write), <tt>x</tt> (execute), <tt>+</tt> (add permission),
+<tt>-</tt>
+(take away permission) and <tt>=</tt> (assign permission). For example,
+the command:
+<p><tt>&nbsp;&nbsp;&nbsp; $ chmod ug=rw,o-rw,a-x *.txt</tt>
+<p>sets the permissions on all files ending in <tt>*.txt</tt>
+to <tt>rw-rw----</tt> (i.e. the owner and users in the file's group can
+read and write to the file, while the general public do not have any sort
+of access).
+<p><tt>chmod</tt> also supports a <tt>-R</tt> option which
+can be used to recursively modify file permissions, e.g.
+<p><tt>&nbsp;&nbsp;&nbsp; $ chmod -R go+r play</tt>
+<p>will grant group and other read rights to the directory
+<tt>play</tt>
+and all of the files and directories within <tt>play</tt>.
+<br>&nbsp;
+<li>
+<tt>chgrp</tt> (change group)</li>
+
+<p><tt>&nbsp;&nbsp;&nbsp; $ chgrp </tt><i>group files</i>
+<p>can be used to change the group that a file or directory
+belongs to. It also supports a <tt>-R</tt> option.</ul>
+
+</div>
+<br>
+
+<div class="heading">
+<div class="table">
+3.3 Inspecting File Content
+</div>
+</div>
+
+<div class="text">
+
+Besides <tt>cat </tt>there are several other
+useful utilities for investigating the contents of files:
+<ul>
+<li>
+<tt>file</tt> <i>filename(s)</i></li>
+
+<p><tt>file </tt>analyzes a file's contents for you and reports
+a high-level description of what type of file it appears to be:
+<p><tt>&nbsp;&nbsp;&nbsp; $ file myprog.c letter.txt webpage.html</tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp; myprog.c:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+C program text</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; letter.txt:&nbsp;&nbsp;&nbsp;
+English text</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; webpage.html:&nbsp; HTML document
+text</tt>
+<p><i>file</i> can identify a wide range of files but sometimes
+gets understandably confused (e.g. when trying to automatically detect
+the difference between C++ and Java code).
+<br>&nbsp;
+<li>
+<tt>head, tail</tt> <i>filename</i></li>
+
+<p><tt>head</tt> and <tt>tail</tt> display the first and
+last few lines in a file respectively. You can specify the number of lines
+as an option, e.g.
+<p><tt>&nbsp;&nbsp;&nbsp; $ tail -20 messages.txt</tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp; $ head -5 messages.txt</tt><img SRC="enter.gif" height=15 width=27>
+<p><tt>tail </tt>includes a useful <tt>-f</tt> option that
+can be used to continuously monitor the last few lines of a (possibly changing)
+file. This can be used to monitor log files, for example:
+<p><tt>&nbsp;&nbsp;&nbsp; $ tail -f /var/log/messages</tt><img SRC="enter.gif" height=15 width=27>
+<p>continuously outputs the latest additions to the system
+log file.
+<br>&nbsp;
+<li>
+<tt>objdump</tt> <i>options binaryfile</i></li>
+
+<p><tt>objdump</tt> can be used to disassemble binary
+files - that is it can show the machine language instructions which make
+up compiled application programs and system utilities.
+<br>&nbsp;
+<li>
+<tt>od</tt> <i>options filename</i> (octal dump)</li>
+
+<p><tt>od</tt> can be used to displays the contents of
+a binary or text file in a variety of formats, e.g.
+<p><tt>&nbsp;&nbsp;&nbsp; $ cat hello.txt</tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp; hello world</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; $ od -c hello.txt</tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp; 0000000&nbsp; h&nbsp; e&nbsp;
+l&nbsp; l&nbsp; o&nbsp;&nbsp;&nbsp;&nbsp; w&nbsp; o&nbsp; r&nbsp; l&nbsp;
+d \n</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; 0000014</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; $ od -x hello.txt</tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp; 0000000 6865 6c6c 6f20 776f 726c
+640a</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; 0000014</tt></ul>
+There are also several other useful content inspectors that
+are non-standard (in terms of availability on UNIX systems) but are nevertheless
+in widespread use. They are summarised in Fig. 3.2.
+<br>
+
+<center><table>
+  <tr>
+  <th>File type</th>
+  <th>Typical extension </th>
+  <th>Content viewer</th>
+  </tr>
+  <tr>
+    <td>Portable Document Format</td>
+    <td>.pdf</td>
+    <td>acroread</td>
+  </tr>
+  <tr>
+    <td>Postscript Document</td>
+    <td>.ps</td>
+    <td>ghostview</td>
+  </tr>
+  <tr>
+    <td>DVI Document</td>
+    <td>.dvi</td>
+    <td>xdvi</td>
+  </tr>
+  <tr>
+    <td>JPEG Image</td>
+    <td>.jpg</td>
+    <td>xv</td>
+  </tr>
+  <tr>
+    <td>GIF Image</td>
+    <td>.gif</td>
+    <td>xv</td>
+  </tr>
+  <tr>
+    <td>MPEG mvie</td>
+    <td>.mpg</td>
+    <td>mpeg_play</td>
+  </tr>
+  <tr>
+    <td>WAV sound file</td>
+    <td>.wav</td>
+    <td>realplayer</td>
+  </tr>
+  <tr>
+    <td>HTML document</td>
+    <td>.html</td>
+    <td>netscape</td>
+  </tr>
+</table></center>
+
+<div class="caption">Fig 3.2: Other file types and appropriate content
+viewers</div>
+</div>
+<br>
+
+<div class="heading">
+<div class="table">
+3.4 Finding Files
+</div>
+</div>
+
+<br>
+
+<div class="text">
+
+There are at least three ways to find files when
+you don't know their exact location:
+<ul>
+<li>
+<tt>find</tt></li>
+
+<p>If you have a rough idea of the directory tree the file
+might be in (or even if you don't and you're prepared to wait a while)
+you can use <tt>find</tt>:
+<p><tt>&nbsp;$ find </tt><i>directory</i><tt> -name </tt><i>targetfile</i><tt>
+-print&nbsp;</tt><img SRC="enter.gif" height=15 width=27>
+<p><tt>find</tt> will look for a file called <i>targetfile</i>
+in any part of the directory tree rooted at <i>directory</i>. <i>targetfile</i>
+can include wildcard characters. For example:
+<p><tt>&nbsp;$ find /home -name "*.txt" -print 2>/dev/null</tt><img SRC="enter.gif" height=15 width=27>
+<p>will search all user directories for any file ending in
+"<tt>.txt</tt>" and output any matching files (with a full absolute or
+relative path). Here the quotes (<tt>"</tt>) are necessary to avoid filename
+expansion, while the <tt>2>/dev/null </tt>suppresses error messages (arising
+from errors such as not being able to read the contents of directories
+for which the user does not have the right permissions).
+<p><tt>find</tt> can in fact do a lot more than just find
+files by name. It can find files by type (e.g.<tt> -type f</tt> for files,
+<tt>-type
+d</tt> for directories), by permissions (e.g. <tt>-perm o=r</tt> for all
+files and directories that can be read by others), by size (<tt>-size</tt>)
+etc. You can also execute commands on the files you find. For example,
+<p>&nbsp;<tt>$ find . -name "*.txt" -exec wc -l '{}' ';'</tt>
+<p>counts the number of lines in every text file in and below
+the current directory. The <tt>'{}' </tt>is replaced by the name of each
+file found and the <tt>';'</tt> ends the <tt>-exec</tt> clause.
+<p>For more information about <tt>find</tt> and its abilities,
+use <tt>man find</tt> and/or <tt>info find</tt>.
+<br>&nbsp;
+<li>
+<tt>which</tt> (sometimes also called <tt>whence</tt>) <i>command</i></li>
+
+<p>If you can execute an application program or system utility
+by typing its name at the shell prompt, you can use <tt>which</tt> to find
+out where it is stored on disk. For example:
+<p><tt>&nbsp;&nbsp;&nbsp; $ which ls</tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp; /bin/ls</tt>
+<br>&nbsp;
+<li>
+<tt>locate </tt><i>string</i></li>
+
+<p><tt>find</tt> can take a long time to execute if you are
+searching a large filespace (e.g. searching from <tt>/</tt> downwards).
+The <tt>locate
+</tt>command provides a much faster way of locating all
+files whose names match a particular search string. For example:
+<p><tt>&nbsp;&nbsp;&nbsp; $ locate ".txt"</tt><img SRC="enter.gif" height=15 width=27>
+<p>will find all filenames in the filesystem that contain
+"<tt>.txt</tt>" anywhere in their full paths.
+<p>One disadvantage of <tt>locate</tt> is it stores all filenames
+on the system in an index that is usually updated only once a day. This
+means <tt>locate</tt> will not find files that have been created very recently.
+It may also report filenames as being present even though the file has
+just been deleted. Unlike <tt>find</tt>, <tt>locate </tt>cannot track down
+files on the basis of their permissions, size and so on.
+
+</div>
+<br>
+
+<div class="heading">
+<div class="table">
+3.5 Finding Text in Files
+</div>
+</div>
+
+<div class="text">
+
+<ul>
+<li>
+<tt>grep</tt> (General Regular Expression Print)</li>
+
+<p><tt>&nbsp;&nbsp;&nbsp; $ grep </tt><i>options pattern
+files</i><img SRC="enter.gif" height=15 width=27>
+<p><tt>grep </tt>searches the named files (or standard input
+if no files are named) for lines that match a given pattern. The default
+behaviour of <tt>grep</tt> is to print out the matching lines. For example:
+<p><tt>&nbsp;&nbsp;&nbsp; $ grep hello *.txt</tt><img SRC="enter.gif" height=15 width=27>
+<p>searches all text files in the current directory for lines
+containing "hello". Some of the more useful options that <tt>grep</tt>
+provides are:
+<br><tt>-c</tt> (print a count of the number of lines that
+match), <tt>-i</tt> (ignore case), <tt>-v</tt> (print out the lines that
+don't match the pattern) and <tt>-n</tt> (printout the line number before
+printing the matching line). So
+<p><tt>&nbsp;&nbsp;&nbsp; $ grep -vi hello *.txt</tt><img SRC="enter.gif" height=15 width=27>
+<p>searches all text files in the current directory for lines
+that do not contain any form of the word hello (e.g. Hello, HELLO, or hELlO).
+<p>If you want to search all files in an entire directory
+tree for a particular pattern, you can combine <tt>grep</tt> with <tt>find
+</tt>using
+backward single quotes to pass the output from <tt>find</tt> into <tt>grep</tt>.
+So
+<p><tt>&nbsp;&nbsp;&nbsp; $ grep hello `find . -name "*.txt"
+-print`</tt><img SRC="enter.gif" height=15 width=27>
+<p>will search all text files in the directory tree rooted
+at the current directory for lines containing the word "hello".
+<p>The patterns that <tt>grep</tt> uses are actually a special
+type of pattern known as <b><font color="#3333FF">regular expressions</b></font>.
+Just like arithemetic expressions, regular expressions are made up of basic
+subexpressions combined by operators.
+<p>The most fundamental expression is a regular expression
+that matches a single character.&nbsp; Most characters, including all letters
+and digits, are regular expressions that match themselves.&nbsp; Any other
+character with special meaning may be quoted by preceding it with a backslash
+(<tt>\</tt>). A list of characters enclosed by '<tt>[</tt>' and '<tt>]</tt>'
+matches any single character in that list; if the first character of the
+list is the caret `<tt>^</tt>', then it matches any character not in the
+list. A range of characters can be specified using a dash (<tt>-</tt>)
+between the first and last items in the list. So <tt>[0-9]</tt> matches
+any digit and <tt>[^a-z]</tt> matches any character that is not a letter.
+<p>The caret `<tt>^</tt>' and the dollar sign `<tt>$</tt>'
+are special characters that
+<br>match the beginning and end of a line respectively. The
+dot '<tt>.</tt>' matches any character. So
+<p><tt>&nbsp;&nbsp;&nbsp; $ grep ^..[l-z]$ hello.txt</tt><img SRC="enter.gif" height=15 width=27>
+<p>matches any line in <tt>hello.txt</tt> that contains a
+three character sequence that ends with a lowercase letter from l to z.
+<p><tt>egrep</tt> (extended grep) is a variant of grep that
+supports more sophisticated regular expressions. Here two regular expressions
+may be joined by the operator `<tt>|</tt>'; the resulting regular expression
+matches any string matching either subexpression. Brackets '<tt>(</tt>'
+and '<tt>)</tt>' may be used for grouping regular expressions. In addition,
+a regular expression may be followed by one of several repetition operators:
+<p><tt>`?'</tt> means the preceding item is optional (matched
+at most once).
+<br><tt>`*'&nbsp;</tt> means the preceding item will be matched
+zero or more times.
+<br><tt>`+'</tt> means the preceding item will be matched
+one or more times.
+<br><tt>`{N}'&nbsp;&nbsp;</tt> means the preceding item is
+matched exactly N times.
+<br><tt>`{N,}'&nbsp;</tt> means the preceding item is matched
+N or more times.
+<br><tt>`{N,M}'</tt> means the preceding item is matched
+at least N times, but not more than M times.
+<p>For example, if <tt>egrep</tt> was given the regular expression
+<p><tt>&nbsp;&nbsp;&nbsp; '(^[0-9]{1,5}[a-zA-Z ]+$)|none'</tt>
+<p>it would match any line that either:
+<ul>
+<li>
+begins with a number up to five digits long, followed by
+a sequence of one or more letters or spaces, or</li>
+
+<li>
+contains the word <tt>none</tt></li>
+</ul>
+You can read more about regular expressions on the
+<tt>grep</tt>
+and <tt>egrep </tt>manual pages.
+<p>Note that UNIX systems also usually support another <tt>grep</tt>
+variant called <tt>fgrep</tt> (fixed grep) which simply looks for a fixed
+string inside a file (but this facility is largely redundant).
+
+</div>
+<br>
+
+<div class="heading">
+<div class="table">
+3.6 Sorting files
+</div>
+</div>
+
+<div class="text">
+
+There are two facilities that are useful for
+sorting files in UNIX:
+<ul>
+<li>
+<tt>sort</tt> <i>filenames</i></li>
+
+<p><tt>sort</tt> sorts lines contained in a group of files
+alphabetically (or if the <tt>-n</tt> option is specified) numerically.
+The sorted output is displayed on the screen, and may be stored in another
+file by redirecting the output. So
+<p><tt>&nbsp;&nbsp;&nbsp; $ sort input1.txt input2.txt >
+output.txt</tt><img SRC="enter.gif" height=15 width=27>
+<p>outputs the sorted concentenation of files <tt>input1.txt</tt>
+and
+<tt>input2.txt </tt>to the file <tt>output.txt</tt>.<br>
+
+<li>
+<tt>uniq </tt><i>filename</i></li>
+
+<p><tt>uniq </tt>removes duplicate adjacent lines from a
+file. This facility is most useful when combined with <tt>sort</tt>:
+<p><tt>&nbsp;&nbsp;&nbsp; $ sort input.txt | uniq > output.txt</tt><img SRC="enter.gif" height=15 width=27></ul>
+
+</div>
+<br>
+
+<div class="heading">
+<div class="table">
+3.7 File Compression and Backup
+</div>
+</div>
+
+<br>
+
+<div class="text">
+
+UNIX systems usually support a number of utilities
+for backing up and compressing files. The most useful are:
+<ul>
+<li>
+<tt>tar</tt> (tape archiver)</li>
+
+<p><tt>tar</tt> backs up entire directories and files onto
+a tape device or (more commonly) into a single disk file known as an archive.
+An archive is a file that contains other files plus information about them,
+such as&nbsp; their filename, owner, timestamps, and access permissions.
+<tt>tar</tt>
+does not perform any compression by default.
+<p>To create a disk file <tt>tar</tt> archive, use
+<p><tt>&nbsp;&nbsp;&nbsp; $ tar -cvf </tt><i>archivenamefilenames</i>
+<p>where <i>archivename</i> will usually have a <tt>.tar</tt>
+extension. Here the <tt>c</tt> option means create, <tt>v</tt> means verbose
+(output filenames as they are archived), and <tt>f</tt> means file.To list
+the contents of a <tt>tar</tt> archive, use
+<p><tt>&nbsp;&nbsp;&nbsp; $ tar -tvf </tt><i>archivename</i>
+<p>To restore files from a <tt>tar</tt> archive, use
+<p><tt>&nbsp;&nbsp;&nbsp; $ tar -xvf </tt><i>archivename</i>
+<br>&nbsp;
+<li>
+<tt>cpio</tt></li>
+
+<p><tt>cpio </tt>is another facility for creating and reading
+archives. Unlike <tt>tar</tt>, <tt>cpio</tt> doesn't automatically archive
+the contents of directories, so it's common to combine <tt>cpio</tt> with
+<tt>find</tt>
+when creating an archive:
+<p><tt>$ find . -print -depth | cpio -ov -Htar > </tt><i>archivename</i>
+<p>This will take all the files in the current directory
+and the
+<br>directories below and place them in an archive called
+<i>archivename</i>.The
+<tt>-depth</tt>
+option controls the order in which the filenames are produced and is recommended
+to prevent problems with directory permissions when doing a restore.The
+<tt>-o</tt>
+option creates the archive, the <tt>-v</tt> option prints the names of
+the files archived as they are added and the
+<tt>-H</tt> option&nbsp; specifies
+an archive format type (in this case it creates a <tt>tar</tt> archive).
+Another common archive type is <tt>crc</tt>, a portable format with a checksum
+for error control.
+<p>To list the contents of a <tt>cpio</tt> archive, use
+<p><tt>&nbsp;&nbsp;&nbsp; $ cpio -tv &lt; </tt><i>archivename</i>
+<p>To restore files, use:
+<p><tt>&nbsp;&nbsp;&nbsp; $ cpio -idv &lt; </tt><i>archivename</i>
+<p>Here the <tt>-d</tt> option will create directories as
+necessary. To force <tt>cpio </tt>to extract files&nbsp; on top of files
+of the same name that already exist (and have the same or later modification
+time), use the <tt>-u</tt> option.<br>
+
+<li>
+<tt>compress</tt>, <tt>gzip</tt></li>
+
+<p><tt>compress</tt> and <tt>gzip</tt> are utilities for
+compressing and decompressing individual files (which may be or may not
+be archive files). To compress files, use:
+<p><tt>&nbsp;&nbsp;&nbsp; $ compress </tt><i>filename</i>
+<br>or
+<br><tt>&nbsp;&nbsp;&nbsp; $ gzip </tt><i>filename</i>
+<p>In each case, <i>filename</i> will be deleted and replaced
+by a compressed file called <i>filename</i>.Z or <i>filename</i>.gz. To
+reverse the compression process, use:
+<p><tt>&nbsp;&nbsp;&nbsp; $ compress -d filename</tt>
+<br>or
+<br><tt>&nbsp;&nbsp;&nbsp; $ gzip -d filename</tt></ul>
+
+<br>
+</div>
+
+<div class="table">
+<div class="heading">
+3.8 Handling Removable Media (e.g. floppy disks)
+</div>
+</div>
+
+<div class="text">
+
+<br>
+
+UNIX supports tools for accessing removable media
+such as CDROMs and floppy disks.
+<ul>
+<li>
+<tt>mount, umount</tt></li>
+
+<p>The <tt>mount</tt> command serves to attach the filesystem
+found on some device to the filesystem tree. Conversely, the <tt>umount</tt>
+command will detach it again (it is very important to remember to do this
+when removing the floppy or CDROM). The file <tt>/etc/fstab</tt> contains
+a list of devices and the points at which they will be attached to the
+main filesystem:
+<p><tt>$ cat /etc/fstab</tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>/dev/fd0&nbsp;&nbsp; /mnt/floppy&nbsp; auto&nbsp;&nbsp;&nbsp;
+rw,user,noauto&nbsp; 0 0</tt>
+<br><tt>/dev/hdc&nbsp;&nbsp; /mnt/cdrom&nbsp;&nbsp; iso9660
+ro,user,noauto&nbsp; 0 0</tt>
+<p>In this case, the mount point for the floppy drive is
+<tt>/mnt/floppy</tt>
+and the mount point for the CDROM is <tt>/mnt/cdrom</tt>. To access a floppy
+we can use:
+<p><tt>$ mount /mnt/floppy</tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>$ cd /mnt/floppy</tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>$ ls (</tt>etc...)
+<p>To force all changed data to be written back to the floppy
+and to detach the floppy disk from the filesystem, we use:
+<p><tt>$ umount /mnt/floppy</tt>
+<br>&nbsp;
+<li>
+<tt>mtools</tt></li>
+
+<p>If they are installed, the (non-standard) <tt>mtools</tt>
+utilities provide a convenient way of accessing DOS-formatted floppies
+without having to mount and unmount filesystems. You can use DOS-type commands
+like "<tt>mdir a:</tt>", "<tt>mcopy a:*.* .</tt>", "<tt>mformat a:</tt>",
+etc. (see the
+<tt>mtools </tt>manual pages for more details).</ul>
+
+
+<P><A HREF="http:./index.html">
+(BACK TO COURSE CONTENTS)</A></P>
+
+</body>
+</html>

@@ -1,0 +1,536 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <link rel="stylesheet" type="text/css" href="mystyle.css">
+   <link rel="icon" href="https://sites.google.com/a/my.sduhsd.net/csp-yana2319/home/0-01-magic-square/planticon.jpg?attredirects=0">
+   <title>Introduction to UNIX and Linux: Lecture 2</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+
+<body>
+<hr WIDTH="100%">
+
+<h1>
+Introduction to UNIX: Lecture Two
+</h1>
+
+<div class="heading">
+<div class="table">
+2.1 Objectives
+</div>
+</div>
+<br>
+
+<div class="text">
+This lecture covers:<br>
+<li> The UNIX filesystem and directory structure.</li>
+<li> File and directory handling commands.</li>
+<li> How to make symbolic and hard links.</li>
+<li> How wildcard filename expansion works.</li>
+<li> What argument quoting is and when it should be used.</li>
+</div>
+<br>
+
+<div class="heading">
+<div class="table">
+2.2 The UNIX Filesystem
+</div>
+</div>
+<br>
+
+<div class="text">
+<blockquote>The UNIX operating system is built around the
+concept of a filesystem which is used to store all of the information that
+constitutes the long-term state of the system. This state includes the
+operating system kernel itself, the executable files for the commands supported
+by the operating system, configuration information, temporary workfiles,
+user data, and various special files that are used to give controlled access
+to system hardware and operating system functions.
+
+Every item stored in a UNIX filesystem belongs to one
+of four types:
+
+<ol>
+<li><b>Ordinary files</b></li>
+Ordinary files can contain text, data, or program information.
+Files cannot contain other files or directories. Unlike other operating
+systems, UNIX filenames are not broken into a name part and an extension
+part (although extensions are still frequently used as a means to classify
+files). Instead they can contain any keyboard character except for '/'
+and be up to 256 characters long (note however that characters such as
+*,?,# and &amp; have special meaning in most shells and should not therefore
+be used in filenames). Putting spaces in filenames also makes them difficult
+to manipulate - rather use the underscore '_'.
+<br>
+<br
+<li><b>Directories</b></li>
+Directories are containers or folders that hold files,
+and other directories.
+<br>
+<br>
+<li><b>Devices</b></li>
+To provide applications with easy access to hardware
+devices, UNIX allows them to be used in much the same way as ordinary files.
+There are two types of devices in UNIX - <b>block-oriented</b> devices
+which transfer data in blocks (e.g. hard disks) and <b>character-oriented</b>
+devices that transfer data on a byte-by-byte basis (e.g. modems and dumb
+terminals).
+<br>
+<br>
+<li><b>Links</b></li>
+A link is a pointer to another file. There are two types
+of links - a <b>hard link</b> to a file is indistinguishable from the file
+itself. A <b>soft link</b> (or symbolic link) provides an indirect pointer
+or shortcut to a file. A soft link is implemented as a directory file entry
+containing a pathname.
+</div>
+<br>
+
+<div class="heading">
+<div class="table">
+2.3 Typical UNIX Directory Structure
+</div>
+</div>
+<br>
+
+<div class="text">
+The UNIX filesystem is laid out as a hierarchical
+tree structure which is anchored at a special top-level directory known
+as the root (designated by a slash '/'). Because of the tree structure,
+a directory can have many child directories, but only one parent directory.
+Fig. 2.1 illustrates this layout.
+
+<center><p><img SRC="dirtree.gif" height=383 width=573>
+<div class="caption">Fig. 2.1: Part of a typical UNIX filesystem tree</div>
+
+<p>To specify a location in the directory hierarchy, we must
+specify a path through the tree. The path to a location can be defined
+by an absolute path from the root /, or as a relative path from the current
+working directory. To specify a path, each directory along the route from
+the source to the destination must be included in the path, with each directory
+in the sequence being separated by a slash. To help with the specification
+of relative paths, UNIX provides the shorthand "<tt>.</tt>" for the current
+directory and "<tt>..</tt>" for the parent directory. For example, the
+absolute path to the directory "<tt>play</tt>" is <tt>/home/will/play</tt>,
+while the relative path to this directory from "<tt>zeb</tt>" is <tt>../will/play</tt>.
+<p>Fig. 2.2 shows some typical directories you will find
+on UNIX systems and briefly describes their contents. Note that these although
+these subdirectories appear as part of a seamless logical filesystem, they
+do not need be present on the same hard disk device; some may even be located
+on a remote machine and accessed across a network.</font>
+<br>
+
+<center><table>
+  <tr>
+  <th>Directory</th>
+  <th>Typical Contents</th>
+  </tr>
+  <tr>
+    <td>/</td>
+    <td>The "root" directory</td>
+  </tr>
+  <tr>
+    <td>/bin</td>
+    <td>Essential low-level system utilities</td>
+  </tr>
+  <tr>
+    <td>/sbin</td>
+    <td>Superuser system utilities(for performing system administrative tasks)</td>
+  </tr>
+  <tr>
+    <td>/lib</td>
+    <td>Program libraries for higher-level user programs</td>
+  </tr>
+  <tr>
+    <td>/tmp</td>
+    <td>Temporary file storage space (can be used by any user)</td>
+  </tr>
+  <tr>
+    <td>/home or /homes</td>
+    <td> User home directories containing personal file space for each user. Each directory is named after the login of the user.</td>
+  </tr>
+  <tr>
+    <td>/etc</td>
+    <td>UNIX system configuration and information files</td>
+  </tr>
+  <tr>
+    <td>/dev</td>
+    <td>Hardware devices</td>
+  </tr>
+  <tr>
+    <td>/proc</td>
+    <td>A pseudo-filesystem which is used as an interface to the kernel. Includes a sub-directory for each active program (or process).</td>
+  </tr>  
+</table>
+
+<div class="caption">Fig. 2.2: Typical UNIX directories</div>
+
+<p>When you log into UNIX, your current working directory
+is your user home directory. You can refer to your home directory at any
+time as "<tt>~</tt>" and the home directory of other users as "<tt>~&lt;login></tt>".
+So <tt>~will/play</tt> is another way for user <tt>jane</tt> to specify
+an absolute path to the directory
+<tt>/homes/will/play</tt>. User <tt>will</tt>
+may refer to the directory as <tt>~/play.</tt>
+</div>
+<br>
+
+<div class="heading">
+<div class="table">
+2.4 Directory and File Handling Commands
+</div>
+</div>
+<br>
+
+<div class="text">
+This section describes some of the more important
+directory and file handling commands.
+
+<ul>
+<li><tt>pwd</tt> (print [current] working directory)</li>
+
+<p><tt>pwd</tt> displays the full absolute path to the your
+current location in the filesystem. So
+<p><tt>$</tt> <tt>pwd</tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp; /usr/bin</tt>
+<p>implies that <tt>/usr/bin</tt> is the current working
+directory.
+<br>&nbsp;
+
+<li><tt>ls</tt> (list directory)</li>
+
+<p><tt>ls </tt>lists the contents of a directory. If no
+target directory is given, then the contents of the current working directory
+are displayed. So, if the current working directory is <tt>/</tt>,
+<p><tt>&nbsp;&nbsp;&nbsp; $ ls</tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp; bin&nbsp;&nbsp; dev&nbsp; home&nbsp;
+mnt&nbsp;&nbsp; share&nbsp; usr&nbsp; var</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; boot&nbsp; etc&nbsp; lib&nbsp;&nbsp;
+proc&nbsp; sbin&nbsp;&nbsp; tmp&nbsp; vol</tt>
+<p>Actually, <tt>ls</tt> doesn't show you <i>all</i> the
+entries in a directory - files and directories that begin with a dot (.)
+are hidden (this includes the directories '.' and '..' which are always
+present). The reason for this is that files that begin with a . usually
+contain important configuration information and should not be changed under
+normal circumstances. If you want to see all files, <tt>ls</tt> supports
+the <tt>-a</tt> option:
+<p><tt>&nbsp;&nbsp;&nbsp; $ ls -a</tt><img SRC="enter.gif" height=15 width=27>
+<p>Even this listing is not that helpful - there are no hints
+to properties such as the size, type and ownership of files, just their
+names. To see more detailed information, use the <tt>-l</tt> option (long
+listing), which can be combined with the <tt>-a</tt> option as follows:</font>
+<p><tt>&nbsp;&nbsp;&nbsp; $ ls -a -l</tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </tt>(or, equivalently,)
+<br><tt>&nbsp;&nbsp;&nbsp; $ ls -al</tt><img SRC="enter.gif" height=15 width=27>
+<br>&nbsp;
+<p>Each line of the output looks like this:</ul>
+<img SRC="direntry.gif" height=128 width=667>
+<ul>where:
+<ul>
+<li>
+<i>type</i> is a single character which is either 'd' (directory),
+'-' (ordinary file), 'l' (symbolic link), 'b' (block-oriented device) or
+'c' (character-oriented device).</li>
+
+<li>
+<i>permissions</i> is a set of characters describing access
+rights. There are 9 permission characters, describing 3 access types given
+to 3 user categories. The three access types are read ('r'), write ('w')
+and execute ('x'), and the three users categories are the user who owns
+the file, users in the group that the file belongs to and other users (the
+general public). An 'r', 'w' or 'x' character means the corresponding permission
+is present; a '-' means it is absent.</li>
+
+<li>
+<i>links</i> refers to the number of filesystem links pointing
+to the file/directory (see the discussion on hard/soft links in the next
+section).</li>
+
+<li>
+<i>owner</i> is usually the user who created the file or
+directory.</li>
+
+<li>
+<i>group</i> denotes a collection of users who are allowed
+to access the file according to the group access rights specified in the
+permissions field.</font></li>
+
+<li>
+<i>size </i>is the length of a file, or the number of bytes
+used by the operating system to store the list of files in a directory.</font></li>
+
+<li>
+<i>date </i>is the date when the file or directory was last
+modified (written to). The <tt>-u</tt> option display the time when the
+file was last accessed (read).</font></li>
+
+<li>
+<i>name </i>is the name of the file or directory.</font></li>
+</ul>
+
+<p><br><tt>ls</tt> supports more options. To find out what
+they are, type:</font>
+<p><tt>&nbsp;&nbsp;&nbsp; $ man ls</font></tt><img SRC="enter.gif" height=15 width=27>
+<p><tt>man </tt>is the online UNIX user manual, and you can
+use it to get help with commands and find out about what options are supported.
+It has quite a terse style which is often not that helpful, so some users
+prefer to the use the (non-standard) <tt>info</tt> utility if it is installed:</font>
+<p><tt>&nbsp;&nbsp;&nbsp; $ info ls</font></tt><img SRC="enter.gif" height=15 width=27>
+<br>&nbsp;
+<li>
+<tt>cd</tt> (change [current working] directory)</font></li>
+
+<p><tt>&nbsp;&nbsp;&nbsp; $ cd</tt> <i>path</i></font>
+<p>changes your current working directory to <i>path</i>
+(which can be an absolute or a relative path). One of the most common relative
+paths to use is '..' (i.e. the parent directory of the current directory).</font>
+<p>Used without any target directory</font>
+<p><tt>&nbsp;&nbsp;&nbsp; $ cd</font></tt><img SRC="enter.gif" height=15 width=27>
+<p>resets your current working directory to your home directory
+(useful if you get lost). If you change into a directory and you subsequently
+want to return to your original directory, use</font>
+<p><tt>&nbsp;&nbsp;&nbsp; $ cd -</font></tt><img SRC="enter.gif" height=15 width=27>
+<br>&nbsp;
+<li>
+<tt>mkdir</tt> (make directory)</font></li>
+
+<p><tt>&nbsp;&nbsp;&nbsp; $ mkdir </tt><i>directory</i></font>
+<p>creates a subdirectory called&nbsp; <i>directory</i>in
+the current working directory. You can only create subdirectories in a
+directory if you have write permission on that directory.</font></ul>
+
+<ul>
+<li>
+<tt>rmdir </tt>(remove directory)</font></li>
+
+<p><tt>&nbsp;&nbsp;&nbsp; $ rmdir </tt><i>directory</i></font>
+<p>removes the subdirectory <i>directory</i> from the current
+working directory. You can only remove subdirectories if they are completely
+empty (i.e. of all entries besides the '.' and '..' directories).</font>
+<br>&nbsp;
+<li>
+<tt>cp</tt> (copy)</font></li>
+
+<p><tt>cp</tt> is used to make copies of files or entire
+directories. To copy files, use:</font>
+<p><tt>&nbsp;&nbsp;&nbsp; $ cp </tt><i>source-file(s) destination</i></font>
+<p>where <i>source-file(s)</i> and <i>destination</i> specify
+the source and destination of the copy respectively. The behaviour of <tt>cp</tt>
+depends on whether the destination<i> </i>is a file or a directory. If
+the destination is a file, only one source file is allowed and <tt>cp</tt>
+makes a new file called <i>destination</i> that has the same contents as
+the source file. If the destination is a directory, many source files can
+be specified, each of which will be copied into the destination directory.
+Section 2.6 will discuss efficient specification of source files using
+wildcard characters.</font>
+<p>To copy entire directories (including their contents),
+use a <i>recursive</i> copy:</font>
+<p>&nbsp;<tt>&nbsp;&nbsp;&nbsp; $ cp -rd </tt><i>source-directories
+destination-directory</i></font>
+<br>&nbsp;
+<li>
+<tt>mv</tt> (move/rename)</font></li>
+
+<p><tt>mv</tt> is used to rename files/directories and/or
+move them from one directory into another. Exactly one source and one destination
+must be specified:</font>
+<p><tt>&nbsp;&nbsp;&nbsp; $ mv </tt><i>source destination</i></font>
+<p>If <i>destination</i> is an existing directory, the new
+name for <i>source</i> (whether it be a file or a directory) will&nbsp;
+be <i>destination<tt>/</tt>source</i>. If <i>source</i> and <i>destination</i>
+are both files, <i>source</i> is renamed <i>destination</i>. N.B.: if <i>destination</i>
+is an existing file it will be destroyed and overwritten by<i> source</i>
+(you can use the <tt>-i</tt> option if you would like to be asked for confirmation
+before a file is overwritten in this way).</font>
+<br>&nbsp;
+<li>
+<tt>rm </tt>(remove/delete)</font></li>
+
+<p><tt>&nbsp;&nbsp;&nbsp; $ rm </tt><i>target-file(s)</i></font>
+<p>removes the specified files. Unlike other operating systems,
+it is almost impossible to recover a deleted file unless you have a backup
+(there is no recycle bin!) so use this command with care. If you would
+like to be asked before files are deleted, use the <tt>-i </tt>option:</font>
+<p><tt>&nbsp;&nbsp;&nbsp; $ rm -i myfile</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp; rm: remove 'myfile'?</font></tt>
+<p><tt>rm</tt> can also be used to delete directories (along
+with all of their contents, including any subdirectories they contain).
+To do this, use the
+<tt>-r</tt> option. To avoid <tt>rm</tt> from asking
+any questions or giving errors (e.g. if the file doesn't exist) you used
+the <tt>-f </tt>(force) option. Extreme care needs to be taken when using
+this option - consider what would happen if a system administrator was
+trying to delete user<tt> will</tt>'s home directory and accidentally typed:</font>
+<p><tt>&nbsp;&nbsp;&nbsp; $ rm -rf / home/will</font></tt><img SRC="enter.gif" height=15 width=27>
+<p>(instead of<tt> rm -rf /home/will</tt>).</font>
+<br>&nbsp;
+<li>
+<tt>cat</tt> (catenate/type)</font></li>
+
+<p><tt>&nbsp;&nbsp;&nbsp; $ cat </tt><i>target-file(s)</i></font>
+<p>displays the contents of <i>target-file(s)&nbsp;</i> on
+the screen, one after the other. You can also use it to create files from
+keyboard input as follows (<tt>></tt> is the output redirection operator,
+which will be discussed in the next chapter):</font>
+<p><tt>&nbsp;&nbsp;&nbsp; $ cat > hello.txt</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp; hello world!</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>[ctrl-d]</font>
+<br><tt>&nbsp;&nbsp;&nbsp; $ ls hello.txt</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp; hello.txt</font></tt>
+<br><tt>&nbsp;&nbsp;&nbsp; $ cat hello.txt</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp; hello world!</font></tt>
+<br><tt>&nbsp;&nbsp;&nbsp; $</font></tt>
+<br>&nbsp;
+<li>
+<tt>more</tt> and <tt>less</tt> (catenate with pause)</font></li>
+
+<p><tt>&nbsp;&nbsp;&nbsp; $ more </tt><i>target-file(s)</i></font>
+<p>displays the contents of <i>target-file(s)&nbsp;</i> on
+the screen, pausing at the end of each screenful and asking the user to
+press a key (useful for long files). It also incorporates a searching facility
+(press '<tt>/</tt>' and then type a phrase that you want to look for).</font>
+<p>You can also use <tt>more</tt> to break up the output
+of commands that produce more than one screenful of output as follows (<tt>|
+</tt>is
+the pipe operator, which will be discussed in the next chapter):</font>
+<p><tt>&nbsp;&nbsp;&nbsp; $ ls -l | more</font></tt><img SRC="enter.gif" height=15 width=27>
+<p><tt>less</tt> is just like <tt>more</tt>, except that
+has a few extra features (such as allowing users to scroll backwards and
+forwards through the displayed file). <tt>less</tt> not a standard utility,
+however and may not be present on all UNIX systems.</font></ul>
+</blockquote>
+
+</div>
+
+<br>
+
+<div class="heading">
+<div class="table">
+2.5
+Making Hard and Soft (Symbolic) Links
+</div>
+</div>
+<br>
+
+<div class="text">
+
+<blockquote>Direct (hard) and indirect (soft or symbolic)
+links from one file or directory to another can be created using the <tt>ln</tt>
+command.</font>
+<p><tt>&nbsp;&nbsp;&nbsp; $ ln </tt><i>filename linkname</i></font>
+<p>creates another directory entry for <i>filename</i> called
+<i>linkname
+</i>(i.e.
+<i>linkname</i>
+is a hard link). Both directory entries appear identical (and both now
+have a link count of 2). If either <i>filename</i> or <i>linkname</i> is
+modified, the change will be reflected in the other file (since they are
+in fact just two different directory entries pointing to the same file).</font>
+<p><tt>&nbsp;&nbsp;&nbsp; $ ln -s </tt><i>filename linkname</i></font>
+<p>creates a shortcut called <i>linkname</i> (i.e. <i>linkname</i>
+is a soft link). The shortcut appears as an entry with a special type ('<tt>l</tt>'):</font>
+<p><tt>&nbsp;&nbsp;&nbsp; $ ln -s hello.txt bye.txt</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp; $ ls -l bye.txt</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp; lrwxrwxrwx&nbsp;&nbsp; 1 will
+finance 13 bye.txt -> hello.txt</font></tt>
+<br><tt>&nbsp;&nbsp;&nbsp; $</font></tt>
+<p>The link count of the source file remains unaffected.
+Notice that the permission bits on a symbolic link are not used (always
+appearing as <tt>rwxrwxrwx</tt>). Instead the permissions on the link are
+determined by the permissions on the target (<tt>hello.txt</tt> in this
+case).</font>
+<p>Note that you can create a symbolic link to a file that
+doesn't exist, but not a hard link. Another difference between the two
+is that you can create symbolic links across different physical disk devices
+or partitions, but hard links are restricted to the same disk partition.
+Finally, most current UNIX implementations do not allow hard links to point
+to directories.</font></blockquote>
+
+</div>
+<br>
+
+<div class="heading">
+<div class="table">
+2.6 Specifying multiple filenames
+</div>
+</div>
+<br>
+
+<div class="text">
+Multiple filenames can be specified using special
+pattern-matching characters. The rules are:
+
+<ul>
+<li>'<tt>?</tt>' matches any single character in that position
+in the filename.</li>
+<li>'<tt>*</tt>' matches zero or more characters in the filename.
+A '<tt>*</tt>' on its own will match all files. '<tt>*.*</tt>' matches
+all files with containing a '<tt>.</tt>'.</li>
+<li>Characters enclosed in square brackets ('[' and ']') will
+match any filename that has one of those characters in that position.</li>
+
+<li>A list of comma separated strings enclosed in curly braces
+("{" and "}") will be expanded as a Cartesian product with the surrounding
+characters.</li>
+For example:
+<ol>
+<li><tt>??? </tt>matches all three-character filenames.</li>
+
+<li><tt>?ell?</tt> matches any five-character filenames with
+'<tt>ell</tt>' in the middle.</li>
+
+<li><tt>he*</tt> matches any filename beginning with '<tt>he</tt>'.</li>
+
+<li><tt>[m-z]*[a-l]</tt> matches any filename that begins with
+a letter from '<tt>m</tt>' to '<tt>z</tt>' and ends in a letter from '<tt>a</tt>'
+to '<tt>l</tt>'.</li>
+
+<li><tt>{/usr,}{/bin,/lib}/file</tt> expands to <tt>/usr/bin/file
+/usr/lib/file /bin/file </tt>and<tt> /lib/file</tt>.</li>
+</ol>
+
+Note that the UNIX shell performs these expansions (including
+any filename matching) on a command's arguments <i>before</i> the command
+is executed.
+</div>
+
+<br>
+
+<div class="heading">
+<div class="table">
+2.7 Quotes
+</div>
+</div>
+<br>
+
+<div class="text">
+As we have seen certain special characters (e.g.
+'<tt>*</tt>', '<tt>-</tt>','<tt>{</tt>' etc.) are interpreted in a special
+way by the shell. In order to pass arguments that use these characters
+to commands directly (i.e. without filename expansion etc.), we need to
+use special quoting characters. There are three levels of quoting that
+you can try:
+
+<ol>
+<li>Try insert a '<tt>\</tt>' in front of the special character.</li>
+<li>Use double quotes (<tt>"</tt>) around arguments to prevent
+most expansions.</li>
+<li>Use single forward quotes (<tt>'</tt>) around arguments to
+prevent all expansions.</li>
+</ol>
+There is a fourth type of quoting in UNIX. Single backward
+quotes (<tt>`</tt>) are used to pass the output of some command as an input
+argument to another. For example:</font>
+<p><tt>&nbsp;&nbsp;&nbsp; $ hostname</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp; rose</font></tt>
+<br><tt>&nbsp;&nbsp;&nbsp; $ echo this machine is called
+`hostname`</font></tt><img SRC="enter.gif" height=15 width=27>
+<br><tt>&nbsp;&nbsp;&nbsp; this machine is called rose</font></tt></blockquote>
+</div>
+
+<BLOCKQUOTE><P><A HREF="http:./index.html">
+(BACK TO COURSE CONTENTS)</A></P></BLOCKQUOTE>
+
+</body>
+</html>

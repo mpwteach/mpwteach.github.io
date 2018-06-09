@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <title>Introduction to UNIX and Linux: Lecture 1</title>
+    <link rel="icon"  href="https://sites.google.com/a/my.sduhsd.net/csp-yana2319/home/0-01-magic-square/planticon.jpg?attredirects=0">	
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">  
+ </head>
+
+<body>
+
+<h1>
+Introduction to UNIX: Lecture 1 
+</h1>
+
+<div class="table">
+<div class="heading"> 
+1.1 Objectives
+</div>
+</div>
+
+<br>
+
+<div class="text">
+This lecture covers:
+<ul>
+<li>The concept of an operating system.
+<li>The internal architecture of an operating system.
+<li>The evolution of the UNIX operating system into two broad schools (BSD and SYSV) and the development of Linux, a popular open source operating system.
+<li>The architecture of the Linux operating system in more detail.
+<li>How to log into (and out of) UNIX and change your password.
+<li>The general format of UNIX commands.
+</ul>
+</div>
+
+<div class="table">
+<div class="heading">
+What is an Operating System?
+</div>
+</div>
+
+<br>
+
+<div class="text">
+
+An <font color="#000000">operating system</font> (OS) is a resource manager. 
+It takes the form of a set of software routines that allow users and application programs to access system resources 
+(e.g.the CPU, memory, disks, modems, printers network cards etc.) in a <b><fontcolor="#3333FF">safe</font><font color="#000000">, 
+</font><font color="#3333FF"> efficient</font></b> and <b><font color="#3333FF">abstract</font></b> way.</font>
+
+<br>     
+
+<p>For example, an OS ensures <b><font color="#3366FF">safe
+	  </font></b>access
+	  to a printer by allowing only one application program to send data directly
+	  to the printer at any one time. An OS encourages
+	  <b><font color="#3333FF">efficient
+	  </font></b>use
+	  of the CPU by suspending programs that are waiting for I/O operations to
+	  complete to make way for programs that can use the CPU more productively.
+	  An OS also provides convenient
+	  <b><font color="#3333FF">abstractions
+	  </font></b><font color="#000000">(such
+	    as files rather than disk locations) which isolate a</font>pplication programmers
+	  and users from the details of the underlying hardware.
+	<center>
+	  <p><img src="opsys.gif" height=461 width=523>
+	    
+<br>
+<div class="caption">Fig. 1.1: General operating system architecture</div>
+
+      <p>Fig. 1.1 presents the architecture of a typical operating
+	  system and shows how an OS succeeds in presenting users and application
+	  programs with a uniform interface without regard to the details of the
+	  underlying hardware. We see that:
+<ul>
+<li>	  
+The operating system <b><font color="#3333FF">kernel</font></b><font color="#000000">
+is in direct control of the underlying hardware. The kernel provides low-level
+device, memory and processor management functions (e.g. dealing with interrupts
+from hardware devices, sharing the processor among multiple programs, allocating
+memory for programs etc.)</font>
+
+<li>
+Basic hardware-independent kernel services are exposed to 
+higher-level programs through a library of <b><font color="#3333FF">system
+calls </font></b><font color="#000000">(e.g. services to create a file,
+begin execution of a program, or open a logical network connection to another
+computer).</font>
+
+<li>
+<b><font color="#3333FF">Application programs</font></b><font color="#000000"> (e.g. word processors, spreadsheets) and
+</font><b><font color="#3333FF">system utility programs</font></b><font color="#000000"> (simple but useful application
+programs that come with the operating system, e.g. programs which find
+text inside a group of files) make use of system calls. Applications and
+system utilities are launched using a </font><b><font color="#3333FF">shell</font></b><font color="#000000">
+(a textual command line interface) or a </FONT><b><FONT COLOR="#3333FF">graphical
+user interface</font></b><font color="#000000"> that provides direct user
+interaction.</font>
+	
+</ul>
+	
+Operating systems (and different flavours of the same operating
+system) can be distinguished from one another by the system calls, system
+utilities and user interface they provide, as well as by the resource <font color="#000000">scheduling
+	    policies</FONT> implemented by the kernel.</font>
+
+</div>
+
+<br>
+
+<div class="table">
+<div class="heading">
+1.3 A Brief History of UNIX</FONT></FONT></FONT></b></TD>
+</div>
+</div>
+
+<div class="text">    
+
+    UNIX has been a popular OS for more than two
+	decades because of its multi-user, multi-tasking environment, stability,
+	portability and powerful networking capabilities. What follows here is
+	a simplified history of how UNIX has developed (to get an idea for how
+	complicated things really are, see the web site 
+	<a href="http://www.levenez.com/unix/">http://www.levenez.com/unix/</a>).
+
+    
+      <center><img src="familytree.gif" height=613 width=529>
+	<br>
+	<div class="caption">Fig. 1.2: Simplified UNIX FamilyTree</div>
+
+      <p>In the late 1960s, researchers from General Electric,
+	  MIT and Bell Labs launched a joint project to develop an ambitious multi-user,
+	  multi-tasking OS for mainframe computers known as MULTICS (Multiplexed
+	  Information and Computing System). MULTICS failed (for 
+	  <a href="http://www.multicians.org/myths.html#fail69">some MULTICS enthusiasts</a> "failed" is perhaps too
+	  strong a word to use here), but it did inspire Ken
+	  Thompson, who was a researcher at Bell Labs, to have a go at writing a
+	  simpler operating system himself. He wrote a simpler version of MULTICS
+	  on a PDP7 in assembler and called his attempt UNICS (Uniplexed Information
+	  and Computing System). Because memory and CPU power were at a premium in
+	  those days, UNICS (eventually shortened to UNIX) used short commands to
+	  minimize the space needed to store them and the time needed to decode them
+	  - hence the tradition of short UNIX commands we use today, e.g. <tt>ls,
+	    cp, rm, mv</tt> etc.
+      <p>Ken Thompson then teamed up with Dennis Ritchie, the author
+	  of the first C compiler in 1973. They rewrote the UNIX kernel in C - this
+	  was a big step forwards in terms of the system's portability - and released
+	  the Fifth Edition of UNIX to universities in 1974. The Seventh Edition,
+	  released in 1978, marked a split in UNIX development into two main branches:
+	  SYSV (System 5) and BSD (Berkeley Software Distribution). BSD arose from
+	  the University of California at Berkeley where Ken Thompson spent a sabbatical
+	  year. Its development was continued by students at Berkeley and other research
+	  institutions. SYSV was developed by AT&amp;T and other commercial companies.
+	  UNIX flavours based on SYSV have traditionally been more conservative,
+	  but better supported than BSD-based flavours.
+      <p>The latest incarnations of SYSV (SVR4 or System 5 Release
+	  4) and BSD Unix are actually very similar. Some minor differences are to
+	  be found in&nbsp; file system structure, system utility names and options
+	  and system call libraries as shown in Fig 1.3.
+	
+</div>
+<br>
+
+<center><table>
+  <tr>
+    <th>Feature</th>
+    <th>Typical SYSV</th>
+    <th>Typical BSD</th>
+  </tr>
+  <tr>
+    <td>kernel name</td>
+    <td>/unix</td>
+    <td>/vmunix</td>
+  </tr>
+  <tr>
+    <td>boot init</td>
+    <td>/etc/rc.d directories</td>
+    <td>/etc/rc.* files</td>
+  </tr>
+  <tr>
+    <td>mounted FS</td>
+    <td>/etc/mnttab</td>
+    <td>/etc/mtab</td>
+  </tr>
+  <tr>
+    <td>default shell</td>
+    <td>sh, ksh</td>
+    <td>csh, tcsh</td>
+  </tr>
+  <tr>
+    <td>FS block size</td>
+    <td>512 bytes -> 2k</td>
+    <td>4k -> 8k</td>
+  </tr>
+  <tr>
+    <td>print subsystem</td>
+    <td>lp, lpstat, cancel</td>
+    <td>lpr, lpq, lprm</td>
+  </tr>
+  <tr>
+    <td>echo command (no new line)</td>
+    <td>echo "\c"</td>
+    <td>echo -n</td>
+  </tr>
+  <tr>
+    <td>ps command</td>
+    <td>ps -fae</td>
+    <td>ps -aux</td>
+  </tr>
+  <tr>
+    <td>multiple wait syscalls</td>
+    <td>poll</td>
+    <td>select</td>
+  </tr>
+  <tr>
+    <td>memory access syscalls</td>
+    <td>memset, memcpy</td>
+    <td>bzero, bcopy</td>
+  </tr>
+</table>
+</center>
+
+<div class="caption">
+Fig. 1.3: Differences between SYSV and BSD
+</div>
+
+<div class="text">
+      <p>Linux is a free open source UNIX OS for PCs that was originally
+	  developed in 1991 by Linus Torvalds, a Finnish undergraduate student. Linux
+	  is neither pure SYSV or pure BSD. Instead, incorporates some features from
+	  each (e.g. SYSV-style startup files but BSD-style file system layout) and
+	  aims to conform with a set of IEEE standards called POSIX (Portable Operating
+	  System Interface). To maximise code portability, it typically supports
+	  SYSV, BSD and POSIX system calls (e.g.
+	  <tt>poll, select, memset, memcpy,
+	    bzero</tt> and <tt>bcopy</tt> are all supported).
+      <p>The open source nature of Linux means that the source
+	  code for the Linux kernel is freely available so that anyone can add features
+	  and correct deficiencies. This approach has been very successful and what
+	  started as one person's project has now turned into a collaboration of
+	  hundreds of volunteer developers from around the globe. The open source
+	  approach has not just successfully been applied to kernel code, but also
+	  to application programs for Linux (see e.g. <a href="http://www.freshmeat.net">http://www.freshmeat.net</a>).
+      <p>As Linux has become more popular, several different development
+	  streams or distributions have emerged, e.g. Redhat, Slackware, Mandrake,
+	  Debian, and Caldera. A distribution comprises a prepackaged kernel, system
+	  utilities, GUI interfaces and application programs.
+      <p>Redhat is the most popular distribution because it has
+	  been ported to a large number of hardware platforms (including Intel, Alpha,
+	  and SPARC), it is easy to use and install and it comes with a comprehensive
+	  set of utilities and applications including the X Windows graphics system,
+	  GNOME and KDE GUI environments, and the StarOffice suite (an open source
+	  MS-Office clone for Linux).
+
+</div>
+
+<br>
+
+<div class="heading">
+<div class="table">
+1.4 Architecture of the Linux Operating System
+</div>
+</div>
+
+<div class="text">
+    Linux has all of the components of a typical
+	OS (at this point you might like to refer back to Fig 1.1):
+      <ul>
+	<li> <b>Kernel</b></li>
+
+<br>
+
+The Linux kernel includes device driver support for a large number of PC hardware devices (graphics cards, network cards, hard
+	  disks etc.), advanced processor and memory management features, and support
+	  for many different types of filesystems (including DOS floppies and the
+	  ISO9660 standard for CDROMs). In terms of the services that it provides
+	  to application programs and system utilities, the kernel implements most
+	  BSD and SYSV system calls, as well as the system calls described in the
+	  POSIX.1 specification.
+	<p>The kernel (in raw binary form that is loaded directly
+	    into memory at system startup time) is typically found in the file /boot/vmlinuz,
+	    while the source files can usually be found in /usr/src/linux.The latest
+	    version of the Linux kernel sources can be downloaded from <a href="http://www.kernel.org">http://www.kernel.org</a>.</FONT>
+	  <br>
+
+ <li><b>Shells and GUIs</b></li>
+
+ <br>
+
+Linux supports two forms of command input: through textual
+	    command line shells similar to those found on most UNIX systems (e.g. sh
+	    - the Bourne shell, bash - the Bourne again shell and csh - the C shell)
+	    and through graphical interfaces (GUIs) such as the KDE and GNOME window
+	    managers. If you are connecting remotely to a server your access will typically
+	    be through a command line shell.
+ <br>
+
+<li><b>System Utilities</b></li>
+
+	  <br>Virtually every system utility that you would expect
+	    to find on standard implementations of UNIX (including every system utility
+	    described in the POSIX.2 specification) has been ported to Linux. This
+	    includes commands such as <tt>ls, cp, grep, awk, sed, bc, wc, more</tt>,
+	    and so on. These system utilities are designed to be powerful tools that
+	    do a single task extremely well (e.g. <tt>grep</tt> finds text inside files
+	    while <tt>wc</tt> counts the number of words, lines and bytes inside a
+	    file). Users can often solve problems by interconnecting these tools instead
+	    of writing a large monolithic application program.
+	<p>Like other UNIX flavours, Linux's system utilities also
+	    include server programs called <b><FONT COLOR="#3333FF">daemons</font></b>
+	    which provide remote network and administration services (e.g. <tt>telnetd</tt>
+	    and <tt>sshd</tt> provide remote login facilities, <tt>lpd</tt> provides
+	    printing services,
+	    <tt>httpd</tt> serves web pages, <tt>crond</tt> runs
+	    regular system administration tasks automatically). A daemon (probably
+	    derived from the Latin word which refers to a beneficient spirit who watches
+	    over someone, or perhaps short for "Disk And Execution MONitor") is usually
+	    spawned automatically at system startup and spends most of its time lying
+	    dormant (lurking?) waiting for some event to occur.
+	  <br>&nbsp;
+	  <li>
+	    <b>Application programs</b></li>
+
+	  <br>Linux distributions typically come with several useful
+	    application programs as standard. Examples include the <tt>emacs</tt> editor,
+	    <tt>xv</tt>
+	    (an image viewer), <tt>gcc</tt> (a C compiler), <tt>g++</tt> (a C++ compiler),
+	    <tt>xfig</tt>
+	    (a drawing package), <tt>latex</tt> (a powerful typesetting language) and
+	    <tt>soffice</tt>
+	    (StarOffice, which is an MS-Office style clone that can read and write
+	    Word, Excel and PowerPoint files).
+	<p>Redhat Linux also comes with <tt>rpm</tt>, the Redhat
+	    Package Manager which makes it easy to install and uninstall application
+	    programs.</ul>
+    
+</div>
+
+<div class="heading">
+<div class="table">
+1.5 Logging into (and out of) UNIX Systems
+</div>
+</div>
+
+<div class="text">
+     
+    <b>Text-based (TTY) terminals</b>:
+      <p>When you connect to a UNIX computer remotely (using telnet)
+	  or when you log in locally using a text-only terminal, you will see the
+	  prompt:
+      <p><tt>&nbsp;&nbsp;&nbsp; login:</tt>
+      <p>At this prompt, type in your usename and press the enter/return/<img src="enter.gif" HEIGHT=15 WIDTH=27>
+	  key. Remember that UNIX is case sensitive (i.e. Will, WILL and will are
+	  all different logins). You should then be prompted for your password:
+      <p><tt>&nbsp;&nbsp;&nbsp; login: will</tt>
+	<br><tt>&nbsp;&nbsp;&nbsp; password:</tt>
+      <p>Type your password in at the prompt and press the enter/return/<img src="enter.gif" HEIGHT=15 WIDTH=27>
+	  key. Note that your password will not be displayed on the screen as you
+	  type it in.
+      <p>If you mistype your username or password you will get
+	  an appropriate message from the computer and you will be presented with
+	  the <tt>login:</tt> prompt again. Otherwise you should be presented with
+	  a shell prompt which looks something like this:
+      <p><tt>&nbsp;&nbsp;&nbsp; $</tt>
+      <p>To log out of a text-based UNIX shell, type "exit" at
+	  the shell prompt (or if that doesn't work try "logout"; if that doesn't
+	  work press ctrl-d).
+      <p><b>Graphical terminals:</b>
+      <p>If you're logging into a UNIX computer locally, or if
+	  you are using a remote login facility that supports graphics, you might
+	  instead be presented with a graphical prompt with login and password fields.
+	  Enter your user name and password in the same way as above (N.B. you may
+	  need to press the TAB key to move between fields).
+      <p>Once you are logged in, you should be presented with a
+	  graphical window manager that looks similar to the Microsoft Windows interface.
+	  To bring up a window containing a shell prompt look for menus or icons
+	  which mention the words "shell", "xterm", "console" or "terminal emulator".
+      <p>To log out of a graphical window manager, look for menu
+	  options similar to "Log out" or "Exit".
+
+<br>
+
+</div>
+
+<div class="heading">
+<div class="table">
+1.6 Changing your password
+</div>
+</div>
+
+<div class="text">
+    One of the things you should do when you log
+	in for the first time is to change your password.
+      <p>The UNIX command to change your password is <tt>passwd</tt>:
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <tt>$ passwd</tt><img src="enter.gif" HEIGHT=15 WIDTH=27>
+      <p>The system will prompt you for your old password, then
+	  for your new password. To eliminate any possible typing errors you have
+	  made in your new password, it will ask you to reconfirm your new password.
+      <p>Remember the following points when choosing your password:
+
+    <ul>
+      <ul>
+	<li>
+	  Avoid characters which might not appear on all keyboards,
+	    e.g. '&pound;'.
+
+	<li>
+	  The weakest link in most computer security is user passwords
+	    so keep your password a secret, don't write it down and don't tell it to
+	    anyone else. Also avoid dictionary words or words related to your personal
+	    details (e.g. your boyfriend or girlfriend's name or your login).
+
+	<li>
+	  Make it at least 7 or 8 characters long and try to use a
+	    mix of letters, numbers and punctuation.
+      </ul>
+    </ul>
+</div>
+<br>
+
+<div class="heading">
+<div class="table">
+1.7 General format of UNIX commands
+</div>
+</div>
+
+<div class="text">
+    A UNIX command line consists of the name of a
+	UNIX command (actually the "command" is the name of a built-in shell command,
+	a system utility or an application program) followed by its "arguments"
+	(options and the target filenames and/or expressions). The general syntax
+	for a UNIX command is
+      <p><tt>&nbsp;&nbsp;&nbsp; $ command -options targets</tt><img src="enter.gif" HEIGHT=15 WIDTH=27>
+      <p>Here <tt>command</tt> can be though of as a verb, <tt>options
+	  </tt>as
+	  an adverb and <tt>targets</tt> as the direct objects of the verb. In the
+	  case that the user wishes to specify several options, these need not always
+	  be listed separately (the options can sometimes be listed altogether after
+	  a single dash).
+
+    <p><a href="index.html">
+	  (BACK TO COURSE CONTENTS)</a></p>
+</div>
+
+  </body>
+</html>
