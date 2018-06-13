@@ -10,7 +10,7 @@
 
   <body>
 
-    <h1>Introduction to UNIX: Lecture 1</h1>
+    <h1>1. Introduction to UNIX</h1>
 
     <h2>1.1 Objectives</h2>
     
@@ -70,23 +70,24 @@
 	    device, memory and processor management functions (e.g. dealing with interrupts
 	    from hardware devices, sharing the processor among multiple programs, allocating
 	    memory for programs etc.)
-	    
-	<li>
-	  Basic hardware-independent kernel services are exposed to 
-	  higher-level programs through a library of <b>system
+	  </li>
+	  <li>
+	    Basic hardware-independent kernel services are exposed to 
+	    higher-level programs through a library of <b>system
 	      calls </b>(e.g. services to create a file,
 	    begin execution of a program, or open a logical network connection to another
 	    computer).
-
-	<li>
-	  <b>Application programs</b> (e.g. word processors, spreadsheets) and
-	  <b>system utility programs</b> (simple but useful application
+	  </li>
+	  <li>
+	    <b>Application programs</b> (e.g. word processors, spreadsheets) and
+	    <b>system utility programs</b> (simple but useful application
 	    programs that come with the operating system, e.g. programs which find
 	    text inside a group of files) make use of system calls. Applications and
 	    system utilities are launched using a <b>shell</b>
 	    (a textual command line interface) or a <b>graphical
 	      user interface</b> that provides direct user
 	    interaction.
+	  </li>
 	</ul>
 	
       <p>
@@ -129,8 +130,8 @@
 	and Computing System). Because memory and CPU power were at a premium in
 	those days, UNICS (eventually shortened to UNIX) used short commands to
 	minimize the space needed to store them and the time needed to decode them
-	- hence the tradition of short UNIX commands we use today, e.g. <tt>ls,
-	  cp, rm, mv</tt> etc.
+	- hence the tradition of short UNIX commands we use today, e.g. <b>ls,
+	  cp, rm, mv</b> etc.
       </p>
 
       <p>
@@ -222,33 +223,40 @@
     </div>
 
     <div class="text">
-      <p>Linux is a free open source UNIX OS for PCs that was originally
+      <p>
+	Linux is a free open source UNIX OS for PCs that was originally
 	developed in 1991 by Linus Torvalds, a Finnish undergraduate student. Linux
 	is neither pure SYSV or pure BSD. Instead, incorporates some features from
 	each (e.g. SYSV-style startup files but BSD-style file system layout) and
 	aims to conform with a set of IEEE standards called POSIX (Portable Operating
 	System Interface). To maximise code portability, it typically supports
 	SYSV, BSD and POSIX system calls (e.g.
-	<tt>poll, select, memset, memcpy,
-	  bzero</tt> and <tt>bcopy</tt> are all supported).
-      <p>The open source nature of Linux means that the source
+	<b>poll, select, memset, memcpy,
+	  bzero</b> and <b>bcopy</b> are all supported).
+      </p>
+      <p>
+	The open source nature of Linux means that the source
 	code for the Linux kernel is freely available so that anyone can add features
 	and correct deficiencies. This approach has been very successful and what
 	started as one person's project has now turned into a collaboration of
 	hundreds of volunteer developers from around the globe. The open source
 	approach has not just successfully been applied to kernel code, but also
 	to application programs for Linux (see e.g. <a href="http://www.freshmeat.net">http://www.freshmeat.net</a>).
-      <p>As Linux has become more popular, several different development
+      </p>
+      <p>
+	As Linux has become more popular, several different development
 	streams or distributions have emerged, e.g. Redhat, Slackware, Mandrake,
 	Debian, and Caldera. A distribution comprises a prepackaged kernel, system
 	utilities, GUI interfaces and application programs.
-      <p>Redhat is the most popular distribution because it has
+      </p>
+      <p>
+	Redhat is the most popular distribution because it has
 	been ported to a large number of hardware platforms (including Intel, Alpha,
 	and SPARC), it is easy to use and install and it comes with a comprehensive
 	set of utilities and applications including the X Windows graphics system,
 	GNOME and KDE GUI environments, and the StarOffice suite (an open source
 	MS-Office clone for Linux).
-
+      </p>
     </div>
 
     
@@ -295,19 +303,19 @@
 	  Virtually every system utility that you would expect
 	  to find on standard implementations of UNIX (including every system utility
 	  described in the POSIX.2 specification) has been ported to Linux. This
-	  includes commands such as <tt>ls, cp, grep, awk, sed, bc, wc, more</tt>,
+	  includes commands such as <b>ls, cp, grep, awk, sed, bc, wc, more</b>,
 	  and so on. These system utilities are designed to be powerful tools that
-	  do a single task extremely well (e.g. <tt>grep</tt> finds text inside files
-	  while <tt>wc</tt> counts the number of words, lines and bytes inside a
+	  do a single task extremely well (e.g. <b>grep</b> finds text inside files
+	  while <b>wc</b> counts the number of words, lines and bytes inside a
 	  file). Users can often solve problems by interconnecting these tools instead
 	  of writing a large monolithic application program.
 	</p>
 	<p>Like other UNIX flavours, Linux's system utilities also
 	  include server programs called <b>daemons</b>
-	  which provide remote network and administration services (e.g. <tt>telnetd</tt>
-	  and <tt>sshd</tt> provide remote login facilities, <tt>lpd</tt> provides
+	  which provide remote network and administration services (e.g. <b>telnetd</b>
+	  and <b>sshd</b> provide remote login facilities, <b>lpd</b> provides
 	  printing services,
-	  <tt>httpd</tt> serves web pages, <tt>crond</tt> runs
+	  <b>httpd</b> serves web pages, <b>crond</b> runs
 	  regular system administration tasks automatically). A daemon (probably
 	  derived from the Latin word which refers to a beneficient spirit who watches
 	  over someone, or perhaps short for "Disk And Execution MONitor") is usually
@@ -319,17 +327,17 @@
 
 	<p>
 	  Linux distributions typically come with several useful
-	  application programs as standard. Examples include the <tt>emacs</tt> editor,
-	  <tt>xv</tt>
-	  (an image viewer), <tt>gcc</tt> (a C compiler), <tt>g++</tt> (a C++ compiler),
-	  <tt>xfig</tt>
-	  (a drawing package), <tt>latex</tt> (a powerful typesetting language) and
-	  <tt>soffice</tt>
+	  application programs as standard. Examples include the <b>emacs</b> editor,
+	  <b>xv</b>
+	  (an image viewer), <b>gcc</b> (a C compiler), <b>g++</b> (a C++ compiler),
+	  <b>xfig</b>
+	  (a drawing package), <b>latex</b> (a powerful typesetting language) and
+	  <b>soffice</b>
 	  (StarOffice, which is an MS-Office style clone that can read and write
 	  Word, Excel and PowerPoint files).
 	</p>
 	<p>
-	  Redhat Linux also comes with <tt>rpm</tt>, the Redhat
+	  Redhat Linux also comes with <b>rpm</b>, the Redhat
 	  Package Manager which makes it easy to install and uninstall application
 	  programs.
 	</p>
@@ -348,24 +356,34 @@
 	prompt:
       </p>
       
-      <p><tt>&nbsp;&nbsp;&nbsp; login:</tt></p>
-      <p>At this prompt, type in your usename and press the enter/return/<img src="enter.gif" HEIGHT=15 WIDTH=27>
+      <p class="terminal">
+	login:
+      </p>
+      
+      <p>
+	At this prompt, type in your usename and press the enter/return/
 	key. Remember that UNIX is case sensitive (i.e. Will, WILL and will are
 	all different logins). You should then be prompted for your password:
       </p>
-      <p><tt>&nbsp;&nbsp;&nbsp; login: will</tt>
-	<br><tt>&nbsp;&nbsp;&nbsp; password:</tt></p>
+      
+      <p class="terminal">
+	login: will
+	<br>
+	password:
+      </p>
       <p>
-	Type your password in at the prompt and press the enter/return/<img src="enter.gif" HEIGHT=15 WIDTH=27>
+	Type your password in at the prompt and press the enter/return/
 	key. Note that your password will not be displayed on the screen as you
 	type it in.
       </p>
       <p>If you mistype your username or password you will get
 	an appropriate message from the computer and you will be presented with
-	the <tt>login:</tt> prompt again. Otherwise you should be presented with
+	the <b>login:</b> prompt again. Otherwise you should be presented with
 	a shell prompt which looks something like this:
       </p>
-      <p><tt>&nbsp;&nbsp;&nbsp; $</tt></p>
+      <p class="terminal">
+	$
+      </p>
       <p>
 	To log out of a text-based UNIX shell, type "exit" at
     the shell prompt (or if that doesn't work try "logout"; if that doesn't
@@ -401,9 +419,9 @@
 	in for the first time is to change your password.
       </p>
       <p>
-	The UNIX command to change your password is <tt>passwd</tt>:
+	The UNIX command to change your password is <b>passwd</b>:
       </p>
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <tt>$ passwd</tt><img src="enter.gif" HEIGHT=15 WIDTH=27></p>
+      <p class="terminal">$ passwd</p>
       <p>
 	The system will prompt you for your old password, then
 	for your new password. To eliminate any possible typing errors you have
@@ -440,10 +458,10 @@
 	(options and the target filenames and/or expressions). The general syntax
 	for a UNIX command is
       </p>
-      <p><tt>&nbsp;&nbsp;&nbsp; $ command -options targets</tt><img src="enter.gif" HEIGHT=15 WIDTH=27></p>
+      <p class="terminal">$ command -options targets</p>
       <p>
-	Here <tt>command</tt> can be though of as a verb, <tt>options
-	</tt>as an adverb and <tt>targets</tt> as the direct objects of the verb. In the
+	Here <b>command</b> can be though of as a verb, <b>options
+	</b>as an adverb and <b>targets</b> as the direct objects of the verb. In the
 	case that the user wishes to specify several options, these need not always
 	be listed separately (the options can sometimes be listed altogether after
 	a single dash).

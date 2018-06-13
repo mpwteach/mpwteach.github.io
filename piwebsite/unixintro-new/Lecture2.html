@@ -11,7 +11,7 @@
   <body>
     <hr WIDTH="100%">
 
-    <h1>Introduction to UNIX: Lecture Two</h1>
+    <h1>2. Filsystem</h1>
 
 
     <h2>2.1 Objectives</h2>
@@ -89,7 +89,7 @@
 	a directory can have many child directories, but only one parent directory.
 	Fig. 2.1 illustrates this layout.
       </p>
-
+      
       <center>
 	<img SRC="dirtree.gif" height=383 width=573>
 	<div class="caption">Fig. 2.1: Part of a typical UNIX filesystem tree</div>
@@ -102,10 +102,10 @@
 	working directory. To specify a path, each directory along the route from
 	the source to the destination must be included in the path, with each directory
 	in the sequence being separated by a slash. To help with the specification
-	of relative paths, UNIX provides the shorthand "<tt>.</tt>" for the current
-	directory and "<tt>..</tt>" for the parent directory. For example, the
-	absolute path to the directory "<tt>play</tt>" is <tt>/home/will/play</tt>,
-	while the relative path to this directory from "<tt>zeb</tt>" is <tt>../will/play</tt>.
+	of relative paths, UNIX provides the shorthand "<b>.</b>" for the current
+	directory and "<b>..</b>" for the parent directory. For example, the
+	absolute path to the directory "<b>play</b>" is <b>/home/will/play</b>,
+	while the relative path to this directory from "<b>zeb</b>" is <b>../will/play</b>.
       </p>
       <p>
 	Fig. 2.2 shows some typical directories you will find
@@ -117,7 +117,6 @@
       
       <br>
 
-      <center>
       <table>
 	<tr>
 	  <th>Directory</th>
@@ -160,18 +159,18 @@
 	  <td>A pseudo-filesystem which is used as an interface to the kernel. Includes a sub-directory for each active program (or process).</td>
 	</tr>  
       </table>
-      </center>
+    
 
       <div class="caption">Fig. 2.2: Typical UNIX directories</div>
 
       <p>
 	When you log into UNIX, your current working directory
 	is your user home directory. You can refer to your home directory at any
-	time as "<tt>~</tt>" and the home directory of other users as "<tt>~&lt;login&gt;</tt>".
-	So <tt>~will/play</tt> is another way for user <tt>jane</tt> to specify
+	time as "<b>~</b>" and the home directory of other users as "<b>~&lt;login&gt;</b>".
+	So <b>~will/play</b> is another way for user <b>jane</b> to specify
 	an absolute path to the directory
-	<tt>/homes/will/play</tt>. User <tt>will</tt>
-	may refer to the directory as <tt>~/play.</tt>
+	<b>/homes/will/play</b>. User <b>will</b>
+	may refer to the directory as <b>~/play.</b>
       </p>
     </div>
 
@@ -281,268 +280,258 @@
 	  </li>
 	</ul>
 
-<p><br><tt>ls</tt> supports more options. To find out what
-they are, type:</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ man ls</font></tt><img SRC="enter.gif" height=15 width=27>
-<p><tt>man </tt>is the online UNIX user manual, and you can
-use it to get help with commands and find out about what options are supported.
-It has quite a terse style which is often not that helpful, so some users
-prefer to the use the (non-standard) <tt>info</tt> utility if it is installed:</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ info ls</font></tt><img SRC="enter.gif" height=15 width=27>
-<br>&nbsp;
-<li>
-<tt>cd</tt> (change [current working] directory)</font></li>
+	<p><br><b>ls</b> supports more options. To find out what
+	  they are, type:
+	<p class="terminal">$ man ls</p>
+	<p><b>man </b>is the online UNIX user manual, and you can
+	  use it to get help with commands and find out about what options are supported.
+	  It has quite a terse style which is often not that helpful, so some users
+	  prefer to the use the (non-standard) <b>info</b> utility if it is installed:
+	<p class="terminal">$ info ls</p>
+	<br>
+	
+	<li><b>cd</b> (change [current working] directory)</li>
 
-<p><tt>&nbsp;&nbsp;&nbsp; $ cd</tt> <i>path</i></font>
-<p>changes your current working directory to <i>path</i>
-(which can be an absolute or a relative path). One of the most common relative
-paths to use is '..' (i.e. the parent directory of the current directory).</font>
-<p>Used without any target directory</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ cd</font></tt><img SRC="enter.gif" height=15 width=27>
-<p>resets your current working directory to your home directory
-(useful if you get lost). If you change into a directory and you subsequently
-want to return to your original directory, use</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ cd -</font></tt><img SRC="enter.gif" height=15 width=27>
-<br>&nbsp;
-<li>
-<tt>mkdir</tt> (make directory)</font></li>
+	<p class="terminal"> $ cd <i>path</i></p>
+	<p>changes your current working directory to <i>path</i>
+	  (which can be an absolute or a relative path). One of the most common relative
+	  paths to use is '..' (i.e. the parent directory of the current directory).
+	<p>Used without any target directory
+	<p class="terminal">$ cd</p>
+	<p>resets your current working directory to your home directory
+	  (useful if you get lost). If you change into a directory and you subsequently
+	  want to return to your original directory, use
+	<p class="terminal">$ cd -</p>
+	<br>
+	
+	<li><b>mkdir</b> (make directory)</li>
 
-<p><tt>&nbsp;&nbsp;&nbsp; $ mkdir </tt><i>directory</i></font>
-<p>creates a subdirectory called&nbsp; <i>directory</i>in
-the current working directory. You can only create subdirectories in a
-directory if you have write permission on that directory.</font></ul>
+	<p class="terminal">$ mkdir <i>directory</i></p>
+	<p>creates a subdirectory called&nbsp; <i>directory</i>in
+	  the current working directory. You can only create subdirectories in a
+	  directory if you have write permission on that directory.</p>
+	
+	<li><b>rmdir </b>(remove directory)</li>
 
-<ul>
-<li>
-<tt>rmdir </tt>(remove directory)</font></li>
+	<p class="terminal">$ rmdir <i>directory</i></p>
+	<p>removes the subdirectory <i>directory</i> from the current
+	  working directory. You can only remove subdirectories if they are completely
+	  empty (i.e. of all entries besides the '.' and '..' directories).</p>
 
-<p><tt>&nbsp;&nbsp;&nbsp; $ rmdir </tt><i>directory</i></font>
-<p>removes the subdirectory <i>directory</i> from the current
-working directory. You can only remove subdirectories if they are completely
-empty (i.e. of all entries besides the '.' and '..' directories).</font>
-<br>&nbsp;
-<li>
-<tt>cp</tt> (copy)</font></li>
+	<br>
+	<li><b>cp</b> (copy)</li>
 
-<p><tt>cp</tt> is used to make copies of files or entire
-directories. To copy files, use:</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ cp </tt><i>source-file(s) destination</i></font>
-<p>where <i>source-file(s)</i> and <i>destination</i> specify
-the source and destination of the copy respectively. The behaviour of <tt>cp</tt>
-depends on whether the destination<i> </i>is a file or a directory. If
-the destination is a file, only one source file is allowed and <tt>cp</tt>
-makes a new file called <i>destination</i> that has the same contents as
-the source file. If the destination is a directory, many source files can
-be specified, each of which will be copied into the destination directory.
-Section 2.6 will discuss efficient specification of source files using
-wildcard characters.</font>
-<p>To copy entire directories (including their contents),
-use a <i>recursive</i> copy:</font>
-<p>&nbsp;<tt>&nbsp;&nbsp;&nbsp; $ cp -rd </tt><i>source-directories
-destination-directory</i></font>
-<br>&nbsp;
-<li>
-<tt>mv</tt> (move/rename)</font></li>
+	<p><b>cp</b> is used to make copies of files or entire
+	  directories. To copy files, use:
+	<p class="terminal">$ cp <i>source-file(s) destination</i></p>
+	<p>where <i>source-file(s)</i> and <i>destination</i> specify
+	  the source and destination of the copy respectively. The behaviour of <b>cp</b>
+	  depends on whether the destination<i> </i>is a file or a directory. If
+	  the destination is a file, only one source file is allowed and <b>cp</b>
+	  makes a new file called <i>destination</i> that has the same contents as
+	  the source file. If the destination is a directory, many source files can
+	  be specified, each of which will be copied into the destination directory.
+	  Section 2.6 will discuss efficient specification of source files using
+	  wildcard characters.</p>
+	<p>To copy entire directories (including their contents),
+	  use a <i>recursive</i> copy:
+	<p class="terminal">$ cp -rd <i>source-directories destination-directory</i></p>
 
-<p><tt>mv</tt> is used to rename files/directories and/or
-move them from one directory into another. Exactly one source and one destination
-must be specified:</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ mv </tt><i>source destination</i></font>
-<p>If <i>destination</i> is an existing directory, the new
-name for <i>source</i> (whether it be a file or a directory) will&nbsp;
-be <i>destination<tt>/</tt>source</i>. If <i>source</i> and <i>destination</i>
-are both files, <i>source</i> is renamed <i>destination</i>. N.B.: if <i>destination</i>
-is an existing file it will be destroyed and overwritten by<i> source</i>
-(you can use the <tt>-i</tt> option if you would like to be asked for confirmation
-before a file is overwritten in this way).</font>
-<br>&nbsp;
-<li>
-<tt>rm </tt>(remove/delete)</font></li>
+	<br>
+	<li><b>mv</b> (move/rename)</li>
 
-<p><tt>&nbsp;&nbsp;&nbsp; $ rm </tt><i>target-file(s)</i></font>
-<p>removes the specified files. Unlike other operating systems,
-it is almost impossible to recover a deleted file unless you have a backup
-(there is no recycle bin!) so use this command with care. If you would
-like to be asked before files are deleted, use the <tt>-i </tt>option:</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ rm -i myfile</font></tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; rm: remove 'myfile'?</font></tt>
-<p><tt>rm</tt> can also be used to delete directories (along
-with all of their contents, including any subdirectories they contain).
-To do this, use the
-<tt>-r</tt> option. To avoid <tt>rm</tt> from asking
-any questions or giving errors (e.g. if the file doesn't exist) you used
-the <tt>-f </tt>(force) option. Extreme care needs to be taken when using
-this option - consider what would happen if a system administrator was
-trying to delete user<tt> will</tt>'s home directory and accidentally typed:</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ rm -rf / home/will</font></tt><img SRC="enter.gif" height=15 width=27>
-<p>(instead of<tt> rm -rf /home/will</tt>).</font>
-<br>&nbsp;
-<li>
-<tt>cat</tt> (catenate/type)</font></li>
+	<p><b>mv</b> is used to rename files/directories and/or
+	  move them from one directory into another. Exactly one source and one destination
+	  must be specified:
+	<p class="terminal">$ mv <i>source destination</i></p>
+	<p>If <i>destination</i> is an existing directory, the new
+	  name for <i>source</i> (whether it be a file or a directory) will&nbsp;
+	  be <i>destination<b>/</b>source</i>. If <i>source</i> and <i>destination</i>
+	  are both files, <i>source</i> is renamed <i>destination</i>. N.B.: if <i>destination</i>
+	  is an existing file it will be destroyed and overwritten by<i> source</i>
+	  (you can use the <b>-i</b> option if you would like to be asked for confirmation
+	  before a file is overwritten in this way).
 
-<p><tt>&nbsp;&nbsp;&nbsp; $ cat </tt><i>target-file(s)</i></font>
-<p>displays the contents of <i>target-file(s)&nbsp;</i> on
-the screen, one after the other. You can also use it to create files from
-keyboard input as follows (<tt>></tt> is the output redirection operator,
-which will be discussed in the next chapter):</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ cat > hello.txt</font></tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; hello world!</font></tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>[ctrl-d]</font>
-<br><tt>&nbsp;&nbsp;&nbsp; $ ls hello.txt</font></tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; hello.txt</font></tt>
-<br><tt>&nbsp;&nbsp;&nbsp; $ cat hello.txt</font></tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; hello world!</font></tt>
-<br><tt>&nbsp;&nbsp;&nbsp; $</font></tt>
-<br>&nbsp;
-<li>
-<tt>more</tt> and <tt>less</tt> (catenate with pause)</font></li>
+	  <br>
+	  <li><b>rm </b>(remove/delete)</li>
 
-<p><tt>&nbsp;&nbsp;&nbsp; $ more </tt><i>target-file(s)</i></font>
-<p>displays the contents of <i>target-file(s)&nbsp;</i> on
-the screen, pausing at the end of each screenful and asking the user to
-press a key (useful for long files). It also incorporates a searching facility
-(press '<tt>/</tt>' and then type a phrase that you want to look for).</font>
-<p>You can also use <tt>more</tt> to break up the output
-of commands that produce more than one screenful of output as follows (<tt>|
-</tt>is
-the pipe operator, which will be discussed in the next chapter):</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ ls -l | more</font></tt><img SRC="enter.gif" height=15 width=27>
-<p><tt>less</tt> is just like <tt>more</tt>, except that
-has a few extra features (such as allowing users to scroll backwards and
-forwards through the displayed file). <tt>less</tt> not a standard utility,
-however and may not be present on all UNIX systems.</font></ul>
-</blockquote>
+	<p class="terminal">$ rm <i>target-file(s)</i></p>
+	<p>removes the specified files. Unlike other operating systems,
+	  it is almost impossible to recover a deleted file unless you have a backup
+	  (there is no recycle bin!) so use this command with care. If you would
+	  like to be asked before files are deleted, use the <b>-i </b>option:
+	<p class="terminal">$ rm -i myfile
+	  <br>rm: remove 'myfile'?</p>
+	<p><b>rm</b> can also be used to delete directories (along
+	  with all of their contents, including any subdirectories they contain).
+	  To do this, use the
+	  <b>-r</b> option. To avoid <b>rm</b> from asking
+	  any questions or giving errors (e.g. if the file doesn't exist) you used
+	  the <b>-f </b>(force) option. Extreme care needs to be taken when using
+	  this option - consider what would happen if a system administrator was
+	  trying to delete user<b> will</b>'s home directory and accidentally typed:
+	<p class="terminal">$ rm -rf / home/will</p>
+	<p>(instead of<b> rm -rf /home/will</b>).</p>
+	
+	<br>
+	<li><b>cat</b> (catenate/type)</li>
 
-</div>
+	<p class="terminal">$ cat <i>target-file(s)</i></p>
+	<p>displays the contents of <i>target-file(s)&nbsp;</i> on
+	  the screen, one after the other. You can also use it to create files from
+	  keyboard input as follows (<b>></b> is the output redirection operator,
+	  which will be discussed in the next chapter):
+	<p class="terminal">
+	  $ cat > hello.txt
+	  <br>hello world!
+	  <br>[ctrl-d]
+	  <br>$ ls hello.txt
+	  <br>hello.txt
+	  <br>$ cat hello.txt
+	  <br>hello world!
+	  <br>$
+	</p>
 
-<br>
+	<br>
+	<li><b>more</b> and <b>less</b> (catenate with pause)</li>
 
-<div class="heading">
-<div class="table">
-2.5
-Making Hard and Soft (Symbolic) Links
-</div>
-</div>
-<br>
+	<p class="termnal">$ more <i>target-file(s)</i></p>
+	<p>displays the contents of <i>target-file(s)&nbsp;</i> on
+	  the screen, pausing at the end of each screenful and asking the user to
+	  press a key (useful for long files). It also incorporates a searching facility
+	  (press '<b>/</b>' and then type a phrase that you want to look for).
+	<p>You can also use <b>more</b> to break up the output
+	  of commands that produce more than one screenful of output as follows (<b>|
+	  </b>is
+	  the pipe operator, which will be discussed in the next chapter):
+	<p class="terminal">$ ls -l | more</p>
+	<p><b>less</b> is just like <b>more</b>, except that
+	  has a few extra features (such as allowing users to scroll backwards and
+	  forwards through the displayed file). <b>less</b> not a standard utility,
+	  however and may not be present on all UNIX systems.</p>
 
-<div class="text">
+      </ul>
 
-<blockquote>Direct (hard) and indirect (soft or symbolic)
-links from one file or directory to another can be created using the <tt>ln</tt>
-command.</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ ln </tt><i>filename linkname</i></font>
-<p>creates another directory entry for <i>filename</i> called
-<i>linkname
-</i>(i.e.
-<i>linkname</i>
-is a hard link). Both directory entries appear identical (and both now
-have a link count of 2). If either <i>filename</i> or <i>linkname</i> is
-modified, the change will be reflected in the other file (since they are
-in fact just two different directory entries pointing to the same file).</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ ln -s </tt><i>filename linkname</i></font>
-<p>creates a shortcut called <i>linkname</i> (i.e. <i>linkname</i>
-is a soft link). The shortcut appears as an entry with a special type ('<tt>l</tt>'):</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ ln -s hello.txt bye.txt</font></tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; $ ls -l bye.txt</font></tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; lrwxrwxrwx&nbsp;&nbsp; 1 will
-finance 13 bye.txt -> hello.txt</font></tt>
-<br><tt>&nbsp;&nbsp;&nbsp; $</font></tt>
-<p>The link count of the source file remains unaffected.
-Notice that the permission bits on a symbolic link are not used (always
-appearing as <tt>rwxrwxrwx</tt>). Instead the permissions on the link are
-determined by the permissions on the target (<tt>hello.txt</tt> in this
-case).</font>
-<p>Note that you can create a symbolic link to a file that
-doesn't exist, but not a hard link. Another difference between the two
-is that you can create symbolic links across different physical disk devices
-or partitions, but hard links are restricted to the same disk partition.
-Finally, most current UNIX implementations do not allow hard links to point
-to directories.</font></blockquote>
 
-</div>
-<br>
+    </div>
 
-<div class="heading">
-<div class="table">
-2.6 Specifying multiple filenames
-</div>
-</div>
-<br>
+    <br>
 
-<div class="text">
-Multiple filenames can be specified using special
-pattern-matching characters. The rules are:
+    <h2>2.5 Making Hard and Soft (Symbolic) Links</h2>
 
-<ul>
-<li>'<tt>?</tt>' matches any single character in that position
-in the filename.</li>
-<li>'<tt>*</tt>' matches zero or more characters in the filename.
-A '<tt>*</tt>' on its own will match all files. '<tt>*.*</tt>' matches
-all files with containing a '<tt>.</tt>'.</li>
-<li>Characters enclosed in square brackets ('[' and ']') will
-match any filename that has one of those characters in that position.</li>
+    <div class="text">
 
-<li>A list of comma separated strings enclosed in curly braces
-("{" and "}") will be expanded as a Cartesian product with the surrounding
-characters.</li>
-For example:
-<ol>
-<li><tt>??? </tt>matches all three-character filenames.</li>
+      <p>Direct (hard) and indirect (soft or symbolic)
+	links from one file or directory to another can be created using the <b>ln</b>
+	command.
+      <p class="terminal">$ ln <i>filename linkname</i></p>
+      <p>creates another directory entry for <i>filename</i> called
+	<i>linkname</i>(i.e. <i>linkname</i>
+	is a hard link). Both directory entries appear identical (and both now
+	have a link count of 2). If either <i>filename</i> or <i>linkname</i> is
+	modified, the change will be reflected in the other file (since they are
+	in fact just two different directory entries pointing to the same file).
+      <p class="terminal">$ ln -s <i>filename linkname</i></p>
+      <p>creates a shortcut called <i>linkname</i> (i.e. <i>linkname</i>
+	is a soft link). The shortcut appears as an entry with a special type ('<b>l</b>'):
+      <p class="terminal">$ ln -s hello.txt bye.txt
+	<br>$ ls -l bye.txt
+	<br>lrwxrwxrw 1 will finance 13 bye.txt -> hello.txt
+	<br>$
+      </p>
+      <p>The link count of the source file remains unaffected.
+	Notice that the permission bits on a symbolic link are not used (always
+	appearing as <b>rwxrwxrwx</b>). Instead the permissions on the link are
+	determined by the permissions on the target (<b>hello.txt</b> in this
+	case).
+      </p>
+      <p>Note that you can create a symbolic link to a file that
+	doesn't exist, but not a hard link. Another difference between the two
+	is that you can create symbolic links across different physical disk devices
+	or partitions, but hard links are restricted to the same disk partition.
+	Finally, most current UNIX implementations do not allow hard links to point
+	to directories.</p>
 
-<li><tt>?ell?</tt> matches any five-character filenames with
-'<tt>ell</tt>' in the middle.</li>
+    </div>
 
-<li><tt>he*</tt> matches any filename beginning with '<tt>he</tt>'.</li>
+    <h2>2.6 Specifying multiple filenames</h2>
 
-<li><tt>[m-z]*[a-l]</tt> matches any filename that begins with
-a letter from '<tt>m</tt>' to '<tt>z</tt>' and ends in a letter from '<tt>a</tt>'
-to '<tt>l</tt>'.</li>
 
-<li><tt>{/usr,}{/bin,/lib}/file</tt> expands to <tt>/usr/bin/file
-/usr/lib/file /bin/file </tt>and<tt> /lib/file</tt>.</li>
-</ol>
+    <div class="text">
 
-Note that the UNIX shell performs these expansions (including
-any filename matching) on a command's arguments <i>before</i> the command
-is executed.
-</div>
+      <p>Multiple filenames can be specified using special
+	pattern-matching characters. The rules are:</p>
 
-<br>
+      <ul>
+	<li>'<b>?</b>' matches any single character in that position
+	  in the filename.</li>
+	
+	<li>'<b>*</b>' matches zero or more characters in the filename.
+	  A '<b>*</b>' on its own will match all files. '<b>*.*</b>' matches
+	  all files with containing a '<b>.</b>'.</li>
+	
+	<li>Characters enclosed in square brackets ('[' and ']') will
+	  match any filename that has one of those characters in that position.</li>
+	
+	<li>A list of comma separated strings enclosed in curly braces
+	  ("{" and "}") will be expanded as a Cartesian product with the surrounding
+	  characters.</li>
+	
+	For example:
+	<ol>
+	  <li><b>??? </b>matches all three-character filenames.</li>
+	  
+	  <li><b>?ell?</b> matches any five-character filenames with
+	    '<b>ell</b>' in the middle.</li>
+	  
+	  <li><b>he*</b> matches any filename beginning with '<b>he</b>'.</li>
+	  
+	  <li><b>[m-z]*[a-l]</b> matches any filename that begins with
+	    a letter from '<b>m</b>' to '<b>z</b>' and ends in a letter from '<b>a</b>'
+	    to '<b>l</b>'.</li>
+	  
+	  <li><b>{/usr,}{/bin,/lib}/file</b> expands to <b>/usr/bin/file
+	      /usr/lib/file /bin/file </b>and<b> /lib/file</b>.</li>
+	</ol>
+      </ul>
 
-<div class="heading">
-<div class="table">
-2.7 Quotes
-</div>
-</div>
-<br>
+      <p>Note that the UNIX shell performs these expansions (including
+	any filename matching) on a command's arguments <i>before</i> the command
+	is executed.</p>
+    </div>
+    
 
-<div class="text">
-As we have seen certain special characters (e.g.
-'<tt>*</tt>', '<tt>-</tt>','<tt>{</tt>' etc.) are interpreted in a special
-way by the shell. In order to pass arguments that use these characters
-to commands directly (i.e. without filename expansion etc.), we need to
-use special quoting characters. There are three levels of quoting that
-you can try:
+    <h2>2.7 Quotes</h2>
 
-<ol>
-<li>Try insert a '<tt>\</tt>' in front of the special character.</li>
-<li>Use double quotes (<tt>"</tt>) around arguments to prevent
-most expansions.</li>
-<li>Use single forward quotes (<tt>'</tt>) around arguments to
-prevent all expansions.</li>
-</ol>
-There is a fourth type of quoting in UNIX. Single backward
-quotes (<tt>`</tt>) are used to pass the output of some command as an input
-argument to another. For example:</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ hostname</font></tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; rose</font></tt>
-<br><tt>&nbsp;&nbsp;&nbsp; $ echo this machine is called
-`hostname`</font></tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; this machine is called rose</font></tt></blockquote>
-</div>
+    <div class="text">
+      <p>
+	As we have seen certain special characters (e.g.
+	'<b>*</b>', '<b>-</b>','<b>{</b>' etc.) are interpreted in a special
+	way by the shell. In order to pass arguments that use these characters
+	to commands directly (i.e. without filename expansion etc.), we need to
+	use special quoting characters. There are three levels of quoting that
+	you can try:
+      </p>
 
-<BLOCKQUOTE><P><A HREF="http:./index.html">
-(BACK TO COURSE CONTENTS)</A></P></BLOCKQUOTE>
+      <ol>
+	<li>Try insert a '<b>\</b>' in front of the special character.</li>
+	<li>Use double quotes (<b>&quot;</b>) around arguments to prevent
+	  most expansions.</li>
+	<li>Use single forward quotes (<b>'</b>) around arguments to
+	  prevent all expansions.</li>
+      </ol>
+      There is a fourth type of quoting in UNIX. Single backward
+      quotes (<b>`</b>) are used to pass the output of some command as an input
+      argument to another. For example:
+      <p class="terminal">
+	$ hostname
+	<br>rose
+	<br>$ echo this machine is called `hostname`
+	<br>this machine is called rose
+      </p>
+    </div>
 
-</body>
+    <a href="index.html">(BACK TO COURSE CONTENTS)</a>
+
+  </body>
 </html>
