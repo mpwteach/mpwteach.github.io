@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<h1>Introduction to UNIX and Linux: Exercise Sheet 1</h1>
+<meta charset="utf-8">
+<link rel="icon"  href="https://sites.google.com/a/my.sduhsd.net/csp-yana2319/home/0-01-magic-square/planticon.jpg?attredirects=0">
+<meta name="viewport" content="width=device-width">
+</head>
+
+
+<div class="h1">Introduction to UNIX: Exercise Sheet One</div>
+
+<div class="text">	   
+      <ol>
+	<li>
+	  Log on a Linux machine or connect to one from a 
+	    Windows machine (e.g. click on the Exceed icon and then use putty to
+	    connect to the server <tt>kiwi</tt>.
+	    Enter your login (user name) and password at relevant prompts.</font></li>
+
+	<li>
+	  Enter these commands at the UNIX prompt, and try to interpret
+	    the output. Ask questions and don't be afraid to experiment (as a normal
+	    user you cannot do much harm):</font></li>
+
+	<ul>
+	  <li>
+	    <tt>echo hello world</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>passwd</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>date</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>hostname</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>arch</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>uname -a</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>dmesg | more<img SRC="enter.gif" height=15 width=27></tt>(you
+	      may need to press <tt>q</tt> to quit)</font></li>
+
+	  <li>
+	    <tt>uptime</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>who am i</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>who</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>id</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>last</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>finger</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>w</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>top<img SRC="enter.gif" height=15 width=27> </font></tt>(you
+	      may need to press <tt>q</tt> to quit)</font></li>
+
+	  <li>
+	    <tt>echo $SHELL</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>echo {con,pre}{sent,fer}{s,ed}</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>man "automatic door"</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>man ls<img SRC="enter.gif" height=15 width=27> </font></tt>(you
+	      may need to press <tt>q</tt> to quit)</font></li>
+
+	  <li>
+	    <tt>man who<img SRC="enter.gif" height=15 width=27> </font></tt>(you
+	      may need to press <tt>q</tt> to quit)</font></li>
+
+	  <li>
+	    <tt>who can tell me why i got divorced</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>lost</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>clear</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>cal 2000</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>cal 9 1752<img SRC="enter.gif" height=15 width=27></tt>(do
+	      you notice anything unusual?)</font></li>
+
+	  <li>
+	    <tt>bc -l<img SRC="enter.gif" height=15 width=27></tt>(type
+	      <tt>quit<img SRC="enter.gif" height=15 width=27></tt>
+	      or press Ctrl-d to quit)</font></li>
+
+	  <li>
+	    <tt>echo 5+4 | bc -l</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>yes please<img SRC="enter.gif" height=15 width=27></tt>(you
+	      may need to press Ctrl-c to quit)</font></li>
+
+	  <li>
+	    <tt>time sleep 5</font></tt><img SRC="enter.gif" height=15 width=27></li>
+
+	  <li>
+	    <tt>history</font></tt><img SRC="enter.gif" height=15 width=27></li>
+	</ul>
+      </ol>
+    </blockquote>
+
+    <p><a href="http:./index.html">
+	  (BACK TO COURSE CONTENTS)</a></p>
+</div>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <link rel="stylesheet" type="text/css" href="mystyle.css">
+   <link rel="icon" href="https://sites.google.com/a/my.sduhsd.net/csp-yana2319/home/0-01-magic-square/planticon.jpg?attredirects=0">
+   <title>Introduction to UNIX and Linux: Exercise Sheet 5</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.75 [en] (X11; U; Linux 2.2.16-3 i686) [Netscape]">
+</head>
+
+<body>
+
+<h1>Introduction to UNIX: Exercise Sheet Five</h1>
+
+<div class="text">
+
+<hr WIDTH="100%">
+<blockquote>
+<ol>
+<li>
+Use <tt>telnet</tt> to request a web page from the web server
+<tt>www.doc.ic.ac.uk</tt> by connecting to port 80, as shown in the notes.</font></li>
+
+<li>
+Use <tt>ping</tt> to find the round-trip delay to <tt>www.altavista.com</tt>.</font></li>
+
+<li>
+Use <tt>traceroute</tt> to see the network route taken to
+<tt>www.altavista.com</tt> (which is in the USA). Can you tell which
+cities your network traffic passes through?</font></li>
+
+<li>
+Use <tt>ftp</tt> to connect to the FTP&nbsp;site <tt>sunsite.doc.ic.ac.uk</tt>.
+Obtain the latest version of the package <tt>units</tt> (in the form of
+a <tt>.tar.gz</tt> file)&nbsp;from the directory <tt>packages/gnu/units</tt>.
+Decompress and unarchive the <tt>.tar.gz</tt> file. Type <tt>configure</tt>
+and then <tt>make</tt>. Run the executable program that is produced as
+"<tt>./units -f units.dat</tt>". What does the program do? If you were
+the system administrator, what would you have to do to install the package
+for everyone to use?</font></li>
+
+<li>
+Use <tt>wget</tt> to get a copy of the web page <tt>http://www.doc.ic.ac.uk/index.html</tt>.
+Have a look at the contents of the file. Can you use <tt>sed</tt> to strip
+out the HTML&nbsp;tags (text enclosed in <tt>&lt;</tt> and <tt>></tt>)
+to leave you with just plain text?</font></li>
+
+<li>
+Use <tt>finger</tt> or <tt>who</tt> to get a list of users
+on the machine.</font></li>
+
+<li>
+Use <tt>write</tt> to send them a message. To stop people
+from sending you messages, type "<tt>mesg n</tt>". To reenable messages,
+type "<tt>mesg y</tt>".</font></li>
+
+<li>
+Try use <tt>talk</tt> to send a message to someone (N.B.
+this may not work).</font></li>
+
+<li>
+List all your processes, using <tt>sed</tt> to substitute
+"me" for your username.</font></li>
+
+<li>
+Use <tt>who</tt>, <tt>awk</tt>, <tt>sort</tt> and <tt>uniq</tt>
+to print out a sorted list of the logins of active users.</font></li>
+
+<li>
+Use <tt>awk</tt> on <tt>/etc/passwd</tt> to produce a list
+of users and their login shells.</font></li>
+
+<li>
+Write an <tt>awk</tt> script that prints out all lines in
+a file except for the first two.</font></li>
+
+<li>
+Modify the <b>awk</b> script in the notes so that it doesn't
+increase the number of players used to calculate the average if the manner
+of dismissal is "not-out".</font></li>
+
+<li>
+Create a file called <tt>hello.c</tt> containing the simple
+"hello world" program in the notes. Create an appropriate <tt>makefile</tt>
+for compiling it. Run <tt>make</tt>.</font></li>
+
+<li>
+Use <tt>man -k</tt> to find a suitable utility for viewing
+postscript files.</font></li>
+</ol>
+</blockquote>
+
+<BLOCKQUOTE><P><A HREF="http:./index.html">
+(BACK TO COURSE CONTENTS)</A></P></BLOCKQUOTE>
+
+</div>
+
+</body>
+</html>

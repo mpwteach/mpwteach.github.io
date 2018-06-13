@@ -1,0 +1,451 @@
+<!doctype htm public "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+   <link rel="stylesheet" type="text/css" href="mystyle.css">
+   <title>Introduction to UNIX and Linux: Lecture 8</title>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+</head>
+
+<body>
+<hr WIDTH="100">
+
+<h1>
+Introduction to UNIX: Lecture Eight
+</h1>
+
+<div class="heading">
+<div class="table">
+8.1 Objectives
+</div>
+</div>
+<br>
+
+<div class="text">
+This chapter covers:
+<ul>
+<li>Shells and shell scripts.</li>
+<li>Shells variables and the environment.</li>
+<li>Simple shell scripting</li>
+<li>Advanced shell scripting.</li>
+<li>Start-up shell scripts.</li>
+</ul>
+</div>
+<br>
+
+<div class="heading">
+<div class="table">
+8.2 Shells and Shell Scripts
+</div>
+</div>
+<br>
+
+<div class="text">
+<blockquote>A shell is a program which reads and executes
+commands for the user. Shells also usually provide features such job control,
+input and output redirection and a command language for writing <i>shell
+scripts</i>. A shell script is simply an ordinary text file containing
+a series of commands in a shell command language (just like a "batch file"
+under MS-DOS).
+<P>There are many different shells available on UNIX systems
+(e.g.
+<tt>sh</tt>, <tt>bash</tt>, <tt>csh</tt>, <tt>ksh</tt>, <tt>tcsh</tt>
+etc.), and they each support a different command language. Here we will
+discuss the command language for the Bourne shell <tt>sh</tt> since it
+is available on almost all UNIX systems (and is also supported under <tt>bash</tt>
+and <tt>ksh</tt>).</blockquote>
+</div>
+<br>
+
+<div class="heading">
+<div class="table">
+8.3 Shell Variables and the Environment
+</div>
+</div>
+<br>
+
+<div class="text">
+<blockquote>A shell lets you define variables (like most
+programming languages). A variable is a piece of data that is given a name.
+Once you have assigned a value to a variable, you access its value by prepending
+a <tt>$</tt> to the name:
+<P><tt>&nbsp;&nbsp;&nbsp; $ bob='hello world'</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<br><tt>&nbsp;&nbsp;&nbsp; $ echo $bob</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; hello world</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; $</tt>
+<P>Variables created within a shell are local to that shell,
+so only that shell can access them. The <tt>set</tt> command will show
+you a list of all variables currently defined in a shell. If you wish a
+variable to be accessible to commands outside the shell, you can <i>export</i>
+it into the <i>environment</i>:
+<P><tt>&nbsp;&nbsp;&nbsp; $ export bob</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<P>(under <tt>csh</tt> you used <tt>setenv</tt>). The environment
+is the set of variables that are made available to commands (including
+shells) when they are executed. UNIX commands and programs can read the
+values of environment variables, and adjust their behaviour accordingly.
+For example, the environment variable <tt>PAGER</tt>&nbsp; is used by the
+<tt>man</tt>
+command (and others) to see what command should be used to display multiple
+pages. If you say:
+<P><tt>&nbsp;&nbsp;&nbsp; $ export PAGER=cat</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<P>and then try the <tt>man</tt> command (say <tt>man pwd</tt>),
+the page will go flying past without stopping. If you now say:
+<P><tt>&nbsp;&nbsp;&nbsp; $ export PAGER=more</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<P>normal service should be resumed (since now <tt>more</tt>
+will be used to display the pages one at a time). Another environment variable
+that is commonly used is the <tt>EDITOR</tt> variable which specifies the
+default editor to use (so you can set this to <tt>vi</tt> or <tt>emacs</tt>
+or which ever other editor you prefer). To find out which environment variables
+are used by a particular command, consult the <tt>man</tt> pages for that
+command.
+<P>Another interesting environment variable is <tt>PS1</tt>,
+the main shell prompt string which you can use to create your own custom
+prompt. For example:
+<P><tt>&nbsp;&nbsp;&nbsp; $ export PS1="(\h) \w> "</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<br><tt>&nbsp;&nbsp;&nbsp; (lumberjack) ~></tt>
+<P>The shell often incorporates efficient mechanisms for
+specifying common parts of the shell prompt (e.g. in <tt>bash</tt> you
+can use <tt>\h</tt> for the current host, <tt>\w</tt> for the current working
+directory, <tt>\d</tt> for the date, <tt>\t</tt> for the time, <tt>\u</tt>
+for the current user and so on - see the <tt>bash</tt> man page).
+<P>Another important environment variable is <tt>PATH</tt>.
+<tt>PATH</tt>
+is a list of directories that the shell uses to locate executable files
+for commands. So if the <tt>PATH</tt> is set to:
+<P><tt>&nbsp;&nbsp;&nbsp; /bin:/usr/bin:/usr/local/bin:.</tt>
+<P>and you typed l<tt>s</tt>, the shell would look for <tt>/bin/ls</tt>,
+<tt>/usr/bin/ls</tt>
+etc. Note that the <tt>PATH</tt> contains'<tt>.</tt>', i.e. the current
+working directory. This allows you to create a shell script or program
+and run it as a command from your current directory without having to explicitly
+say "<tt>./</tt><i>filename</i>".
+<P>Note that <tt>PATH</tt> has nothing to with filenames
+that are specified as <i>arguments</i> to commands (e.g. <tt>cat myfile.txt
+</tt>would
+only look for <tt>./myfile.txt</tt>, not for <tt>/bin/myfile.txt</tt>,<tt>
+/usr/bin/myfile.txt
+</tt>etc.)</blockquote>
+</div>
+<br>
+
+<div class="heading">
+<div class="table">
+8.4 Simple Shell Scripting</B></TD>
+</div>
+</div>
+
+<div class="text">
+<blockquote>Consider the following simple shell script, which
+has been created (using an editor) in a text file called <tt>simple</tt>:
+<P><tt>#!/bin/sh</tt>
+<br><tt># this is a comment</tt>
+<br><tt>echo "The number of arguments is $#"</tt>
+<br><tt>echo "The arguments are $*"</tt>
+<br><tt>echo "The first is $1"</tt>
+<br><tt>echo "My process number is $$"</tt>
+<br><tt>echo "Enter a number from the keyboard: "</tt>
+<br><tt>read number</tt>
+<br><tt>echo "The number you entered was $number"</tt>
+<P>The shell script begins with the line "<tt>#!/bin/sh</tt>"
+. Usually "<tt>#</tt>" denotes the start of a comment, but <tt>#!</tt>
+is a special combination that tells UNIX to use the Bourne shell (<tt>sh</tt>)
+to interpret this script. The <tt>#!</tt> must be the first two characters
+of the script. The arguments passed to the script can be accessed through
+<tt>$1</tt>,
+<tt>$2</tt>,
+<tt>$3</tt> etc. <tt>$*</tt> stands for all the arguments, and <tt>$#</tt>
+for the number of arguments. The process number of the shell executing
+the script is given by <tt>$$</tt>. the <tt>read</tt> number statement
+assigns keyboard input to the variable <tt>number</tt>.
+<P>To execute this script, we first have to make the file
+<tt>simple</tt>
+executable:
+<P><tt>&nbsp;&nbsp;&nbsp; $ ls -l simple</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<br><tt>&nbsp;&nbsp;&nbsp; -rw-r--r--&nbsp;&nbsp;&nbsp; 1
+will&nbsp; finance&nbsp; 175&nbsp; Dec 13&nbsp; simple</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; $ chmod +x simple</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<br><tt>&nbsp;&nbsp;&nbsp; $ ls -l simple</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<br><tt>&nbsp;&nbsp;&nbsp; -rwxr-xr-x&nbsp;&nbsp;&nbsp; 1
+will&nbsp; finance&nbsp; 175&nbsp; Dec 13&nbsp; simple</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; $ ./simple hello world</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<br><tt>&nbsp;&nbsp;&nbsp; The number of arguments is 2</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; The arguments are hello world</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; The first is hello</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; My process number is 2669</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; Enter a number from the keyboard:</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; 5</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<br><tt>&nbsp;&nbsp;&nbsp; The number you entered was 5</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; $</tt>
+<P>We can use input and output redirection in the normal
+way with scripts, so:
+<P><tt>&nbsp;&nbsp;&nbsp; $ echo 5 | simple hello world</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<P>would produce similar output but would not pause to read
+a number from the keyboard.</blockquote>
+</div>
+<br>
+
+<div class="heading">
+<div class="table">
+8.5 More Advanced Shell Scripting
+</div>
+</div>
+<br>
+
+<div class="text">
+<blockquote>
+<ul>
+<li>
+<tt>if-then-else</tt> statements</li>
+<P>Shell scripts are able to perform simple conditional branches:
+<P><tt>if [ </tt><i>test</i><tt> ]</tt>
+<br><tt>then</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt><i>commands-if-test-is-true</i>
+<br><tt>else</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt><i>commands-if-test-is-false</i>
+<br><tt>fi</tt>
+<P>The <i>test</i> condition may involve file characteristics
+or simple string or numerical comparisons. The <tt>[</tt> used here is
+actually the name of a command (<tt>/bin/[</tt>) which performs the evaluation
+of the test condition. Therefore there must be spaces before and after
+it as well as before the closing bracket. Some common test conditions are:
+<P><tt>-s </tt><i>file</i>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <i>file</i> exists
+and is not empty
+<br><tt>-f </tt><i>file</i>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <i>file</i> is an
+ordinary file
+<br><tt>-d </tt><i>file</i>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <i>file</i> is a
+directory
+<br><tt>-r </tt><i>file</i>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <i>file</i> is readable
+<br><tt>-w </tt><i>file</i>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <i>file</i> is writable
+<br><tt>-x </tt><i>file</i>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <i>file</i> is executable
+<br><tt>$X -eq $Y</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <tt>X</tt> equals
+<tt>Y</tt>
+<br><tt>$X -ne $Y</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <tt>X</tt> not equal
+to <tt>Y</tt>
+<br><tt>$X -lt $Y</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <tt>X</tt> less than
+<tt>$Y</tt>
+<br><tt>$X -gt $Y</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>true <tt>if</tt> X greater
+than <tt>$Y</tt>
+<br><tt>$X -le $Y</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <tt>X</tt> less than
+or equal to <tt>Y</tt>
+<br><tt>$X -ge $Y</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <tt>X</tt> greater
+than or equal to
+<tt>Y</tt>
+<br><tt>"$A" = "$B"</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if string <tt>A</tt>
+equals string <tt>B</tt>
+<br><tt>"$A" != "$B"</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if string <tt>A</tt>
+not equal to string
+<tt>B</tt>
+<br><tt>$X ! -gt $Y</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if string <tt>X</tt>
+is not greater than <tt>Y</tt>
+<br><tt>$E -a $F</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if expressions<tt> E
+</tt>and<tt>
+F </tt>are both true
+<br><tt>$E -o $F</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>true <tt>if </tt>either expression<tt>
+E </tt>or expression<tt> F </tt>is true
+<br>&nbsp;
+<li>
+<tt>for</tt> loops</li>
+
+<P>Sometimes we want to loop through a list of files, executing
+some commands on each file. We can do this by using a <tt>for</tt> loop:
+<P><tt>for </tt><i>variable</i><tt> in </tt><i>list</i>
+<br><tt>do</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt><i>statements&nbsp;</i><tt>
+
+</tt>(referring to<tt> $</tt><i>variable</i>)
+<br><tt>done</tt>
+<P>The following script sorts each text files in the current
+directory<tt>:</tt>
+<P><tt>#!/bin/sh</tt>
+<br><tt>for f in *.txt</tt>
+<br><tt>do</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; echo sorting file $f</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; cat $f | sort > $f.sorted</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; echo sorted file has been output
+to $f.sorted</tt>
+<br><tt>done</tt>
+<br>&nbsp;
+<li>
+<tt>while</tt> loops</li>
+
+<P>Another form of loop is the while loop:
+<P><tt>while [ </tt><i>test</i><tt> ]</tt>
+<br><tt>do</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt><i>statements</i>&nbsp;&nbsp;&nbsp;&nbsp;
+(to be executed while <i>test</i> is true)
+<br><tt>done</tt>
+<P>The following script waits until a non-empty file <tt>input.txt</tt>
+has been created:
+<P><tt>#!/bin/sh</tt>
+<br><tt>while [ ! -s input.txt ]</tt>
+<br><tt>do</tt>
+<br><tt>&nbsp; echo waiting...</tt>
+<br><tt>&nbsp; sleep 5</tt>
+<br><tt>done</tt>
+<br><tt>echo input.txt is ready</tt>
+<P>You can abort a shell script at any point using the <tt>exit</tt>
+statement, so the following script is equivalent:
+<P><tt>#!/bin/sh</tt>
+<br><tt>while true</tt>
+<br><tt>do</tt>
+<br><tt>&nbsp; if [ -s input.txt ]</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; echo input.txt is ready</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; exit</tt>
+<br><tt>&nbsp; fi</tt>
+<br><tt>&nbsp; echo waiting...</tt>
+<br><tt>&nbsp; sleep 5</tt>
+<br><tt>done</tt>
+<br>&nbsp;
+<li>
+<tt>case</tt> statements</li>
+
+<P><tt>case</tt> statements are a convenient way to perform
+multiway branches where one input pattern must be compared to several alternatives:
+<P><tt>case </tt><i>variable</i><tt> in</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt><i>pattern1</i><tt>)</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </tt><i>statement&nbsp;</i>&nbsp;&nbsp;
+(executed if <i>variable</i> matches <i>pattern1</i>)
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt><i>pattern2</i><tt>)</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </tt><i>statement</i>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt><i>etc.</i>
+<br><tt>esac</tt>
+<P>The following script uses a <tt>case</tt> statement to
+have a guess at the type of non-directory non-executable files passed as
+arguments on the basis of their extensions (note how the "or" operator
+<tt>|</tt>
+can be used to denote multiple patterns, how "<tt>*</tt>" has been used
+as a catch-all, and the effect of the forward single quotes <tt>`</tt>):
+<P><tt>#!/bin/sh</tt>
+<br><tt>for f in $*</tt>
+<br><tt>do</tt>
+<br><tt>&nbsp; if [ -f $f -a ! -x $f ]</tt>
+<br><tt>&nbsp; then</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; case $f in</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; core)</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo "$f: a core dump
+file"</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; *.c)</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; echo "$f: a C program"</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; *.cpp|*.cc|*.cxx)</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo "$f: a C++ program"</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; *.txt)</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo "$f: a text file"</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; *.pl)</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo "$f: a PERL script"</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; *.html|*.htm)</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo "$f: a web document"</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; *)</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo "$f: appears
+to be "`file -b $f`</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; esac</tt>
+<br><tt>&nbsp; fi</tt>
+<br><tt>done</tt>
+<br>&nbsp;
+<li>
+capturing command output</li>
+
+<P>Any UNIX command or program can be executed from a shell
+script just as if you would on the line command line. You can also capture
+the output of a command and assign it to a variable by using the forward
+single quotes
+<tt>` `</tt>:
+<P><tt>&nbsp;#!\bin\sh</tt>
+<br><tt>&nbsp;lines=`wc -l $1`</tt>
+<br><tt>&nbsp;echo "the file $1 has $lines lines"</tt>
+<P>This script outputs the number of lines in the file passed
+as the first parameter.
+<br>&nbsp;
+<li>
+arithmetic operations</li>
+
+<P>The Bourne shell doesn't have any built-in ability to
+evaluate simple mathematical expressions. Fortunately the UNIX <tt>expr
+</tt>command
+is available to do this. It is frequently used in shell scripts with forward
+single quotes to update the value of a variable. For example:
+<P><tt>&nbsp;&nbsp;&nbsp; lines = `expr $lines + 1`</tt>
+<P>adds 1 to the variable <tt>lines</tt>. <tt>expr</tt> supports
+the operators <tt>+</tt>, <tt>-</tt>, <tt>*</tt>, <tt>/</tt>, <tt>%</tt>
+(remainder),
+<tt>&lt;</tt>, <tt>&lt;=</tt>, <tt>=</tt>, <tt>!=</tt>, <tt>>=</tt>,
+<tt>></tt>,
+<tt>|</tt>
+(or) and <tt>&amp;</tt> (and).<ul>
+</blockquote>
+</div>
+<br>
+
+<div class="heading">
+<div class="table">
+8.6 Start-up Shell Scripts
+</div>
+</div>
+<br>
+
+<div class="text">
+<blockquote>When you first login to a shell, your shell runs
+a systemwide start-up script (usually called <tt>/etc/profile</tt> under
+<tt>sh</tt>,
+<tt>bash</tt>
+and <tt>ksh</tt> and <tt>/etc/.login </tt>under
+<tt>csh</tt>). It then
+looks in your home directory and runs your personal start-up script (<tt>.profile</tt>
+under <tt>sh</tt>,<tt> bash</tt> and
+<tt>ksh</tt> and
+<tt>.cshrc</tt> under
+<tt>csh</tt> and <tt>tcsh</tt>). Your personal start-up script is therefore
+usually a good place to set up environment variables such as <tt>PATH</tt>,
+<tt>EDITOR</tt> etc. For example with <tt>bash</tt>, to add the directory<tt> ~/bin</tt> to
+your <tt>PATH</tt>, you can include the line:
+<P><tt>&nbsp;&nbsp;&nbsp; export PATH=$PATH:~/bin</tt>
+<P>in your <tt>.profile</tt>. If you subsequently modify
+your <tt>.profile</tt> and you wish to import the changes into your current
+shell, type:
+<P><tt>&nbsp;&nbsp;&nbsp; $ source .profile</tt>
+<br>or
+<br><tt>&nbsp;&nbsp;&nbsp; $ . ./profile</tt>
+<P>The <tt>source </tt>command is built into the shell. It
+ensures that changes to the environment made in <tt>.profile</tt> affect
+the current shell, and not the shell that would otherwise be created to
+execute the
+<tt>.profile</tt> script.</blockquote>
+
+<blockquote><P>
+With <tt>csh</tt>, to add the directory<tt> ~/bin</tt> to
+your <tt>PATH</tt>, you can include the line:
+<P><tt>&nbsp;&nbsp;&nbsp; set path = ( $PATH $HOME/bin )</tt>
+<P>in your <tt>.cshrc</tt>.</blockquote>
+</div>
+<br>
+
+
+<blockquote><P><A HREF="http:./index.html">
+(BACK TO COURSE CONTENTS)</A></P></blockquote>
+
+
