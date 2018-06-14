@@ -18,37 +18,39 @@ h2 {
     padding-top: 2px;
 }
 
-table {
-    width: 50%;
-    font-size: 75%;
-    padding: 8px;
-    text-align: center;
-    background-color: #66FFFF;
 
+
+table {
+  border-collapse: collapse;
+  width: 100%;
 }
 
-th {
-    padding-left: 15 px;
-    padding-right: 15 px;
-    pading-top: 10px;
-    padding-bottom: 10px;
-    text-align: left;
-    font-style: underline;
+table th, td {
+    border: 1px solid gray;
+    background-color: #dddddd;
+    padding: 8px;
 } 
 
-td {
-    padding-left: 15 px;
-    padding-right: 15 px;
-    pading-top: 10px;
-    padding-bottom: 10px;
-    text-align: left;
-}	
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #000099;
+  color: white;
+}
+
+/*.tablestyle2 tr:nth-child(even) {
+  background-color: #dddddd;
+}*/
+
+
 
 .caption {
     text-align: center;
     font-style: italic;	
 }
-  
+
+
 .text {
     color: #831010;
     font-size: 100%;
