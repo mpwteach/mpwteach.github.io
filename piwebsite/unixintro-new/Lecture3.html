@@ -1,359 +1,360 @@
 <!doctype html public "-//w3c//dtd html 4.0 transitional//en">
 <html>
-<head>
-   <link rel="stylesheet" type="text/css" href="mystyle.css">
-   <h1>Introduction to UNIX: Lecture 3</h1>
-   <link rel="icon"  href="https://sites.google.com/a/my.sduhsd.net/csp-yana2319/home/0-01-magic-square/planticon.jpg?attredirects=0">
-   <title>Introduction to UNIX and Linux: Lecture 3</title>
-   <meta name="viewport" content="width=device-width"> 
-</head>
+  <head>
+    <link rel="stylesheet" type="text/css" href="mystyle.css?3">
+    <title>UNIX: Filesystem</title>
+    <link rel="icon" href="/images/favicon4.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">  
+  </head>
 
 
-<body>
+  <body>
 
-<div class="heading">
-<div class="table">
-3.1 Objectives
-</div>
-</div>
+    <h1>3. Files</h1>
+    
+    <h2>3.1 Objectives</h2>
 
-<div class="text">
+    <div class="text">
 
-This lecture covers:
-<ul>
-<li>
-File and directory permissions in more detail and how these
-can be changed.</li>
+      This lecture covers:
+      <ul>
+	<li>
+	  File and directory permissions in more detail and how these
+	  can be changed.</li>
 
-<li>
-Ways to examine the contents of files.</li>
+	<li>Ways to examine the contents of files.</li>
 
-<li>
-How to find files when you don't know how their exact location.</li>
+	<li>How to find files when you don't know how their exact location.</li>
+	
+	<li>Ways of searching files for text patterns.</li>
 
-<li>
-Ways of searching files for text patterns.</li>
+	<li>How to sort files.</li>
 
-<li>
-How to sort files.</li>
+	<li>Tools for compressing files and making backups.</li>
 
-<li>
-Tools for compressing files and making backups.</li>
+	<li>Accessing floppy disks and other removable media.</li>
+      </ul>
 
-<li>
-Accessing floppy disks and other removable media.</li>
-</ul>
+    </div>
 
-</div>
-<br>
 
-<div class="heading">
-<div class="table">
-3.2 File and Directory Permissions
-</div>
-</div>
+    <h2>3.2 File and Directory Permissions</h2>
 
-<div class="text">
-<center><table>
-  <tr>
-  <th>Permission</th>
-  <th>File</th>
-  <th>Directory</th>
-  </tr>
-  <tr>
-    <td>read</td>
-    <td>User can look at the contents of the file</td>
-    <td>User can list the files in the directory</td>
-  </tr>
-  <tr>
-    <td>write</td>
-    <td>User can modify the contents of the file</td>
-    <td>User can create new files and remove existing files in the directory</td>
-  </tr>
-  <tr>
-    <td>execute</td>
-    <td>User can use the filename as a UNIX command</td>
-    <td>User can change into the directory, but cannoy list the files unless they have read permission. User can read files if they have read permission on them</td>
-</table></center>
 
-<div class="caption">Fig 3.1: Interpretation of permissions for files
-and directories</div>
 
-<br>
+    <div class="text">
+      <table>
+	<tr>
+	  <th>Permission</th>
+	  <th>File</th>
+	  <th>Directory</th>
+	</tr>
+	<tr>
+	  <td>read</td>
+	  <td>User can look at the contents of the file</td>
+	  <td>User can list the files in the directory</td>
+	</tr>
+	<tr>
+	  <td>write</td>
+	  <td>User can modify the contents of the file</td>
+	  <td>User can create new files and remove existing files in the directory</td>
+	</tr>
+	<tr>
+	  <td>execute</td>
+	  <td>User can use the filename as a UNIX command</td>
+	  <td>User can change into the directory, but cannoy list the files unless they have read permission. User can read files if they have read permission on them</td>
+	</tr>
+      </table>
+      
+      <div class="caption">Fig 3.1: Interpretation of permissions for files
+	and directories</div>
 
-As we have seen in the previous chapter, every
-file or directory on a UNIX system has three types of permissions, describing
-what operations can be performed on it by various categories of users.
-The permissions are read (<tt>r</tt>), write (<tt>w</tt>) and execute (<tt>x</tt>),
-and the three categories of users are user/owner (<tt>u</tt>), group (<tt>g</tt>)
-and others (<tt>o</tt>). Because files and directories are different entities,
-the interpretation of the permissions assigned to each differs slightly,
-as shown in Fig 3.1.
+      <br>
 
-File and directory permissions can only be modified
-by their owners, or by the superuser (<tt>root</tt>), by using the <tt>chmod</tt>
-system utility.
-<ul>
-<li>
-<tt>chmod </tt>(change [file or directory] mode)</li>
+      <p>
+	As we have seen in the previous chapter, every
+	file or directory on a UNIX system has three types of permissions, describing
+	what operations can be performed on it by various categories of users.
+	The permissions are read (<b>r</b>), write (<b>w</b>) and execute (<b>x</b>),
+	and the three categories of users are user/owner (<b>u</b>), group (<b>g</b>)
+	and others (<b>o</b>). Because files and directories are different entities,
+	the interpretation of the permissions assigned to each differs slightly,
+	as shown in Fig 3.1.
+      </p>
+      <p>
+	File and directory permissions can only be modified
+	by their owners, or by the superuser (<b>root</b>), by using the <b>chmod</b>
+	system utility.
+      </p>
+      
+      <ul>
+	<li><b>chmod</b> (change [file or directory] mode)</li>
 
-<p><tt>&nbsp;&nbsp;&nbsp; $ chmod </tt><i>options files</i>
-<p><tt>chmod</tt> accepts options in two forms. Firstly,
-permissions may be specified as a sequence of 3 octal digits (octal is
-like decimal except that the digit range is 0 to 7 instead of 0 to 9).
-Each octal digit represents the access permissions for the user/owner,
-group and others respectively. The mappings of permissions onto their corresponding
-octal digits is as follows:
+	<p class="terminal"> $ chmod <i>options files</i></p>
+	
+	<p><b>chmod</b> accepts options in two forms. Firstly,
+	  permissions may be specified as a sequence of 3 octal digits (octal is
+	  like decimal except that the digit range is 0 to 7 instead of 0 to 9).
+	  Each octal digit represents the access permissions for the user/owner,
+	  group and others respectively. The mappings of permissions onto their
+	  corresponding octal digits is as follows:
 
-<center><table>
-  <tr>
-    <td>---</td>
-    <td>0</td>
-  </tr>
-  <tr>
-    <td>--x</td>
-    <td>1</td>
-  </tr>
-  <tr>
-    <td>-w-</td>
-    <td>2</td>
-  </tr>
-  <tr>
-    <td>-wx</td>
-    <td>3</td>
-  </tr>
-  <tr>
-    <td>r--</td>
-    <td>4</td>
-  </tr>
-  <tr>
-    <td>r-x</td>
-    <td>5</td>
-  </tr>
-  <tr>
-    <td>rw-</td>
-    <td>6</td>
-  </tr>
-  <tr>
-    <td>rwx</td>
-    <td>7</td>
-  </tr>
-</table></center>
+	  <table>
+	    <tr>
+	      <td>---</td>
+	      <td>0</td>
+	    </tr>
+	    <tr>
+	      <td>--x</td>
+	      <td>1</td>
+	    </tr>
+	    <tr>
+	      <td>-w-</td>
+	      <td>2</td>
+	    </tr>
+	    <tr>
+	      <td>-wx</td>
+	      <td>3</td>
+	    </tr>
+	    <tr>
+	      <td>r--</td>
+	      <td>4</td>
+	    </tr>
+	    <tr>
+	      <td>r-x</td>
+	      <td>5</td>
+	    </tr>
+	    <tr>
+	      <td>rw-</td>
+	      <td>6</td>
+	    </tr>
+	    <tr>
+	      <td>rwx</td>
+	      <td>7</td>
+	    </tr>
+	  </table>
 
-<p>For example the command:
-<p><tt>&nbsp;&nbsp;&nbsp; $ chmod 600 private.txt</tt>
-<p>sets the permissions on <tt>private.txt</tt> to <tt>rw-------</tt>
-(i.e. only the owner can read and write to the file).
-<p>Permissions may be specified symbolically, using the symbols
-<tt>u</tt>
-(user), <tt>g</tt> (group), <tt>o</tt> (other), <tt>a</tt> (all),
-<tt>r</tt>
-(read), <tt>w</tt> (write), <tt>x</tt> (execute), <tt>+</tt> (add permission),
-<tt>-</tt>
-(take away permission) and <tt>=</tt> (assign permission). For example,
-the command:
-<p><tt>&nbsp;&nbsp;&nbsp; $ chmod ug=rw,o-rw,a-x *.txt</tt>
-<p>sets the permissions on all files ending in <tt>*.txt</tt>
-to <tt>rw-rw----</tt> (i.e. the owner and users in the file's group can
-read and write to the file, while the general public do not have any sort
-of access).
-<p><tt>chmod</tt> also supports a <tt>-R</tt> option which
-can be used to recursively modify file permissions, e.g.
-<p><tt>&nbsp;&nbsp;&nbsp; $ chmod -R go+r play</tt>
-<p>will grant group and other read rights to the directory
-<tt>play</tt>
-and all of the files and directories within <tt>play</tt>.
-<br>&nbsp;
-<li>
-<tt>chgrp</tt> (change group)</li>
+	<p>For example the command:
+	  
+	<p class="terminal">$ chmod 600 private.txt</p>
+	
+	<p>sets the permissions on <b>private.txt</b> to <b>rw-------</b>
+	  (i.e. only the owner can read and write to the file).
+	</p>
+	<p>Permissions may be specified symbolically, using the symbols
+	  <b>u</b> (user), <b>g</b> (group), <b>o</b> (other), <b>a</b> (all),
+	  <b>r</b> (read), <b>w</b> (write), <b>x</b> (execute), <b>+</b> (add permission),
+	  <b>-</b>(take away permission) and <b>=</b> (assign permission).
+	</p>
+	<p>For example, the command:</p>
+	<p class="terminal"> $ chmod ug=rw,o-rw,a-x *.txt</p>
+	
+	<p>sets the permissions on all files ending in <b>*.txt</b>
+	  to <b>rw-rw----</b> (i.e. the owner and users in the file's group can
+	  read and write to the file, while the general public do not have any sort
+	  of access).</p>
+	<p><b>chmod</b> also supports a <b>-R</b> option which
+	  can be used to recursively modify file permissions, e.g.</p>
+	<p class="terminal"> $ chmod -R go+r play</p>
+	<p>will grant group and other read rights to the directory
+	  <b>play</b>and all of the files and directories within <b>play</b>.</p>
+	
+	<br>
+	<li><b>chgrp</b> (change group)</li>
 
-<p><tt>&nbsp;&nbsp;&nbsp; $ chgrp </tt><i>group files</i>
-<p>can be used to change the group that a file or directory
-belongs to. It also supports a <tt>-R</tt> option.</ul>
+	<p class="terminal"> $ chgrp <i>group files</i></p>
+	<p>can be used to change the group that a file or directory
+	  belongs to. It also supports a <b>-R</b> option.
+      </ul>
 
-</div>
-<br>
+    </div>
+    
+    <h2>3.3 Inspecting File Content</h2>
 
-<div class="heading">
-<div class="table">
-3.3 Inspecting File Content
-</div>
-</div>
+    <div class="text">
 
-<div class="text">
+      Besides <b>cat</b> there are several other
+      useful utilities for investigating the contents of files:
 
-Besides <tt>cat </tt>there are several other
-useful utilities for investigating the contents of files:
-<ul>
-<li>
-<tt>file</tt> <i>filename(s)</i></li>
+      <ul>
 
-<p><tt>file </tt>analyzes a file's contents for you and reports
-a high-level description of what type of file it appears to be:
-<p><tt>&nbsp;&nbsp;&nbsp; $ file myprog.c letter.txt webpage.html</tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; myprog.c:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-C program text</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; letter.txt:&nbsp;&nbsp;&nbsp;
-English text</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; webpage.html:&nbsp; HTML document
-text</tt>
-<p><i>file</i> can identify a wide range of files but sometimes
-gets understandably confused (e.g. when trying to automatically detect
-the difference between C++ and Java code).
-<br>&nbsp;
-<li>
-<tt>head, tail</tt> <i>filename</i></li>
+	<li><b>file</b> <i>filename(s)</i></li>
 
-<p><tt>head</tt> and <tt>tail</tt> display the first and
-last few lines in a file respectively. You can specify the number of lines
-as an option, e.g.
-<p><tt>&nbsp;&nbsp;&nbsp; $ tail -20 messages.txt</tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; $ head -5 messages.txt</tt><img SRC="enter.gif" height=15 width=27>
-<p><tt>tail </tt>includes a useful <tt>-f</tt> option that
-can be used to continuously monitor the last few lines of a (possibly changing)
-file. This can be used to monitor log files, for example:
-<p><tt>&nbsp;&nbsp;&nbsp; $ tail -f /var/log/messages</tt><img SRC="enter.gif" height=15 width=27>
-<p>continuously outputs the latest additions to the system
-log file.
-<br>&nbsp;
-<li>
-<tt>objdump</tt> <i>options binaryfile</i></li>
+	<p><b>file </b>analyzes a file's contents for you and reports
+	  a high-level description of what type of file it appears to be:</p>
+	
+	<p class="terminal">
+	  $ file myprog.c letter.txt webpage.html
+	  <br>myprog.c:     C source, ASCII text
+	  <br>letter.txt:   ASCII text
+	  <br>webpage.html: HTML document, ASCII text
+	</p>
+	
+	<p><i>file</i> can identify a wide range of files but sometimes
+	  gets understandably confused (e.g. when trying to automatically detect
+	  the difference between C++ and Java code).</p>
 
-<p><tt>objdump</tt> can be used to disassemble binary
-files - that is it can show the machine language instructions which make
-up compiled application programs and system utilities.
-<br>&nbsp;
-<li>
-<tt>od</tt> <i>options filename</i> (octal dump)</li>
+	<br><li><b>head, tail</b> <i>filename</i></li>
 
-<p><tt>od</tt> can be used to displays the contents of
-a binary or text file in a variety of formats, e.g.
-<p><tt>&nbsp;&nbsp;&nbsp; $ cat hello.txt</tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; hello world</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; $ od -c hello.txt</tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; 0000000&nbsp; h&nbsp; e&nbsp;
-l&nbsp; l&nbsp; o&nbsp;&nbsp;&nbsp;&nbsp; w&nbsp; o&nbsp; r&nbsp; l&nbsp;
-d \n</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; 0000014</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; $ od -x hello.txt</tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; 0000000 6865 6c6c 6f20 776f 726c
-640a</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; 0000014</tt></ul>
-There are also several other useful content inspectors that
-are non-standard (in terms of availability on UNIX systems) but are nevertheless
-in widespread use. They are summarised in Fig. 3.2.
-<br>
+	<p><b>head</b> and <b>tail</b> display the first and
+	  last few lines in a file respectively. You can specify the number of lines
+	  as an option, e.g.
+	<p class="terminal">$ tail -20 messages.txt</p>
+	<p class="terminal">$ head -5 messages.txt</p>
+	
+	<p><b>tail </b>includes a useful <b>-f</b> option that
+	  can be used to continuously monitor the last few lines of a (possibly changing)
+	  file. This can be used to monitor log files, for example:
+	  
+	<p class="terminal">$ tail -f /var/log/messages</p>
 
-<center><table>
-  <tr>
-  <th>File type</th>
-  <th>Typical extension </th>
-  <th>Content viewer</th>
-  </tr>
-  <tr>
-    <td>Portable Document Format</td>
-    <td>.pdf</td>
-    <td>acroread</td>
-  </tr>
-  <tr>
-    <td>Postscript Document</td>
-    <td>.ps</td>
-    <td>ghostview</td>
-  </tr>
-  <tr>
-    <td>DVI Document</td>
-    <td>.dvi</td>
-    <td>xdvi</td>
-  </tr>
-  <tr>
-    <td>JPEG Image</td>
-    <td>.jpg</td>
-    <td>xv</td>
-  </tr>
-  <tr>
-    <td>GIF Image</td>
-    <td>.gif</td>
-    <td>xv</td>
-  </tr>
-  <tr>
-    <td>MPEG mvie</td>
-    <td>.mpg</td>
-    <td>mpeg_play</td>
-  </tr>
-  <tr>
-    <td>WAV sound file</td>
-    <td>.wav</td>
-    <td>realplayer</td>
-  </tr>
-  <tr>
-    <td>HTML document</td>
-    <td>.html</td>
-    <td>netscape</td>
-  </tr>
-</table></center>
+	<p>continuously outputs the latest additions to the system log file.</p>
 
-<div class="caption">Fig 3.2: Other file types and appropriate content
+	<br>
+	<li><b>objdump</b> <i>options binaryfile</i></li>
+
+	<p><b>objdump</b> can be used to disassemble binary
+	  files - that is it can show the machine language instructions which make
+	  up compiled application programs and system utilities.</p>
+
+	<br>
+	<li><b>od</b> <i>options filename</i> (octal dump)</li>
+
+	<p><b>od</b> can be used to displays the contents of
+	  a binary or text file in a variety of formats, e.g.
+	<p class="terminal">
+	  $ cat hello.txt
+	  <br>hello world
+	  <br>$ od -c hello.txt
+	  <br>0000000&nbsp; h&nbsp; e&nbsp;
+	  l&nbsp; l&nbsp; o&nbsp;&nbsp;&nbsp;&nbsp; w&nbsp; o&nbsp; r&nbsp; l&nbsp; d \n
+	  <br>0000014
+	  <br>$ od -x hello.txt
+	  <br>0000000 6865 6c6c 6f20 776f 726c 640a
+	  <br>0000014
+	</p>
+      </ul>
+      
+      <p>There are also several other useful content inspectors that
+	are non-standard (in terms of availability on UNIX systems) but are nevertheless
+	in widespread use. They are summarised in Fig. 3.2.</p>
+      
+      <br>
+
+      <table>
+	<tr>
+	  <th>File type</th>
+	  <th>Typical extension </th>
+	  <th>Content viewer</th>
+	</tr>
+	<tr>
+	  <td>Portable Document Format</td>
+	  <td>.pdf</td>
+	  <td>acroread</td>
+	</tr>
+	<tr>
+	  <td>Postscript Document</td>
+	  <td>.ps</td>
+	  <td>ghostview</td>
+	</tr>
+	<tr>
+	  <td>DVI Document</td>
+	  <td>.dvi</td>
+	  <td>xdvi</td>
+	</tr>
+	<tr>
+	  <td>JPEG Image</td>
+	  <td>.jpg</td>
+	  <td>xv</td>
+	</tr>
+	<tr>
+	  <td>GIF Image</td>
+	  <td>.gif</td>
+	  <td>xv</td>
+	</tr>
+	<tr>
+	  <td>MPEG mvie</td>
+	  <td>.mpg</td>
+	  <td>mpeg_play</td>
+	</tr>
+	<tr>
+	  <td>WAV sound file</td>
+	  <td>.wav</td>
+	  <td>realplayer</td>
+	</tr>
+	<tr>
+	  <td>HTML document</td>
+	  <td>.html</td>
+	  <td>netscape</td>
+	</tr>
+      </table>
+
+      <div class="caption">Fig 3.2: Other file types and appropriate content
 viewers</div>
-</div>
-<br>
+    </div>
+      
+    <br>
 
-<div class="heading">
-<div class="table">
-3.4 Finding Files
-</div>
-</div>
+    <h2>3.4 Finding Files</h2>
 
-<br>
+    <br>
+    
+    <div class="text">
 
-<div class="text">
+      <p>There are at least three ways to find files when
+	you edon't know their exact location:</p>
+      
+      <ul>
+	
+	<li><b>find</b></li>
 
-There are at least three ways to find files when
-you don't know their exact location:
-<ul>
-<li>
-<tt>find</tt></li>
+	<p>If you have a rough idea of the directory tree the file
+	  might be in (or even if you don't and you're prepared to wait a while)
+	  you can use <b>find</b>:
+	  
+	<p class="terminal">$ find <i>directory</i> -name <i>targetfile</i> -print</p>
+	
+	<p><b>find</b> will look for a file called <i>targetfile</i>
+	  in any part of the directory tree rooted at <i>directory</i>. <i>targetfile</i>
+	  can include wildcard characters. For example:
+	<p class="terminal">$ find /home -name "*.txt" -print 2>/dev/null</p>
 
-<p>If you have a rough idea of the directory tree the file
-might be in (or even if you don't and you're prepared to wait a while)
-you can use <tt>find</tt>:
-<p><tt>&nbsp;$ find </tt><i>directory</i><tt> -name </tt><i>targetfile</i><tt>
--print&nbsp;</tt><img SRC="enter.gif" height=15 width=27>
-<p><tt>find</tt> will look for a file called <i>targetfile</i>
-in any part of the directory tree rooted at <i>directory</i>. <i>targetfile</i>
-can include wildcard characters. For example:
-<p><tt>&nbsp;$ find /home -name "*.txt" -print 2>/dev/null</tt><img SRC="enter.gif" height=15 width=27>
-<p>will search all user directories for any file ending in
-"<tt>.txt</tt>" and output any matching files (with a full absolute or
-relative path). Here the quotes (<tt>"</tt>) are necessary to avoid filename
-expansion, while the <tt>2>/dev/null </tt>suppresses error messages (arising
-from errors such as not being able to read the contents of directories
-for which the user does not have the right permissions).
-<p><tt>find</tt> can in fact do a lot more than just find
-files by name. It can find files by type (e.g.<tt> -type f</tt> for files,
-<tt>-type
-d</tt> for directories), by permissions (e.g. <tt>-perm o=r</tt> for all
-files and directories that can be read by others), by size (<tt>-size</tt>)
-etc. You can also execute commands on the files you find. For example,
-<p>&nbsp;<tt>$ find . -name "*.txt" -exec wc -l '{}' ';'</tt>
-<p>counts the number of lines in every text file in and below
-the current directory. The <tt>'{}' </tt>is replaced by the name of each
-file found and the <tt>';'</tt> ends the <tt>-exec</tt> clause.
-<p>For more information about <tt>find</tt> and its abilities,
-use <tt>man find</tt> and/or <tt>info find</tt>.
-<br>&nbsp;
-<li>
-<tt>which</tt> (sometimes also called <tt>whence</tt>) <i>command</i></li>
+	<p>will search all user directories for any file ending in
+	  <b>.txt</b> and output any matching files (with a full absolute or
+	  relative path). Here the quotes (<b>"</b>) are necessary to avoid filename
+	  expansion, while the <b>2>/dev/null </b>suppresses error messages (arising
+	  from errors such as not being able to read the contents of directories
+	  for which the user does not have the right permissions).</p>
+	<p><b>find</b> can in fact do a lot more than just find
+	  files by name. It can find files by type (e.g.<b> -type f</b> for files,
+	  <b>-type d</b> for directories), by permissions (e.g. <b>-perm o=r</b>
+	  for all files and directories that can be read by others),
+	  by size (<b>-size</b>) etc. You can also execute commands on the files
+	  you find. For example,
+	  
+	<p class="terminal">$ find . -name "*.txt" -exec wc -l '{}' ';'</p>
 
-<p>If you can execute an application program or system utility
-by typing its name at the shell prompt, you can use <tt>which</tt> to find
-out where it is stored on disk. For example:
-<p><tt>&nbsp;&nbsp;&nbsp; $ which ls</tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; /bin/ls</tt>
-<br>&nbsp;
-<li>
-<tt>locate </tt><i>string</i></li>
+	<p>counts the number of lines in every text file in and below
+	  the current directory. The <b>'{}' </b>is replaced by the name of each
+	  file found and the <b>';'</b> ends the <b>-exec</b> clause.</p>
+	<p>For more information about <b>find</b> and its abilities,
+	  use <b>man find</b> and/or <b>info find</b>.</p>
+	  
+	<br>
+	<li><b>which</b> (sometimes also called <b>whence</b>) <i>command</i></li>
 
-<p><tt>find</tt> can take a long time to execute if you are
+	<p>If you can execute an application program or system utility
+	  by typing its name at the shell prompt, you can use <b>which</b> to find
+	  out where it is stored on disk. For example:</p>
+	
+	<p class="terminal">$ which ls
+	  <br>/bin/ls</p>
+	
+	<br>
+	<li><b>locate</b> <i>string</i></li>
+
+	<p><tt>find</tt> can take a long time to execute if you are
 searching a large filespace (e.g. searching from <tt>/</tt> downwards).
 The <tt>locate
 </tt>command provides a much faster way of locating all
