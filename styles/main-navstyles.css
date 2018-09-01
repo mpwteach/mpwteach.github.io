@@ -12,8 +12,13 @@ h1 {
   margin:0;
 }
 
-h2 {
+p {
   margin-left: 10px;
+}
+
+.bodycontent {
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 /* -- header and navbar -- */
