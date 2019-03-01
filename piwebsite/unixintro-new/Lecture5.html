@@ -41,233 +41,131 @@
     <div class="text">
 
       <ul>
-	<li><b>telnet</b> <i>machinename</i></li>
+	<li><b>ssh</b> <i>machinename</i>(secure shell)</li>
 
-	<p><b>telnet</b> provides an insecure mechanism for logging
-	  into remote machines. It is insecure because all data (including your username
-	  and password) is passed in unencrypted format over the network. For this
-	  reason, <b>telnet</b> login access is disabled on most systems and where
-	  possible it should be avoided in favour of secure alternatives such as
-	  <b>ssh</b>.</p>
-	<p><b>telnet</b> is still a useful utility, however, because,
-	  by specifying different port numbers, <tt>telnet </tt>can be used to connect
-	  to other services offered by remote machines besides remote login (e.g.
-	  web pages, email, etc.) and reveal the mechanisms behind how those services
-	  are offered. For example,</p>
-	<p class="terminal">
-	  $ telnet www.doc.ic.ac.uk 80<br>
+	<p><b>ssh</b> is a secure alternative for remote login
+	  and also for executing commands in a remote machine. It is intended to
+	  replace <b>rlogin</b> and <b>rsh</b>, and provide secure encrypted
+	  communications between two untrusted hosts over an insecure network. X11
+	  connections (i.e. graphics) can also be forwarded over the secure channel
+	  (another advantage over <b>telnet</b>, <b>rlogin</b> and <b>rsh</b>).
+	  <b>ssh</b> is not a standard system utility, although it is a de facto standard. It
+	  can be obtained from <a href="http://www.ssh.org">http://www.ssh.org</a>.
+	  A good introduction page giving more background and showing you how to
+	  set up <tt>ssh</tt> is <a href="http://www.tac.nyc.ny.us/~kim/ssh/">http://www.tac.nyc.ny.us/~kim/ssh/</a>.
+	<p><b>ssh</b> clients are also available for Windows machines
+	  (e.g. there is a good <b>ssh</b> client called <b>putty</b>).
+      </ul>
+      
+    </div>
 
-	  <br>Trying 146.169.1.10...
-	  <br>Connected to seagull.doc.ic.ac.uk (146.169.1.10).
-	  <br>Escape character is '^]'.
-	  <br>GET / HTTP/1.0
-	  <br>HTTP/1.1 200 OK
-	  <br>Date: Sun, 10 Dec 2000 21:06:34 GMT
-	  <br>Server: Apache/1.3.14 (Unix)
-	  <br>Last-Modified: Tue, 28 Nov 2000 16:09:20 GMT
-	  <br>ETag: "23dcfd-3806-3a23d8b0"
-	  <br>Accept-Ranges: bytes
-	  <br>Content-Length: 14342
-	  <br>Connection: close
-	  <br>Content-Type: text/html
-	<p>&lt;HTML>
-<br>&lt;HEAD>
-<br>&nbsp;&nbsp; &lt;TITLE>Department of Computing, Imperial
-  College, London: Home Page&lt;/TITLE>
-<br>&lt;/HEAD>
-<br>(etc)</font>
-<p>Here www.doc.ic.ac.uk</tt> is the name of the remote
-  machine (in this case the web server for the Department of Computing at
-  Imperial College in London). Like most web servers, it offers web page
-  services on port 80 through the daemon httpd</tt> (to see what other
-  services are potentially available on a machine, have a look at the file
-  <tt>/etc/services</tt>;
-  and to see what services are actually active, see
-  <tt>/etc/inetd.conf)</tt>.
-  By entering a valid HTTP GET command (HTTP is the protocol used to serve
-  web pages) we obtain the top-level home page in HTML format. This is exactly
-  the same process that is used by a web browser to access web pages.</font>
-<br>&nbsp;
-<li>
-  <tt>rlogin, rsh</li>
+    <h2>5.3 Network routing utilities</h2>
 
-<p><tt>rlogin </tt>and<tt> rsh </tt>are insecure facilities
-  for logging into remote machines and for executing commands on remote machines
-  respectively. Along with <tt>telnet</tt>, they have been superseded by
-  <tt>ssh</tt>.</font>
-<br>&nbsp;
-<li>
-  <tt>ssh </tt><i>machinename </i>(secure shell)</font></li>
+    <div class="text">
 
-<p><tt>ssh </tt>is a secure alternative for remote login
-  and also for executing commands in a remote machine. It is intended to
-  replace <tt>rlogin</tt> and <tt>rsh</tt>, and provide secure encrypted
-  communications between two untrusted hosts over an insecure network. X11
-  connections (i.e. graphics) can also be forwarded over the secure channel
-  (another advantage over <tt>telnet</tt>,
-  <tt>rlogin</tt> and <tt>rsh</tt>).
-  <tt>ssh</tt>
-  is not a standard system utility, although it is a de facto standard. It
-  can be obtained from <a href="http://www.ssh.org">http://www.ssh.org</a>.
-  A good introduction page giving more background and showing you how to
-  set up <tt>ssh</tt> is <a href="http://www.tac.nyc.ny.us/~kim/ssh/">http://www.tac.nyc.ny.us/~kim/ssh/</a>.</font>
-<p><tt>ssh</tt> clients are also available for Windows machines
-  (e.g. there is a good <tt>ssh</tt> client called <tt>putty</tt>).</font></ul>
-</blockquote>
+      <ul>
+	<li><b>ping</b> <i>machinename</i></li>
 
-</div>
+	<p>The <tt>ping</tt> utility is useful for checking round-trip
+	  response time between machines. e.g.</p>
+	<p class="terminal">$ ping www.google.com</p>
+	<p>measures the reponse time delay between the current machine
+	  and the web server at Google.
+	  <b>ping</b> is also useful to check whether a machine is still "alive" in
+	  some sense.</p>
 
-<div class="heading">
-  <div class="table">
-    5.3 Network routing utilities
-  </div>
-</div>
+	<li><b>traceroute</b> <i>machinename</i></li>
 
-<div class="text">
+	<p><b>traceroute</b> shows the full path taken to reach
+	  a remote machine, including the delay to each machine along the route.
+	  This is particularly useful in tracking down the location of network problems.
+      </ul>
+    </div>
+      
+    <h2>5.4 Remote File Transfer</h2>
 
-  <blockquote>
-    <ul>
-      <li>
-	<tt>ping</tt> <i>machinename</i></font></li>
+    <div class="text">
 
-<p>The <tt>ping</tt> utility is useful for checking round-trip
-  response time between machines. e.g.</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ ping www.doc.ic.ac.uk
-<p>measures the reponse time delay between the current machine
-  and the web server at the Department of Computing at Imperial College.
-  <tt>ping</tt>
-  is also useful to check whether a machine is still "alive" in some sense.</font>
-<br>&nbsp;
-<li>
-  <tt>traceroute </tt><i>machinename</i></font></li>
+      <ul>
+	<li><b>ftp</b> <i>machinename</i> (file transfer protocol)</li>
 
-<p><tt>traceroute </tt>shows the full path taken to reach
-  a remote machine, including the delay to each machine along the route.
-  This is particularly useful in tracking down the location of network problems.</font></ul>
-</blockquote>
+	<p><b>ftp</b> is an insecure way of transferring files
+	  between computers. When you connect to a machine via ftp, you will be asked
+	  for your username and password. If you have an account on the machine,
+	  you can use it, or you can can often use the user "<b>ftp</b>" or "<b>anonymous</b>".
+	  Once logged in via FTP, you can list files (<b>dir</b>), receive files
+	  (<b>get </b>and<b> mget</b>) and send files (<b>put</b> and <b>mput</b>).
+	  (Unusually for UNIX) <b>help</b> will show you a list of available commands.
+	  Particularly useful are <b>binary</b> (transfer files preserving all
+	  8 bits) and <b>prompt n</b> (do not confirm each file on multiple file
+	  transfers). Type <b>quit</b> to leave <b>ftp</b> and return to the
+	  shell prompt.</p>
 
-</div>
+	<li><b>scp</b> <i>sourcefiles destination </i>(secure copy)</li>
 
-<div class="table">
-  <div class="heading">
-    5.4 Remote File Transfer</font></font></font></b></td>
-</div>
-</div>
+	<p><b>scp</b> is a secure way of transferring files between
+	  computers. It works just like the UNIX <b>cp</b> command except that
+	  the arguments can specify a user and machine as well as files. For example:
+	<p class="terminal"> $ scp will@rose.doc.ic.ac.uk:~/hello.txt
+	  
+	<p>will (subject to correct authentication) copy the file
+	  <b>hello.txt</b>
+	  from the user account <b>will</b> on the remote machine
+	  <b>rose.doc.ic.ac.uk</b>
+	  into the current directory (<b>.</b>) on the local machine.</p>
+      </ul>
+    </div>
 
-<div class="text">
+    <h2>5.5 Other Internet-related utilities</h2>
 
-  <blockquote>
-    <ul>
-      <li>
-	<tt>ftp </tt><i>machinename</i> (file transfer protocol)</font></li>
+    <div class="text">
+      <ul>
+	<li><b>wget</b> <i>URL</i></li>
 
-<p><tt>ftp</tt> is an insecure way of transferring files
-  between computers. When you connect to a machine via ftp, you will be asked
-  for your username and password. If you have an account on the machine,
-  you can use it, or you can can often use the user "<tt>ftp</tt>" or "<tt>anonymous</tt>".
-  Once logged in via FTP, you can list files (<tt>dir</tt>), receive files
-  (<tt>get </tt>and<tt> mget</tt>) and send files (<tt>put</tt> and <tt>mput</tt>).
-  (Unusually for UNIX) <tt>help </tt>will show you a list of available commands.
-  Particularly useful are <tt>binary</tt> (transfer files preserving all
-  8 bits) and <tt>prompt n</tt> (do not confirm each file on multiple file
-  transfers). Type <tt>quit</tt> to leave <tt>ftp</tt> and return to the
-  shell prompt.</font>
-<br>&nbsp;
-<li>
-  <tt>scp</tt> <i>sourcefiles destination </i>(secure copy)</font></li>
+	<p><b>wget</b> provides a way to retrieve files from the
+	  web (using the HTTP protocol). <b>wget</b> is non-interactive,
+	  which means it can run in the background, while the user is not logged
+	  in (unlike most web browsers). The content retrieved by <b>wget</b>
+	  is stored as raw HTML text (which can be viewed later using a web browser).
+	<p>Note that <b>netscape</b>, <b>lynx</b> and <b>wget</b>
+	  are not standard UNIX system utilities, but are frequently-installed application
+	  packages.
+      </ul>
+    </div>
+    
+    <h2>5.6 User Information and Communication</h2>
+  
+    <div class="text">
 
-<p><tt>scp</tt> is a secure way of transferring files between
-  computers. It works just like the UNIX <tt>cp</tt> command except that
-  the arguments can specify a user and machine as well as files. For example:</font>
-<p><tt>&nbsp;&nbsp; $ scp will@rose.doc.ic.ac.uk:~/hello.txt
-    <b>.&nbsp;</b><img src="enter.gif" height=15 width=27>
-<p>will (subject to correct authentication) copy the file
-  <tt>hello.txt</tt>
-  from the user account <tt>will </tt>on the remote machine
-  <tt>rose.doc.ic.ac.uk</tt>
-  into the current directory (<tt>.</tt>) on the local machine.</font></ul>
-</blockquote>
+      <ul>
+	<li><b>finger</b>, <b>who</b></li>
 
-</div>
-<br>
-
-<div class="heading">
-  <div class="table">
-    5.5 Other Internet-related utilities
-  </div>
-</div>
-
-<div class="text">
-
-  <blockquote>
-    <ul>
-      <li>
-	<tt>netscape</li>
-
-<p><tt>netscape </tt>is a fully-fledged graphical web browser
-  (like Internet Explorer).</font>
-<br>&nbsp;
-<li>
-  <tt>lynx</li>
-
-<p><tt>lynx</tt> provides a way to browse the web on a text-only
-  terminal.</font>
-<br>&nbsp;
-<li>
-  <tt>wget</tt> <i>URL</i></font></li>
-
-<p><tt>wget </tt>provides a way to retrieve files from the
-  web (using the HTTP protocol).&nbsp; <tt>wget</tt> is non-interactive,
-  which means it can run in the background, while the user is not&nbsp; logged&nbsp;
-  in (unlike&nbsp; most&nbsp; web browsers). The content retrieved by <tt>wget</tt>
-  is stored as raw HTML text (which can be viewed later using a web browser).</font>
-<p>Note that <tt>netscape</tt>, <tt>lynx</tt> and <tt>wget</tt>
-  are not standard UNIX system utilities, but are frequently-installed application
-  packages.</font></ul>
-</blockquote>
-
-</div>
-<br>
-
-<div class="table">
-  <div class="heading">
-    5.6 User Information and Communication
-  </div>
-</div>
-
-<div class="text">
-
-  <blockquote>
-    <ul>
-      <li>
-	<tt>finger</tt>, <tt>who</tt></font></li>
-
-<p><tt>finger</tt> and <tt>who</tt> show the list of users
-  logged into a machine, the terminal they are using, and the date they logged
-  in on.</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ who
-<br><tt>&nbsp;&nbsp;&nbsp; will&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  pts/2&nbsp;&nbsp;&nbsp; Dec&nbsp; 5 19:41
-<br><tt>&nbsp;&nbsp;&nbsp; $
-<br>&nbsp;
-<li>
-  <tt>write</tt>, <tt>talk</tt></font></li>
+	<p><b>finger</b> and <b>who</b> show the list of users
+	  logged into a machine, the terminal they are using, and the date they logged
+	  in on.
+	  <p class="terminal">$ who
+	    <br>will
+	    pts/2  Dec  5 19:41
+	    <br>$
+	  </p>
+	  
+	<li><b>write</b>, <tt>talk</b></li>
 
 <p><tt>write</tt> is used by users on the same machine who
   want to talk to each other. You should specify the user and (optionally)
-  the terminal they are on:</font>
+  the terminal they are on:
 <p><tt>&nbsp;&nbsp; $ write will pts/2
 <br><tt>&nbsp;&nbsp; hello will
 <p>Lines are only transmitted when you press&nbsp;.
-  To return to the shell prompt, press ctrl-d (the UNIX end of file marker).</font>
+  To return to the shell prompt, press ctrl-d (the UNIX end of file marker).
 <p><tt>talk</tt> is a more sophisticated interactive chat
-  client that can be used between remote machines:</font>
+  client that can be used between remote machines:
 <p><tt>&nbsp;&nbsp;&nbsp; $ talk will@rose.doc.ic.ac.uk
 <p>Unfortunately because of increasingly tight security restrictions,
   it is increasingly unlikely that <tt>talk</tt> will work (this is because
   it requires a special daemon called <tt>talkd</tt> to be running on the
   remote computer). Sometimes an application called <tt>ytalk</tt> will succeed
-  if <tt>talk</tt> fails.</font></ul>
+  if <tt>talk</tt> fails.</ul>
 </blockquote>
 
 </div>
@@ -285,29 +183,29 @@
   <ul>
     <ul>
       <li>
-	<tt>lpr -P</tt><i>printqueue filename</i></font></li>
+	<tt>lpr -P</tt><i>printqueue filename</i></li>
 
 <p><tt>lpr </tt>adds a document to a print queue, so that
   the document is printed when the printer is available. Look at <tt>/etc/printcap</tt>
-  to find out what printers are available.</font>
+  to find out what printers are available.
 <br>&nbsp;
 <li>
-  <tt>lpq -P</tt><i>printqueue</i></font></li>
+  <tt>lpq -P</tt><i>printqueue</i></li>
 
 <p><tt>lpq </tt>checks the status of the specified print
-  queue. Each job will have an associated job number.</font>
+  queue. Each job will have an associated job number.
 <br>&nbsp;
 <li>
-  <tt>lprm -P</tt><i>printqueue jobnumber</i></font></li>
+  <tt>lprm -P</tt><i>printqueue jobnumber</i></li>
 
 <p><tt>lprm</tt> removes the given job from the specified
-  print queue.</font></ul>
+  print queue.</ul>
 
 <p>Note that <tt>lpr</tt>, <tt>lpq</tt> and <tt>lprm</tt>
   are BSD-style print management utilities. If you are using a strict SYSV
   UNIX, you may need to use the SYSV equivalents <tt>lp</tt>, <tt>lpstat</tt>
   and
-  <tt>cancel</tt>.</font></ul>
+  <tt>cancel</tt>.</ul>
 
 <br>
 </div>
@@ -326,7 +224,7 @@
 	<tt>mail</li>
 
 <p><tt>mail</tt> is the standard UNIX utility for sending
-  and receiving email.</font>
+  and receiving email.
 <p><tt>$ mail
 <br><tt>Mail version 8.1 6/6/93.&nbsp; Type ? for help.
 <br><tt>"/var/spool/mail/will": 2 messages 2 new
@@ -338,7 +236,7 @@
   a full list) are given below in Fig. 5.1. Here a <i>messagelist</i> is
   either a single message specified by a number (e.g. <tt>1</tt>) or a range
   (e.g. <tt>1-2</tt>). The special <i>messagelist</i> <tt>*</tt> matches
-  all messages.</font>
+  all messages.
 <br>&nbsp;
 <center><table>
     <tr>
@@ -366,7 +264,7 @@
 </tr>
 <tr>
   <td>u <i>messagelist</i></td>
-  <td>undelete messages</font></td>
+  <td>undelete messages</td>
 </tr>
 <tr>
   <td>m <i>address</i></td>
@@ -387,12 +285,12 @@
 </div>
 
 <p>You can also use <tt>mail </tt>to send email directly
-  from the command line. For example:</font>
+  from the command line. For example:
 <p><tt>$ mail -s "Hi" wjk@doc.ic.ac.uk &lt; message.txt
 <br><tt>$
 <p>emails the contents of the (ASCII) file<tt> message.txt
   </tt>to
-  the recipient<tt> wjk@doc.ic.ac.uk </tt>with the subject<tt> "Hi"</tt>.</font></ul>
+  the recipient<tt> wjk@doc.ic.ac.uk </tt>with the subject<tt> "Hi"</tt>.</ul>
 
 <ul>
   <li>
@@ -400,7 +298,7 @@
 
 <p><tt>mutt</tt>,<tt> elm </tt>and<tt> pine</tt> are more
   friendly (but non-standard) email interfaces that you will probably prefer
-  to use instead of <tt>mail</tt>. All have good in-built help facilities.</font>
+  to use instead of <tt>mail</tt>. All have good in-built help facilities.
 <br>&nbsp;
 <li>
   <tt>sendmail, exim</li>
@@ -409,7 +307,7 @@
   which uses a protocol called SMTP (Simple Mail Transfer Protocol). The
   two most popular Email Transfer Agents are <tt>sendmail </tt>and <tt>exim</tt>.
   You can see how these agents work by using <tt>telnet</tt> to connect to
-  port 25 of any mail server, for example:</font>
+  port 25 of any mail server, for example:
 <p><tt>$ telnet mail.doc.ic.ac.uk 25
 <br><tt>Trying 146.169.1.47...
 <br><tt>Connected to diver.doc.ic.ac.uk (146.169.1.47).
@@ -441,7 +339,7 @@
   use this technique to attempt to confuse recipients as to the true source
   of messages. Fortunately <tt>exim</tt> and <tt>sendmail</tt> include extensive
   header information when they forward email, including the IP address of
-  the computer from where the message was sent.</font></ul>
+  the computer from where the message was sent.</ul>
 </blockquote>
 
 </div>
@@ -458,7 +356,7 @@
   <blockquote>
     <ul>
       <li>
-	<tt>sed </tt>(stream editor)</font></li>
+	<tt>sed </tt>(stream editor)</li>
 
 <p><tt>sed</tt> allows you to perform basic text transformations
   on an input stream (i.e. a file or input from a pipeline). For example,
@@ -469,36 +367,36 @@
   its full language is obscure and probably best forgotten (being based on
   the old and esoteric UNIX line editor <tt>ed</tt>). <tt>sed</tt> is probably
   at its most useful when used directly from the command line with simple
-  parameters:</font>
+  parameters:
 <p><tt>$ sed "s/</tt><i>pattern1</i><tt>/</tt><i>pattern2</i><tt>/"
   </tt><i>inputfile</i><tt>
-    > </tt><i>outputfile</i></font>
+    > </tt><i>outputfile</i>
 <br>(substitutes <i>pattern2</i> for <i>pattern1</i> once
-per line)</font>
+per line)
 <p><tt>$ sed "s/</tt><i>pattern1</i>/<i>pattern2</i><tt>/g"
   </tt><i>inputfile</i><tt>
-    > </tt><i>outputfile</i></font>
+    > </tt><i>outputfile</i>
 <br>(substitutes <i>pattern2</i> for <i>pattern1</i> for
-every <i>pattern1</i> per line)</font>
+every <i>pattern1</i> per line)
 <p><tt>$ sed "/</tt><i>pattern1</i><tt>/d" </tt><i>inputfile</i><tt>
-    > </tt><i>outputfile</i></font>
-<br>(deletes all lines containing <i>pattern1</i>)</font>
+    > </tt><i>outputfile</i>
+<br>(deletes all lines containing <i>pattern1</i>)
 <p><tt>$ sed "y/</tt><i>string1</i><tt>/</tt><i>string2</i><tt>/"
   </tt><i>inputfile</i><tt>
-    > </tt><i>outputfile</i></font>
+    > </tt><i>outputfile</i>
 <br>(substitutes characters in <i>string2</i> for those in
-<i>string1</i>)</font>
+<i>string1</i>)
 <br>&nbsp;
 <li>
-  <tt>awk </tt>(Aho, Weinberger and Kernigan)</font></li>
+  <tt>awk </tt>(Aho, Weinberger and Kernigan)</li>
 
 <p><tt>awk</tt> is useful for manipulating files that contain
   columns of data on a line by line basis. Like <tt>sed</tt>, you can either
   pass <tt>awk</tt> statements directly on the command line, or you can write
-  a script file and let <tt>awk</tt> read the commands from the script.</font>
+  a script file and let <tt>awk</tt> read the commands from the script.
 <p>Say we have a file of cricket scores called <tt>cricket.dat</tt>
   containing columns for player number, name, runs and the way in which they
-  were dismissed:</font>
+  were dismissed:
 <p><tt>1 atherton&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; bowled
 <br><tt>2 hussain&nbsp;&nbsp;&nbsp;&nbsp; 20&nbsp;&nbsp;
   caught
@@ -508,7 +406,7 @@ every <i>pattern1</i> per line)</font>
   lbw
 <br><tt>5 gough&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   6&nbsp;&nbsp; run-out
-<p>To print out only the first and second columns we can say:</font>
+<p>To print out only the first and second columns we can say:
 <p><tt>$ awk '{ print $1 " " $2 }' cricket.dat
 <br><tt>atherton 0
 <br><tt>hussain 20
@@ -518,10 +416,10 @@ every <i>pattern1</i> per line)</font>
 <br><tt>$
 <p>Here <tt>$</tt><i>n</i> stands for the <i>n</i>th field
   or column of each line in the data file. <tt>$0 </tt>can be used to denote
-  the whole line.</font>
+  the whole line.
 <p>We can do much more with <tt>awk</tt>. For example, we
   can write a script <tt>cricket.awk</tt> to calculate the team's batting
-  average and to check if Mike Atherton got another duck:</font>
+  average and to check if Mike Atherton got another duck:
 <p><tt>$ cat > cricket.awk
 <br><tt>BEGIN { players = 0; runs = 0 }
 <br><tt>{ players++; runs +=$3 }
@@ -529,8 +427,8 @@ every <i>pattern1</i> per line)</font>
   }
 <br><tt>END { print "the batting average is " runs/players
   }
-<br>(ctrl-d)</font>
-<br>$ <tt>awk -f cricket.awk cricket.dat</tt></font>
+<br>(ctrl-d)
+<br>$ <tt>awk -f cricket.awk cricket.dat</tt>
 <br><tt>atherton duck!
 <br><tt>the batting average is 21.2
 <br><tt>$
@@ -539,9 +437,9 @@ every <i>pattern1</i> per line)</font>
   </tt>clause
   only if the word <tt>atherton </tt>occurs in the line and the
   <tt>END</tt>
-  clause once at the end of the script.</font>
+  clause once at the end of the script.
 <p><tt>awk</tt> can do a lot more. See the manual pages for
-  details (type <tt>man awk</tt>).</font></ul>
+  details (type <tt>man awk</tt>).</ul>
 </blockquote>
 
 </div>
@@ -564,47 +462,47 @@ every <i>pattern1</i> per line)</font>
   which pieces of a large program need to be recompiled, and issue the commands&nbsp;
   to recompile them. To use make, you need to create a file called <tt>Makefile</tt>
   or <tt>makefile</tt> that describes&nbsp; the relationships among files
-  in your program, and the states the commands for updating each file.</font>
-<p>Here is an example of a simple makefile:</font>
+  in your program, and the states the commands for updating each file.
+<p>Here is an example of a simple makefile:
 <p><tt>scores.out: cricket.awk cricket.dat
-<br>[TAB]<tt>awk -f cricket.awk cricket.dat > scores.out</tt></font>
+<br>[TAB]<tt>awk -f cricket.awk cricket.dat > scores.out</tt>
 <p>Here [TAB] indicates the TAB key. The interpretation of
-  this makefile is as follows:</font>
+  this makefile is as follows:
 <ul>
   <li>
-    <tt>scores.out</tt> is the target of the compilation</font></li>
+    <tt>scores.out</tt> is the target of the compilation</li>
 
 <li>
-  <tt>scores.out</tt> depends on <tt>cricket.awk</tt> and <tt>cricket.dat</tt></font></li>
+  <tt>scores.out</tt> depends on <tt>cricket.awk</tt> and <tt>cricket.dat</tt></li>
 
 <li>
   if either <tt>cricket.awk</tt> or <tt>cricket.dat</tt> have
   been modified since <tt>scores.out </tt>was last modified or if <tt>scores.out</tt>
-  does not exist, update <tt>scores.out</tt> by executing the command:</font></li>
+  does not exist, update <tt>scores.out</tt> by executing the command:</li>
 
 <br><tt>awk -f cricket.awk cricket.dat > scores.out<br>
 </ul>
-<tt>make</tt> is invoked simply by typing</font>
+<tt>make</tt> is invoked simply by typing
 <p><tt>$ make
 <br><tt>awk -f cricket.awk cricket.dat > scores.out
 <br><tt>$
 <p>Since <tt>scores.out</tt> did not exist, <tt>make</tt>
   executed the commands to create it. If we now invoke make again, nothing
-  happens:</font>
+  happens:
 <p><tt>$ make
 <br><tt>make: `scores.out' is up to date.
 <br><tt>$
 <p>But if we modify <tt>cricket.dat</tt> and then run <tt>make</tt>
-  again, <tt>scores.out</tt> will be updated:</font>
+  again, <tt>scores.out</tt> will be updated:
 <p><tt>$ touch cricket.dat</tt>(<tt>touch
   </tt>simulates
-  file modification)</font>
+  file modification)
 <br><tt>$ make
 <br><tt>awk -f cricket.awk cricket.dat > scores.out
 <br><tt>$
 <p><tt>make</tt> is mostly used when compiling large C, C++
   or Java programs, but can (as we have seen) be used to automatically and
-  intelligently produce a target file of any kind.</font></ul>
+  intelligently produce a target file of any kind.</ul>
 </blockquote>
 
 </div>
@@ -622,33 +520,33 @@ every <i>pattern1</i> per line)</font>
   <blockquote>
     <ul>
       <li>
-	<tt>cvs</tt> (Concurrent Versioning System)</font></li>
+	<tt>cvs</tt> (Concurrent Versioning System)</li>
 
 <p><tt>cvs</tt> is a source code control system often used
   on large programming projects to control the concurrent editing of source
   files by multiple authors. It keeps old versions of files and maintains
-  a log of when, and why changes occurred, and who made them.</font>
+  a log of when, and why changes occurred, and who made them.
 <p><tt>cvs</tt> keeps a single copy of the master sources.
   This copy is called&nbsp; the source ``repository''; it contains all the
   information to permit extracting previous software releases at any time
-  based on either a symbolic revision tag, or a date in the past.</font></font>
+  based on either a symbolic revision tag, or a date in the past.
 <p><tt>cvs</tt> has a large number of commands (type <tt>info
     cvs</tt> for a full <tt>cvs</tt> tutorial, including how to set up a repository
-  from scratch or from existing code). The most useful commands are:</font>
-<br></font>&nbsp;
+  from scratch or from existing code). The most useful commands are:
+<br>&nbsp;
 <ul>
   <li>
     <tt>cvs checkout </tt><i>modules<br>
       <br>
     </i>This gives you a private copy of source code that you can work on with
-    without interfering with others.</font><br>
+    without interfering with others.<br>
 </li>
 
 <li>
   <tt>cvs update<br>
     <br>
   </tt>This updates the code you have checked out, to reflect any changes
-  that have subsequently been made by other developers.</font><br>
+  that have subsequently been made by other developers.<br>
 </li>
 
 <li>
@@ -656,21 +554,21 @@ every <i>pattern1</i> per line)</font>
   <br>
 </i>You can use this to add new files into a repository that you have checked-out.
 Does not actually affect the repository until a "<tt>cvs commit</tt>" is
-performed.</font><br>
+performed.<br>
 </li>
 
 <li>
   <tt>cvs remove </tt><i>files</i><br>
   <br>
   Removes files from a checked-out repository. Doesn't affect the repository
-  until a "<tt>cvs commit</tt>" is performed.</font><br>
+  until a "<tt>cvs commit</tt>" is performed.<br>
 </li>
 
 <li>
   <tt>cvs commit</tt> <i>files<br>
     <br>
   </i>This command publishes your changes to other developers by updating
-  the source code in the central repository.</font></li>
+  the source code in the central repository.</li>
 </ul>
 </ul>
 </blockquote>
@@ -698,19 +596,19 @@ performed.</font><br>
   C++ programs will come with a <tt>makefile</tt> and will support the
   <tt>configure</tt>
   utility, so that compiling and installing a package is often as simple
-  as:</font>
+  as:
 <p><tt>$ ./configure
 <br><tt>$ make
 <br><tt>$ make install
 <p>However, there is nothing to prevent you from writing
-  and compiling a simple C program yourself:</font>
+  and compiling a simple C program yourself:
 <p><tt>$ cat > hello.c
 <br><tt>#include &lt;stdio.h>
 <br><tt>int main() {
 <br><tt>&nbsp; printf("hello world!\n");
 <br><tt>&nbsp; return 0;
 <br><tt>}
-<br>(ctrl-d)</font>
+<br>(ctrl-d)
 <br><tt>$ cc hello.c -o hello
 <br><tt>$ ./hello
 <br><tt>hello world!
@@ -721,7 +619,7 @@ performed.</font><br>
   <tt>hello</tt>. The program <tt>hello</tt> may then be executed
   (the <tt>./
   </tt>tells the shell to look in the current directory to find
-  the <tt>hello</tt> program).</font></ul>
+  the <tt>hello</tt> program).</ul>
 </blockquote>
 
 </div>
@@ -745,7 +643,7 @@ performed.</font><br>
   available via the online manual pages, which are accessible through the
   <tt>man</tt>
   command. The online documentation is in fact divided into sections. Traditionally,
-  they are</font>
+  they are
 <p><tt>1 User-level commands
 <br><tt>2 System calls
 <br><tt>3 Library functions
@@ -759,17 +657,17 @@ performed.</font><br>
   to use the <tt>rmdir</tt> system call. <tt>man rmdir</tt> gives you the
   manual page for the user-level command <tt>rmdir</tt>. To force <tt>man</tt>
   to look in Section 2 of the manual instead, type <tt>man 2 rmdir</tt> (or<tt>man
-    -s2 rmdir</tt> on some systems).</font>
+    -s2 rmdir</tt> on some systems).
 <p><tt>man</tt> can also find manual pages which mention
   a particular topic. For example, <tt>man -k postscript </tt>should produce
-  a list of utilities that can produce and manipulate postscript files.</font>
+  a list of utilities that can produce and manipulate postscript files.
 <br>&nbsp;
 <li>
   <tt>info</li>
 
 <p><tt>info </tt>is an interactive, somewhat more friendly
   and helpful alternative to <tt>man</tt>. It may not be installed on all
-  systems, however.</font></ul>
+  systems, however.</ul>
 </blockquote>
 
 <BLOCKQUOTE><P><A HREF="http:./index.html">
