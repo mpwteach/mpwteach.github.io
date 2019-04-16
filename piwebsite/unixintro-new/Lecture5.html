@@ -17,21 +17,21 @@
     <div class="text">
       
       This lecture introduces other useful UNIX system
-	utilities and covers:
+        utilities and covers:
 
       <ul>
-	<li>Connecting to remote machines.</li>
-	<li>Networking routing utilities.</li>
-	<li>Remote file transfer.</li>
-	<li>Other Internet-related utilities.</li>
-	<li>Facilities for user information and communication.</li>
-	<li>Printer control.</li>
-	<li>Email utilities.</li>
-	<li>Advanced text file processing with <b>sed</b> and <b>awk</b>.</li>
-	<li>Target directed compilation with <b>make</b>.</li>
-	<li>Version control with CVS.</li>
-	<li>C++ compilation facilities.</li>
-	<li>Manual pages.</li>
+        <li>Connecting to remote machines.</li>
+        <li>Networking routing utilities.</li>
+        <li>Remote file transfer.</li>
+        <li>Other Internet-related utilities.</li>
+        <li>Facilities for user information and communication.</li>
+        <li>Printer control.</li>
+        <li>Email utilities.</li>
+        <li>Advanced text file processing with <b>sed</b> and <b>awk</b>.</li>
+        <li>Target directed compilation with <b>make</b>.</li>
+        <li>Version control with CVS.</li>
+        <li>C++ compilation facilities.</li>
+        <li>Manual pages.</li>
       </ul>
 
     </div>
@@ -41,20 +41,20 @@
     <div class="text">
 
       <ul>
-	<li><b>ssh</b> <i>machinename</i>(secure shell)</li>
+        <li><b>ssh</b> <i>machinename</i>(secure shell)</li>
 
-	<p><b>ssh</b> is a secure alternative for remote login
-	  and also for executing commands in a remote machine. It is intended to
-	  replace <b>rlogin</b> and <b>rsh</b>, and provide secure encrypted
-	  communications between two untrusted hosts over an insecure network. X11
-	  connections (i.e. graphics) can also be forwarded over the secure channel
-	  (another advantage over <b>telnet</b>, <b>rlogin</b> and <b>rsh</b>).
-	  <b>ssh</b> is not a standard system utility, although it is a de facto standard. It
-	  can be obtained from <a href="http://www.ssh.org">http://www.ssh.org</a>.
-	  A good introduction page giving more background and showing you how to
-	  set up <tt>ssh</tt> is <a href="http://www.tac.nyc.ny.us/~kim/ssh/">http://www.tac.nyc.ny.us/~kim/ssh/</a>.
-	<p><b>ssh</b> clients are also available for Windows machines
-	  (e.g. there is a good <b>ssh</b> client called <b>putty</b>).
+        <p><b>ssh</b> is a secure alternative for remote login
+          and also for executing commands in a remote machine. It is intended to
+          replace <b>rlogin</b> and <b>rsh</b>, and provide secure encrypted
+          communications between two untrusted hosts over an insecure network. X11
+          connections (i.e. graphics) can also be forwarded over the secure channel
+          (another advantage over <b>telnet</b>, <b>rlogin</b> and <b>rsh</b>).
+          <b>ssh</b> is not a standard system utility, although it is a de facto standard. It
+          can be obtained from <a href="http://www.ssh.org">http://www.ssh.org</a>.
+          A good introduction page giving more background and showing you how to
+          set up <tt>ssh</tt> is <a href="http://www.tac.nyc.ny.us/~kim/ssh/">http://www.tac.nyc.ny.us/~kim/ssh/</a>.
+        <p><b>ssh</b> clients are also available for Windows machines
+          (e.g. there is a good <b>ssh</b> client called <b>putty</b>).
       </ul>
       
     </div>
@@ -64,21 +64,21 @@
     <div class="text">
 
       <ul>
-	<li><b>ping</b> <i>machinename</i></li>
+        <li><b>ping</b> <i>machinename</i></li>
 
-	<p>The <tt>ping</tt> utility is useful for checking round-trip
-	  response time between machines. e.g.</p>
-	<p class="terminal">$ ping www.google.com</p>
-	<p>measures the reponse time delay between the current machine
-	  and the web server at Google.
-	  <b>ping</b> is also useful to check whether a machine is still "alive" in
-	  some sense.</p>
+        <p>The <tt>ping</tt> utility is useful for checking round-trip
+          response time between machines. e.g.</p>
+        <p class="terminal">$ ping www.google.com</p>
+        <p>measures the reponse time delay between the current machine
+          and the web server at Google.
+          <b>ping</b> is also useful to check whether a machine is still "alive" in
+          some sense.</p>
 
-	<li><b>traceroute</b> <i>machinename</i></li>
+        <li><b>traceroute</b> <i>machinename</i></li>
 
-	<p><b>traceroute</b> shows the full path taken to reach
-	  a remote machine, including the delay to each machine along the route.
-	  This is particularly useful in tracking down the location of network problems.
+        <p><b>traceroute</b> shows the full path taken to reach
+          a remote machine, including the delay to each machine along the route.
+          This is particularly useful in tracking down the location of network problems.
       </ul>
     </div>
       
@@ -87,32 +87,32 @@
     <div class="text">
 
       <ul>
-	<li><b>ftp</b> <i>machinename</i> (file transfer protocol)</li>
+        <li><b>ftp</b> <i>machinename</i> (file transfer protocol)</li>
 
-	<p><b>ftp</b> is an insecure way of transferring files
-	  between computers. When you connect to a machine via ftp, you will be asked
-	  for your username and password. If you have an account on the machine,
-	  you can use it, or you can can often use the user "<b>ftp</b>" or "<b>anonymous</b>".
-	  Once logged in via FTP, you can list files (<b>dir</b>), receive files
-	  (<b>get </b>and<b> mget</b>) and send files (<b>put</b> and <b>mput</b>).
-	  (Unusually for UNIX) <b>help</b> will show you a list of available commands.
-	  Particularly useful are <b>binary</b> (transfer files preserving all
-	  8 bits) and <b>prompt n</b> (do not confirm each file on multiple file
-	  transfers). Type <b>quit</b> to leave <b>ftp</b> and return to the
-	  shell prompt.</p>
+        <p><b>ftp</b> is an insecure way of transferring files
+          between computers. When you connect to a machine via ftp, you will be asked
+          for your username and password. If you have an account on the machine,
+          you can use it, or you can can often use the user "<b>ftp</b>" or "<b>anonymous</b>".
+          Once logged in via FTP, you can list files (<b>dir</b>), receive files
+          (<b>get </b>and<b> mget</b>) and send files (<b>put</b> and <b>mput</b>).
+          (Unusually for UNIX) <b>help</b> will show you a list of available commands.
+          Particularly useful are <b>binary</b> (transfer files preserving all
+          8 bits) and <b>prompt n</b> (do not confirm each file on multiple file
+          transfers). Type <b>quit</b> to leave <b>ftp</b> and return to the
+          shell prompt.</p>
 
-	<li><b>scp</b> <i>sourcefiles destination </i>(secure copy)</li>
+        <li><b>scp</b> <i>sourcefiles destination </i>(secure copy)</li>
 
-	<p><b>scp</b> is a secure way of transferring files between
-	  computers. It works just like the UNIX <b>cp</b> command except that
-	  the arguments can specify a user and machine as well as files. For example:
-	<p class="terminal"> $ scp will@rose.doc.ic.ac.uk:~/hello.txt
-	  
-	<p>will (subject to correct authentication) copy the file
-	  <b>hello.txt</b>
-	  from the user account <b>will</b> on the remote machine
-	  <b>rose.doc.ic.ac.uk</b>
-	  into the current directory (<b>.</b>) on the local machine.</p>
+        <p><b>scp</b> is a secure way of transferring files between
+          computers. It works just like the UNIX <b>cp</b> command except that
+          the arguments can specify a user and machine as well as files. For example:
+        <p class="terminal"> $ scp will@rose.doc.ic.ac.uk:~/hello.txt
+          
+        <p>will (subject to correct authentication) copy the file
+          <b>hello.txt</b>
+          from the user account <b>will</b> on the remote machine
+          <b>rose.doc.ic.ac.uk</b>
+          into the current directory (<b>.</b>) on the local machine.</p>
       </ul>
     </div>
 
@@ -120,16 +120,16 @@
 
     <div class="text">
       <ul>
-	<li><b>wget</b> <i>URL</i></li>
+        <li><b>wget</b> <i>URL</i></li>
 
-	<p><b>wget</b> provides a way to retrieve files from the
-	  web (using the HTTP protocol). <b>wget</b> is non-interactive,
-	  which means it can run in the background, while the user is not logged
-	  in (unlike most web browsers). The content retrieved by <b>wget</b>
-	  is stored as raw HTML text (which can be viewed later using a web browser).
-	<p>Note that <b>netscape</b>, <b>lynx</b> and <b>wget</b>
-	  are not standard UNIX system utilities, but are frequently-installed application
-	  packages.
+        <p><b>wget</b> provides a way to retrieve files from the
+          web (using the HTTP protocol). <b>wget</b> is non-interactive,
+          which means it can run in the background, while the user is not logged
+          in (unlike most web browsers). The content retrieved by <b>wget</b>
+          is stored as raw HTML text (which can be viewed later using a web browser).
+        <p>Note that <b>netscape</b>, <b>lynx</b> and <b>wget</b>
+          are not standard UNIX system utilities, but are frequently-installed application
+          packages.
       </ul>
     </div>
     
@@ -138,18 +138,18 @@
     <div class="text">
 
       <ul>
-	<li><b>finger</b>, <b>who</b></li>
+        <li><b>finger</b>, <b>who</b></li>
 
-	<p><b>finger</b> and <b>who</b> show the list of users
-	  logged into a machine, the terminal they are using, and the date they logged
-	  in on.
-	  <p class="terminal">$ who
-	    <br>will
-	    pts/2  Dec  5 19:41
-	    <br>$
-	  </p>
-	  
-	<li><b>write</b>, <tt>talk</b></li>
+        <p><b>finger</b> and <b>who</b> show the list of users
+          logged into a machine, the terminal they are using, and the date they logged
+          in on.
+          <p class="terminal">$ who
+            <br>will
+            pts/2  Dec  5 19:41
+            <br>$
+          </p>
+          
+        <li><b>write</b>, <tt>talk</b></li>
 
 <p><tt>write</tt> is used by users on the same machine who
   want to talk to each other. You should specify the user and (optionally)
@@ -183,7 +183,7 @@
   <ul>
     <ul>
       <li>
-	<tt>lpr -P</tt><i>printqueue filename</i></li>
+        <tt>lpr -P</tt><i>printqueue filename</i></li>
 
 <p><tt>lpr </tt>adds a document to a print queue, so that
   the document is printed when the printer is available. Look at <tt>/etc/printcap</tt>
@@ -221,7 +221,7 @@
   <blockquote>
     <ul>
       <li>
-	<tt>mail</li>
+        <tt>mail</li>
 
 <p><tt>mail</tt> is the standard UNIX utility for sending
   and receiving email.
@@ -356,7 +356,7 @@
   <blockquote>
     <ul>
       <li>
-	<tt>sed </tt>(stream editor)</li>
+        <tt>sed </tt>(stream editor)</li>
 
 <p><tt>sed</tt> allows you to perform basic text transformations
   on an input stream (i.e. a file or input from a pipeline). For example,
@@ -456,7 +456,7 @@ every <i>pattern1</i> per line)
   <blockquote>
     <ul>
       <li>
-	<tt>make</li>
+        <tt>make</li>
 
 <p><tt>make</tt> is a utility which can determine automatically
   which pieces of a large program need to be recompiled, and issue the commands&nbsp;
@@ -520,7 +520,7 @@ every <i>pattern1</i> per line)
   <blockquote>
     <ul>
       <li>
-	<tt>cvs</tt> (Concurrent Versioning System)</li>
+        <tt>cvs</tt> (Concurrent Versioning System)</li>
 
 <p><tt>cvs</tt> is a source code control system often used
   on large programming projects to control the concurrent editing of source
@@ -588,7 +588,7 @@ performed.<br>
   <blockquote>
     <ul>
       <li>
-	<tt>cc, gcc, CC, g++</li>
+        <tt>cc, gcc, CC, g++</li>
 
 <p>UNIX installations usually come with a C and/or C++ compiler.
   The C compiler is usually called <tt>cc</tt> or <tt>gcc</tt>, and the C++
@@ -637,7 +637,7 @@ performed.<br>
   <blockquote>
     <ul>
       <li>
-	<tt>man</li>
+        <tt>man</li>
 
 <p>More information is available on most UNIX commands is
   available via the online manual pages, which are accessible through the
