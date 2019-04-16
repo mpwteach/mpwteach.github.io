@@ -19,11 +19,11 @@
       This lecture covers:
 
       <ul>
-	<li>The concept of a process.</li>
-	<li>Passing output from one process as input to another using pipes.</li>
-	<li>Redirecting process input and output.</li>
-	<li>Controlling processes associated with the current shell.</li>
-	<li>Controlling other processes.</li>
+        <li>The concept of a process.</li>
+        <li>Passing output from one process as input to another using pipes.</li>
+        <li>Redirecting process input and output.</li>
+        <li>Controlling processes associated with the current shell.</li>
+        <li>Controlling other processes.</li>
       </ul>
 
     </div>
@@ -33,12 +33,12 @@
     <div class="text">
 
       <p>A <b>process</b> is a program in execution. Every time you invoke a system utility or an
-	application program from a shell, one or more "child" processes are created
-	by the shell in response to your command. All UNIX processes are identified
-	by a unique process identifier or PID. An important process that is always
-	present is the <b>init</b> process. This is the first process to be created
-	when a UNIX system starts up and usually has a PID of 1. All other processes
-	are said to be "descendants" of <b>init</b>.</p>
+        application program from a shell, one or more "child" processes are created
+        by the shell in response to your command. All UNIX processes are identified
+        by a unique process identifier or PID. An important process that is always
+        present is the <b>init</b> process. This is the first process to be created
+        when a UNIX system starts up and usually has a PID of 1. All other processes
+        are said to be "descendants" of <b>init</b>.</p>
 
     </div>
 
@@ -47,18 +47,18 @@
     <div class="text">
 
       <p>The pipe ('<b>|</b>') operator is used to create
-	concurrently executing processes that pass data directly to one another.
-	It is useful for combining system utilities to perform more complex functions.
-	For example:</p>
+        concurrently executing processes that pass data directly to one another.
+        It is useful for combining system utilities to perform more complex functions.
+        For example:</p>
       <p class="terminal">$ cat hello.txt | sort | uniq</p>
       <p>creates three processes (corresponding to <b>cat</b>, <b>sort</b> and <b>uniq</b>)
-	which execute concurrently. As they execute, the output of the who process
-	is passed on to the <b>sort </b>process which is in turn passed on to
-	the <b>uniq</b> process. <b>uniq</b> displays its output on the screen
-	(a sorted list of users with duplicate lines removed). Similarly:
+        which execute concurrently. As they execute, the output of the who process
+        is passed on to the <b>sort </b>process which is in turn passed on to
+        the <b>uniq</b> process. <b>uniq</b> displays its output on the screen
+        (a sorted list of users with duplicate lines removed). Similarly:
       <p class="terminal">$ cat hello.txt | grep "dog" | grep -v "cat"</p>
       <p>finds all lines in <b>hello.txt</b> that contain the
-	string "<b>dog</b>" but do not contain the string "<b>cat</b>".</p>
+        string "<b>dog</b>" but do not contain the string "<b>cat</b>".</p>
 
     </div>
 
@@ -67,41 +67,41 @@
     <div class="text">
 
       <p>The output from programs is usually written to
-	the screen, while their input usually comes from the keyboard (if no file
-	arguments are given). In technical terms, we say that processes usually
-	write to <b>standard output</b> (the screen)
-	and take their input from <b>standard input</b>(the
-	keyboard). There is in fact another output channel called <b>standard error</b>,
-	where processes write their error messages; by default
-	error messages are also sent to the screen.</p>
+        the screen, while their input usually comes from the keyboard (if no file
+        arguments are given). In technical terms, we say that processes usually
+        write to <b>standard output</b> (the screen)
+        and take their input from <b>standard input</b>(the
+        keyboard). There is in fact another output channel called <b>standard error</b>,
+        where processes write their error messages; by default
+        error messages are also sent to the screen.</p>
 
       <p>To redirect standard output to a file instead of the screen,
-	we use the <b>&gt;</b> operator:</p>
+        we use the <b>&gt;</b> operator:</p>
       <p class="terminal">$ echo hello
-	<br>hello
-	<br>$ echo hello > output
-	<br>$ cat output
-	<br>hello</p>
+        <br>hello
+        <br>$ echo hello > output
+        <br>$ cat output
+        <br>hello</p>
       
       <p>In this case, the contents of the file <b>output</b>
-	will be destroyed if the file already exists. If instead we want to append
-	the output of the echo command to the file, we can use the >> operator:</p>
+        will be destroyed if the file already exists. If instead we want to append
+        the output of the echo command to the file, we can use the >> operator:</p>
       
       <p class="terminal">$ echo bye >> output
-	<br>$ cat output
-	<br>hello
-	<br>bye</p>
+        <br>$ cat output
+        <br>hello
+        <br>bye</p>
       
       <p>To capture standard error, prefix the <b>&gt;</b> operator
-	with a 2 (in UNIX the file numbers 0, 1 and 2 are assigned to standard
-	input, standard output and standard error respectively), e.g.:</p>
+        with a 2 (in UNIX the file numbers 0, 1 and 2 are assigned to standard
+        input, standard output and standard error respectively), e.g.:</p>
       
       <p class="terminal">$ cat nonexistent 2>errors
-	<br>$ cat errors
-	<br>cat: nonexistent: No such file or directory</p>
+        <br>$ cat errors
+        <br>cat: nonexistent: No such file or directory</p>
       
       <p>You can redirect standard error and standard output to
-	two different files:</p>
+        two different files:</p>
       
       <p class="terminal">$ find . -print 1>errors 2>files</p>
       <p>or to the same file:</p>
@@ -110,24 +110,24 @@
       <p class="terminal">$ find . -print >&amp; output</p>
       
       <p>Standard input can also be redirected using the <b>&lt;</b>
-	operator, so that input is read from a file instead of the keyboard:</p>
+        operator, so that input is read from a file instead of the keyboard:</p>
       
       <p class="terminal">$ cat &lt; output
-	<br>hello
-	<br>bye</p>
+        <br>hello
+        <br>bye</p>
       
       <p>You can combine input redirection with output redirection,
-	but be careful not to use the same filename in both places. For example:</p>
+        but be careful not to use the same filename in both places. For example:</p>
       <p class="terminal">$ cat &lt; output &gt; output</p>
       
       <p>will destroy the contents of the file <b>output</b>.
-	This is because the first thing the shell does when it sees the <b>&gt;</b>
-	operator is to create an empty file ready for the output.</p>
+        This is because the first thing the shell does when it sees the <b>&gt;</b>
+        operator is to create an empty file ready for the output.</p>
       <p>One last point to note is that we can pass standard output
-	to system utilities that require filenames as "<b>-</b>":</p>
+        to system utilities that require filenames as "<b>-</b>":</p>
       <p class="terminal">$ cat package.tar.gz | gzip -d | tar tvf -</p>
       <p>Here the output of the <b>gzip -d</b> command is used
-	as the input file to the <b>tar</b> command.</p>
+        as the input file to the <b>tar</b> command.</p>
 
     </div>
 
@@ -136,71 +136,71 @@
     <div class="text">
 
       <p>Most shells provide sophisticated job control
-	facilities that let you control many running jobs (i.e. processes) at the
-	same time. This is useful if, for example, you are editing a text file
-	and want ot interrupt your editing to do something else. With job control,
-	you can suspend the editor, go back to the shell prompt, and start work
-	on something else. When you are finished, you can switch back to the editor
-	and continue as if you hadn't left.</p>
+        facilities that let you control many running jobs (i.e. processes) at the
+        same time. This is useful if, for example, you are editing a text file
+        and want ot interrupt your editing to do something else. With job control,
+        you can suspend the editor, go back to the shell prompt, and start work
+        on something else. When you are finished, you can switch back to the editor
+        and continue as if you hadn't left.</p>
       <p>Jobs can either be in the <b>foreground</b>
-	or the <b>background</b>. There can be only
-	one job in the foreground at any time. The foreground job has control of
-	the shell with which you interact - it receives input from the keyboard
-	and sends output to the screen. Jobs in the background do not receive input
-	from the terminal, generally running along quietly without the need for
-	interaction (and drawing it to your attention if they do).</p>
+        or the <b>background</b>. There can be only
+        one job in the foreground at any time. The foreground job has control of
+        the shell with which you interact - it receives input from the keyboard
+        and sends output to the screen. Jobs in the background do not receive input
+        from the terminal, generally running along quietly without the need for
+        interaction (and drawing it to your attention if they do).</p>
       <p>The foreground job may be suspended, i.e. temporarily
-	stopped, by pressing the Ctrl-Z key. A suspended job can be made to continue
-	running in the foreground or background as needed by typing <b>fg</b>
-	or <b>bg</b> respectively. Note that suspending a job is very different
-	from interrupting a job (by pressing the interrupt key, usually Ctrl-C);
-	interrupted jobs are killed off permanently and cannot be resumed.</p>
+        stopped, by pressing the Ctrl-Z key. A suspended job can be made to continue
+        running in the foreground or background as needed by typing <b>fg</b>
+        or <b>bg</b> respectively. Note that suspending a job is very different
+        from interrupting a job (by pressing the interrupt key, usually Ctrl-C);
+        interrupted jobs are killed off permanently and cannot be resumed.</p>
       <p>Background jobs can also be run directly from the command
-	line, by appending a <b>&amp;</b> character to the command line. For
-	example:</p>
+        line, by appending a <b>&amp;</b> character to the command line. For
+        example:</p>
       
       <p class="terminal">$ find / -print 1>output 2>errors &amp;
-	<br>[1] 27501
-	<br>$</p>
+        <br>[1] 27501
+        <br>$</p>
       
       <p>Here the <b>[1]</b> returned by the shell represents
-	the job number of the background process, and the 27501 is the PID of the
-	process. To see a list of all the jobs associated with the current shell,
-	type <b>jobs</b>:</p>
+        the job number of the background process, and the 27501 is the PID of the
+        process. To see a list of all the jobs associated with the current shell,
+        type <b>jobs</b>:</p>
 
       <p class="terminal">$ jobs
-	<br>[1]+&nbsp; Running&nbsp; find / -print 1>output 2>errors &amp;
-	<br>$</p>
+        <br>[1]+&nbsp; Running&nbsp; find / -print 1>output 2>errors &amp;
+        <br>$</p>
 
       <p>Note that if you have more than one job you can refer
-	to the job as <b>%n</b> where <b>n </b>is the job number. So for example
-	<b>fg %3</b> resumes job number 3 in the foreground.</p>
+        to the job as <b>%n</b> where <b>n </b>is the job number. So for example
+        <b>fg %3</b> resumes job number 3 in the foreground.</p>
       <p>To find out the process ID's of the underlying processes
-	associated with the shell and its jobs, use <b>ps</b> (process show):</p>
+        associated with the shell and its jobs, use <b>ps</b> (process show):</p>
 
       <p class="terminal">$ ps
-	<br>PID TTY TIME CMD
-	<br>17717 pts/10&nbsp;&nbsp; 00:00:00 bash
-	<br>27501 pts/10&nbsp;&nbsp; 00:00:01 find
-	<br>27502 pts/10&nbsp;&nbsp; 00:00:00 ps</p>
+        <br>PID TTY TIME CMD
+        <br>17717 pts/10&nbsp;&nbsp; 00:00:00 bash
+        <br>27501 pts/10&nbsp;&nbsp; 00:00:01 find
+        <br>27502 pts/10&nbsp;&nbsp; 00:00:00 ps</p>
 
       <p>So here the PID of the shell (<b>bash</b>) is 17717,
-	the PID of <b>find</b> is 27501 and the PID of <b>ps</b> is 27502.</p>
+        the PID of <b>find</b> is 27501 and the PID of <b>ps</b> is 27502.</p>
       <p>To terminate a process or job abrubtly, use the <b>kill</b>
-	command. <b>kill</b> allows jobs to referred to in two ways - by
-	their PID or by their job number. So</p>
+        command. <b>kill</b> allows jobs to referred to in two ways - by
+        their PID or by their job number. So</p>
       <p class="terminal">$ kill %1</p>
       <p>or</p>
       <p class="terminal">$ kill 27501</p>
       <p>would terminate the <b>find</b> process. Actually kill
-	only sends the process a signal requesting it shutdown and exit gracefully
-	(the SIGTERM signal), so this may not always work. To force a process to
-	terminate abruptly (and with a higher probability of sucess), use a <b>-9</b>
-	option (the SIGKILL signal):</p>
+        only sends the process a signal requesting it shutdown and exit gracefully
+        (the SIGTERM signal), so this may not always work. To force a process to
+        terminate abruptly (and with a higher probability of sucess), use a <b>-9</b>
+        option (the SIGKILL signal):</p>
       <p class="terminal">$ kill -9 27501</p>
       <p><b>kill</b> can be used to send many other types of
-	signals to running processes. For example a <b>-19</b> option (SIGSTOP)
-	will suspend a running process. To see a list of such signals, run <b>kill -l.</b></p>
+        signals to running processes. For example a <b>-19</b> option (SIGSTOP)
+        will suspend a running process. To see a list of such signals, run <b>kill -l.</b></p>
 
     </div>
     
@@ -209,35 +209,35 @@
     <div class="text">
 
       <p>You can also use <b>ps</b> to show all processes
-	running on the machine (not just the processes in your current shell):</p>
+        running on the machine (not just the processes in your current shell):</p>
       <p class="terminal">$ ps -aux</p>
       
       <p><b>ps -aeH</b> displays a full process hierarchy
-	(including the <b>init</b> process).</p>
+        (including the <b>init</b> process).</p>
       <p>Many UNIX versions have a system utility called <b>top</b>
-	that provides an interactive way to monitor system activity. Detailed statistics
-	about currently running processes are displayed and constantly refreshed.
-	Processes are displayed in order of CPU utilization. Useful keys in
-	<b>top</b> are:</p>
+        that provides an interactive way to monitor system activity. Detailed statistics
+        about currently running processes are displayed and constantly refreshed.
+        Processes are displayed in order of CPU utilization. Useful keys in
+        <b>top</b> are:</p>
       <ul>
-	<li><b>s - </b> set update frequency</li>
-	<li><b>k - </b> kill process (by PID)</li>
-	<li><b>u - </b> display processes of one user </li>
-	<li><b>q - </b> quit</li>
+        <li><b>s - </b> set update frequency</li>
+        <li><b>k - </b> kill process (by PID)</li>
+        <li><b>u - </b> display processes of one user </li>
+        <li><b>q - </b> quit</li>
       </ul>
       
       <p>On some systems, the utility <b>w</b> is a non-interactive
-	substitute for <b>top</b>.</p>
+        substitute for <b>top</b>.</p>
       <p>One other useful process control utility that can be found
-	on most UNIX systems is the <b>pkill</b> command. You can use
-	<b>pkill</b> to kill processes by name instead of PID or job number. So another way
-	to kill off our background <b>find</b> process (along with any another
-	<b>find</b> processes we are running) would be:</p>
+        on most UNIX systems is the <b>pkill</b> command. You can use
+        <b>pkill</b> to kill processes by name instead of PID or job number. So another way
+        to kill off our background <b>find</b> process (along with any another
+        <b>find</b> processes we are running) would be:</p>
       <p class="terminal">$ pkill find
-	<br>[1]+&nbsp; Terminated find / -print 1>output 2>errors
-	<br>$</p>
+        <br>[1]+&nbsp; Terminated find / -print 1>output 2>errors
+        <br>$</p>
       <p>Note that, for obvious security reasons, you can only
-	kill processes that belong to you (unless you are the superuser).</p>
+        kill processes that belong to you (unless you are the superuser).</p>
 
       <p><a href="index.html">(Contents)</a></p>
       
