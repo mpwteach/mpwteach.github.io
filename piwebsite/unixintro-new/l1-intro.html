@@ -40,17 +40,17 @@
       </p>
       
       <p>
-        For example, an OS ensures <b>safe</b>access
+        For example, an OS ensures <b>safe</b> access
         to a printer by allowing only one application program to send data directly
         to the printer at any one time. An OS encourages <b>efficient</b> use
         of the CPU by suspending programs that are waiting for I/O operations to
         complete to make way for programs that can use the CPU more productively.
         An OS also provides convenient
-        <b>abstractions</b>(such as files rather than disk locations) which isolate
+        <b>abstractions</b> (such as files rather than disk locations) which isolate
         application programmers and users from the details of the underlying hardware.
       </p>
       <center>
-        <img src="images/opsys.gif" height=461 width=523>  
+        <img src="images/osdiagram.png">  
         <br>
         <div class="caption">Fig. 1.1: General operating system architecture</div>
       </center>
@@ -112,9 +112,9 @@
         <a href="http://www.levenez.com/unix/">http://www.levenez.com/unix/</a>).
       </p>
       
-      <center><img src="images/familytree.gif" height=613 width=529>
+      <center><img src="images/unixhistory.png">
         <br>
-        <div class="caption">Fig. 1.2: Simplified UNIX FamilyTree</div>
+        <div class="caption">Fig. 1.2: UNIX FamilyTree</div>
       </center>
       
       <p>
@@ -224,9 +224,17 @@
 
     <div class="text">
       <p>
-        Linux is a free open source UNIX OS for PCs that was originally
-        developed in 1991 by Linus Torvalds, a Finnish undergraduate student. Linux
-        is neither pure SYSV or pure BSD. Instead, incorporates some features from
+        GNU/Linux is a free open source UNIX OS which was created in 1991 by Linus Torvalds,
+        a Finnish undergraduate student.   In reality, GNU/Linux is a combination of
+        the kernel, developed Torvalds, and software developed by the 
+        Free Software Foundation's - GNU Project
+        which provided compilers, editors, libraries, system ultilties.
+        Although it is more accurate to refer to Linux as GNU/Linux, today most refer to 
+        GNU/Linux as simply Linux.
+      </p>
+      
+      <p>
+        Linux is neither pure SYSV or pure BSD. Instead, incorporates some features from
         each (e.g. SYSV-style startup files but BSD-style file system layout) and
         aims to conform with a set of IEEE standards called POSIX (Portable Operating
         System Interface). To maximise code portability, it typically supports
@@ -241,22 +249,18 @@
         started as one person's project has now turned into a collaboration of
         hundreds of volunteer developers from around the globe. The open source
         approach has not just successfully been applied to kernel code, but also
-        to application programs for Linux (see e.g. <a href="http://www.freshmeat.net">http://www.freshmeat.net</a>).
+        to application programs for Linux.
       </p>
       <p>
         As Linux has become more popular, several different development
-        streams or distributions have emerged, e.g. Redhat, Slackware, Mandrake,
-        Debian, and Caldera. A distribution comprises a prepackaged kernel, system
+        streams or distributions have emerged, e.g. Redhat, Slackware,
+        Debian, and Ubuntu. A distribution comprises a prepackaged kernel, system
         utilities, GUI interfaces and application programs.
       </p>
-      <p>
-        Redhat is the most popular distribution because it has
-        been ported to a large number of hardware platforms (including Intel, Alpha,
-        and SPARC), it is easy to use and install and it comes with a comprehensive
-        set of utilities and applications including the X Windows graphics system,
-        GNOME and KDE GUI environments, and the StarOffice suite (an open source
-        MS-Office clone for Linux).
-      </p>
+      <center><img src="images/linuxdistr.png">
+        <br>
+        <div class="caption">Fig. 1.4: Linux Distributions</div>
+      </center>
     </div>
 
     
@@ -264,8 +268,7 @@
     
 
     <div class="text">
-      Linux has all of the components of a typical
-      OS (at this point you might like to refer back to Fig 1.1):
+      Linux has all of the components of a typical OS:
       <ul>
         <li> <b>Kernel</b></li>
 
@@ -273,8 +276,7 @@
           The Linux kernel includes device driver support for a large number of PC hardware
           devices (graphics cards, network cards, hard
           disks etc.), advanced processor and memory management features, and support
-          for many different types of filesystems (including DOS floppies and the
-          ISO9660 standard for CDROMs). In terms of the services that it provides
+          for many different types of filesystems. In terms of the services that it provides
           to application programs and system utilities, the kernel implements most
           BSD and SYSV system calls, as well as the system calls described in the
           POSIX.1 specification.
@@ -337,8 +339,8 @@
           Word, Excel and PowerPoint files).
         </p>
         <p>
-          Redhat Linux also comes with <b>rpm</b>, the Redhat
-          Package Manager which makes it easy to install and uninstall application
+          Debian Linux also comes with <b>apt</b>, 
+          Advanced Package Tool which makes it easy to install and uninstall application
           programs.
         </p>
       </ul>
@@ -351,7 +353,7 @@
       
       <b>Text-based (TTY) terminals</b>:
       <p>
-        When you connect to a UNIX computer remotely (using telnet)
+        When you connect to a UNIX computer remotely (using ssh)
         or when you log in locally using a text-only terminal, you will see the
         prompt:
       </p>
@@ -399,7 +401,7 @@
         need to press the TAB key to move between fields).
       </p>
       <p>Once you are logged in, you should be presented with a
-        graphical window manager that looks similar to the Microsoft Windows interface.
+        graphical window manager.
         To bring up a window containing a shell prompt look for menus or icons
         which mention the words "shell", "xterm", "console" or "terminal emulator".
       <p>
