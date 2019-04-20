@@ -1,175 +1,177 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>UNIX: E12/title>
-    <link rel="stylesheet" type="text/css" href="unix.css">
+    <title>UNIX: E2</title>
+    <link rel="stylesheet" type="text/css" href="unixstyle.css">
     <link rel="icon" href="/images/favicon4.png">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
   </head>
 
-<div class="text">
-<hr WIDTH="100%">
-<blockquote>
-<ol>
-<li>
-Try the following command sequence:</li>
+  <body>
+    <h2>UNIX: Exercise Sheet 2</h2>
 
-<ul>
-<li>
-<tt>cd</tt></li>
+    <div class="text">
 
-<li>
-<tt>pwd</tt></li>
+      <ol>
+        <li>
+          Try the following command sequence:
+	</li>
 
-<li>
-<tt>ls -al</tt></li>
+        <ul>
+          <li><b>cd</b></li>
 
-<li>
-<tt>cd .</tt></li>
+          <li><b>pwd</b></li>
 
-<li>
-<tt>pwd&nbsp;&nbsp;&nbsp;&nbsp; </tt>(where did that get
-you?)</li>
+          <li><b>ls -al</b></li>
 
-<li>
-<tt>cd ..</tt></li>
+          <li><b>cd .</b></li>
 
-<li>
-<tt>pwd</tt></li>
+          <li><b>pwd</b> (where did that get you?)</li>
 
-<li>
-<tt>ls -al</tt></li>
+          <li><b>cd ..</b></li>
 
-<li>
-<tt>cd ..</tt></li>
+          <li><b>pwd</b></li>
 
-<li>
-<tt>pwd</tt></li>
+          <li><b>ls -al</b></li>
 
-<li>
-<tt>ls -al</tt></li>
+          <li><b>cd ..</b></li>
 
-<li>
-<tt>cd ..</tt></li>
+          <li><b>pwd</b></li>
 
-<li>
-<tt>pwd&nbsp;&nbsp;&nbsp;&nbsp; </tt>(what happens now)</li>
+          <li><b>ls -al</b></li>
 
-<li>
-<tt>cd /etc</tt></li>
+          <li><b>cd ..</b></li>
 
-<li>
-<tt>ls -al |&nbsp;more</tt></li>
+          <li><b>pwd</b> (what happens now)</li>
 
-<li>
-<tt>cat passwd</tt></li>
+          <li><b>cd /etc</b></li>
 
-<li>
-<tt>cd -</tt></li>
+          <li><b>ls -al | more</b></li>
 
-<li>
-<tt>pwd</tt></li>
-</ul>
+          <li><b>cat passwd</b></li>
 
-<li>
-Continue to explore the filesystem tree using <tt>cd</tt>,
-<tt>ls</tt>, <tt>pwd</tt> and <tt>cat</tt>. Look in <tt>/bin</tt>, <tt>/usr/bin</tt>,
-<tt>/sbin</tt>, <tt>/tmp</tt> and <tt>/boot</tt>. What do you see?</li>
+          <li><b>cd -</b></li>
 
-<li>
-Explore <tt>/dev</tt>. Can you identify what devices are
-available?&nbsp;Which are character-oriented and which are block-oriented?
-Can you identify your tty&nbsp;(terminal)&nbsp;device (typing <tt>who am
-i </tt>might help); who is the owner of your tty (use <tt>ls -l</tt>)?</li>
+          <li><b>pwd</b></li>
+        </ul>
 
-<li>
-Explore <tt>/proc</tt>. Display the contents of the files
-<tt>interrupts</tt>, <tt>devices</tt>, <tt>cpuinfo</tt>, <tt>meminfo</tt>
-and <tt>uptime</tt> using <tt>cat</tt>. Can you see why we say <tt>/proc</tt>
-is a pseudo-filesystem which allows access to kernel data structures?</li>
+        <li>
+          Continue to explore the filesystem tree using <b>cd</b>,
+          <b>ls</b>, <b>pwd</b> and <b>cat</b>. Look in <b>/bin</b>, <b>/usr/bin</b>,
+          <b>/sbin</b>, <b>/tmp</b> and <b>/boot</b>. What do you see?
+	</li>
 
-<li>
-Change to the home directory of another user directly, using
-<tt>cd ~username</tt>.</li>
+        <li>
+          Explore <b>/dev</b>. Can you identify what devices are
+          available? Which are character-oriented and which are block-oriented?
+          Can you identify your by (terminal) device (typing <b>who am
+            i </b>might help); who is the owner of your by (use <b>ls -l</b>)?
+	</li>
 
-<li>
-Change back into your home directory.</li>
+        <li>
+          Explore <b>/proc</b>. Display the contents of the files
+          <b>interrupts</b>, <b>devices</b>, <b>cpuinfo</b>, <b>meminfo</b>
+          and <b>uptime</b> using <b>cat</b>. Can you see why we say <b>/proc</b>
+          is a pseudo-filesystem which allows access to kernel data structures?
+	</li>
 
-<li>
-Make subdirectories called <tt>work</tt> and <tt>play</tt>.</li>
+        <li>
+          Change to the home directory of another user directly, using
+          <b>cd ~username</b>.
+	</li>
 
-<li>
-Delete the subdirectory called <tt>work</tt>.</li>
+        <li>
+          Change back into your home directory.</li>
 
-<li>
-Copy the file <tt>/etc/passwd</tt> into your home directory.</li>
+        <li>
+          Make subdirectories called <b>work</b> and <b>play</b>.
+	</li>
 
-<li>
-Move it into the subdirectory <tt>play</tt>.</li>
+        <li>
+          Delete the subdirectory called <b>work</b>.
+	</li>
 
-<li>
-Change into subdirectory <tt>play</tt> and create a symbolic
-link called <tt>terminal</tt> that points to your tty device. What happens
-if you try to make a hard link to the tty device?</li>
+        <li>
+          Copy the file <b>/etc/passwd</b> into your home directory.</li>
 
-<li>
-What is the difference between listing the contents of directory
-play with <tt>ls -l</tt> and <tt>ls -L</tt>?</li>
+        <li>
+          Move it into the subdirectory <b>play</b>.
+	</li>
 
-<li>
-Create a file called <tt>hello.txt</tt> that contains the
-words "<tt>hello world</tt>". Can you use "<tt>cp</tt>" using "<tt>terminal</tt>"
-as the source file to achieve the same effect?</li>
+        <li>
+          Change into subdirectory <b>play</b> and create a symbolic
+          link called <b>terminal</b> that points to your by device. What happens
+          if you try to make a hard link to the by device?
+	</li>
 
-<li>
-Copy <tt>hello.txt</tt> to <tt>terminal</tt>. What happens?</li>
+        <li>
+          What is the difference between listing the contents of directory
+          play with <b>ls -l</b> and <b>ls -L</b>?
+	</li>
 
-<li>
-Imagine you were working on a system and someone accidentally
-deleted the <tt>ls</tt> command (<tt>/bin/ls</tt>). How could you get a
-list of the files in the current directory? Try it.</li>
+        <li>
+          Create a file called <b>hello.txt</b> that contains the
+          words <q>hello world</q>. Can you use <b>cp</b> using <b>terminal</b>
+          as the source file to achieve the same effect?
+	</li>
 
-<li>
-How would you create and then delete a file called "<tt>$SHELL</tt>"?
-Try it.</li>
+        <li>
+          Copy <b>hello.txt</b> to <b>terminal</b>. What happens?
+	</li>
 
-<li>
-How would you create and then delete a file that begins with
-the symbol <tt>#</tt>? Try it.</li>
+        <li>
+          Imagine you were working on a system and someone accidentally
+          deleted the <b>ls</b> command (<b>/bin/ls</b>). How could you get a
+          list of the files in the current directory? Try it.
+	</li>
 
-<li>
-How would you create and then delete a file that begins with
-the symbol <tt>-</tt>? Try it.</li>
+        <li>
+          How would you create and then delete a file called <q><b>$SHELL</b><q>?
+          Try it.
+	</li>
 
-<li>
-What is the output of the command: <tt>echo&nbsp;{con,pre}{sent,fer}{s,ed}</tt>?
-Now, from your home directory, copy <tt>/etc/passwd</tt> and <tt>/etc/group</tt>
-into your home directory in one command given that you can only type <tt>/etc</tt>
-once.</li>
+        <li>
+          How would you create and then delete a file that begins with
+          the symbol <b>#</b>? Try it.
+	</li>
 
-<li>
-Still in your home directory, copy the entire directory <tt>play</tt>
-to a directory called <tt>work</tt>, preserving the symbolic link.</li>
+        <li>
+          How would you create and then delete a file that begins with
+          the symbol <b>-</b>? Try it.
+	</li>
 
-<li>
-Delete the <tt>work</tt> directory and its contents with
-one command. Accept no complaints or queries.</li>
+        <li>
+          What is the output of the command: <b>echo {con,pre}{sent,fer}{s,ed}</b>?
+          Now, from your home directory, copy <b>/etc/passwd</b> and <b>/etc/group</b>
+          into your home directory in one command given that you can only type <b>/etc</b>
+          once.
+	</li>
 
-<li>
-Change into a directory that does not belong to you and try
-to delete all the files (avoid <tt>/proc</tt> or <tt>/dev</tt>, just in
-case!)</li>
+        <li>
+          Still in your home directory, copy the entire directory <b>play</b>
+          to a directory called <b>work</b>, preserving the symbolic link.
+	</li>
 
-<li>
-Experiment with the options on the <tt>ls</tt> command. What
-do the <tt>d</tt>, <tt>i</tt>, <tt>R</tt> and <tt>F</tt> options do?</li>
-</ol>
-</blockquote>
+        <li>
+          Delete the <b>work</b> directory and its contents with
+          one command. Accept no complaints or queries.
+	</li>
 
-<BLOCKQUOTE><P><A HREF="http:./index.html">
-(BACK TO COURSE CONTENTS)</A></P></BLOCKQUOTE>
+        <li>
+          Change into a directory that does not belong to you and try
+          to delete all the files (avoid <b>/proc</b> or <b>/dev</b>, just in
+          case!)
+	</li>
 
-</div>
-</body>
+        <li>
+          Experiment with the options on the <b>ls</b> command. What
+          do the <b>d</b>, <b>i</b>, <b>R</b> and <b>F</b> options do?
+	</li>
+      </ol>
+
+      <p><a href="index.html">(Contents)</a></p>
+
+    </div>
+  </body>
 </html>
