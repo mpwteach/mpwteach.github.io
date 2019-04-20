@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="mystyle.css?3">
     <title>UNIX: Files</title>
+    <link rel="stylesheet" type="text/css" href="/styles/navbar.css?v=1.4" >
+    <link rel="stylesheet" type="text/css" href="unixstyle.css">
     <link rel="icon" href="/images/favicon4.png">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">  
@@ -11,13 +12,28 @@
 
   <body>
 
-    <h1>3. Files</h1>
+    <div class="mainheader">
+      <h1>UNIX and Linux</h1>
+
+      <ul class="topnav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="l1-intro.html">Introduction</a></li>
+        <li><a href="l2-filesys.html">File System</a></li>
+        <li><a class="active" href="l3-files.html">Files</a></li>
+        <li><a href="l4-proc.html">Processes</a></li>
+        <li><a href="l5-network.html">Network</a></li>
+        <li><a href="l6-edit.html">Editors</a></li>
+        <li><a href="l7-admin.html">Admin</a></li>
+        <li><a href="l8-shell.html">Shell</a></li>
+        <li class="right"><a href="/index.html">MPW Teach Home</a></li>
+      </ul>
+    </div>
     
-    <h2>3.1 Objectives</h2>
+    <h2>3.1 Introduction</h2>
 
     <div class="text">
 
-      This lecture covers:
+      This section covers:
       <ul>
         <li>
           File and directory permissions in more detail and how these
@@ -291,9 +307,9 @@
       </table>
 
       <div class="caption">Fig 3.2: Other file types and appropriate content
-viewers</div>
+	viewers</div>
     </div>
-      
+    
 
     <h2>3.4 Finding Files</h2>
 
@@ -338,7 +354,7 @@ viewers</div>
           file found and the <b>';'</b> ends the <b>-exec</b> clause.</p>
         <p>For more information about <b>find</b> and its abilities,
           use <b>man find</b> and/or <b>info find</b>.</p>
-          
+        
         <br>
         <li><b>which</b> (sometimes also called <b>whence</b>) <i>command</i></li>
 
@@ -583,7 +599,7 @@ viewers</div>
     <div class="text">
 
       <p>UNIX supports tools for accessing removable media
-      such as CDROMs and floppy disks.</p>
+	such as CDROMs and floppy disks.</p>
 
       <ul>
         
@@ -597,10 +613,10 @@ viewers</div>
           main filesystem:</p>
 
         <p class="terminal">$ cat /etc/fstab
-        <br>/dev/fd0&nbsp;&nbsp; /mnt/floppy&nbsp; auto&nbsp;&nbsp;&nbsp;
-        rw,user,noauto&nbsp; 0 0
-        <br>/dev/hdc&nbsp;&nbsp; /mnt/cdrom&nbsp;&nbsp; iso9660
-        ro,user,noauto&nbsp; 0 0</p>
+          <br>/dev/fd0&nbsp;&nbsp; /mnt/floppy&nbsp; auto&nbsp;&nbsp;&nbsp;
+          rw,user,noauto&nbsp; 0 0
+          <br>/dev/hdc&nbsp;&nbsp; /mnt/cdrom&nbsp;&nbsp; iso9660
+          ro,user,noauto&nbsp; 0 0</p>
 
         <p>In this case, the mount point for the floppy drive is
           <b>/mnt/floppy</b>
@@ -626,7 +642,7 @@ viewers</div>
 
       </ul>
     </div>
-      
+    
     <p><a href="index.html">(Contents)</a></p>
     
   </body>

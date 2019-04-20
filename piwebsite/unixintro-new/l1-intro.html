@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="mystyle.css">
-    <title>Introduction to UNIX and Linux: Lecture 1</title>
+    <title>UNIX: Intro</title>
+    <link rel="stylesheet" type="text/css" href="/styles/navbar.css?v=1.4" >
+    <link rel="stylesheet" type="text/css" href="unixstyle.css">
     <link rel="icon" href="/images/favicon4.png">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">  
@@ -10,25 +11,39 @@
 
   <body>
 
-    <h1>1. Introduction to UNIX</h1>
+    <div class="mainheader">
+      <h1>UNIX and Linux</h1>
 
-    <h2>1.1 Objectives</h2>
+      <ul class="topnav">
+        <li><a href="index.html">Home</a></li>
+        <li><a class="active" href="l1-intro.html">Introduction</a></li>
+        <li><a href="l2-filesys.html">File System</a></li>
+        <li><a href="l3-files.html">Files</a></li>
+        <li><a href="l4-proc.html">Processes</a></li>
+        <li><a href="l5-network.html">Network</a></li>
+        <li><a href="l6-edit.html">Editors</a></li>
+        <li><a href="l7-admin.html">Admin</a></li>
+        <li><a href="l8-shell.html">Shell</a></li>
+        <li class="right"><a href="/index.html">MPW Teach Home</a></li>
+      </ul>
+    </div>
+
+   <h2>1.1 Introduction</h2>
     
-
     <div class="text">
-      This lecture covers:
+      This section covers:
       <ul>
-        <li>The concept of an operating system.</li>
-        <li>The internal architecture of an operating system.</li>
-        <li>The evolution of the UNIX operating system into two broad schools (BSD and SYSV) and the development of Linux, a popular open source operating system.</li>
-        <li>The architecture of the Linux operating system in more detail.</li>
-        <li>How to log into (and out of) UNIX and change your password.</li>
-        <li>The general format of UNIX commands.</li>
+        <li><a href="#s2">The concept of an operating system.</a></li>
+        <li><a href="#s3">A Brief history of UNIX operating system and the development Linux.</a></li>
+        <li><a href="#s4">The architecture of the Linux operating system.</a></li>
+        <li><a href="#s5">Logging into (and out of) UNIX</a></li>
+        <li><a href="#s6">Changing your password.</a></li>
+        <li><a href="#s7">General format of UNIX commands.</a></li>
       </ul>
     </div>
 
     
-    <h2>1.2 What is an Operating System?</h2>
+    <h2 id="s2">1.2 What is an Operating System?</h2>
 
     <div class="text">
 
@@ -99,7 +114,7 @@
       
     </div>
 
-    <h2>1.3 A Brief History of UNIX</h2>
+    <h2 id="s3">1.3 A Brief History of UNIX</h2>
 
     <div class="text">    
 
@@ -232,7 +247,10 @@
         Although it is more accurate to refer to Linux as GNU/Linux, today most refer to 
         GNU/Linux as simply Linux.
       </p>
-      
+      <center><img src="images/gnulinux.png" style="width:25%;">
+        <br>
+        <div class="caption">Fig. 1.4: GNU/Linux</div>
+      </center>
       <p>
         Linux is neither pure SYSV or pure BSD. Instead, incorporates some features from
         each (e.g. SYSV-style startup files but BSD-style file system layout) and
@@ -264,7 +282,7 @@
     </div>
 
     
-    <h2>1.4 Architecture of the Linux Operating System</h2>
+    <h2 id="s4">1.4 Architecture of the Linux Operating System</h2>
     
 
     <div class="text">
@@ -347,7 +365,7 @@
 
     </div>
 
-    <h2>1.5 Logging into (and out of) UNIX Systems</h2>
+    <h2 id="s5">1.5 Logging into (and out of) UNIX Systems</h2>
     
     <div class="text">
       
@@ -413,7 +431,7 @@
 
     </div>
 
-    <h2>1.6 Changing your password</h2>
+    <h2 id="s6">1.6 Changing your password</h2>
 
     <div class="text">
       <p>
@@ -450,7 +468,7 @@
     </div>
     
     
-    <h2>1.7 General format of UNIX commands</h2>
+    <h2 id="s7">1.7 General format of UNIX commands</h2>
 
     <div class="text">
       <p>

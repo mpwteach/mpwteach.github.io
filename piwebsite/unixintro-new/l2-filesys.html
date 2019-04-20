@@ -1,31 +1,46 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="mystyle.css?3">
     <title>UNIX: Filesystem</title>
+    <link rel="stylesheet" type="text/css" href="/styles/navbar.css?v=1.4" >
+    <link rel="stylesheet" type="text/css" href="unixstyle.css">
     <link rel="icon" href="/images/favicon4.png">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">  
   </head>
 
   <body>
-    <hr WIDTH="100%">
 
-    <h1>2. Filsystem</h1>
+    <div class="mainheader">
+      <h1>UNIX and Linux</h1>
 
-
-    <h2>2.1 Objectives</h2>
-
-    <div class="text">
-      This lecture covers:<br>
-      <li> The UNIX filesystem and directory structure.</li>
-      <li> File and directory handling commands.</li>
-      <li> How to make symbolic and hard links.</li>
-      <li> How wildcard filename expansion works.</li>
-      <li> What argument quoting is and when it should be used.</li>
+      <ul class="topnav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="l1-intro.html">Introduction</a></li>
+        <li><a class="active" href="l2-filesys.html">File System</a></li>
+        <li><a href="l3-files.html">Files</a></li>
+        <li><a href="l4-proc.html">Processes</a></li>
+        <li><a href="l5-network.html">Network</a></li>
+        <li><a href="l6-edit.html">Editors</a></li>
+        <li><a href="l7-admin.html">Admin</a></li>
+        <li><a href="l8-shell.html">Shell</a></li>
+        <li class="right"><a href="/index.html">MPW Teach Home</a></li>
+      </ul>
     </div>
 
-    <h2>2.2 The UNIX Filesystem</h2>
+
+    <h2>2.1 Introduction</h2>
+
+    <div class="text">
+      This section covers:<br>
+      <li><a href="#s2">The UNIX filesystem and directory structure.</a></li>
+      <li><a href="#s3">File and directory handling commands.</a></li>
+      <li><a href="#s4">How to make symbolic and hard links.</a></li>
+      <li><a href="#s5">How wildcard filename expansion works.</a></li>
+      <li><a href="#s6">What argument quoting is and when it should be used.</a></li>
+    </div>
+
+    <h2 id="s2">2.2 The UNIX Filesystem</h2>
 
 
     <div class="text">
@@ -79,7 +94,7 @@
     </div>
     
 
-    <h2>2.3 Typical UNIX Directory Structure</h2>
+    <h2 id="s3">2.3 Typical UNIX Directory Structure</h2>
 
     <div class="text">
       <p>
@@ -91,7 +106,7 @@
       </p>
       
       <center>
-        <img src="images/dirtree.gif" height=383 width=573>
+        <img src="images/linuxfsystem.png">
         <div class="caption">Fig. 2.1: Part of a typical UNIX filesystem tree</div>
       </center>
       
@@ -132,7 +147,7 @@
         </tr>
         <tr>
           <td>/sbin</td>
-          <td>Superuser system utilities(for performing system administrative tasks)</td>
+          <td>Superuser system utilities (for performing system administrative tasks)</td>
         </tr>
         <tr>
           <td>/lib</td>
@@ -143,7 +158,7 @@
           <td>Temporary file storage space (can be used by any user)</td>
         </tr>
         <tr>
-          <td>/home or /homes</td>
+          <td>/home</td>
           <td> User home directories containing personal file space for each user. Each directory is named after the login of the user.</td>
         </tr>
         <tr>
@@ -159,7 +174,7 @@
           <td>A pseudo-filesystem which is used as an interface to the kernel. Includes a sub-directory for each active program (or process).</td>
         </tr>  
       </table>
-    
+      
 
       <div class="caption">Fig. 2.2: Typical UNIX directories</div>
 
@@ -175,7 +190,7 @@
     </div>
 
 
-    <h2>2.4 Directory and File Handling Commands</h2>
+    <h2 id="s4">2.4 Directory and File Handling Commands</h2>
 
 
     <div class="text">
@@ -196,7 +211,7 @@
         </p>
         
         <p>implies that <b>/usr/bin</b> is the current working directory.</p>
-          
+        
 
         <li><b>ls</b> (list directory)</li>
 
@@ -226,10 +241,13 @@
           listing), which can be combined with the <b>-a</b> option as follows:
         <p class="terminal">$ ls -a -l</p>
         <p>(or, equivalently,)</p>
-        <p class="terminal">$ ls -al</p>
+        <p class="terminal">
+          $ ls -al
+          <br>-rwxr-x--- 1 william marketing 0 Oct 31 11:06 test
+        </p>
 
         <p>Each line of the output looks like this:</p>
-        <img src="images/direntry.gif" height=128 width=667>
+        <img src="images/filedesc.png">
 
         <p>where:</p>
         <ul>
@@ -417,7 +435,7 @@
 
     <br>
 
-    <h2>2.5 Making Hard and Soft (Symbolic) Links</h2>
+    <h2 id="s5">2.5 Making Hard and Soft (Symbolic) Links</h2>
 
     <div class="text">
 
@@ -454,7 +472,7 @@
 
     </div>
 
-    <h2>2.6 Specifying multiple filenames</h2>
+    <h2 id="s6">2.6 Specifying multiple filenames</h2>
 
 
     <div class="text">
@@ -501,7 +519,7 @@
     </div>
     
 
-    <h2>2.7 Quotes</h2>
+    <h2 id="s7">2.7 Quotes</h2>
 
     <div class="text">
       <p>
