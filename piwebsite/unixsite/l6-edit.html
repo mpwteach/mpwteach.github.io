@@ -1,528 +1,586 @@
-<!DOCTYPE HTML public "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
-<head>
-   <link rel="stylesheet" type="text/css" href="mystyle.css">
-   <link rel="icon" href="https://sites.google.com/a/my.sduhsd.net/csp-yana2319/home/0-01-magic-square/planticon.jpg?attredirects=0">
-</head>
+  <head>
+    <title>UNIX: Editors</title>
+    <link rel="stylesheet" type="text/css" href="/styles/navbar.css?v=1.4" >
+    <link rel="stylesheet" type="text/css" href="unixstyle.css">
+    <link rel="icon" href="/images/favicon4.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+  </head>
 
-<body>
+  <body>
 
-<HR width=100%">
+    <div class="mainheader">
+      <h1>UNIX and Linux</h1>
 
-<h1>Introduction to UNIX: Lecture Six</h1>
+      <ul class="topnav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="l1-intro.html">Introduction</a></li>
+        <li><a href="l2-filesys.html">File System</a></li>
+        <li><a href="l3-files.html">Files</a></li>
+        <li><a href="l4-proc.html">Processes</a></li>
+        <li><a href="l5-util.html">Utilities</a></li>
+        <li><a class="active" href="l6-edit.html">Editors</a></li>
+        <li><a href="l7-admin.html">Admin</a></li>
+        <li><a href="l8-shell.html">Shell</a></li>
+        <li class="right"><a href="/index.html">MPW Teach Home</a></li>
+      </ul>
+    </div>
 
-<div class="table">
-<div class="heading">
-6.1 Objectives
+
+
+    <h2>6.1 Introduction</h2>
+
+    <div class="text">
+      This section introduces the two most popular UNIX editors: 
+      <b>vi</b> and <b>emacs</b>. For each editor, it covers:
+      <ul>
+        <li>Basic text input and navigation.</li>
+        <li>Moving and copying text.</li>
+        <li>Searching for and replacing text.</li>
+        <li>Other useful commands.</li>
+        <li>A quick-reference chart.</li>
+      </ul>
+    </div>
+
+    <br>
+
+    <h2>6.2.1 Introduction to vi</h2>
+ 
+    <div class="text">
+      <p>
+        <b>vi</b> (pronounced "vee-eye", short for
+        visual, or perhaps vile) is a display-oriented text editor based on an
+        underlying line editor called <b>ex</b>. Although beginners usually find
+        <b>vi</b> somewhat awkward to use, it is useful to learn because it is universally available
+        (being supplied with all UNIX systems). It also uses standard alphanumeric
+        keys for commands, so it can be used on almost any terminal or workstation
+        without having to worry about unusual keyboard mappings. System administrators
+        like users to use <b>vi</b> because it uses very few system resources.
+      </p>
+
+      <p>
+        To start <b>vi</b>, enter:
+      </p>
+      <p class="terminal">
+        $ vi filename<br>
+      </p>
+      <p>where <I>filename</I> is the name of the file you want
+        to edit. If the file doesn't exist, <b>vi</b> will create it for you.
+      </p>
+    </div>
+
+
+    <h2>6.2.2 Basic Text Input and Navigation in vi</h2>
+
+    <div class="text">
+      <p>
+        The main feature that makes <b>vi</b> unique
+        as an editor is its mode-based operation. <b>vi</b> has two modes: command
+        mode and input mode. In command mode, characters you type perform actions
+        (e.g. moving the cursor, cutting or copying text, etc.) In input mode,
+        characters you type are inserted or overwrite existing text.
+      </p>
+      <p>
+        When you begin <b>vi</b>, it is in command mode. To
+        put <b>vi</b> into input mode, press <b>i </b>(insert). You can then
+        type text which is inserted at the current cursor location; you can correct
+        mistakes with the backspace key as you type.To get back into command mode,
+        press ESC (the escape key). Another way of inserting text, especially useful
+        when you are at the end of a line is to press <b>a</b> (append).
+      </p>
+      <p>
+        In command mode, you are able to move the cursor around your document.
+        <b>h</b>, <b>j</b>, <b>k</b> and <b>l</b> move the
+        cursor left, down, up and right respectively (if you are lucky the arrow
+        keys may also work). Other useful keys are <b>^</b> and <b>$</b> which
+        move you to the beginning and end of a line respectively.
+        <b>w</b> skips to the beginning of the next word and <b>b</b> skips back to the beginning
+        of the previous word. To go right to the top of the document, press <b>1</b>
+        and then <b>G</b>. To go the bottom of the document, press <b>G</b>.
+        To skip forward a page, press <b>^F</b>, and to go back a page, press
+        <b>^B</b>.
+        To go to a particular line number, type the line number and press <b>G</b>,
+        e.g. <b>55G</b> takes you to line 55.
+      </p>
+      <p>
+        To delete text, move the cursor over the first character
+        of the group you want to delete and make sure you are in command mode.
+        Press <b>x</b> to delete the current character, <b>dw</b> to delete
+        the next word, <b>d4w</b> to delete the next 4 words, <b>dd</b> to
+        delete the next line, <b>4dd</b> to delete the next 4 lines, <b>d$</b>
+        to delete to the end of the line or even <b>dG</b> to delete to the end
+        of the document. If you accidentally delete too much, pressing <b>u</b>
+        will undo the last change.
+      </p>
+      <p>
+        Occasionally you will want to join two lines together.
+        Press <b>J</b> to do this (trying to press backspace on the beginning
+        of the second line does not have the intuitive effect!)
+      </p>
+    </div>
+
+
+    <h2>6.2.3 Moving and Copying Text in vi</h2>
+
+    <div class="text">
+      <p>
+        <b>vi</b> uses buffers to store text that is
+        deleted. There are nine numbered buffers (1-9) as well as the undo buffer.
+        Usually buffer 1 contains the most recent deletion, buffer 2 the next recent,
+        etc.
+      </p>
+      <p>
+        To cut and paste in <b>vi</b>, delete the text (using
+        e.g. <b>5dd</b> to delete 5 lines). Then move to the line where you want
+        the text to appear and press <b>p</b>. If you delete something else before
+        you paste, you can still retrieve the delete text by pasting the contents
+        of the delete buffers. You can do this by typing <b>1p</b>,<b>2p</b>,
+        etc.
+      </p>
+      <p>
+        To copy and paste, "yank" the text (using e.g. <b>5yy</b>
+        to copy 5 lines). Then move to the line where you want the text to appear
+        and press <b>p</b>.
+      </p>
+    </div>
+
+
+    <h2>6.2.4 Searching for and Replacing Text in vi</h2>
+
+
+    <div class="text">
+      <p>
+        In command mode, you can search for text by specifying
+        regular expressions. To search forward, type <b>/</b> and then a regular
+        expression and press enter. To
+        search backwards, begin with a <b>?</b> instead of a <b>/</b>. To find
+        the next text that matches your regular expression press <b>n</b>.
+      </p>
+      <p>
+        To search and replace all occurences of pattern1 with
+        pattern2, type <b>:%s/</b><I>pattern1</I><b>/</b><I>pattern2</I><b>/g</b>.
+        To be asked to confirm each replacement, add a <b>c</b> to this substitution
+        command. Instead of the <b>%</b> you can also give a range of lines (e.g.
+        1,17) over which you want the substitution to apply.
+      </p>
+    </div>
+
+    <h2>6.2.5 Other Useful vi Commands</h2>
+
+    <div class="text">
+      <p>
+        Programmers might like the <b>:set number<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></b>
+        command which displays line numbers (<b>:set nonumbe</b>r turns them
+        off).
+      </p>
+      <p>To save a file, type <b>:w</b>.
+        To save and quit, type <b>:wq</b>
+        or press <b>ZZ</b>. To force a quit without saving type <b>:q!</b>
+      </p>
+      <p>
+        To start editing another file, type <b>:e</b> filename .
+      </p>
+      <p>
+        To execute shell commands from within vi, and then return
+        to vi afterwards, type <b>:!</b><I>shellcommand</I>.
+        You can use the letter <b>%</b> as a substitute for the name of the file
+        that you are editing (so <b>:!echo %</b> prints the name of the current
+        file).
+      </p>
+      <p>
+        <b>.</b> repeats the last command.
+      </p>
+    </div>
+
+    <h2>6.2.6 Quick reference for vi</h2>
+    
+    <table class="tablestyle2">
+      <tr>
+        <th>Command</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td><b>Inserting and typing text:</b></td>
+      </tr>
+      <tr>
+        <td>i</td>
+        <td>insert text (and enter input mode)</td>
+      </tr>
+      <tr>
+        <td>a</td>
+        <td>append text (to end of line)</td>
+      </tr>
+      <tr>
+        <td>ESC</td>
+        <td>re-enter command mode</td>
+      </tr>
+      <tr>
+        <td>J</td>
+        <td>join lines</td>
+      </tr>
+      <tr>
+        <td><b>Cursor movement:</b></td>
+      </tr>
+      <tr>
+        <td>h</td>
+        <td>left</td>
+      </tr>
+      <tr>
+        <td>j</td>
+        <td>down</td>
+      </tr>
+      <tr>
+        <td>k</td>
+        <td>up</td>
+      </tr>
+      <tr>
+        <td>l</td>
+        <td>right</td>
+      </tr>
+      <tr>
+        <td>^</td>
+        <td>beginning of line</td>
+      </tr>      
+      <tr>
+        <td>$</td>
+        <td>end of line</td>
+      </tr>
+      <tr>
+        <td>1 G</td>
+        <td>top of document</td>
+      </tr>
+      <tr>
+        <td>G</td>
+        <td>end of document</td>
+      </tr>
+      <tr>
+        <td>&lt;n&gt; G</td> 
+        <td>go to line &lt;n&gt;</td>
+      </tr>
+      <tr>
+        <td>^F</td>
+        <td>page forward</td>
+      <tr>
+      <tr>
+        <td>^B</td>
+        <td>page backward</td>
+      </tr>
+      <tr>
+        <td>w</td>
+        <td>word forwards</td>
+      </tr>
+      <tr>
+        <td>b</td>
+        <td>word backwards</td>
+      </tr>
+
+      <tr>
+	<td><b>Deleting and moving text:</b></td>
+      </tr>
+    </table>
+
+<br><b>Backspace delete character before cursor</b>
+<br><b>
+  (only works in insert mode)</b>
+<br><b>x
+  delete character under cursor</b>
+<br><b>dw
+  delete word</b>
+<br><b>dd
+  delete line (restore with p or P)</b>
+<br><b>&lt;n> dd delete n lines</b>
+<br><b>d$
+  delete to end of line</b>
+<br><b>dG
+  delete to end of file</b>
+<br><b>yy
+  yank/copy line (restore with p or P)</b>
+<br><b>&lt;n> yy yank/copy &lt;n>
+  lines</b>
+<p><b>Search and replace:</b>
+<br><b>%s/&lt;search string>/&lt;replace string>/g</b><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<p><b>Miscellaneous:</b>
+<br><b>u
+  undo</b>
+<br><b>:w
+  save file</b>
+<br><b>:wq save
+  file and quit</b>
+<br><b>ZZ
+  save file and quit</b>
+<br><b>:q! quit
+  without saving</b></ul>
 </div>
+<br>
+
+<div class="heading">
+  <div class="table">
+    6.3.1 Introduction to emacs
+  </div>
 </div>
 <br>
 
 <div class="text">
-This lecture introduces the two most popular
-UNIX editors: <tt>vi </tt>and <tt>emacs</tt>. For each editor, it covers:</font>
-<ul>
-<li>
-Basic text input and navigation.</font></li>
-<li>
-Moving and copying text.</font></li>
-<li>
-Searching for and replacing text.</font></li>
-<li>
-Other useful commands.</font></li>
-<li>
-A quick-reference chart.</font></li>
-</ul>
-</div>
-<br>
-
-<div class="table">
-<div class="heading">
-6.2.1 Introduction to vi
-</div>
-</div>
-<br>
-
-<div class="text">
-<tt>vi</tt> (pronounced "vee-eye", short for
-visual, or perhaps vile) is a display-oriented text editor based on an
-underlying line editor called <tt>ex</tt>. Although beginners usually find
-<tt>vi
-</tt>somewhat
-awkward to use, it is useful to learn because it is universally available
-(being supplied with all UNIX systems). It also uses standard alphanumeric
-keys for commands, so it can be used on almost any terminal or workstation
-without having to worry about unusual keyboard mappings. System administrators
-like users to use <tt>vi</tt> because it uses very few system resources.</font>
-<p>To start <tt>vi</tt>, enter:</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ vi </tt><I>filename</I></font><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+  <b>emacs </b>is a popular editor for UNIX,
+  Windows and Macintosh systems. Unlike <b>vi</b>, it is not a standard
+  UNIX system utility, but is available from the Free Software Foundation.
+<p>An<b> emacs</b> zealot will tell you how <b>emacs</b>
+  provides advanced facilities that go beyond simple insertion and deletion
+  of text: you can view two are more files at the same time, compile and
+  debug programs in almost any programming language, typeset documents, run
+  shell commands, read manual pages, email and news and even browse the web
+  from inside <b>emacs</b>.
+  <b>emacs</b> is also very flexible - you
+  can redefine keystrokes and commands easily, and (for the more ambitious)
+  you can even write Lisp programs to add new commands and display modes
+  to <b>emacs</b>, since <b>emacs</b> has its own Lisp interpreter. In
+  fact most of the editing commands of Emacs are written in Lisp already;
+  the few exceptions are written in C for efficiency. However, users do not
+  need to know how to program Lisp to use <b>emacs</b> (while it is true
+  that only a programmer can write a substantial extension to <b>emacs</b>,
+  it is easy for anyone to use it afterwards).
+<p>Critics of <b>emacs</b> point out that it uses a relatively
+  large amount of system resources compared to <b>vi</b> and that it has
+  quite a complicated command structure (joking that <b>emacs</b> stands
+  for Escape-Meta-Alt-Control-Shift).
+<p>In practice most users tend to use both editors - <b>vi</b>
+  to quickly edit short scripts and programs and <b>emacs</b> for more
+  complex jobs that require reference to more than one file simultaneously.
+<p>On UNIX systems, <b>emacs</b> can run in graphical mode
+  under the X Windows system, in which case some helpful menus and mouse
+  button command mappings are provided. However, most of its facilities are
+  also available on a text terminal.
+<p>To start <b>emacs</b>, enter:
+<p><b> $ emacs </b><I>filename</I><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
 <p>where <I>filename</I> is the name of the file you want
-to edit. If the file doesn't exist, <tt>vi</tt> will create it for you.</font>
+  to edit. If the file doesn't exist, <b>emacs</b> will create it for you.
 </div>
 <br>
 
 <div class="heading">
-<div class="table">
-6.2.2 Basic Text Input and Navigation in vi
-</div>
-</div>
-<br>
-
-<div class="text">
-The main feature that makes <tt>vi</tt> unique
-as an editor is its mode-based operation. <tt>vi</tt> has two modes: command
-mode and input mode. In command mode, characters you type perform actions
-(e.g. moving the cursor, cutting or copying text, etc.) In input mode,
-characters you type are inserted or overwrite existing text.</font>
-<p>When you begin <tt>vi</tt>, it is in command mode. To
-put <tt>vi</tt> into input mode, press <tt>i </tt>(insert). You can then
-type text which is inserted at the current cursor location; you can correct
-mistakes with the backspace key as you type.To get back into command mode,
-press ESC (the escape key). Another way of inserting text, especially useful
-when you are at the end of a line is to press <tt>a</tt> (append).</font>
-<p>In command mode, you are able to move the cursor around
-your document.
-<tt>h</tt>, <tt>j</tt>, <tt>k</tt> and <tt>l </tt>move the
-cursor left, down, up and right respectively (if you are lucky the arrow
-keys may also work). Other useful keys are <tt>^</tt> and <tt>$</tt> which
-move you to the beginning and end of a line respectively.
-<tt>w</tt> skips
-to the beginning of the next word and <tt>b</tt> skips back to the beginning
-of the previous word. To go right to the top of the document, press <tt>1</tt>
-and then <tt>G</tt>. To go the bottom of the document, press <tt>G</tt>.
-To skip forward a page, press <tt>^F</tt>, and to go back a page, press
-<tt>^B</tt>.
-To go to a particular line number, type the line number and press <tt>G</tt>,
-e.g. <tt>55G</tt> takes you to line 55.</font>
-<p>To delete text, move the cursor over the first character
-of the group you want to delete and make sure you are in command mode.
-Press <tt>x</tt> to delete the current character, <tt>dw</tt> to delete
-the next word, <tt>d4w</tt> to delete the next 4 words, <tt>dd</tt> to
-delete the next line, <tt>4dd
-</tt>to delete the next 4 lines, <tt>d$</tt>
-to delete to the end of the line or even <tt>dG</tt> to delete to the end
-of the document. If you accidentally delete too much, pressing <tt>u</tt>
-will undo the last change.</font>
-<p>Occasionally you will want to join two lines together.
-Press <tt>J</tt> to do this (trying to press backspace on the beginning
-of the second line does not have the intuitive effect!)</font>
-</div>
-<br>
-
-<div class="heading">
-<div class="table">
-6.2.3 Moving and Copying Text in vi
-</div>
+  <div class="table">
+    6.3.2 Basic Text Input and Navigation in emacs
+  </div>
 </div>
 <br>
 
 <div class="text">
-<tt>vi</tt> uses buffers to store text that is
-deleted. There are nine numbered buffers (1-9) as well as the undo buffer.
-Usually buffer 1 contains the most recent deletion, buffer 2 the next recent,
-etc.</font>
-<p>To cut and paste in <tt>vi</tt>, delete the text (using
-e.g. <tt>5dd</tt> to delete 5 lines). Then move to the line where you want
-the text to appear and press <tt>p</tt>. If you delete something else before
-you paste, you can still retrieve the delete text by pasting the contents
-of the delete buffers. You can do this by typing <tt>"1p</tt>,<tt> "2p</tt>,
-etc.</font>
-<p>To copy and paste, "yank" the text (using e.g. <tt>5yy</tt>
-to copy 5 lines). Then move to the line where you want the text to appear
-and press <tt>p</tt>.</font>
-</div>
-<br>
-
-<div class="table">
-<div class="heading">
-6.2.4 Searching for and Replacing Text in vi
-</div>
-</div>
-<br>
-
-<div class="text">
-In command mode, you can search for text by specifying
-regular expressions. To search forward, type <tt>/</tt> and then a regular
-expression and press&nbsp;<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>. To
-search backwards, begin with a <tt>?</tt> instead of a <tt>/</tt>. To find
-the next text that matches your regular expression press <tt>n</tt>.</font>
-<p>To search and replace all occurences of pattern1 with
-pattern2, type <tt>:%s/</tt><I>pattern1</I><tt>/</tt><I>pattern2</I><tt>/g<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></tt>.
-To be asked to confirm each replacement, add a <tt>c</tt> to this substitution
-command. Instead of the <tt>%</tt> you can also give a range of lines (e.g.
-1,17) over which you want the substitution to apply.</font>
-</div>
-<br>
-
-<div class="heading">
-<div class="table">
-6.2.5 Other Useful vi Commands
-</div>
-</div>
-<br>
-
-<div class="text">
-Programmers might like the <tt>:set number<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></tt>
-command which displays line numbers (<tt>:set nonumbe</tt>r turns them
-off).</font>
-<p>To save a file, type <tt>:w<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></tt>.
-To save and quit, type <tt>:wq<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></tt>
-or press <tt>ZZ</tt>. To force a quit without saving type <tt>:q!<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></tt>.</font>
-<p>To start editing another file, type :e filename<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>.</font>
-<p>To execute shell commands from within vi, and then return
-to vi afterwards, type <tt>:!</tt><I>shellcommand<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></I>.
-You can use the letter <tt>% </tt>as a substitute for the name of the file
-that you are editing (so <tt>:!echo %</tt> prints the name of the current
-file).</font>
-<p><tt>.</tt> repeats the last command.</font>
-</div>
-<br>
-
-<div class="heading">
-<div class="table">
-6.2.6 Quick reference for vi
-</div>
-</div>
-<br>
-
-<div class="text">
-<ul><b>Inserting and typing text:</font></b>
-<br><tt>i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-insert text (and enter input mode)</font></tt>
-<br><tt>$a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-append text (to end of line)</font></tt>
-<br><tt>ESC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; re-enter
-command mode</font></tt>
-<br><tt>J&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-join lines</font></tt>
-<p><b>Cursor movement:</font></b>
-<br><tt>h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-left</font></tt>
-<br><tt>j&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-down</font></tt>
-<br><tt>k&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-up</font></tt>
-<br><tt>l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-right</font></tt>
-<br><tt>^&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-beginning of line</font></tt>
-<br><tt>$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-end of line</font></tt>
-<br><tt>1 G&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; top
-of document</font></tt>
-<br><tt>G&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-end of document</font></tt>
-<br><tt>&lt;n> G&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; go to line
-&lt;n></font></tt>
-<br><tt>^F&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-page forward</font></tt>
-<br><tt>^B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-page backward</font></tt>
-<br><tt>w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-word forwards</font></tt>
-<br><tt>b&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-word backwards</font></tt>
-<p><b>Deleting and moving text:</font></b>
-<br><tt>Backspace&nbsp; delete character before cursor</font></tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-(only works in insert mode)</font></tt>
-<br><tt>x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-delete character under cursor</font></tt>
-<br><tt>dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-delete word</font></tt>
-<br><tt>dd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-delete line (restore with p or P)</font></tt>
-<br><tt>&lt;n> dd&nbsp;&nbsp;&nbsp;&nbsp; delete n lines</font></tt>
-<br><tt>d$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-delete to end of line</font></tt>
-<br><tt>dG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-delete to end of file</font></tt>
-<br><tt>yy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-yank/copy line (restore with p or P)</font></tt>
-<br><tt>&lt;n> yy&nbsp;&nbsp;&nbsp;&nbsp; yank/copy &lt;n>
-lines</font></tt>
-<p><b>Search and replace:</font></b>
-<br><tt>%s/&lt;search string>/&lt;replace string>/g</font></tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<p><b>Miscellaneous:</font></b>
-<br><tt>u&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-undo</font></tt>
-<br><tt>:w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-save file</font></tt>
-<br><tt>:wq&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; save
-file and quit</font></tt>
-<br><tt>ZZ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-save file and quit</font></tt>
-<br><tt>:q!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; quit
-without saving</font></tt></ul>
-</div>
-<br>
-
-<div class="heading">
-<div class="table">
-6.3.1 Introduction to emacs
-</div>
-</div>
-<br>
-
-<div class="text">
-<tt>emacs </tt>is a popular editor for UNIX,
-Windows and Macintosh systems. Unlike <tt>vi</tt>, it is not a standard
-UNIX system utility, but is available from the Free Software Foundation.</font>
-<p>An<tt> emacs</tt> zealot will tell you how <tt>emacs</tt>
-provides advanced facilities that go beyond simple insertion and deletion
-of text: you can view two are more files at the same time, compile and
-debug programs in almost any programming language, typeset documents, run
-shell commands, read manual pages, email and news and even browse the web
-from inside <tt>emacs</tt>.
-<tt>emacs</tt> is also very flexible - you
-can redefine keystrokes and commands easily, and (for the more ambitious)
-you can even write Lisp programs to add new commands and display modes
-to <tt>emacs</tt>, since <tt>emacs</tt> has its own Lisp interpreter. In
-fact most of the editing commands of Emacs are written in Lisp already;
-the few exceptions are written in C for efficiency. However, users do not
-need to know how to program Lisp to use <tt>emacs</tt> (while it is true
-that only a programmer can write a substantial extension to <tt>emacs</tt>,
-it is easy for anyone to use it afterwards).</font>
-<p>Critics of <tt>emacs</tt> point out that it uses a relatively
-large amount of system resources compared to <tt>vi</tt> and that it has
-quite a complicated command structure (joking that <tt>emacs</tt> stands
-for Escape-Meta-Alt-Control-Shift).</font>
-<p>In practice most users tend to use both editors - <tt>vi</tt>
-to quickly edit short scripts and programs and <tt>emacs</tt> for more
-complex jobs that require reference to more than one file simultaneously.</font>
-<p>On UNIX systems, <tt>emacs</tt> can run in graphical mode
-under the X Windows system, in which case some helpful menus and mouse
-button command mappings are provided. However, most of its facilities are
-also available on a text terminal.</font>
-<p>To start <tt>emacs</tt>, enter:</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ emacs </tt><I>filename</I></font><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<p>where <I>filename</I> is the name of the file you want
-to edit. If the file doesn't exist, <tt>emacs</tt> will create it for you.</font>
-</div>
-<br>
-
-<div class="heading">
-<div class="table">
-6.3.2 Basic Text Input and Navigation in emacs
-</div>
-</div>
-<br>
-
-<div class="text">
-Text input and navigation in <tt>emacs</tt> is
-mostly a matter of using the arrow keys to position the cursor and typing
-some text. Issuing more complex<tt> emacs</tt> commands usually involves
-pressing the Ctrl key (sometimes also labelled Control or Ctl) or the Meta
-key (sometimes also labelled Alt). <tt>emacs</tt> commands are usually
-described in this way:</font>
+  Text input and navigation in <b>emacs</b> is
+  mostly a matter of using the arrow keys to position the cursor and typing
+  some text. Issuing more complex<b> emacs</b> commands usually involves
+  pressing the Ctrl key (sometimes also labelled Control or Ctl) or the Meta
+  key (sometimes also labelled Alt). <b>emacs</b> commands are usually
+  described in this way:
 <ul>
-<li>
-<tt>C-&lt;chr>&nbsp;</tt> means hold the Ctrl key while typing
-the character <tt>&lt;chr></tt>. Thus, <tt>C-f</tt> would be: hold the
-Ctrl key and type <tt>f</tt>.</font></li>
+  <li>
+    <b>C-&lt;chr></b> means hold the Ctrl key while typing
+    the character <b>&lt;chr></b>. Thus, <b>C-f</b> would be: hold the
+    Ctrl key and type <b>f</b>.</li>
 
 <li>
-<tt>M-&lt;chr></tt>&nbsp; means hold the Meta or Alt key
-down while typing <tt>&lt;chr></tt>. If there is no Meta or Alt key, instead
-press and release the ESC key and then type <tt>&lt;chr></tt>.</font></li>
+  <b>M-&lt;chr></b> means hold the Meta or Alt key
+  down while typing <b>&lt;chr></b>. If there is no Meta or Alt key, instead
+  press and release the ESC key and then type <b>&lt;chr></b>.</li>
 </ul>
-One initially annoying feature of <tt>emacs</tt> is that
-its help facility has been installed on <tt>C-h</tt> (Ctrl h). Unfortunately
+One initially annoying feature of <b>emacs</b> is that
+its help facility has been installed on <b>C-h</b> (Ctrl h). Unfortunately
 this is also the code for the backspace key on most systems. You can, however,
-easily make the key work as expected by creating a <tt>.emacs</tt> file
+easily make the key work as expected by creating a <b>.emacs</b> file
 (a file always read on start up) in your home directory containing the
-following line:</font>
-<p><tt>(global-set-key "\C-h" 'backward-delete-char-untabify)</font></tt>
-<p><A HREF=".emacs">Here</A> is a <tt>.emacs</tt> file that
-contains this line as well as several other useful facilities (see Section
-6.3.6).</font>
-<p>To access the help system you can still type <tt>M-x help<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></tt>
-or (for a comprehensive tutorial) <tt>M-x help-with-tutorial<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></tt>.</font>
-<p>Useful navigation commands are <tt>C-a</tt> (beginning
-of line), <tt>C-e</tt> (end of line), <tt>C-v</tt> (forward page), <tt>M-v</tt>
-(backwards page), <tt>M-&lt;</tt> (beginning of document) and <tt>M-></tt>
-(end of document). <tt>C-d </tt>will delete the character under the cursor,
-while <tt>C-k</tt> will delete to the end of the line. Text deleted with
-<tt>C-k</tt>
-is placed in a buffer which can be "yanked" back later with
-<tt>C-y</tt>.</font>
+following line:
+<p><b>(global-set-key "\C-h" 'backward-delete-char-untabify)</b>
+<p><A HREF=".emacs">Here</A> is a <b>.emacs</b> file that
+  contains this line as well as several other useful facilities (see Section
+  6.3.6).
+<p>To access the help system you can still type <b>M-x help<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></b>
+  or (for a comprehensive tutorial) <b>M-x help-with-tutorial<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></b>.
+<p>Useful navigation commands are <b>C-a</b> (beginning
+  of line), <b>C-e</b> (end of line), <b>C-v</b> (forward page), <b>M-v</b>
+  (backwards page), <b>M-&lt;</b> (beginning of document) and <b>M-></b>
+  (end of document). <b>C-d </b>will delete the character under the cursor,
+  while <b>C-k</b> will delete to the end of the line. Text deleted with
+  <b>C-k</b>
+  is placed in a buffer which can be "yanked" back later with
+  <b>C-y</b>.
 </div>
 <br>
 
 <div class="heading">
-<div class="text">
-6.3.3 Moving and Copying Text in emacs
-</div>
+  <div class="text">
+    6.3.3 Moving and Copying Text in emacs
+  </div>
 </div>
 <br>
 
 <div class="heading">
-The easiest way to cut and paste text is to go
-to the start of the text and press <tt>C-k</tt> until you have deleted
-the text you want. Then move to the spot where you want to paste the text
-and press <tt>C-y</tt> to restore the text. If you make a mistake, <tt>C-u</tt>
-will undo the change (<tt>emacs</tt> supports several levels of undo).
-Another way to delete a chunk of text is to go the start of the text and
-press <tt>C-SPC</tt> (SPC is the spacebar; this sets a mark). Then go to
-the end of the text you wish to delete and press <tt>C-w</tt>. Restore
-the text in the right spot with <tt>C-y</tt>.</font>
+  The easiest way to cut and paste text is to go
+  to the start of the text and press <b>C-k</b> until you have deleted
+  the text you want. Then move to the spot where you want to paste the text
+  and press <b>C-y</b> to restore the text. If you make a mistake, <b>C-u</b>
+  will undo the change (<b>emacs</b> supports several levels of undo).
+  Another way to delete a chunk of text is to go the start of the text and
+  press <b>C-SPC</b> (SPC is the spacebar; this sets a mark). Then go to
+  the end of the text you wish to delete and press <b>C-w</b>. Restore
+  the text in the right spot with <b>C-y</b>.
 <p>To copy and paste, delete the target text as above, and
-then use <tt>C-y</tt> twice (once to restore the original text, and once
-to create the copy).</font>
+  then use <b>C-y</b> twice (once to restore the original text, and once
+  to create the copy).
 </div>
 <br>
 
 <div class="heading">
-<div class="table">
-6.3.4 Searching for and Replacing Text in emacs
-</div>
+  <div class="table">
+    6.3.4 Searching for and Replacing Text in emacs
+  </div>
 </div>
 <br>
 
 <div class="text">
-To search forwards and backwards incrementally,
-use <tt>C-s</tt> and <tt>C-r</tt> respectively. Pressing <tt>C-s</tt> or
-<tt>C-r</tt>
-again will repeat the operation. When you have found the text you want,
-press&nbsp;<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>, or press
-<tt>C-g</tt>
-to cancel the operation and return your cursor to the position where the
-search started.</font>
-<p>To replace a string, type <tt>M-x replace-string<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></tt>
-(you may want to modify your <tt>.emacs</tt> file so that this command
-is on <tt>C-x r</tt>). <tt>M-%</tt> performs a query search and replace.</font>
+  To search forwards and backwards incrementally,
+  use <b>C-s</b> and <b>C-r</b> respectively. Pressing <b>C-s</b> or
+  <b>C-r</b>
+  again will repeat the operation. When you have found the text you want,
+  press<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>, or press
+  <b>C-g</b>
+  to cancel the operation and return your cursor to the position where the
+  search started.
+<p>To replace a string, type <b>M-x replace-string<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></b>
+  (you may want to modify your <b>.emacs</b> file so that this command
+  is on <b>C-x r</b>). <b>M-%</b> performs a query search and replace.
 </div>
 <br>
 
 <div class="heading">
-<div class="table">
-6.3.5 Other Useful emacs Commands
-</div>
+  <div class="table">
+    6.3.5 Other Useful emacs Commands
+  </div>
 </div>
 <br>
 
 <div class="text">
-Pressing <tt>C-g</tt> will cancel any <tt>emacs</tt>
-command in progress.</font>
+  Pressing <b>C-g</b> will cancel any <b>emacs</b>
+  command in progress.
 
-To save a file, press <tt>C-x C-s</tt>. To start
-editing a new file, press <tt>C-x C-f</tt>.</font>
+To save a file, press <b>C-x C-s</b>. To start
+editing a new file, press <b>C-x C-f</b>.
 <p>To bring up two windows (or "buffers" in emacs-speak),
-press <tt>C-x 2</tt> (<tt>C-x 1</tt> gets you back to 1). <tt>C-x o</tt>
-switches between buffers on the same screen. <tt>C-x b</tt> lets you switch
-between all active buffers, whether you can see them or not. <tt>C-x C-k</tt>
-deletes a buffer that you are finished with.</font>
-<p><tt>M-x shell<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></tt>
-brings up a UNIX shell inside a buffer (you may like to put this on <tt>C-x
-C-u</tt>).
-<tt>M-x goto-line<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></tt>
-skips to a particular line (you may like to put this on <tt>C-x g</tt>).
-<tt>M-x
-compile<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></tt> will attempt to compile
-a program (using the <tt>make</tt> utility or some other command that you
-can specify). If you are doing a lot of programming you will probably want
-to put this on a key like <tt>C-x c</tt>.</font>
-<p><tt>M-q</tt> will reformat a paragraph.</font>
-<p><tt>C-x C-c </tt>quits emacs.</font>
+  press <b>C-x 2</b> (<b>C-x 1</b> gets you back to 1). <b>C-x o</b>
+  switches between buffers on the same screen. <b>C-x b</b> lets you switch
+  between all active buffers, whether you can see them or not. <b>C-x C-k</b>
+  deletes a buffer that you are finished with.
+<p><b>M-x shell<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></b>
+  brings up a UNIX shell inside a buffer (you may like to put this on <b>C-x
+    C-u</b>).
+  <b>M-x goto-line<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></b>
+  skips to a particular line (you may like to put this on <b>C-x g</b>).
+  <b>M-x
+    compile<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></b> will attempt to compile
+  a program (using the <b>make</b> utility or some other command that you
+  can specify). If you are doing a lot of programming you will probably want
+  to put this on a key like <b>C-x c</b>.
+<p><b>M-q</b> will reformat a paragraph.
+<p><b>C-x C-c </b>quits emacs.
 </div>
 <br>
 
 <div class="table">
-<div class="heading">
-6.3.6 Quick reference for emacs
-</div>
+  <div class="heading">
+    6.3.6 Quick reference for emacs
+  </div>
 </div>
 <br>
 
 <div class="text">
-<b>Cursor movement:</font></b>
-<br><tt>C-a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-beginning of line</font></tt>
-<br><tt>C-e&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-end of line</font></tt>
-<br><tt>C-&lt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-top of document</font></tt>
-<br><tt>C->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-end of document</font></tt>
-<br><tt>M-x goto-line Go to line</font></tt>
-<br><tt>C-v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-page forward</font></tt>
-<br><tt>M-v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-page backward</font></tt>
-<p><b>Deleting and moving text:</font></b>
-<br><tt>Backspace&nbsp;&nbsp;&nbsp;&nbsp; delete character
-before cursor</font></tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-(subject to modification of .emacs)</font></tt>
-<br><tt>C-d&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-delete character under cursor</font></tt>
-<br><tt>M-d&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-delete word</font></tt>
-<br><tt>C-k&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-delete to end of line(s)</font></tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-(restore with C-y)</font></tt>
-<br><tt>C-SPC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-set mark</font></tt>
-<br><tt>C-w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-delete from mark to cursor</font></tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-(restore with C-y)</font></tt>
-<p><b>Search and replace:</font></b>
-<br><tt>C-s&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-incremental search forward</font></tt>
-<br><tt>C-r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-incremental search backward</font></tt>
-<br><tt>C-%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-query replace</font></tt>
-<br><tt>M-x replace-string<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>&lt;searchstr><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>&lt;replstr></font></tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<p><b>Miscellaneous:</font></b>
-<br><tt>C-x u&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-undo</font></tt>
-<br><tt>C-x C-s&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; save
-file</font></tt>
-<br><tt>C-x C-f&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; find
-file</font></tt>
-<br><tt>C-x 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-2 windows</font></tt>
-<br><tt>C-x 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-1 window</font></tt>
-<br><tt>C-x o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-switch between windows</font></tt>
-<br><tt>C-x b&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-switch buffers</font></tt>
-<br><tt>M-q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-reformat paragraph</font></tt>
-<br><tt>C-x C-c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; quit</font></tt>
+  <b>Cursor movement:</b>
+<br><b>C-a
+  beginning of line</b>
+<br><b>C-e
+  end of line</b>
+<br><b>C-&lt;
+  top of document</b>
+<br><b>C->
+  end of document</b>
+<br><b>M-x goto-line Go to line</b>
+<br><b>C-v
+  page forward</b>
+<br><b>M-v
+  page backward</b>
+<p><b>Deleting and moving text:</b>
+<br><b>Backspace delete character
+  before cursor</b>
+<br><b>
+  (subject to modification of .emacs)</b>
+<br><b>C-d
+  delete character under cursor</b>
+<br><b>M-d
+  delete word</b>
+<br><b>C-k
+  delete to end of line(s)</b>
+<br><b>
+  (restore with C-y)</b>
+<br><b>C-SPC
+  set mark</b>
+<br><b>C-w
+  delete from mark to cursor</b>
+<br><b>
+  (restore with C-y)</b>
+<p><b>Search and replace:</b>
+<br><b>C-s
+  incremental search forward</b>
+<br><b>C-r
+  incremental search backward</b>
+<br><b>C-%
+  query replace</b>
+<br><b>M-x replace-string<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>&lt;searchstr><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>&lt;replstr></b><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<p><b>Miscellaneous:</b>
+<br><b>C-x u
+  undo</b>
+<br><b>C-x C-s save
+  file</b>
+<br><b>C-x C-f find
+  file</b>
+<br><b>C-x 2
+  2 windows</b>
+<br><b>C-x 1
+  1 window</b>
+<br><b>C-x o
+  switch between windows</b>
+<br><b>C-x b
+  switch buffers</b>
+<br><b>M-q
+  reformat paragraph</b>
+<br><b>C-x C-c quit</b>
 <p><b>Useful customisable keys (configured using the provided
-<tt><A HREF=".emacs">.emacs</A></tt> file):</font></b>
-<br><tt>C-x g&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-goto line</font></tt>
-<br><tt>C-x c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-compile program (useful with C-x 2)</font></tt>
-<br><tt>C-x C-u&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; open
-Unix shell (useful with C-x 2)</font></tt>
-<br><tt>C-x a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-repeat command</font></tt>
-<br><tt>C-x m&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-manual entry</font></tt>
+    <b><A HREF=".emacs">.emacs</A></b> file):</b>
+<br><b>C-x g
+  goto line</b>
+<br><b>C-x c
+  compile program (useful with C-x 2)</b>
+<br><b>C-x C-u open
+  Unix shell (useful with C-x 2)</b>
+<br><b>C-x a
+  repeat command</b>
+<br><b>C-x m
+  manual entry</b>
 </div>
 <br>
 
 <div class="table">
-<div class="heading">
-6.4 Other UNIX editors
-</div>
+  <div class="heading">
+    6.4 Other UNIX editors
+  </div>
 </div>
 
 <div class="text">
-There are many other editors for UNIX systems.
-Two popular alternatives to <tt>vi</tt> and <tt>emacs</tt> are <tt>nedit
-</tt>and
-<tt>pico</tt>.</font>
+  There are many other editors for UNIX systems.
+  Two popular alternatives to <b>vi</b> and <b>emacs</b> are <b>nedit
+  </b>and
+  <b>pico</b>.
 
 <p><a href="http:./index.html">
-(BACK TO COURSE CONTENTS)</A></p>
+    (BACK TO COURSE CONTENTS)</A></p>
 </div>
 
 </body>
