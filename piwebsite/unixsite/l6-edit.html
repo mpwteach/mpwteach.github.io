@@ -201,9 +201,9 @@
         <th>Command</th>
         <th>Description</th>
       </tr>
-      <tr>
-        <td><b>Inserting and typing text:</b></td>
-      </tr>
+
+      <tr><td><b>Inserting and typing text:</b></td></tr>
+
       <tr>
         <td>i</td>
         <td>insert text (and enter input mode)</td>
@@ -220,9 +220,9 @@
         <td>J</td>
         <td>join lines</td>
       </tr>
-      <tr>
-        <td><b>Cursor movement:</b></td>
-      </tr>
+
+      <tr><td><b>Cursor movement:</b></td></tr>
+
       <tr>
         <td>h</td>
         <td>left</td>
@@ -276,74 +276,72 @@
         <td>word backwards</td>
       </tr>
 
-      <tr>
-	<td><b>Deleting and moving text:</b></td>
-      </tr>
-      <tr>
-	<td>Backspace<td>
-	<td>delete character before cursor (only works in insert mode)</td>
-      </tr>
-      <tr>
-	<td>x</td>
-	<td>delete character under cursor</td>
-      </tr>
-      <tr>
-	<td>dw</td>
-	<td>delete word</td>
-      </tr>
-      <tr>
-	<td>dd</td>
-	<td>delete line (restore with p or P)</td>
-      </tr>
-      <tr>
-	<td>&lt;n&gt; dd</td>
-	<td>delete n lines</td>
-      </tr>
-      <tr>
-	<td>d$</td>
-	<td>delete to end of line</td>
-      </tr>
-      <tr>
-	<td>dG</td>
-	<td>delete to end of file</td>
-      </tr>
-      <tr>
-	<td>yy</td>
-	<td>yank/copy line (restore with p or P)</td>
-      </tr>
-      <tr>
-	<td>&lt;n&gt; yy</td>
-	<td>yank/copy &lt;n&gt;lines</td>
-      </tr>
+      <tr><td><b>Deleting and moving text:</b></td></tr>
 
       <tr>
-	<td><b>Search and replace:</b></td>
+        <td>Backspace</td>
+        <td>delete character before cursor (only works in insert mode)</td>
       </tr>
       <tr>
-	<td>%s/&lt;search string&gt;/&lt;replace string&gt;/g</td>
+        <td>x</td>
+        <td>delete character under cursor</td>
+      </tr>
+      <tr>
+        <td>dw</td>
+        <td>delete word</td>
+      </tr>
+      <tr>
+        <td>dd</td>
+        <td>delete line (restore with p or P)</td>
+      </tr>
+      <tr>
+        <td>&lt;n&gt; dd</td>
+        <td>delete n lines</td>
+      </tr>
+      <tr>
+        <td>d$</td>
+        <td>delete to end of line</td>
+      </tr>
+      <tr>
+        <td>dG</td>
+        <td>delete to end of file</td>
+      </tr>
+      <tr>
+        <td>yy</td>
+        <td>yank/copy line (restore with p or P)</td>
+      </tr>
+      <tr>
+        <td>&lt;n&gt; yy</td>
+        <td>yank/copy &lt;n&gt;lines</td>
+      </tr>
+
+      <tr><td><b>Search and replace:</b></td></tr>
+
+      <tr>
+        <td>%s/&lt;search string&gt;/&lt;replace string&gt;/g</td>
       </tr>
 
       <tr><td><b>Miscellaneous:</b></td></tr>
 
       <tr>
-	<td>u</td>
-	<td>undo</td>
+        <td>u</td>
+        <td>undo</td>
       </tr>
       <tr>
-	<td>:w</td>
-	<td>save file</td>
+        <td>:w</td>
+        <td>save file</td>
       </tr>
       <tr>
-	<td>:wq</td>
-	<td>save File and quit</td>
+        <td>:wq</td>
+        <td>save file and quit</td>
       </tr>
       <tr>
-	<td>>ZZ<td>
-	<td>save file and quit</td>
+        <td>ZZ</td>
+        <td>save file and quit</td>
       </tr>
       <tr>
-	<td>:q!</td> 
-	<td>quit without saving</td>
+        <td>:q!</td> 
+        <td>quit without saving</td>
       </tr>
 
     </table>
@@ -352,50 +350,50 @@
     
     <div class="text">
       <p>
-	<b>emacs </b>is a popular editor for UNIX,
-	based operating systems. Unlike <b>vi</b>, it is not a standard
-	UNIX system utility, but is available from the Free Software Foundation.
+        <b>emacs </b>is a popular editor for UNIX,
+        based operating systems. Unlike <b>vi</b>, it is not a standard
+        UNIX system utility, but is available from the Free Software Foundation.
       </p>
       <p>
-	An <b>emacs</b> zealot will tell you how <b>emacs</b>
-	provides advanced facilities that go beyond simple insertion and deletion
-	of text: you can view two are more files at the same time, compile and
-	debug programs in almost any programming language, typeset documents, run
-	shell commands, read manual pages, email and news and even browse the web
-	from inside <b>emacs</b>.
+        An <b>emacs</b> zealot will tell you how <b>emacs</b>
+        provides advanced facilities that go beyond simple insertion and deletion
+        of text: you can view two are more files at the same time, compile and
+        debug programs in almost any programming language, typeset documents, run
+        shell commands, read manual pages, email and news and even browse the web
+        from inside <b>emacs</b>.
       </p>
       <p>
-	<b>emacs</b> is also very flexible - you
-	can redefine keystrokes and commands easily, and (for the more ambitious)
-	you can even write Lisp programs to add new commands and display modes
-	to <b>emacs</b>, since <b>emacs</b> has its own Lisp interpreter. In
-	fact most of the editing commands of Emacs are written in Lisp already;
-	the few exceptions are written in C for efficiency. However, users do not
-	need to know how to program Lisp to use <b>emacs</b> (while it is true
-	that only a programmer can write a substantial extension to <b>emacs</b>,
-	it is easy for anyone to use it afterwards).
+        <b>emacs</b> is also very flexible - you
+        can redefine keystrokes and commands easily, and (for the more ambitious)
+        you can even write Lisp programs to add new commands and display modes
+        to <b>emacs</b>, since <b>emacs</b> has its own Lisp interpreter. In
+        fact most of the editing commands of Emacs are written in Lisp already;
+        the few exceptions are written in C for efficiency. However, users do not
+        need to know how to program Lisp to use <b>emacs</b> (while it is true
+        that only a programmer can write a substantial extension to <b>emacs</b>,
+        it is easy for anyone to use it afterwards).
       </p>
       <p>
-	Critics of <b>emacs</b> point out that it uses a relatively
-	large amount of system resources compared to <b>vi</b> and that it has
-	quite a complicated command structure (joking that <b>emacs</b> stands
-	for Escape-Meta-Alt-Control-Shift).
+        Critics of <b>emacs</b> point out that it uses a relatively
+        large amount of system resources compared to <b>vi</b> and that it has
+        quite a complicated command structure (joking that <b>emacs</b> stands
+        for Escape-Meta-Alt-Control-Shift).
       </p>
       <p>
-	In practice most users tend to use both editors - <b>vi</b>
-	to quickly edit short scripts and programs and <b>emacs</b> for more
-	complex jobs that require reference to more than one file simultaneously.
+        In practice most users tend to use both editors - <b>vi</b>
+        to quickly edit short scripts and programs and <b>emacs</b> for more
+        complex jobs that require reference to more than one file simultaneously.
       </p>
       <p>
-	On UNIX systems, <b>emacs</b> can run in graphical mode
-	under the X Windows system, in which case some helpful menus and mouse
-	button command mappings are provided. However, most of its facilities are
-	also available on a text terminal.
+        On UNIX systems, <b>emacs</b> can run in graphical mode
+        under the X Windows system, in which case some helpful menus and mouse
+        button command mappings are provided. However, most of its facilities are
+        also available on a text terminal.
       </p>
       <p>To start <b>emacs</b>, enter:
       <p class="terminal">$ emacs <I>filename</I></p>
       <p>where <I>filename</I> is the name of the file you want
-	to edit. If the file doesn't exist, <b>emacs</b> will create it for you.
+        to edit. If the file doesn't exist, <b>emacs</b> will create it for you.
       </p>
     </div>
 
@@ -404,33 +402,33 @@
     
     <div class="text">
       <p>
-	Text input and navigation in <b>emacs</b> is
-	mostly a matter of using the arrow keys to position the cursor and typing
-	some text. Issuing more complex <b>emacs</b> commands usually involves
-	pressing the Ctrl key (sometimes also labelled Control or Ctl) or the Meta
-	key (sometimes also labelled Alt). <b>emacs</b> commands are usually
-	described in this way:
+        Text input and navigation in <b>emacs</b> is
+        mostly a matter of using the arrow keys to position the cursor and typing
+        some text. Issuing more complex <b>emacs</b> commands usually involves
+        pressing the Ctrl key (sometimes also labelled Control or Ctl) or the Meta
+        key (sometimes also labelled Alt). <b>emacs</b> commands are usually
+        described in this way:
       </p>
       <ul>
-	<li>
-	  <b>C-&lt;chr&gy;</b> means hold the Ctrl key while typing
-	  the character <b>&lt;chr&gt;</b>. Thus, <b>C-f</b> would be: hold the
-	  Ctrl key and type <b>f</b>.
-	</li>
+        <li>
+          <b>C-&lt;chr&gy;</b> means hold the Ctrl key while typing
+          the character <b>&lt;chr&gt;</b>. Thus, <b>C-f</b> would be: hold the
+          Ctrl key and type <b>f</b>.
+        </li>
 
-	<li>
-	  <b>M-&lt;chr&gt;</b> means hold the Meta or Alt key
-	  down while typing <b>&lt;chr&gt;</b>. If there is no Meta or Alt key, instead
-	  press and release the ESC key and then type <b>&lt;chr&gt;</b>.</li>
+        <li>
+          <b>M-&lt;chr&gt;</b> means hold the Meta or Alt key
+          down while typing <b>&lt;chr&gt;</b>. If there is no Meta or Alt key, instead
+          press and release the ESC key and then type <b>&lt;chr&gt;</b>.</li>
       </ul>
 
       <p>
-	One initially annoying feature of <b>emacs</b> is that
-	its help facility has been installed on <b>C-h</b> (Ctrl h). Unfortunately
-	this is also the code for the backspace key on most systems. You can, however,
-	easily make the key work as expected by creating a <b>.emacs</b> file
-	(a file always read on start up) in your home directory containing the
-	following line:
+        One initially annoying feature of <b>emacs</b> is that
+        its help facility has been installed on <b>C-h</b> (Ctrl h). Unfortunately
+        this is also the code for the backspace key on most systems. You can, however,
+        easily make the key work as expected by creating a <b>.emacs</b> file
+        (a file always read on start up) in your home directory containing the
+        following line:
       <p><b>(global-set-key "\C-h" 'backward-delete-char-untabify)</b>
 <p><A HREF=".emacs">Here</A> is a <b>.emacs</b> file that
   contains this line as well as several other useful facilities (see Section
