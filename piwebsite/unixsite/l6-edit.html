@@ -411,7 +411,7 @@
       </p>
       <ul>
         <li>
-          <b>C-&lt;chr&gy;</b> means hold the Ctrl key while typing
+          <b>C-&lt;chr&gt;</b> means hold the Ctrl key while typing
           the character <b>&lt;chr&gt;</b>. Thus, <b>C-f</b> would be: hold the
           Ctrl key and type <b>f</b>.
         </li>
@@ -430,158 +430,148 @@
         (a file always read on start up) in your home directory containing the
         following line:
       <p><b>(global-set-key "\C-h" 'backward-delete-char-untabify)</b>
-<p><A HREF=".emacs">Here</A> is a <b>.emacs</b> file that
-  contains this line as well as several other useful facilities (see Section
-  6.3.6).
-<p>To access the help system you can still type <b>M-x help<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></b>
-  or (for a comprehensive tutorial) <b>M-x help-with-tutorial<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></b>.
-<p>Useful navigation commands are <b>C-a</b> (beginning
-  of line), <b>C-e</b> (end of line), <b>C-v</b> (forward page), <b>M-v</b>
-  (backwards page), <b>M-&lt;</b> (beginning of document) and <b>M-></b>
-  (end of document). <b>C-d </b>will delete the character under the cursor,
-  while <b>C-k</b> will delete to the end of the line. Text deleted with
-  <b>C-k</b>
-  is placed in a buffer which can be "yanked" back later with
-  <b>C-y</b>.
-</div>
-<br>
+      <p>
+        <a href=".emacs">Here</a> is a <b>.emacs</b> file that
+        contains this line as well as several other useful facilities (see Section 6.3.6).
+      </p>
+      <p>
+        To access the help system you can still type <b>M-x help</b>
+        or (for a comprehensive tutorial) <b>M-x help-with-tutorial</b>
+      </p>
+      <p>
+        Useful navigation commands are <b>C-a</b> (beginning
+        of line), <b>C-e</b> (end of line), <b>C-v</b> (forward page), <b>M-v</b>
+        (backwards page), <b>M-&lt;</b> (beginning of document) and <b>M-></b>
+        (end of document). <b>C-d </b>will delete the character under the cursor,
+        while <b>C-k</b> will delete to the end of the line. Text deleted with
+        <b>C-k</b> is placed in a buffer which can be "yanked" back later with <b>C-y</b>.
+      </p>
+    </div>
 
-<div class="heading">
-  <div class="text">
-    6.3.3 Moving and Copying Text in emacs
-  </div>
-</div>
-<br>
 
-<div class="heading">
-  The easiest way to cut and paste text is to go
-  to the start of the text and press <b>C-k</b> until you have deleted
-  the text you want. Then move to the spot where you want to paste the text
-  and press <b>C-y</b> to restore the text. If you make a mistake, <b>C-u</b>
-  will undo the change (<b>emacs</b> supports several levels of undo).
-  Another way to delete a chunk of text is to go the start of the text and
-  press <b>C-SPC</b> (SPC is the spacebar; this sets a mark). Then go to
-  the end of the text you wish to delete and press <b>C-w</b>. Restore
-  the text in the right spot with <b>C-y</b>.
-<p>To copy and paste, delete the target text as above, and
-  then use <b>C-y</b> twice (once to restore the original text, and once
-  to create the copy).
-</div>
-<br>
+    <h2>6.3.3 Moving and Copying Text in emacs</h2>
+ 
+    <div class="text">
+      <p>  
+        The easiest way to cut and paste text is to go
+        to the start of the text and press <b>C-k</b> until you have deleted
+        the text you want. Then move to the spot where you want to paste the text
+        and press <b>C-y</b> to restore the text. If you make a mistake, <b>C-u</b>
+        will undo the change (<b>emacs</b> supports several levels of undo).
+        Another way to delete a chunk of text is to go the start of the text and
+        press <b>C-SPC</b> (SPC is the spacebar; this sets a mark). Then go to
+        the end of the text you wish to delete and press <b>C-w</b>. Restore
+        the text in the right spot with <b>C-y</b>.
+      </p>
+      <p>
+        To copy and paste, delete the target text as above, and
+        then use <b>C-y</b> twice (once to restore the original text, and once
+        to create the copy).
+      </p>
+    </div>
 
-<div class="heading">
-  <div class="table">
-    6.3.4 Searching for and Replacing Text in emacs
-  </div>
-</div>
-<br>
 
-<div class="text">
-  To search forwards and backwards incrementally,
-  use <b>C-s</b> and <b>C-r</b> respectively. Pressing <b>C-s</b> or
-  <b>C-r</b>
-  again will repeat the operation. When you have found the text you want,
-  press<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>, or press
-  <b>C-g</b>
-  to cancel the operation and return your cursor to the position where the
-  search started.
-<p>To replace a string, type <b>M-x replace-string<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></b>
-  (you may want to modify your <b>.emacs</b> file so that this command
-  is on <b>C-x r</b>). <b>M-%</b> performs a query search and replace.
-</div>
-<br>
+    <h2>6.3.4 Searching for and Replacing Text in emacs</h2>
 
-<div class="heading">
-  <div class="table">
-    6.3.5 Other Useful emacs Commands
-  </div>
-</div>
-<br>
+    <div class="text">
+      <p>
+        To search forwards and backwards incrementally,
+        use <b>C-s</b> and <b>C-r</b> respectively. Pressing <b>C-s</b> or <b>C-r</b>
+        again will repeat the operation. When you have found the text you want,
+        press enter, or press
+        <b>C-g</b> to cancel the operation and return your cursor to the position where the
+        search started.
+      </p>
+      <p>
+        To replace a string, type <b>M-x replace-string<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></b>
+        (you may want to modify your <b>.emacs</b> file so that this command
+        is on <b>C-x r</b>). <b>M-%</b> performs a query search and replace.
+      </p>
+    </div>
 
-<div class="text">
-  Pressing <b>C-g</b> will cancel any <b>emacs</b>
-  command in progress.
+    <h2>6.3.5 Other Useful emacs Commands</h2>
 
-To save a file, press <b>C-x C-s</b>. To start
-editing a new file, press <b>C-x C-f</b>.
-<p>To bring up two windows (or "buffers" in emacs-speak),
-  press <b>C-x 2</b> (<b>C-x 1</b> gets you back to 1). <b>C-x o</b>
-  switches between buffers on the same screen. <b>C-x b</b> lets you switch
-  between all active buffers, whether you can see them or not. <b>C-x C-k</b>
-  deletes a buffer that you are finished with.
-<p><b>M-x shell<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></b>
-  brings up a UNIX shell inside a buffer (you may like to put this on <b>C-x
-    C-u</b>).
-  <b>M-x goto-line<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></b>
-  skips to a particular line (you may like to put this on <b>C-x g</b>).
-  <b>M-x
-    compile<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></b> will attempt to compile
-  a program (using the <b>make</b> utility or some other command that you
-  can specify). If you are doing a lot of programming you will probably want
-  to put this on a key like <b>C-x c</b>.
-<p><b>M-q</b> will reformat a paragraph.
-<p><b>C-x C-c </b>quits emacs.
-</div>
-<br>
+    <div class="text">
+      <p>
+        Pressing <b>C-g</b> will cancel any <b>emacs</b>
+        command in progress.
+      </p>
+      <p>
+        To save a file, press <b>C-x C-s</b>. To start
+        editing a new file, press <b>C-x C-f</b>.
+      </p>
+      <p>To bring up two windows (or "buffers" in emacs-speak),
+        press <b>C-x 2</b> (<b>C-x 1</b> gets you back to 1). <b>C-x o</b>
+        switches between buffers on the same screen. <b>C-x b</b> lets you switch
+        between all active buffers, whether you can see them or not. <b>C-x C-k</b>
+        deletes a buffer that you are finished with.
+      </p>
+      <p>
+        <b>M-x shell</b> brings up a UNIX shell inside a buffer (you may like to put this on <b>C-x C-u</b>).
+        <b>M-x goto-line</b> skips to a particular line (you may like to put this on <b>C-x g</b>).
+        <b>M-x compile</b> will attempt to compile a program (using the <b>make</b> utility or 
+        some other command that you can specify). If you are doing a lot of programming you will probably want
+        to put this on a key like <b>C-x c</b>.
+        <b>M-q</b> will reformat a paragraph.
+        <b>C-x C-c </b>quits emacs.
+      </p>
+    </div>
 
-<div class="table">
-  <div class="heading">
-    6.3.6 Quick reference for emacs
-  </div>
-</div>
-<br>
 
-<div class="text">
-  <b>Cursor movement:</b>
-<br><b>C-a
-  beginning of line</b>
-<br><b>C-e
-  end of line</b>
-<br><b>C-&lt;
-  top of document</b>
-<br><b>C->
-  end of document</b>
-<br><b>M-x goto-line Go to line</b>
-<br><b>C-v
-  page forward</b>
-<br><b>M-v
-  page backward</b>
-<p><b>Deleting and moving text:</b>
-<br><b>Backspace delete character
-  before cursor</b>
-<br><b>
-  (subject to modification of .emacs)</b>
-<br><b>C-d
-  delete character under cursor</b>
-<br><b>M-d
-  delete word</b>
-<br><b>C-k
-  delete to end of line(s)</b>
-<br><b>
-  (restore with C-y)</b>
-<br><b>C-SPC
-  set mark</b>
-<br><b>C-w
-  delete from mark to cursor</b>
-<br><b>
-  (restore with C-y)</b>
-<p><b>Search and replace:</b>
-<br><b>C-s
-  incremental search forward</b>
-<br><b>C-r
-  incremental search backward</b>
-<br><b>C-%
-  query replace</b>
-<br><b>M-x replace-string<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>&lt;searchstr><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>&lt;replstr></b><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<p><b>Miscellaneous:</b>
-<br><b>C-x u
-  undo</b>
-<br><b>C-x C-s save
-  file</b>
-<br><b>C-x C-f find
-  file</b>
-<br><b>C-x 2
-  2 windows</b>
+    <h2>6.3.6 Quick reference for emacs</h2>
+
+
+    <div class="text">
+      <b>Cursor movement:</b>
+      <br><b>C-a
+        beginning of line</b>
+      <br><b>C-e
+        end of line</b>
+      <br><b>C-&lt;
+        top of document</b>
+      <br><b>C->
+        end of document</b>
+      <br><b>M-x goto-line Go to line</b>
+      <br><b>C-v
+        page forward</b>
+      <br><b>M-v
+        page backward</b>
+      <p><b>Deleting and moving text:</b>
+        <br><b>Backspace delete character
+          before cursor</b>
+        <br><b>
+          (subject to modification of .emacs)</b>
+        <br><b>C-d
+          delete character under cursor</b>
+        <br><b>M-d
+          delete word</b>
+        <br><b>C-k
+          delete to end of line(s)</b>
+        <br><b>
+          (restore with C-y)</b>
+        <br><b>C-SPC
+          set mark</b>
+        <br><b>C-w
+          delete from mark to cursor</b>
+        <br><b>
+          (restore with C-y)</b>
+      <p><b>Search and replace:</b>
+        <br><b>C-s
+          incremental search forward</b>
+        <br><b>C-r
+          incremental search backward</b>
+        <br><b>C-%
+          query replace</b>
+        <br><b>M-x replace-string &lt;searchstr&gt; enter &lt;replstr&gt;</b> enter
+      <p><b>Miscellaneous:</b>
+        <br><b>C-x u
+          undo</b>
+        <br><b>C-x C-s save
+          file</b>
+        <br><b>C-x C-f find
+          file</b>
+        <br><b>C-x 2
+          2 windows</b>
 <br><b>C-x 1
   1 window</b>
 <br><b>C-x o
@@ -606,21 +596,13 @@ editing a new file, press <b>C-x C-f</b>.
 </div>
 <br>
 
-<div class="table">
-  <div class="heading">
-    6.4 Other UNIX editors
-  </div>
-</div>
+<h2>6.4 Other UNIX editors</h2>
 
 <div class="text">
   There are many other editors for UNIX systems.
-  Two popular alternatives to <b>vi</b> and <b>emacs</b> are <b>nedit
-  </b>and
-  <b>pico</b>.
-
-<p><a href="http:./index.html">
-    (BACK TO COURSE CONTENTS)</A></p>
+  Two popular alternatives to <b>vi</b> and <b>emacs</b> are <b>nano</b> and <b>pico</b>.
 </div>
 
-</body>
+
+  </body>
 </html>
