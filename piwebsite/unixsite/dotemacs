@@ -1,0 +1,29 @@
+;; get rid of tool bar
+(if (functionp 'tool-bar-mode) (tool-bar-mode -1))
+
+;; control z is undo
+(global-set-key (kbd "C-z") 'undo)
+
+;; control x g is goto line
+(global-set-key (kbd "C-x g") 'goto-line)
+
+;; compile Ctl CC
+(global-set-key (kbd "C-x c") 'compile)
+
+;; java indentation
+;;(add-hook 'java-mode-hook (lambda ()
+;;   (setq c-default-style "bsd")))
+;;(add-hook 'java-mode-hook (lambda ()
+;;   (setq c-basic-offset 2)))
+
+;; better indentation style
+(setq c-default-style "bsd")
+;;"stroustrup"
+
+;; indent 2 instead of four
+(setq-default c-basic-offset 2)
+
+
+;; backup files on .emacs.d
+(setq backup-directory-alist '(("" . "~/.emacs.d/emacs-backup")))
+
