@@ -47,7 +47,7 @@
     <br>
 
     <h2>6.2.1 Introduction to vi</h2>
- 
+    
     <div class="text">
       <p>
         <b>vi</b> (pronounced "vee-eye", short for
@@ -431,7 +431,7 @@
         following line:
       <p><b>(global-set-key "\C-h" 'backward-delete-char-untabify)</b>
       <p>
-        <a href=".emacs">Here</a> is a <b>.emacs</b> file that
+        <a href="dotemacs">Here</a> is a <b>.emacs</b> file that
         contains this line as well as several other useful facilities (see Section 6.3.6).
       </p>
       <p>
@@ -441,7 +441,7 @@
       <p>
         Useful navigation commands are <b>C-a</b> (beginning
         of line), <b>C-e</b> (end of line), <b>C-v</b> (forward page), <b>M-v</b>
-        (backwards page), <b>M-&lt;</b> (beginning of document) and <b>M-></b>
+        (backwards page), <b>M-&lt;</b> (beginning of document) and <b>M-&gt;</b>
         (end of document). <b>C-d </b>will delete the character under the cursor,
         while <b>C-k</b> will delete to the end of the line. Text deleted with
         <b>C-k</b> is placed in a buffer which can be "yanked" back later with <b>C-y</b>.
@@ -450,7 +450,7 @@
 
 
     <h2>6.3.3 Moving and Copying Text in emacs</h2>
- 
+    
     <div class="text">
       <p>  
         The easiest way to cut and paste text is to go
@@ -458,6 +458,8 @@
         the text you want. Then move to the spot where you want to paste the text
         and press <b>C-y</b> to restore the text. If you make a mistake, <b>C-u</b>
         will undo the change (<b>emacs</b> supports several levels of undo).
+      </p>
+      <p>
         Another way to delete a chunk of text is to go the start of the text and
         press <b>C-SPC</b> (SPC is the spacebar; this sets a mark). Then go to
         the end of the text you wish to delete and press <b>C-w</b>. Restore
@@ -483,7 +485,7 @@
         search started.
       </p>
       <p>
-        To replace a string, type <b>M-x replace-string<IMG SRC="enter.gif" HEIGHT=15 WIDTH=27></b>
+        To replace a string, type <b>M-x replace-string</b>
         (you may want to modify your <b>.emacs</b> file so that this command
         is on <b>C-x r</b>). <b>M-%</b> performs a query search and replace.
       </p>
@@ -521,88 +523,166 @@
     <h2>6.3.6 Quick reference for emacs</h2>
 
 
+    <table class="tablestyle2">
+      <tr>
+        <th>Command</th>
+        <th>Description</th>
+      </tr>
+
+      <tr>
+        <td><b>Cursor movement:</b></td>
+      </tr>     
+      <tr>
+        <td>C-a<td>
+        <td>beginning of line</td>
+      <tr>
+        <td>C-e</td>
+        <td>end of line</td>
+      <tr>
+        <td>C-&lt;</td>
+        <td>top of document</td>
+      </tr>
+      <tr>
+        <td>C-&gt;</td>
+        <td>end of document</td>
+      </tr>
+      <tr>
+        <td>M-x goto-line</td>
+        <td>Go to line</td>
+      </tr>
+      <tr>
+        <td>C-v</td>
+        <td>page forward</td>
+      </tr>
+      <tr>
+        <td>M-v</td>
+        <td>page backward</td>
+      </tr>
+
+      <tr>
+        <td><b>Deleting and moving text:</b></td>
+      </tr>
+      <tr>
+        <td>Backspace</td> 
+        <td>delete character before cursor</td>
+      </tr>
+      <tr>
+        <td>C-d</td>
+        <td>delete character under cursor</td>
+      </tr>
+      <tr>
+        <td>M-d</td>
+        <td>delete word</td>
+      </tr>
+      <tr>
+        <td>C-k</td>
+        <td>delete to end of line(s) (restore with C-y)</td>
+      </tr>
+      <tr>
+        <td>C-y</td>
+        <td>yank/restore after C-k or C-w</td>
+      </tr>
+      <tr>
+        <td>C-SPC</td>
+        <td>set mark</td>
+      </tr>
+      <tr>
+        <td>C-w</td>
+        <td>delete from mark to cursor (restore with C-y)</td>
+      </tr>
+
+      <tr><td><b>Search and replace:</b></td></tr>
+      <tr>
+        <td>C-s</td>
+        <td>incremental search forward</td>
+      </tr>
+      <tr>
+        <td>C-r</td>
+        <td>incremental search backward</td>
+      </tr>
+      <tr>
+        <td>C-%</td>
+        <td>query replace</td>
+      </tr>
+      <tr>
+        <td>M-x replace-string &lt;searchstr&gt; enter &lt;replstr&gt;</td>
+        <td>replace string</td>
+      </tr>
+
+      <tr><td><b>Miscellaneous:</b></td></tr>
+      <tr>
+        <td>C-x u</td>
+        <td>undo</td>
+      </tr>
+      <tr>
+        <td>C-x C-s</td>
+        <td>save file</td>
+      </tr>
+      <tr>
+        <td>C-x C-f</td>
+        <td>find file</td>
+      </tr>
+      <tr>
+        <td>C-x 2</td>
+        <td>split to 2 windows</td>
+      </tr>
+      <tr>
+        <td>C-x 1</td>
+        <td>merge to 1 window</td>
+      </tr>
+      <tr>
+        <td>C-x o</td>
+        <td>switch between windows</td>
+      </tr>
+      <tr>
+        <td>C-x b</td>
+        <td>switch buffers</td>
+      </tr>
+      <tr>
+        <td>M-q</td>
+        <td>reformat paragraph</td>
+      </tr>
+      <tr>
+        <td>C-x C-c</td>
+        <td>quit</td>
+      </tr>
+      <tr>
+        <td>C-x h</td>
+        <td>mark whole buffer, useful to apply a command to whole buffer</td>
+      </tr>
+      <tr>
+        <td>C-M-\</td>
+        <td>indent region</td>
+      </tr>     
+
+
+      <tr><td><b>Useful customisable keys (configured using the provided <a href="dotemacs">.emacs</a> file):</b></td></tr>
+      
+      <tr>
+        <td>C-z</td>
+        <td>undo</td>
+      </tr>
+      <tr>
+        <td>C-x g</td>
+        <td>goto line</td>
+      </tr>
+      <tr>
+        <td>C-x c</td>
+        <td>compile program (useful with C-x 2)</td>
+      </tr>
+    </table>
+
+
+    <h2>6.4 Other UNIX editors</h2>
+
     <div class="text">
-      <b>Cursor movement:</b>
-      <br><b>C-a
-        beginning of line</b>
-      <br><b>C-e
-        end of line</b>
-      <br><b>C-&lt;
-        top of document</b>
-      <br><b>C->
-        end of document</b>
-      <br><b>M-x goto-line Go to line</b>
-      <br><b>C-v
-        page forward</b>
-      <br><b>M-v
-        page backward</b>
-      <p><b>Deleting and moving text:</b>
-        <br><b>Backspace delete character
-          before cursor</b>
-        <br><b>
-          (subject to modification of .emacs)</b>
-        <br><b>C-d
-          delete character under cursor</b>
-        <br><b>M-d
-          delete word</b>
-        <br><b>C-k
-          delete to end of line(s)</b>
-        <br><b>
-          (restore with C-y)</b>
-        <br><b>C-SPC
-          set mark</b>
-        <br><b>C-w
-          delete from mark to cursor</b>
-        <br><b>
-          (restore with C-y)</b>
-      <p><b>Search and replace:</b>
-        <br><b>C-s
-          incremental search forward</b>
-        <br><b>C-r
-          incremental search backward</b>
-        <br><b>C-%
-          query replace</b>
-        <br><b>M-x replace-string &lt;searchstr&gt; enter &lt;replstr&gt;</b> enter
-      <p><b>Miscellaneous:</b>
-        <br><b>C-x u
-          undo</b>
-        <br><b>C-x C-s save
-          file</b>
-        <br><b>C-x C-f find
-          file</b>
-        <br><b>C-x 2
-          2 windows</b>
-<br><b>C-x 1
-  1 window</b>
-<br><b>C-x o
-  switch between windows</b>
-<br><b>C-x b
-  switch buffers</b>
-<br><b>M-q
-  reformat paragraph</b>
-<br><b>C-x C-c quit</b>
-<p><b>Useful customisable keys (configured using the provided
-    <b><A HREF=".emacs">.emacs</A></b> file):</b>
-<br><b>C-x g
-  goto line</b>
-<br><b>C-x c
-  compile program (useful with C-x 2)</b>
-<br><b>C-x C-u open
-  Unix shell (useful with C-x 2)</b>
-<br><b>C-x a
-  repeat command</b>
-<br><b>C-x m
-  manual entry</b>
-</div>
-<br>
-
-<h2>6.4 Other UNIX editors</h2>
-
-<div class="text">
-  There are many other editors for UNIX systems.
-  Two popular alternatives to <b>vi</b> and <b>emacs</b> are <b>nano</b> and <b>pico</b>.
-</div>
-
+      <p>
+        There are many other editors for UNIX systems.
+        Two popular alternatives to <b>vi</b> and <b>emacs</b> are <b>nano</b> and <b>pico</b>.
+      </p>
+    </div>
 
   </body>
+
+
 </html>
