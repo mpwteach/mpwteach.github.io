@@ -1,21 +1,23 @@
 body {
-    background-color: #CCEAFF;
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  background-color: #CCEAFF;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
 h1 {
-    color: #003399;
-    font-size: 200%;
+  color: #003399;
+  font-size: 200%;
+  padding-bottom: 5px;
+  padding-top: 18px;
 }
 
 h2 {
-    color: #ffffff;
-    background-color: #000099;
-    margin-left: 2px;
-    margin-right: 2px;
-    padding-left: 5px;
-    padding-bottom: 5px;
-    padding-top: 2px;
+  color: #003399;
+  //background-color: #000099;
+  margin-left: 2px;
+  margin-right: 2px;
+  padding-left: 5px;
+  padding-bottom: 5px;
+  padding-top: 18px;
 }
 
 img {
@@ -29,16 +31,16 @@ table {
 }
 
 table th, td {
-    border: 1px solid gray;
-    background-color: #dddddd;
-    padding: 8px;
+  border: 1px solid gray;
+  background-color: #dddddd;
+  padding: 8px;
 } 
 
 table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #000099;
+  background-color: #003399;
   color: white;
 }
 
@@ -49,16 +51,16 @@ table th {
 
 
 .caption {
-    text-align: center;
-    font-style: italic;	
+  text-align: center;
+  font-style: italic;	
 }
 
 
 .text {
-    color: #000000;
-    font-size: 100%;
-    margin-left: 50px;
-    margin-right: 50px;
+  color: #000000;
+  font-size: 100%;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 
@@ -68,8 +70,4 @@ table th {
   box-shadow: 4px 4px 2px darkgray;
   font-family: "Courier New", sans-serif;
 }
-
-
-
-
 
