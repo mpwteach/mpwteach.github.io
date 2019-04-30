@@ -157,239 +157,230 @@
    <h2>8.4 Simple Shell Scripting</h2>
 
 
-<div class="text">
-<blockquote>Consider the following simple shell script, which
-has been created (using an editor) in a text file called <b>simple</b>:
-<P><b>#!/bin/sh</b>
-<br><b># this is a comment</b>
-<br><b>echo "The number of arguments is $#"</b>
-<br><b>echo "The arguments are $*"</b>
-<br><b>echo "The first is $1"</b>
-<br><b>echo "My process number is $$"</b>
-<br><b>echo "Enter a number from the keyboard: "</b>
-<br><b>read number</b>
-<br><b>echo "The number you entered was $number"</b>
-<P>The shell script begins with the line "<b>#!/bin/sh</b>"
-. Usually "<b>#</b>" denotes the start of a comment, but <b>#!</b>
-is a special combination that tells UNIX to use the Bourne shell (<b>sh</b>)
-to interpret this script. The <b>#!</b> must be the first two characters
-of the script. The arguments passed to the script can be accessed through
-<b>$1</b>,
-<b>$2</b>,
-<b>$3</b> etc. <b>$*</b> stands for all the arguments, and <b>$#</b>
-for the number of arguments. The process number of the shell executing
-the script is given by <b>$$</b>. the <b>read</b> number statement
-assigns keyboard input to the variable <b>number</b>.
-<P>To execute this script, we first have to make the file
-<b>simple</b>
-executable:
-<P><b>&nbsp;&nbsp;&nbsp; $ ls -l simple</b><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<br><b>&nbsp;&nbsp;&nbsp; -rw-r--r--&nbsp;&nbsp;&nbsp; 1
-will&nbsp; finance&nbsp; 175&nbsp; Dec 13&nbsp; simple</b>
-<br><b>&nbsp;&nbsp;&nbsp; $ chmod +x simple</b><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<br><b>&nbsp;&nbsp;&nbsp; $ ls -l simple</b><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<br><b>&nbsp;&nbsp;&nbsp; -rwxr-xr-x&nbsp;&nbsp;&nbsp; 1
-will&nbsp; finance&nbsp; 175&nbsp; Dec 13&nbsp; simple</b>
-<br><b>&nbsp;&nbsp;&nbsp; $ ./simple hello world</b><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<br><b>&nbsp;&nbsp;&nbsp; The number of arguments is 2</b>
-<br><b>&nbsp;&nbsp;&nbsp; The arguments are hello world</b>
-<br><b>&nbsp;&nbsp;&nbsp; The first is hello</b>
-<br><b>&nbsp;&nbsp;&nbsp; My process number is 2669</b>
-<br><b>&nbsp;&nbsp;&nbsp; Enter a number from the keyboard:</b>
-<br><b>&nbsp;&nbsp;&nbsp; 5</b><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<br><b>&nbsp;&nbsp;&nbsp; The number you entered was 5</b>
-<br><b>&nbsp;&nbsp;&nbsp; $</b>
-<P>We can use input and output redirection in the normal
-way with scripts, so:
-<P><b>&nbsp;&nbsp;&nbsp; $ echo 5 | simple hello world</b><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<P>would produce similar output but would not pause to read
-a number from the keyboard.</blockquote>
-</div>
-<br>
+   <div class="text">
+     <p>
+       Consider the following simple shell script, which
+       has been created (using an editor) in a text file called <b>simple</b>:
+     <p class="egcode">
+       #!/bin/bash
+       <br># this is a comment
+       <br>echo "The number of arguments is $#"
+       <br>echo "The arguments are $*"
+       <br>echo "The first is $1"
+       <br>echo "My process number is $$"
+       <br>echo "Enter a number from the keyboard: "
+       <br>read number
+       <br>echo "The number you entered was $number"
+     </p>
+     <p>
+       The shell script begins with the line <b>#!/bin/bash</b>
+       . Usually "<b>#</b>" denotes the start of a comment, but <b>#!</b>
+       is a special combination that tells UNIX to use the Bash shell (<b>bash</b>)
+       to interpret this script. The <b>#!</b> must be the first two characters
+       of the script. The arguments passed to the script can be accessed through
+       <b>$1</b>, <b>$2</b>, <b>$3</b> etc. <b>$*</b> stands for all the arguments, and <b>$#</b>
+       for the number of arguments. The process number of the shell executing
+       the script is given by <b>$$</b>. the <b>read</b> number statement
+       assigns keyboard input to the variable <b>number</b>.
+     </p>
+     <p>
+       To execute this script, we first have to make the file <b>simple</b>
+       executable:
+     </p>
+     <p class="terminal">
+       $ ls -l simple
+       <br>-rw-r--r-- 1 will finance 175 Dec 13 simple
+       <br>$ chmod +x simple
+       <br>$ ls -l simple
+       <br>-rwxr-xr-x 1 will finance 175 Dec 13 simple
+       <br>$ ./simple hello world
+       <br>The number of arguments is 2
+       <br>The arguments are hello world
+       <br>The first is hello
+       <br>My process number is 2669
+       <br>Enter a number from the keyboard:
+       <br> <b>5</b>
+       <br>The number you entered was 5
+       <br>$
+     </p>
+     <p>
+       We can use input and output redirection in the normal
+       way with scripts, so:
+     </p>
+     <p class="terminal">
+       $ echo 5 | simple hello world
+     </p>
+     <p>
+       would produce similar output but would not pause to read
+       a number from the keyboard.
+     </p>
 
-<div class="heading">
-<div class="table">
-8.5 More Advanced Shell Scripting
-</div>
-</div>
-<br>
+     <h2>8.5 More Advanced Shell Scripting</h2>
 
-<div class="text">
-<blockquote>
-<ul>
-<li>
-<b>if-then-else</b> statements</li>
-<P>Shell scripts are able to perform simple conditional branches:
-<P><b>if [ </b><i>test</i><b> ]</b>
-<br><b>then</b>
-<br><b>&nbsp;&nbsp;&nbsp; </b><i>commands-if-test-is-true</i>
-<br><b>else</b>
-<br><b>&nbsp;&nbsp;&nbsp; </b><i>commands-if-test-is-false</i>
-<br><b>fi</b>
-<P>The <i>test</i> condition may involve file characteristics
-or simple string or numerical comparisons. The <b>[</b> used here is
-actually the name of a command (<b>/bin/[</b>) which performs the evaluation
-of the test condition. Therefore there must be spaces before and after
-it as well as before the closing bracket. Some common test conditions are:
-<P><b>-s </b><i>file</i>
-<br><b>&nbsp;&nbsp;&nbsp; </b>true if <i>file</i> exists
-and is not empty
-<br><b>-f </b><i>file</i>
-<br><b>&nbsp;&nbsp;&nbsp; </b>true if <i>file</i> is an
-ordinary file
-<br><b>-d </b><i>file</i>
-<br><b>&nbsp;&nbsp;&nbsp; </b>true if <i>file</i> is a
-directory
-<br><b>-r </b><i>file</i>
-<br><b>&nbsp;&nbsp;&nbsp; </b>true if <i>file</i> is readable
-<br><b>-w </b><i>file</i>
-<br><b>&nbsp;&nbsp;&nbsp; </b>true if <i>file</i> is writable
-<br><b>-x </b><i>file</i>
-<br><b>&nbsp;&nbsp;&nbsp; </b>true if <i>file</i> is executable
-<br><b>$X -eq $Y</b>
-<br><b>&nbsp;&nbsp;&nbsp; </b>true if <b>X</b> equals
-<b>Y</b>
-<br><b>$X -ne $Y</b>
-<br><b>&nbsp;&nbsp;&nbsp; </b>true if <b>X</b> not equal
-to <b>Y</b>
-<br><b>$X -lt $Y</b>
-<br><b>&nbsp;&nbsp;&nbsp; </b>true if <b>X</b> less than
-<b>$Y</b>
-<br><b>$X -gt $Y</b>
-<br><b>&nbsp;&nbsp;&nbsp; </b>true <b>if</b> X greater
-than <b>$Y</b>
-<br><b>$X -le $Y</b>
-<br><b>&nbsp;&nbsp;&nbsp; </b>true if <b>X</b> less than
-or equal to <tt>Y</tt>
-<br><tt>$X -ge $Y</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <tt>X</tt> greater
-than or equal to
-<tt>Y</tt>
-<br><tt>"$A" = "$B"</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if string <tt>A</tt>
-equals string <tt>B</tt>
-<br><tt>"$A" != "$B"</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if string <tt>A</tt>
-not equal to string
-<tt>B</tt>
-<br><tt>$X ! -gt $Y</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if string <tt>X</tt>
-is not greater than <tt>Y</tt>
-<br><tt>$E -a $F</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if expressions<tt> E
-</tt>and<tt>
-F </tt>are both true
-<br><tt>$E -o $F</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>true <tt>if </tt>either expression<tt>
-E </tt>or expression<tt> F </tt>is true
-<br>&nbsp;
-<li>
-<tt>for</tt> loops</li>
+     <div class="text">
+       <ul>
+	 <li><b>if-then-else</b> statements</li>
+	 <p>Shell scripts are able to perform simple conditional branches:
+	 <p class="egcode">
+	   <b>if [</b> <i>test</i> <b>]</b>
+	   <br><b>then</b>
+	   <br><b> </b><i>commands-if-test-is-true</i>
+	   <br><b>else</b>
+	   <br><b> </b><i>commands-if-test-is-false</i>
+	   <br><b>fi</b>
+	 </p>
+       
+	 <p>
+	   The <i>test</i> condition may involve file characteristics
+	   or simple string or numerical comparisons. The <b>[</b> used here is
+	   actually the name of a command (<b>/bin/[</b>) which performs the evaluation
+	   of the test condition. Therefore there must be spaces before and after
+	   it as well as before the closing bracket. Some common test conditions are:
+	 </p>
+	 <p class="egcode">
+	   <b>-s </b><i>file</i>
+	   <br><b> </b>true if <i>file</i> exists and is not empty
+	   <br><b>-f </b><i>file</i>
+	   <br><b> </b>true if <i>file</i> is an ordinary file
+	   <br><b>-d </b><i>file</i>
+	   <br><b> </b>true if <i>file</i> is a directory
+	   <br><b>-r </b><i>file</i>
+	   <br><b> </b>true if <i>file</i> is readable
+	   <br><b>-w </b><i>file</i>
+	   <br><b> </b>true if <i>file</i> is writable
+	   <br><b>-x </b><i>file</i>
+	   <br><b> </b>true if <i>file</i> is executable
+	   <br><b>$X -eq $Y</b>
+	   <br><b> </b>true if <b>X</b> equals <b>Y</b>
+	   <br><b>$X -ne $Y</b>
+	   <br><b> </b>true if <b>X</b> not equal to <b>Y</b>
+	   <br><b>$X -lt $Y</b>
+	   <br><b> </b>true if <b>X</b> less than <b>$Y</b>
+	   <br><b>$X -gt $Y</b>
+	   <br><b> </b>true <b>if</b> X greater than <b>$Y</b>
+	   <br><b>$X -le $Y</b>
+	   <br><b> </b>true if <b>X</b> less than or equal to <b>Y</b>
+	   <br><b>$X -ge $Y</b>
+	   <br><b> </b>true if <b>X</b> greater than or equal to <b>Y</b>
+	   <br><b>"$A" = "$B"</b>
+	   <br><b> </b>true if string <b>A</b> equals string <b>B</b>
+	   <br><b>"$A" != "$B"</b>
+	   <br><b> </b>true if string <b>A</b> not equal to string <b>B</b>
+	   <br><b>$X ! -gt $Y</b>
+	   <br><b> </b>true if string <b>X</b> is not greater than <b>Y</b>
+	   <br><b>$E -a $F</b>
+	   <br><b> </b>true if expressions<b>E</b> and <b>F</b> are both true
+	   <br><b>$E -o $F</b>
+	   <br><b> </b>true if either expression <b>E</b> or expression <b>F</b> is true
+	   <br>
+	 </p>
+	   
+	 <li><b>for</b> loops</li>
 
 <P>Sometimes we want to loop through a list of files, executing
-some commands on each file. We can do this by using a <tt>for</tt> loop:
-<P><tt>for </tt><i>variable</i><tt> in </tt><i>list</i>
-<br><tt>do</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt><i>statements&nbsp;</i><tt>
+some commands on each file. We can do this by using a <b>for</b> loop:
+<P><b>for </b><i>variable</i><b> in </b><i>list</i>
+<br><b>do</b>
+<br><b> </b><i>statements</i><b>
 
-</tt>(referring to<tt> $</tt><i>variable</i>)
-<br><tt>done</tt>
+</b>(referring to<b> $</b><i>variable</i>)
+<br><b>done</b>
 <P>The following script sorts each text files in the current
-directory<tt>:</tt>
-<P><tt>#!/bin/sh</tt>
-<br><tt>for f in *.txt</tt>
-<br><tt>do</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; echo sorting file $f</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; cat $f | sort > $f.sorted</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; echo sorted file has been output
-to $f.sorted</tt>
-<br><tt>done</tt>
-<br>&nbsp;
+directory<b>:</b>
+<P><b>#!/bin/sh</b>
+<br><b>for f in *.txt</b>
+<br><b>do</b>
+<br><b> echo sorting file $f</b>
+<br><b> cat $f | sort > $f.sorted</b>
+<br><b> echo sorted file has been output
+to $f.sorted</b>
+<br><b>done</b>
+<br>
 <li>
-<tt>while</tt> loops</li>
+<b>while</b> loops</li>
 
 <P>Another form of loop is the while loop:
-<P><tt>while [ </tt><i>test</i><tt> ]</tt>
-<br><tt>do</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt><i>statements</i>&nbsp;&nbsp;&nbsp;&nbsp;
+<P><b>while [ </b><i>test</i><b> ]</b>
+<br><b>do</b>
+<br><b> </b><i>statements</i>
 (to be executed while <i>test</i> is true)
-<br><tt>done</tt>
-<P>The following script waits until a non-empty file <tt>input.txt</tt>
+<br><b>done</b>
+<P>The following script waits until a non-empty file <b>input.txt</b>
 has been created:
-<P><tt>#!/bin/sh</tt>
-<br><tt>while [ ! -s input.txt ]</tt>
-<br><tt>do</tt>
-<br><tt>&nbsp; echo waiting...</tt>
-<br><tt>&nbsp; sleep 5</tt>
-<br><tt>done</tt>
-<br><tt>echo input.txt is ready</tt>
-<P>You can abort a shell script at any point using the <tt>exit</tt>
+<P><b>#!/bin/sh</b>
+<br><b>while [ ! -s input.txt ]</b>
+<br><b>do</b>
+<br><b> echo waiting...</b>
+<br><b> sleep 5</b>
+<br><b>done</b>
+<br><b>echo input.txt is ready</b>
+<P>You can abort a shell script at any point using the <b>exit</b>
 statement, so the following script is equivalent:
-<P><tt>#!/bin/sh</tt>
-<br><tt>while true</tt>
-<br><tt>do</tt>
-<br><tt>&nbsp; if [ -s input.txt ]</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; echo input.txt is ready</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; exit</tt>
-<br><tt>&nbsp; fi</tt>
-<br><tt>&nbsp; echo waiting...</tt>
-<br><tt>&nbsp; sleep 5</tt>
-<br><tt>done</tt>
-<br>&nbsp;
+<P><b>#!/bin/sh</b>
+<br><b>while true</b>
+<br><b>do</b>
+<br><b> if [ -s input.txt ]</b>
+<br><b> echo input.txt is ready</b>
+<br><b> exit</b>
+<br><b> fi</b>
+<br><b> echo waiting...</b>
+<br><b> sleep 5</b>
+<br><b>done</b>
+<br>
 <li>
-<tt>case</tt> statements</li>
+<b>case</b> statements</li>
 
-<P><tt>case</tt> statements are a convenient way to perform
-multiway branches where one input pattern must be compared to several alternatives:
-<P><tt>case </tt><i>variable</i><tt> in</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt><i>pattern1</i><tt>)</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </tt><i>statement&nbsp;</i>&nbsp;&nbsp;
-(executed if <i>variable</i> matches <i>pattern1</i>)
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt><i>pattern2</i><tt>)</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </tt><i>statement</i>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt><i>etc.</i>
-<br><tt>esac</tt>
-<P>The following script uses a <tt>case</tt> statement to
+<P><b>case</b> statements are a convenient way to perform
+multiway branches where one input pabern must be compared to several alternatives:
+<P><b>case </b><i>variable</i><b> in</b>
+<br><b> </b><i>pabern1</i><b>)</b>
+<br><b> </b><i>statement</i>
+(executed if <i>variable</i> matches <i>pabern1</i>)
+<br><b> ;;</b>
+<br><b> </b><i>pabern2</i><b>)</b>
+<br><b> </b><i>statement</i>
+<br><b> ;;</b>
+<br><b> </b><i>etc.</i>
+<br><b>esac</b>
+<P>The following script uses a <b>case</b> statement to
 have a guess at the type of non-directory non-executable files passed as
 arguments on the basis of their extensions (note how the "or" operator
-<tt>|</tt>
-can be used to denote multiple patterns, how "<tt>*</tt>" has been used
-as a catch-all, and the effect of the forward single quotes <tt>`</tt>):
-<P><tt>#!/bin/sh</tt>
-<br><tt>for f in $*</tt>
-<br><tt>do</tt>
-<br><tt>&nbsp; if [ -f $f -a ! -x $f ]</tt>
-<br><tt>&nbsp; then</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; case $f in</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; core)</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo "$f: a core dump
-file"</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; *.c)</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; echo "$f: a C program"</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; *.cpp|*.cc|*.cxx)</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo "$f: a C++ program"</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; *.txt)</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo "$f: a text file"</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; *.pl)</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo "$f: a PERL script"</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; *.html|*.htm)</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo "$f: a web document"</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; *)</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo "$f: appears
-to be "`file -b $f`</tt>
-<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;;</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; esac</tt>
-<br><tt>&nbsp; fi</tt>
-<br><tt>done</tt>
-<br>&nbsp;
+<b>|</b>
+can be used to denote multiple paberns, how "<b>*</b>" has been used
+as a catch-all, and the effect of the forward single quotes <b>`</b>):
+<P><b>#!/bin/sh</b>
+<br><b>for f in $*</b>
+<br><b>do</b>
+<br><b> if [ -f $f -a ! -x $f ]</b>
+<br><b> then</b>
+<br><b> case $f in</b>
+<br><b> core)</b>
+<br><b> echo "$f: a core dump
+file"</b>
+<br><b> ;;</b>
+<br><b> *.c)</b>
+<br><b> echo "$f: a C program"</b>
+<br><b> ;;</b>
+<br><b> *.cpp|*.cc|*.cxx)</b>
+<br><b> echo "$f: a C++ program"</b>
+<br><b> ;;</b>
+<br><b> *.txt)</b>
+<br><b> echo "$f: a text file"</b>
+<br><b> ;;</b>
+<br><b> *.pl)</b>
+<br><b> echo "$f: a PERL script"</b>
+<br><b> ;;</b>
+<br><b> *.html|*.htm)</b>
+<br><b> echo "$f: a web document"</b>
+<br><b> ;;</b>
+<br><b> *)</b>
+<br><b> echo "$f: appears
+to be "`file -b $f`</b>
+<br><b> ;;</b>
+<br><b> esac</b>
+<br><b> fi</b>
+<br><b>done</b>
+<br>
 <li>
 capturing command output</li>
 
@@ -397,29 +388,29 @@ capturing command output</li>
 script just as if you would on the line command line. You can also capture
 the output of a command and assign it to a variable by using the forward
 single quotes
-<tt>` `</tt>:
-<P><tt>&nbsp;#!\bin\sh</tt>
-<br><tt>&nbsp;lines=`wc -l $1`</tt>
-<br><tt>&nbsp;echo "the file $1 has $lines lines"</tt>
+<b>` `</b>:
+<P><b>#!\bin\sh</b>
+<br><b>lines=`wc -l $1`</b>
+<br><b>echo "the file $1 has $lines lines"</b>
 <P>This script outputs the number of lines in the file passed
 as the first parameter.
-<br>&nbsp;
+<br>
 <li>
 arithmetic operations</li>
 
 <P>The Bourne shell doesn't have any built-in ability to
-evaluate simple mathematical expressions. Fortunately the UNIX <tt>expr
-</tt>command
+evaluate simple mathematical expressions. Fortunately the UNIX <b>expr
+</b>command
 is available to do this. It is frequently used in shell scripts with forward
 single quotes to update the value of a variable. For example:
-<P><tt>&nbsp;&nbsp;&nbsp; lines = `expr $lines + 1`</tt>
-<P>adds 1 to the variable <tt>lines</tt>. <tt>expr</tt> supports
-the operators <tt>+</tt>, <tt>-</tt>, <tt>*</tt>, <tt>/</tt>, <tt>%</tt>
+<P><b> lines = `expr $lines + 1`</b>
+<P>adds 1 to the variable <b>lines</b>. <b>expr</b> supports
+the operators <b>+</b>, <b>-</b>, <b>*</b>, <b>/</b>, <b>%</b>
 (remainder),
-<tt>&lt;</tt>, <tt>&lt;=</tt>, <tt>=</tt>, <tt>!=</tt>, <tt>>=</tt>,
-<tt>></tt>,
-<tt>|</tt>
-(or) and <tt>&amp;</tt> (and).<ul>
+<b>&lt;</b>, <b>&lt;=</b>, <b>=</b>, <b>!=</b>, <b>>=</b>,
+<b>></b>,
+<b>|</b>
+(or) and <b>&amp;</b> (and).<ul>
 </blockquote>
 </div>
 <br>
@@ -433,42 +424,42 @@ the operators <tt>+</tt>, <tt>-</tt>, <tt>*</tt>, <tt>/</tt>, <tt>%</tt>
 
 <div class="text">
 <blockquote>When you first login to a shell, your shell runs
-a systemwide start-up script (usually called <tt>/etc/profile</tt> under
-<tt>sh</tt>,
-<tt>bash</tt>
-and <tt>ksh</tt> and <tt>/etc/.login </tt>under
-<tt>csh</tt>). It then
-looks in your home directory and runs your personal start-up script (<tt>.profile</tt>
-under <tt>sh</tt>,<tt> bash</tt> and
-<tt>ksh</tt> and
-<tt>.cshrc</tt> under
-<tt>csh</tt> and <tt>tcsh</tt>). Your personal start-up script is therefore
-usually a good place to set up environment variables such as <tt>PATH</tt>,
-<tt>EDITOR</tt> etc. For example with <tt>bash</tt>, to add the directory<tt> ~/bin</tt> to
-your <tt>PATH</tt>, you can include the line:
-<P><tt>&nbsp;&nbsp;&nbsp; export PATH=$PATH:~/bin</tt>
-<P>in your <tt>.profile</tt>. If you subsequently modify
-your <tt>.profile</tt> and you wish to import the changes into your current
+a systemwide start-up script (usually called <b>/etc/profile</b> under
+<b>sh</b>,
+<b>bash</b>
+and <b>ksh</b> and <b>/etc/.login </b>under
+<b>csh</b>). It then
+looks in your home directory and runs your personal start-up script (<b>.profile</b>
+under <b>sh</b>,<b> bash</b> and
+<b>ksh</b> and
+<b>.cshrc</b> under
+<b>csh</b> and <b>tcsh</b>). Your personal start-up script is therefore
+usually a good place to set up environment variables such as <b>PATH</b>,
+<b>EDITOR</b> etc. For example with <b>bash</b>, to add the directory<b> ~/bin</b> to
+your <b>PATH</b>, you can include the line:
+<P><b> export PATH=$PATH:~/bin</b>
+<P>in your <b>.profile</b>. If you subsequently modify
+your <b>.profile</b> and you wish to import the changes into your current
 shell, type:
-<P><tt>&nbsp;&nbsp;&nbsp; $ source .profile</tt>
+<P><b> $ source .profile</b>
 <br>or
-<br><tt>&nbsp;&nbsp;&nbsp; $ . ./profile</tt>
-<P>The <tt>source </tt>command is built into the shell. It
-ensures that changes to the environment made in <tt>.profile</tt> affect
+<br><b> $ . ./profile</b>
+<P>The <b>source </b>command is built into the shell. It
+ensures that changes to the environment made in <b>.profile</b> affect
 the current shell, and not the shell that would otherwise be created to
 execute the
-<tt>.profile</tt> script.</blockquote>
+<b>.profile</b> script.</blockquote>
 
 <blockquote><P>
-With <tt>csh</tt>, to add the directory<tt> ~/bin</tt> to
-your <tt>PATH</tt>, you can include the line:
-<P><tt>&nbsp;&nbsp;&nbsp; set path = ( $PATH $HOME/bin )</tt>
-<P>in your <tt>.cshrc</tt>.</blockquote>
+With <b>csh</b>, to add the directory<b> ~/bin</b> to
+your <b>PATH</b>, you can include the line:
+<P><b> set path = ( $PATH $HOME/bin )</b>
+<P>in your <b>.cshrc</b>.</blockquote>
 </div>
 <br>
 
 
-<blockquote><P><A HREF="http:./index.html">
+<blockquote><P><A HREF="hbp:./index.html">
 (BACK TO COURSE CONTENTS)</A></P></blockquote>
 
 

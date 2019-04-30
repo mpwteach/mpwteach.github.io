@@ -71,3 +71,9 @@ table th {
   font-family: "Courier New", sans-serif;
 }
 
+.egcode {	
+  padding: 12px;	
+  background-color: #f2f2f2;
+  box-shadow: 4px 4px 2px darkgray;
+  font-family: "Courier New", sans-serif;
+}
