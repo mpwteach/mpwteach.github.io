@@ -34,11 +34,11 @@
     <div class="text">
       <p>This section covers:</p>
       <ul>
-	<li>Shells and shell scripts.</li>
-	<li>Shells variables and the environment.</li>
-	<li>Simple shell scripting</li>
-	<li>Advanced shell scripting.</li>
-	<li>Start-up shell scripts.</li>
+        <li>Shells and shell scripts.</li>
+        <li>Shells variables and the environment.</li>
+        <li>Simple shell scripting</li>
+        <li>Advanced shell scripting.</li>
+        <li>Start-up shell scripts.</li>
       </ul>
     </div>
 
@@ -47,23 +47,23 @@
 
     <div class="text">
       <p>
-	A shell is a program which reads and executes
-	commands for the user. Shells also usually provide features such job control,
-	input and output redirection and a command language for writing <i>shell scripts</i>. 
-	A shell script is simply an ordinary text file containing
-	a series of commands in a shell command language.
+        A shell is a program which reads and executes
+        commands for the user. Shells also usually provide features such job control,
+        input and output redirection and a command language for writing <i>shell scripts</i>. 
+        A shell script is simply an ordinary text file containing
+        a series of commands in a shell command language.
       </p>
       <p>
-	There are many different shells available on UNIX systems
-	(e.g.
-	<b>sh</b>, <b>bash</b>, <b>csh</b>, <b>ksh</b>, <b>tcsh</b>
-	etc.), and they each support a different command language. Here we will
-	discuss the command language for the Bourne shell <b>sh</b> since it
-	is available on almost all UNIX systems (and is also supported under <b>bash</b>
-	and <b>ksh</b>).
+        There are many different shells available on UNIX systems
+        (e.g.
+        <b>sh</b>, <b>bash</b>, <b>csh</b>, <b>ksh</b>, <b>tcsh</b>
+        etc.), and they each support a different command language. Here we will
+        discuss the command language for the Bourne shell <b>sh</b> since it
+        is available on almost all UNIX systems (and is also supported under <b>bash</b>
+        and <b>ksh</b>).
       </p>
     </div>
-<
+
 
    <h2>8.3 Shell Variables and the Environment</h2>
 
@@ -161,7 +161,7 @@
      <p>
        Consider the following simple shell script, which
        has been created (using an editor) in a text file called <b>simple</b>:
-     <p class="egcode">
+     <p class="codeeg">
        #!/bin/bash
        <br># this is a comment
        <br>echo "The number of arguments is $#"
@@ -219,116 +219,128 @@
 
      <div class="text">
        <ul>
-	 <li><b>if-then-else</b> statements</li>
-	 <p>Shell scripts are able to perform simple conditional branches:
-	 <p class="egcode">
-	   <b>if [</b> <i>test</i> <b>]</b>
-	   <br><b>then</b>
-	   <br><b> </b><i>commands-if-test-is-true</i>
-	   <br><b>else</b>
-	   <br><b> </b><i>commands-if-test-is-false</i>
-	   <br><b>fi</b>
-	 </p>
+         <li><b>if-then-else</b> statements</li>
+         <p>Shell scripts are able to perform simple conditional branches:
+         <p class="codesyntax">
+           <b>if [</b> <i>test</i> <b>]</b>
+           <br><b>then</b>
+           <br><b> </b><i>commands-if-test-is-true</i>
+           <br><b>else</b>
+           <br><b> </b><i>commands-if-test-is-false</i>
+           <br><b>fi</b>
+         </p>
        
-	 <p>
-	   The <i>test</i> condition may involve file characteristics
-	   or simple string or numerical comparisons. The <b>[</b> used here is
-	   actually the name of a command (<b>/bin/[</b>) which performs the evaluation
-	   of the test condition. Therefore there must be spaces before and after
-	   it as well as before the closing bracket. Some common test conditions are:
-	 </p>
-	 <p class="egcode">
-	   <b>-s </b><i>file</i>
-	   <br><b> </b>true if <i>file</i> exists and is not empty
-	   <br><b>-f </b><i>file</i>
-	   <br><b> </b>true if <i>file</i> is an ordinary file
-	   <br><b>-d </b><i>file</i>
-	   <br><b> </b>true if <i>file</i> is a directory
-	   <br><b>-r </b><i>file</i>
-	   <br><b> </b>true if <i>file</i> is readable
-	   <br><b>-w </b><i>file</i>
-	   <br><b> </b>true if <i>file</i> is writable
-	   <br><b>-x </b><i>file</i>
-	   <br><b> </b>true if <i>file</i> is executable
-	   <br><b>$X -eq $Y</b>
-	   <br><b> </b>true if <b>X</b> equals <b>Y</b>
-	   <br><b>$X -ne $Y</b>
-	   <br><b> </b>true if <b>X</b> not equal to <b>Y</b>
-	   <br><b>$X -lt $Y</b>
-	   <br><b> </b>true if <b>X</b> less than <b>$Y</b>
-	   <br><b>$X -gt $Y</b>
-	   <br><b> </b>true <b>if</b> X greater than <b>$Y</b>
-	   <br><b>$X -le $Y</b>
-	   <br><b> </b>true if <b>X</b> less than or equal to <b>Y</b>
-	   <br><b>$X -ge $Y</b>
-	   <br><b> </b>true if <b>X</b> greater than or equal to <b>Y</b>
-	   <br><b>"$A" = "$B"</b>
-	   <br><b> </b>true if string <b>A</b> equals string <b>B</b>
-	   <br><b>"$A" != "$B"</b>
-	   <br><b> </b>true if string <b>A</b> not equal to string <b>B</b>
-	   <br><b>$X ! -gt $Y</b>
-	   <br><b> </b>true if string <b>X</b> is not greater than <b>Y</b>
-	   <br><b>$E -a $F</b>
-	   <br><b> </b>true if expressions<b>E</b> and <b>F</b> are both true
-	   <br><b>$E -o $F</b>
-	   <br><b> </b>true if either expression <b>E</b> or expression <b>F</b> is true
-	   <br>
-	 </p>
-	   
-	 <li><b>for</b> loops</li>
+         <p>
+           The <i>test</i> condition may involve file characteristics
+           or simple string or numerical comparisons. The <b>[</b> used here is
+           actually the name of a command (<b>/bin/[</b>) which performs the evaluation
+           of the test condition. Therefore there must be spaces before and after
+           it as well as before the closing bracket. Some common test conditions are:
+         </p>
+         <p class="codesyntax">
+           <b>-s </b><i>file</i>
+           <br><b> </b>true if <i>file</i> exists and is not empty
+           <br><b>-f </b><i>file</i>
+           <br><b> </b>true if <i>file</i> is an ordinary file
+           <br><b>-d </b><i>file</i>
+           <br><b> </b>true if <i>file</i> is a directory
+           <br><b>-r </b><i>file</i>
+           <br><b> </b>true if <i>file</i> is readable
+           <br><b>-w </b><i>file</i>
+           <br><b> </b>true if <i>file</i> is writable
+           <br><b>-x </b><i>file</i>
+           <br><b> </b>true if <i>file</i> is executable
+           <br><b>$X -eq $Y</b>
+           <br><b> </b>true if <b>X</b> equals <b>Y</b>
+           <br><b>$X -ne $Y</b>
+           <br><b> </b>true if <b>X</b> not equal to <b>Y</b>
+           <br><b>$X -lt $Y</b>
+           <br><b> </b>true if <b>X</b> less than <b>$Y</b>
+           <br><b>$X -gt $Y</b>
+           <br><b> </b>true <b>if</b> X greater than <b>$Y</b>
+           <br><b>$X -le $Y</b>
+           <br><b> </b>true if <b>X</b> less than or equal to <b>Y</b>
+           <br><b>$X -ge $Y</b>
+           <br><b> </b>true if <b>X</b> greater than or equal to <b>Y</b>
+           <br><b>"$A" = "$B"</b>
+           <br><b> </b>true if string <b>A</b> equals string <b>B</b>
+           <br><b>"$A" != "$B"</b>
+           <br><b> </b>true if string <b>A</b> not equal to string <b>B</b>
+           <br><b>$X ! -gt $Y</b>
+           <br><b> </b>true if string <b>X</b> is not greater than <b>Y</b>
+           <br><b>$E -a $F</b>
+           <br><b> </b>true if expressions<b>E</b> and <b>F</b> are both true
+           <br><b>$E -o $F</b>
+           <br><b> </b>true if either expression <b>E</b> or expression <b>F</b> is true
+           <br>
+         </p>
+           
+         <li><b>for</b> loops</li>
 
-<P>Sometimes we want to loop through a list of files, executing
-some commands on each file. We can do this by using a <b>for</b> loop:
-<P><b>for </b><i>variable</i><b> in </b><i>list</i>
-<br><b>do</b>
-<br><b> </b><i>statements</i><b>
+         <p>
+           Sometimes we want to loop through a list of files, executing
+           some commands on each file. We can do this by using a <b>for</b> loop:
+         </p>
+         <p class="codesyntax"><b>for</b> <i>variable</i><b> in </b><i>list</i>
+           <br><b>do</b>
+           <br><b> </b><i>statements</i> (referring to <b>$</b><i>variable</i>)
+           <br><b>done</b>
+         </p>
+         <p>
+           The following script sorts each text files in the current
+           directory:
+         </p>
+         <p class="codeeg">
+           #!/bin/bash
+           <br>for f in *.txt
+           <br>do
+           <br>  echo sorting file $f
+           <br>  cat $f | sort > $f.sorted
+           <br>  echo sorted file has been output to $f.sorted
+           <br>done
+         </p>
 
-</b>(referring to<b> $</b><i>variable</i>)
-<br><b>done</b>
-<P>The following script sorts each text files in the current
-directory<b>:</b>
-<P><b>#!/bin/sh</b>
-<br><b>for f in *.txt</b>
-<br><b>do</b>
-<br><b> echo sorting file $f</b>
-<br><b> cat $f | sort > $f.sorted</b>
-<br><b> echo sorted file has been output
-to $f.sorted</b>
-<br><b>done</b>
-<br>
-<li>
-<b>while</b> loops</li>
+         <li><b>while</b> loops</li>
 
-<P>Another form of loop is the while loop:
-<P><b>while [ </b><i>test</i><b> ]</b>
-<br><b>do</b>
-<br><b> </b><i>statements</i>
-(to be executed while <i>test</i> is true)
-<br><b>done</b>
-<P>The following script waits until a non-empty file <b>input.txt</b>
-has been created:
-<P><b>#!/bin/sh</b>
-<br><b>while [ ! -s input.txt ]</b>
-<br><b>do</b>
-<br><b> echo waiting...</b>
-<br><b> sleep 5</b>
-<br><b>done</b>
-<br><b>echo input.txt is ready</b>
-<P>You can abort a shell script at any point using the <b>exit</b>
-statement, so the following script is equivalent:
-<P><b>#!/bin/sh</b>
-<br><b>while true</b>
-<br><b>do</b>
-<br><b> if [ -s input.txt ]</b>
-<br><b> echo input.txt is ready</b>
-<br><b> exit</b>
-<br><b> fi</b>
-<br><b> echo waiting...</b>
-<br><b> sleep 5</b>
-<br><b>done</b>
-<br>
-<li>
-<b>case</b> statements</li>
+         <p>
+           Another form of loop is the while loop:
+         </p>
+         <p class="codesyntax">
+           <b>while [</b> <i>test</i> <b>]</b>
+           <br><b>do</b>
+           <br><b> </b><i>statements</i> (to be executed while <i>test</i> is true)
+           <br><b>done</b>
+         </p>
+         <p>
+           The following script waits until a non-empty file <b>input.txt</b> has been created:
+         </p>
+         <p class="codeeg">
+           #!/bin/bash
+           <br>while [ ! -s input.txt ]
+           <br>do
+           <br>  echo waiting...
+           <br>  sleep 5
+           <br>done
+           <br>echo input.txt is ready
+         </p>
+         <p>
+           You can abort a shell script at any point using the <b>exit</b>
+           statement, so the following script is equivalent:
+         <p class="codeeg">
+           #!/bin/sh
+           <br>while true
+           <br>do
+           <br>  if [ -s input.txt ]
+           <br>  then
+           <br>    echo input.txt is ready
+           <br>    exit
+           <br>  fi
+           <br>  echo waiting...
+           <br>  sleep 5
+           <br>done
+         </p>
+         
+         <li><b>case</b> statements</li>
 
 <P><b>case</b> statements are a convenient way to perform
 multiway branches where one input pabern must be compared to several alternatives:
