@@ -1,184 +1,207 @@
-<!doctype htm public "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
-<head>
-   <link rel="stylesheet" type="text/css" href="mystyle.css">
-   <title>Introduction to UNIX and Linux: Lecture 8</title>
-   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-   <META NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
-</head>
+  <head>
+    <title>UNIX: Shell</title>
+    <link rel="stylesheet" type="text/css" href="/styles/navbar.css?v=1.4" >
+    <link rel="stylesheet" type="text/css" href="unixstyle.css">
+    <link rel="icon" href="/images/favicon4.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+  </head>
 
-<body>
-<hr WIDTH="100">
+  <body>
 
-<h1>
-Introduction to UNIX: Lecture Eight
-</h1>
+    <div class="mainheader">
+      <h1>UNIX and Linux</h1>
 
-<div class="heading">
-<div class="table">
-8.1 Objectives
-</div>
-</div>
-<br>
+      <ul class="topnav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="l1-intro.html">Introduction</a></li>
+        <li><a href="l2-filesys.html">File System</a></li>
+        <li><a href="l3-files.html">Files</a></li>
+        <li><a href="l4-proc.html">Processes</a></li>
+        <li><a href="l5-util.html">Utilities</a></li>
+        <li><a href="l6-edit.html">Editors</a></li>
+        <li><a href="l7-admin.html">Admin</a></li>
+        <li><a class="active" href="l8-shell.html">Shell</a></li>
+        <li class="right"><a href="/index.html">MPW Teach Home</a></li>
+      </ul>
+    </div>
 
-<div class="text">
-This chapter covers:
-<ul>
-<li>Shells and shell scripts.</li>
-<li>Shells variables and the environment.</li>
-<li>Simple shell scripting</li>
-<li>Advanced shell scripting.</li>
-<li>Start-up shell scripts.</li>
-</ul>
-</div>
-<br>
 
-<div class="heading">
-<div class="table">
-8.2 Shells and Shell Scripts
-</div>
-</div>
-<br>
+    <h2>8.1 Introduction</h2>
 
-<div class="text">
-<blockquote>A shell is a program which reads and executes
-commands for the user. Shells also usually provide features such job control,
-input and output redirection and a command language for writing <i>shell
-scripts</i>. A shell script is simply an ordinary text file containing
-a series of commands in a shell command language (just like a "batch file"
-under MS-DOS).
-<P>There are many different shells available on UNIX systems
-(e.g.
-<tt>sh</tt>, <tt>bash</tt>, <tt>csh</tt>, <tt>ksh</tt>, <tt>tcsh</tt>
-etc.), and they each support a different command language. Here we will
-discuss the command language for the Bourne shell <tt>sh</tt> since it
-is available on almost all UNIX systems (and is also supported under <tt>bash</tt>
-and <tt>ksh</tt>).</blockquote>
-</div>
-<br>
+    <div class="text">
+      <p>This section covers:</p>
+      <ul>
+	<li>Shells and shell scripts.</li>
+	<li>Shells variables and the environment.</li>
+	<li>Simple shell scripting</li>
+	<li>Advanced shell scripting.</li>
+	<li>Start-up shell scripts.</li>
+      </ul>
+    </div>
 
-<div class="heading">
-<div class="table">
-8.3 Shell Variables and the Environment
-</div>
-</div>
-<br>
 
-<div class="text">
-<blockquote>A shell lets you define variables (like most
-programming languages). A variable is a piece of data that is given a name.
-Once you have assigned a value to a variable, you access its value by prepending
-a <tt>$</tt> to the name:
-<P><tt>&nbsp;&nbsp;&nbsp; $ bob='hello world'</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<br><tt>&nbsp;&nbsp;&nbsp; $ echo $bob</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; hello world</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; $</tt>
-<P>Variables created within a shell are local to that shell,
-so only that shell can access them. The <tt>set</tt> command will show
-you a list of all variables currently defined in a shell. If you wish a
-variable to be accessible to commands outside the shell, you can <i>export</i>
-it into the <i>environment</i>:
-<P><tt>&nbsp;&nbsp;&nbsp; $ export bob</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<P>(under <tt>csh</tt> you used <tt>setenv</tt>). The environment
-is the set of variables that are made available to commands (including
-shells) when they are executed. UNIX commands and programs can read the
-values of environment variables, and adjust their behaviour accordingly.
-For example, the environment variable <tt>PAGER</tt>&nbsp; is used by the
-<tt>man</tt>
-command (and others) to see what command should be used to display multiple
-pages. If you say:
-<P><tt>&nbsp;&nbsp;&nbsp; $ export PAGER=cat</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<P>and then try the <tt>man</tt> command (say <tt>man pwd</tt>),
-the page will go flying past without stopping. If you now say:
-<P><tt>&nbsp;&nbsp;&nbsp; $ export PAGER=more</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<P>normal service should be resumed (since now <tt>more</tt>
-will be used to display the pages one at a time). Another environment variable
-that is commonly used is the <tt>EDITOR</tt> variable which specifies the
-default editor to use (so you can set this to <tt>vi</tt> or <tt>emacs</tt>
-or which ever other editor you prefer). To find out which environment variables
-are used by a particular command, consult the <tt>man</tt> pages for that
-command.
-<P>Another interesting environment variable is <tt>PS1</tt>,
-the main shell prompt string which you can use to create your own custom
-prompt. For example:
-<P><tt>&nbsp;&nbsp;&nbsp; $ export PS1="(\h) \w> "</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<br><tt>&nbsp;&nbsp;&nbsp; (lumberjack) ~></tt>
-<P>The shell often incorporates efficient mechanisms for
-specifying common parts of the shell prompt (e.g. in <tt>bash</tt> you
-can use <tt>\h</tt> for the current host, <tt>\w</tt> for the current working
-directory, <tt>\d</tt> for the date, <tt>\t</tt> for the time, <tt>\u</tt>
-for the current user and so on - see the <tt>bash</tt> man page).
-<P>Another important environment variable is <tt>PATH</tt>.
-<tt>PATH</tt>
-is a list of directories that the shell uses to locate executable files
-for commands. So if the <tt>PATH</tt> is set to:
-<P><tt>&nbsp;&nbsp;&nbsp; /bin:/usr/bin:/usr/local/bin:.</tt>
-<P>and you typed l<tt>s</tt>, the shell would look for <tt>/bin/ls</tt>,
-<tt>/usr/bin/ls</tt>
-etc. Note that the <tt>PATH</tt> contains'<tt>.</tt>', i.e. the current
-working directory. This allows you to create a shell script or program
-and run it as a command from your current directory without having to explicitly
-say "<tt>./</tt><i>filename</i>".
-<P>Note that <tt>PATH</tt> has nothing to with filenames
-that are specified as <i>arguments</i> to commands (e.g. <tt>cat myfile.txt
-</tt>would
-only look for <tt>./myfile.txt</tt>, not for <tt>/bin/myfile.txt</tt>,<tt>
-/usr/bin/myfile.txt
-</tt>etc.)</blockquote>
-</div>
-<br>
+    <h2>8.2 Shells and Shell Scripts</h2>
 
-<div class="heading">
-<div class="table">
-8.4 Simple Shell Scripting</B></TD>
-</div>
-</div>
+    <div class="text">
+      <p>
+	A shell is a program which reads and executes
+	commands for the user. Shells also usually provide features such job control,
+	input and output redirection and a command language for writing <i>shell scripts</i>. 
+	A shell script is simply an ordinary text file containing
+	a series of commands in a shell command language.
+      </p>
+      <p>
+	There are many different shells available on UNIX systems
+	(e.g.
+	<b>sh</b>, <b>bash</b>, <b>csh</b>, <b>ksh</b>, <b>tcsh</b>
+	etc.), and they each support a different command language. Here we will
+	discuss the command language for the Bourne shell <b>sh</b> since it
+	is available on almost all UNIX systems (and is also supported under <b>bash</b>
+	and <b>ksh</b>).
+      </p>
+    </div>
+<
+
+   <h2>8.3 Shell Variables and the Environment</h2>
+
+   <div class="text">
+     <p>
+       A shell lets you define variables (like most
+       programming languages). A variable is a piece of data that is given a name.
+       Once you have assigned a value to a variable, you access its value by prepending
+       a <b>$</b> to the name:
+     </p>
+     <p class="terminal">
+       $ bob='hello world'
+       <br>$ echo $bob
+       <br>hello world
+       <br>$
+     </p>
+     <p>Variables created within a shell are local to that shell,
+       so only that shell can access them. The <b>set</b> command will show
+       you a list of all variables currently defined in a shell. If you wish a
+       variable to be accessible to commands outside the shell, you can <i>export</i>
+       it into the <i>environment</i>:
+     </p>
+     <p class="terminal">
+       $ export bob
+     </p>
+     <p>
+       (under <b>csh</b> use <b>setenv</b>). The environment
+       is the set of variables that are made available to commands (including
+       shells) when they are executed. UNIX commands and programs can read the
+       values of environment variables, and adjust their behaviour accordingly.
+       For example, the environment variable <b>PAGER</b> is used by the
+       <b>man</b>
+       command (and others) to see what command should be used to display multiple
+       pages. If you say:
+     </p>
+     <p class="terminal">
+       $ export PAGER=cat
+     </p>
+     <p>
+       and then try the <b>man</b> command (say <b>man pwd</b>),
+       the page will go flying past without stopping. If you now say:
+     <p class="terminal">
+       $ export PAGER=more
+     </p>
+     <p>
+       normal service should be resumed (since now <b>more</b>
+       will be used to display the pages one at a time). Another environment variable
+       that is commonly used is the <b>EDITOR</b> variable which specifies the
+       default editor to use (so you can set this to <b>vi</b> or <b>emacs</b>
+       or which ever other editor you prefer). To find out which environment variables
+       are used by a particular command, consult the <b>man</b> pages for that
+       command.
+     </p>
+     <P>
+       Another interesting environment variable is <b>PS1</b>,
+       the main shell prompt string which you can use to create your own custom
+       prompt. For example:
+     <p class="terminal">
+       $ export PS1="(\h) \w> "
+       <br>(lumberjack) ~&gt;
+     </p>
+     <p>
+       The shell often incorporates efficient mechanisms for
+       specifying common parts of the shell prompt (e.g. in <b>bash</b> you
+       can use <b>\h</b> for the current host, <b>\w</b> for the current working
+       directory, <b>\d</b> for the date, <b>\t</b> for the time, <b>\u</b>
+       for the current user and so on - see the <b>bash</b> man page).
+     </p>
+     <p>
+       Another important environment variable is <b>PATH</b>.
+       <b>PATH</b> is a list of directories that the shell uses to locate executable files
+       for commands. So if the <b>PATH</b> is set to:
+       <b>/bin:/usr/bin:/usr/local/bin:.</b>
+     </p>
+     <p>and you typed l<b>s</b>, the shell would look for <b>/bin/ls</b>,
+       <b>/usr/bin/ls</b> etc.
+       Note that the <b>PATH</b> contains'<b>.</b>', i.e. the current
+       working directory. This allows you to create a shell script or program
+       and run it as a command from your current directory without having to explicitly
+       say "<b>./</b><i>filename</i>".
+     </p>
+     <p>
+       Note that <b>PATH</b> has nothing to with filenames
+       that are specified as <i>arguments</i> to commands (e.g. <b>cat myfile.txt</b> would
+       only look for <b>./myfile.txt</b>, not for <b>/bin/myfile.txt</b>,
+       <b>/usr/bin/myfile.txt</b>etc.)
+     </p>
+   </div>
+
+
+   <h2>8.4 Simple Shell Scripting</h2>
+
 
 <div class="text">
 <blockquote>Consider the following simple shell script, which
-has been created (using an editor) in a text file called <tt>simple</tt>:
-<P><tt>#!/bin/sh</tt>
-<br><tt># this is a comment</tt>
-<br><tt>echo "The number of arguments is $#"</tt>
-<br><tt>echo "The arguments are $*"</tt>
-<br><tt>echo "The first is $1"</tt>
-<br><tt>echo "My process number is $$"</tt>
-<br><tt>echo "Enter a number from the keyboard: "</tt>
-<br><tt>read number</tt>
-<br><tt>echo "The number you entered was $number"</tt>
-<P>The shell script begins with the line "<tt>#!/bin/sh</tt>"
-. Usually "<tt>#</tt>" denotes the start of a comment, but <tt>#!</tt>
-is a special combination that tells UNIX to use the Bourne shell (<tt>sh</tt>)
-to interpret this script. The <tt>#!</tt> must be the first two characters
+has been created (using an editor) in a text file called <b>simple</b>:
+<P><b>#!/bin/sh</b>
+<br><b># this is a comment</b>
+<br><b>echo "The number of arguments is $#"</b>
+<br><b>echo "The arguments are $*"</b>
+<br><b>echo "The first is $1"</b>
+<br><b>echo "My process number is $$"</b>
+<br><b>echo "Enter a number from the keyboard: "</b>
+<br><b>read number</b>
+<br><b>echo "The number you entered was $number"</b>
+<P>The shell script begins with the line "<b>#!/bin/sh</b>"
+. Usually "<b>#</b>" denotes the start of a comment, but <b>#!</b>
+is a special combination that tells UNIX to use the Bourne shell (<b>sh</b>)
+to interpret this script. The <b>#!</b> must be the first two characters
 of the script. The arguments passed to the script can be accessed through
-<tt>$1</tt>,
-<tt>$2</tt>,
-<tt>$3</tt> etc. <tt>$*</tt> stands for all the arguments, and <tt>$#</tt>
+<b>$1</b>,
+<b>$2</b>,
+<b>$3</b> etc. <b>$*</b> stands for all the arguments, and <b>$#</b>
 for the number of arguments. The process number of the shell executing
-the script is given by <tt>$$</tt>. the <tt>read</tt> number statement
-assigns keyboard input to the variable <tt>number</tt>.
+the script is given by <b>$$</b>. the <b>read</b> number statement
+assigns keyboard input to the variable <b>number</b>.
 <P>To execute this script, we first have to make the file
-<tt>simple</tt>
+<b>simple</b>
 executable:
-<P><tt>&nbsp;&nbsp;&nbsp; $ ls -l simple</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<br><tt>&nbsp;&nbsp;&nbsp; -rw-r--r--&nbsp;&nbsp;&nbsp; 1
-will&nbsp; finance&nbsp; 175&nbsp; Dec 13&nbsp; simple</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; $ chmod +x simple</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<br><tt>&nbsp;&nbsp;&nbsp; $ ls -l simple</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<br><tt>&nbsp;&nbsp;&nbsp; -rwxr-xr-x&nbsp;&nbsp;&nbsp; 1
-will&nbsp; finance&nbsp; 175&nbsp; Dec 13&nbsp; simple</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; $ ./simple hello world</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<br><tt>&nbsp;&nbsp;&nbsp; The number of arguments is 2</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; The arguments are hello world</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; The first is hello</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; My process number is 2669</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; Enter a number from the keyboard:</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; 5</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
-<br><tt>&nbsp;&nbsp;&nbsp; The number you entered was 5</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; $</tt>
+<P><b>&nbsp;&nbsp;&nbsp; $ ls -l simple</b><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<br><b>&nbsp;&nbsp;&nbsp; -rw-r--r--&nbsp;&nbsp;&nbsp; 1
+will&nbsp; finance&nbsp; 175&nbsp; Dec 13&nbsp; simple</b>
+<br><b>&nbsp;&nbsp;&nbsp; $ chmod +x simple</b><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<br><b>&nbsp;&nbsp;&nbsp; $ ls -l simple</b><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<br><b>&nbsp;&nbsp;&nbsp; -rwxr-xr-x&nbsp;&nbsp;&nbsp; 1
+will&nbsp; finance&nbsp; 175&nbsp; Dec 13&nbsp; simple</b>
+<br><b>&nbsp;&nbsp;&nbsp; $ ./simple hello world</b><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<br><b>&nbsp;&nbsp;&nbsp; The number of arguments is 2</b>
+<br><b>&nbsp;&nbsp;&nbsp; The arguments are hello world</b>
+<br><b>&nbsp;&nbsp;&nbsp; The first is hello</b>
+<br><b>&nbsp;&nbsp;&nbsp; My process number is 2669</b>
+<br><b>&nbsp;&nbsp;&nbsp; Enter a number from the keyboard:</b>
+<br><b>&nbsp;&nbsp;&nbsp; 5</b><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<br><b>&nbsp;&nbsp;&nbsp; The number you entered was 5</b>
+<br><b>&nbsp;&nbsp;&nbsp; $</b>
 <P>We can use input and output redirection in the normal
 way with scripts, so:
-<P><tt>&nbsp;&nbsp;&nbsp; $ echo 5 | simple hello world</tt><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
+<P><b>&nbsp;&nbsp;&nbsp; $ echo 5 | simple hello world</b><IMG SRC="enter.gif" HEIGHT=15 WIDTH=27>
 <P>would produce similar output but would not pause to read
 a number from the keyboard.</blockquote>
 </div>
@@ -195,48 +218,48 @@ a number from the keyboard.</blockquote>
 <blockquote>
 <ul>
 <li>
-<tt>if-then-else</tt> statements</li>
+<b>if-then-else</b> statements</li>
 <P>Shell scripts are able to perform simple conditional branches:
-<P><tt>if [ </tt><i>test</i><tt> ]</tt>
-<br><tt>then</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt><i>commands-if-test-is-true</i>
-<br><tt>else</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt><i>commands-if-test-is-false</i>
-<br><tt>fi</tt>
+<P><b>if [ </b><i>test</i><b> ]</b>
+<br><b>then</b>
+<br><b>&nbsp;&nbsp;&nbsp; </b><i>commands-if-test-is-true</i>
+<br><b>else</b>
+<br><b>&nbsp;&nbsp;&nbsp; </b><i>commands-if-test-is-false</i>
+<br><b>fi</b>
 <P>The <i>test</i> condition may involve file characteristics
-or simple string or numerical comparisons. The <tt>[</tt> used here is
-actually the name of a command (<tt>/bin/[</tt>) which performs the evaluation
+or simple string or numerical comparisons. The <b>[</b> used here is
+actually the name of a command (<b>/bin/[</b>) which performs the evaluation
 of the test condition. Therefore there must be spaces before and after
 it as well as before the closing bracket. Some common test conditions are:
-<P><tt>-s </tt><i>file</i>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <i>file</i> exists
+<P><b>-s </b><i>file</i>
+<br><b>&nbsp;&nbsp;&nbsp; </b>true if <i>file</i> exists
 and is not empty
-<br><tt>-f </tt><i>file</i>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <i>file</i> is an
+<br><b>-f </b><i>file</i>
+<br><b>&nbsp;&nbsp;&nbsp; </b>true if <i>file</i> is an
 ordinary file
-<br><tt>-d </tt><i>file</i>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <i>file</i> is a
+<br><b>-d </b><i>file</i>
+<br><b>&nbsp;&nbsp;&nbsp; </b>true if <i>file</i> is a
 directory
-<br><tt>-r </tt><i>file</i>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <i>file</i> is readable
-<br><tt>-w </tt><i>file</i>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <i>file</i> is writable
-<br><tt>-x </tt><i>file</i>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <i>file</i> is executable
-<br><tt>$X -eq $Y</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <tt>X</tt> equals
-<tt>Y</tt>
-<br><tt>$X -ne $Y</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <tt>X</tt> not equal
-to <tt>Y</tt>
-<br><tt>$X -lt $Y</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <tt>X</tt> less than
-<tt>$Y</tt>
-<br><tt>$X -gt $Y</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>true <tt>if</tt> X greater
-than <tt>$Y</tt>
-<br><tt>$X -le $Y</tt>
-<br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <tt>X</tt> less than
+<br><b>-r </b><i>file</i>
+<br><b>&nbsp;&nbsp;&nbsp; </b>true if <i>file</i> is readable
+<br><b>-w </b><i>file</i>
+<br><b>&nbsp;&nbsp;&nbsp; </b>true if <i>file</i> is writable
+<br><b>-x </b><i>file</i>
+<br><b>&nbsp;&nbsp;&nbsp; </b>true if <i>file</i> is executable
+<br><b>$X -eq $Y</b>
+<br><b>&nbsp;&nbsp;&nbsp; </b>true if <b>X</b> equals
+<b>Y</b>
+<br><b>$X -ne $Y</b>
+<br><b>&nbsp;&nbsp;&nbsp; </b>true if <b>X</b> not equal
+to <b>Y</b>
+<br><b>$X -lt $Y</b>
+<br><b>&nbsp;&nbsp;&nbsp; </b>true if <b>X</b> less than
+<b>$Y</b>
+<br><b>$X -gt $Y</b>
+<br><b>&nbsp;&nbsp;&nbsp; </b>true <b>if</b> X greater
+than <b>$Y</b>
+<br><b>$X -le $Y</b>
+<br><b>&nbsp;&nbsp;&nbsp; </b>true if <b>X</b> less than
 or equal to <tt>Y</tt>
 <br><tt>$X -ge $Y</tt>
 <br><tt>&nbsp;&nbsp;&nbsp; </tt>true if <tt>X</tt> greater
