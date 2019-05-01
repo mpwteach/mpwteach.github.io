@@ -1,111 +1,103 @@
-<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<!DOCTYPE html>
 <html>
-<head>
-   <link rel="stylesheet" type="text/css" href="mystyle.css">
-   <link rel="icon" href="https://sites.google.com/a/my.sduhsd.net/csp-yana2319/home/0-01-magic-square/planticon.jpg?attredirects=0">
-   <title>Introduction to UNIX and Linux: Lecture 7</title>
-   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-   <meta name="GENERATOR" content="Mozilla/4.75 [en] (X11; U; Linux 2.2.16-3 i686) [Netscape]">
-</head>
+  <head>
+    <title>UNIX:Admin</title>
+    <link rel="stylesheet" type="text/css" href="/styles/navbar.css?v=1.4" >
+    <link rel="stylesheet" type="text/css" href="unixstyle.css">
+    <link rel="icon" href="/images/favicon4.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+  </head>
 
-<body>
+  <body>
 
-<h1>Introduction to UNIX: Lecture Seven</h1> 
+    <div class="mainheader">
+      <h1>UNIX and Linux</h1>
 
-<hr width="100%">
+      <ul class="topnav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="l1-intro.html">Introduction</a></li>
+        <li><a href="l2-filesys.html">File System</a></li>
+        <li><a href="l3-files.html">Files</a></li>
+        <li><a href="l4-proc.html">Processes</a></li>
+        <li><a href="l5-util.html">Utilities</a></li>
+        <li><a href="l6-edit.html">Editors</a></li>
+        <li><a class="active" href="l7-admin.html">Admin</a></li>
+        <li><a href="l8-shell.html">Shell</a></li>
+        <li class="right"><a href="/index.html">MPW Teach Home</a></li>
+      </ul>
+    </div>
 
-<div class="heading">
-<div class="table">
-7.1 Objectives
-</div>
-</div>
 
-<br>
+    <h2>7.1 Introduction</h2>
 
-<div class="text">
+    <div class="text">
+      <p>This lecture covers basic system administration concepts and tasks:</p>
+      <ul>
+	<li>The superuser <b>root</b>.</li>
+	<li>Shutdown and system start-up.</li>
+	<li>Adding users.</li>
+	<li>Controlling user groups.</li>
+	<li>Reconfiguring and recompiling the Linux kernel.</li>
+	<li>Cron jobs.</li>
+	<li>Keeping essential processes alive.</li>
+      </ul>
+      <p>
+	Note that you will not be given administrator access on
+	the lab machines. However, you might like to try some basic administration
+	tasks on your home computer.
+      </p>
+    </div>
+    
+    <h2>7.2 The Superuser root</h2>
 
-<blockquote>This lecture covers basic system administration
-concepts and tasks, namely:</font>
-<ul>
-<li>
-The superuser <tt>root</tt>.</font></li>
-
-<li>
-Shutdown and system start-up.</font></li>
-
-<li>
-Adding users.</font></li>
-
-<li>
-Controlling user groups.</font></li>
-
-<li>
-Reconfiguring and recompiling the Linux kernel.</font></li>
-
-<li>
-Cron jobs.</font></li>
-
-<li>
-Keeping essential processes alive.</font></li>
-</ul>
-</blockquote>
-<blockquote>Note that you will not be given administrator access on
-the lab machines. However, you might like to try some basic administration
-tasks on your home PC.</blockquote>
-</div>
-<br>
-
-<div class="table">
-<div class="heading">
-7.2 The Superuser root
-</div>
-</div>
-
-<div class="text">
-<blockquote>The superuser is a privileged user who has unrestricted
-access to all commands and files on a system regardless of their permissions.
-The superuser's login is usually <tt>root</tt>. Access to the root account
-is restricted by a password (the root password). Because the root account
-has huge potential for destruction, the root password should be chosen
-carefully, only given to those who need it, and changed regularly.</font>
-<p>One way to become <tt>root </tt>is to log in as usual
-using the username <tt>root</tt> and the root password (usually security
+    
+    <div class="text">
+      <p>
+	The superuser is a privileged user who has unrestricted
+	access to all commands and files on a system regardless of their permissions.
+	The superuser's login is usually <b>root</b>. Access to the root account
+	is restricted by a password (the root password). Because the root account
+	has huge potential for destruction, the root password should be chosen
+	carefully, only given to those who need it, and changed regularly.
+      <p>One way to become <b>root </b>is to log in as usual
+	using the username <b>root</b> and the root password (usually security
 measures are in place so that this is only possible if you are using a
-"secure" console and not connecting over a network). Using <tt>root</tt>
+"secure" console and not connecting over a network). Using <b>root</b>
 as your default login in this way is not recommended, however, because
-normal safeguards that apply to other user accounts do not apply to <tt>root</tt>.
-Consequently using <tt>root</tt> for mundane tasks often results in a memory
+normal safeguards that apply to other user accounts do not apply to <b>root</b>.
+Consequently using <b>root</b> for mundane tasks often results in a memory
 lapse or misplaced keystrokes having catastrophic effects (e.g. forgetting
 for a moment which directory you are in and accidentally deleting another
-user's files, or accidentally typing "<tt>rm -rf * .txt</tt>" instead of
-"<tt>rm -rf *.txt</tt>" ).</font>
-<p>A better way to become root is to use the <tt>su</tt>
-utility. <tt>su</tt> (switch user) lets you become another user (at least
+user's files, or accidentally typing "<b>rm -rf * .txt</b>" instead of
+"<b>rm -rf *.txt</b>" ).
+<p>A better way to become root is to use the <b>su</b>
+utility. <b>su</b> (switch user) lets you become another user (at least
 as far as the computer is concerned). If you don't specify the name of
 the user you wish to become, the system will assume you want to become
-<tt>root</tt>.
-Using <tt>su</tt> does not usually change your current directory, unless
-you specify a "<tt>-</tt>" option which will run the target user's startup
+<b>root</b>.
+Using <b>su</b> does not usually change your current directory, unless
+you specify a "<b>-</b>" option which will run the target user's startup
 scripts and change into their home directory (provided you can supply the
-right password of course). So:</font>
-<p><tt>&nbsp;&nbsp;&nbsp; $ su -</font></tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; Password: xxxxxxxx</font></tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; #</font></tt>
+right password of course). So:
+<p><b> $ su -</b><img SRC="enter.gif" height=15 width=27>
+<br><b> Password: xxxxxxxx</b><img SRC="enter.gif" height=15 width=27>
+<br><b> #</b>
 <p>Note that the root account often displays a different
-prompt (usually a <tt>#</tt>). To return to your old self, simply type
-"<tt>exit</tt>" at the shell prompt.</font>
+prompt (usually a <b>#</b>). To return to your old self, simply type
+"<b>exit</b>" at the shell prompt.
 <p>You should avoid leaving a root window open while you
 are not at your machine. Consider this paragraph from a humorous 1986 Computer
-Language article by Alan Filipski:</font>
+Language article by Alan Filipski:
 <p>"The prudent administrator should be aware of common techniques
 used to breach UNIX security. The most widely known and practised attack
 on the security of the UNIX brand operating system is elegant in its simplicity.
 The perpetrator simply hangs around the system console until the operator
 leaves to get a drink or go to the bathroom. The intruder lunges for the
-console and types <tt>rm -rf /</tt> before anyone can pry his or her hands
+console and types <b>rm -rf /</b> before anyone can pry his or her hands
 off the keyboard. Amateur efforts are characterised by typing in things
-such as <tt>ls</tt> or <tt>pwd</tt>. A skilled UNIX brand operating system
-security expert would laugh at such attempts."</font></blockquote>
+such as <b>ls</b> or <b>pwd</b>. A skilled UNIX brand operating system
+security expert would laugh at such attempts."</blockquote>
 </div>
 <br>
 
@@ -121,58 +113,58 @@ security expert would laugh at such attempts."</font></blockquote>
 <blockquote>
 <ul>
 <li>
-Shutdown<tt>: shutdown, halt</tt>, <tt>reboot </tt>(in<tt>
-/sbin</tt>)</font></li>
+Shutdown<b>: shutdown, halt</b>, <b>reboot </b>(in<b>
+/sbin</b>)</li>
 
-<p><br><tt>/sbin/shutdown </tt>allows a UNIX system to shut
-down gracefully and securely.&nbsp; All logged-in&nbsp; users&nbsp; are&nbsp;
-notified&nbsp; that&nbsp; the system is going down, and new logins are
-blocked.&nbsp; It is possible to shut the system down&nbsp; immediately
+<p><br><b>/sbin/shutdown </b>allows a UNIX system to shut
+down gracefully and securely. All logged-in users are
+notified that the system is going down, and new logins are
+blocked. It is possible to shut the system down immediately
 or after a specified delay and to specify what should happen after the
-system has been shut down:</font>
-<p><tt># /sbin/shutdown -r now<img SRC="enter.gif" height=15 width=27></tt>(shut
-down now and reboot)</font>
-<br><tt># /sbin/shutdown -h +5<img SRC="enter.gif" height=15 width=27>
+system has been shut down:
+<p><b># /sbin/shutdown -r now<img SRC="enter.gif" height=15 width=27></b>(shut
+down now and reboot)
+<br><b># /sbin/shutdown -h +5<img SRC="enter.gif" height=15 width=27>
 
-</font></tt>(shut down in 5 minutes &amp; halt)</font>
-<br><tt># /sbin/shutdown -k 17:00<img SRC="enter.gif" height=15 width=27></tt>(fake
-a shutdown at 5pm)</font>
-<p><tt>halt </tt>and<tt> reboot </tt>are equivalent to<tt>
-shutdown -h </tt>and<tt> shutdown -r </tt>respectively.</font>
+</b>(shut down in 5 minutes &amp; halt)
+<br><b># /sbin/shutdown -k 17:00<img SRC="enter.gif" height=15 width=27></b>(fake
+a shutdown at 5pm)
+<p><b>halt </b>and<b> reboot </b>are equivalent to<b>
+shutdown -h </b>and<b> shutdown -r </b>respectively.
 <p>If you have to shut a system down extremely urgently or
-for some reason cannot use <tt>shutdown</tt>, it is at least a good idea
-to first run the command:</font>
-<p><tt>&nbsp;&nbsp;&nbsp; # sync</font></tt><img SRC="enter.gif" height=15 width=27>
+for some reason cannot use <b>shutdown</b>, it is at least a good idea
+to first run the command:
+<p><b> # sync</b><img SRC="enter.gif" height=15 width=27>
 <p>which forces the state of the file system to be brought
-up to date.</font>
-<br>&nbsp;
+up to date.
+<br>
 <li>
-System startup:</font></li>
+System startup:</li>
 
 <p>At system startup, the operating system performs various
 low-level tasks, such as initialising the memory system, loading up device
 drivers to communicate with hardware devices, mounting filesystems and
-creating the <tt>init</tt> process (the parent of all processes). <tt>init</tt>'s&nbsp;
+creating the <b>init</b> process (the parent of all processes). <b>init</b>'s
 primary responsibility is to start up the system services as specified
-in <tt>/etc/inittab</tt>. Typically these services include gettys (i.e.
+in <b>/etc/inittab</b>. Typically these services include gettys (i.e.
 virtual terminals where users can login), and the scripts in the directory
-<tt>/etc/rc.d/init.d</tt>
+<b>/etc/rc.d/init.d</b>
 which usually spawn high-level daemons such as
-<tt>httpd</tt> (the web
-server). On most UNIX systems you can type <tt>dmesg</tt> to see system
-startup messages, or look in <tt>/var/log/messages</tt>.</font>
+<b>httpd</b> (the web
+server). On most UNIX systems you can type <b>dmesg</b> to see system
+startup messages, or look in <b>/var/log/messages</b>.
 <p>If a mounted filesystem is not "clean" (e.g. the machine
-was turned off without shutting down properly), a system utility <tt>fsck
-</tt>is
+was turned off without shutting down properly), a system utility <b>fsck
+</b>is
 automatically run to repair it. Automatic running can only fix certain
-errors, however, and you may have to run it manually:</font>
-<p><tt>&nbsp;&nbsp;&nbsp; # fsck </tt><i>filesys</i></font><img SRC="enter.gif" height=15 width=27>
-<p>where <i>filesys</i> is the name of a device (e.g.<tt>
-/dev/hda1</tt>) or a mount point (like <tt>/</tt>). "Lost" files recovered
-during this process end up in the <tt>lost+found</tt> directory. Some more
-modern filesystems called "journaling" file systems don't require <tt>fsck</tt>,
+errors, however, and you may have to run it manually:
+<p><b> # fsck </b><i>filesys</i><img SRC="enter.gif" height=15 width=27>
+<p>where <i>filesys</i> is the name of a device (e.g.<b>
+/dev/hda1</b>) or a mount point (like <b>/</b>). "Lost" files recovered
+during this process end up in the <b>lost+found</b> directory. Some more
+modern filesystems called "journaling" file systems don't require <b>fsck</b>,
 since they keep extensive logs of filesystem events and are able to recover
-in a similar way to a transactional database.</font></ul>
+in a similar way to a transactional database.</ul>
 </blockquote>
 </div>
 <br>
@@ -189,15 +181,15 @@ in a similar way to a transactional database.</font></ul>
 <blockquote>
 <ul>
 <li>
-<tt>useradd</tt> (in <tt>/usr/sbin</tt>):</font></li>
+<b>useradd</b> (in <b>/usr/sbin</b>):</li>
 
-<p><tt>useradd</tt> is a utility for adding new users
-to a UNIX system. It adds new user information to the <tt>/etc/passwd</tt>
+<p><b>useradd</b> is a utility for adding new users
+to a UNIX system. It adds new user information to the <b>/etc/passwd</b>
 file and creates a new home directory for the user. When you add a new
-user, you should also set their password (using the <tt>-p</tt> option
-on <tt>useradd</tt>, or using the <tt>passwd</tt> utility):</font>
-<p><tt>&nbsp;&nbsp;&nbsp; # useradd bob</font></tt><img SRC="enter.gif" height=15 width=27>
-<br><tt>&nbsp;&nbsp;&nbsp; # passwd bob</font></tt><img SRC="enter.gif" height=15 width=27></ul>
+user, you should also set their password (using the <b>-p</b> option
+on <b>useradd</b>, or using the <b>passwd</b> utility):
+<p><b> # useradd bob</b><img SRC="enter.gif" height=15 width=27>
+<br><b> # passwd bob</b><img SRC="enter.gif" height=15 width=27></ul>
 </blockquote>
 </div>
 <br>
@@ -215,29 +207,29 @@ on <tt>useradd</tt>, or using the <tt>passwd</tt> utility):</font>
 <blockquote>
 <ul>
 <li>
-<tt>groupadd</tt> (in <tt>/usr/sbin</tt>):</font></li>
+<b>groupadd</b> (in <b>/usr/sbin</b>):</li>
 
-<p><tt>groupadd</tt> creates a new user group and adds
-the new information to <tt>/etc/group</tt>:</font>
-<p><tt>&nbsp; # groupadd </tt><i>groupname</i></font><img SRC="enter.gif" height=15 width=27>
-<br>&nbsp;
+<p><b>groupadd</b> creates a new user group and adds
+the new information to <b>/etc/group</b>:
+<p><b> # groupadd </b><i>groupname</i><img SRC="enter.gif" height=15 width=27>
+<br>
 <li>
-<tt>usermod</tt> (in <tt>/usr/sbin</tt>):</font></li>
+<b>usermod</b> (in <b>/usr/sbin</b>):</li>
 
 <p>Every user belongs to a primary group and possibly
 also to a set of supplementary groups. To modify the group permissions
-of an existing user, use</font>
-<p><tt># usermod -g </tt><i>initialgroup username</i><tt>
--G </tt><i>othergroups</i></font><img SRC="enter.gif" height=15 width=27>
+of an existing user, use
+<p><b># usermod -g </b><i>initialgroup username</i><b>
+-G </b><i>othergroups</i><img SRC="enter.gif" height=15 width=27>
 <p>where <i>othergroups </i>is a list of supplementary group
-names separated by commas (with no intervening whitespace).</font>
-<br>&nbsp;
+names separated by commas (with no intervening whitespace).
+<br>
 <li>
-<tt>groups</font></tt></li>
+<b>groups</b></li>
 
 <p>You can find out which groups a user belongs to by
-typing:</font>
-<p><tt>&nbsp; # groups </tt><i>username</i></font><img SRC="enter.gif" height=15 width=27></ul>
+typing:
+<p><b> # groups </b><i>username</i><img SRC="enter.gif" height=15 width=27></ul>
 </blockquote>
 </blockquote>
 </div>
@@ -258,70 +250,70 @@ drivers for various hardware devices). It may happen that some new hardware
 is added to a Linux machine which requires you to recompile the kernel
 so that it includes device driver support (and possibly new system calls)
 for the new hardware. To do this, you will need to rebuild the Linux kernel
-from scratch as follows:</font>
+from scratch as follows:
 <ul>
 <li>
-Look in <tt>/usr/src/linux</tt> for the kernel source code.
+Look in <b>/usr/src/linux</b> for the kernel source code.
 If it isn't there (or if there is just a message saying that only kernel
 binaries have been installed), get hold of a copy of the latest kernel
 source code from <a href="http://www.kernel.org">http://www.kernel.org</a>
-and untar it into <tt>/usr/src/linux</tt>.</font></li>
+and untar it into <b>/usr/src/linux</b>.</li>
 
 <p>
 <li>
-Change directory to <tt>/usr/src/linux</tt>.</font></li>
+Change directory to <b>/usr/src/linux</b>.</li>
 <p>
-<li> To configure the kernel type either</font></li>
+<li> To configure the kernel type either</li>
 
-<p><tt>&nbsp;&nbsp;&nbsp; # make config&nbsp;&nbsp;&nbsp;
-</tt>(simple text mode configuration), or</font>
-<br><tt>&nbsp;&nbsp;&nbsp; # make menuconfig </tt>(menu-driven
-text configuration), or</font>
-<br><tt>&nbsp;&nbsp;&nbsp; # make xconfig&nbsp;&nbsp; </tt>(graphical
-configuration for X)</font>
+<p><b> # make config
+</b>(simple text mode configuration), or
+<br><b> # make menuconfig </b>(menu-driven
+text configuration), or
+<br><b> # make xconfig </b>(graphical
+configuration for X)
 <p>You will be asked to select which modules (device drivers,
 multiprocessor support etc.) you wish to include. For each module, you
-can chose to include it in the kernel code (<tt>y</tt>), incorporate it
-as an optional module that will be loaded if needed (<tt>m</tt>) or to
-exclude it from the kernel code (<tt>n</tt>). To find out which optional
-modules have actually been loaded you can run <tt>lsmod</tt> when the system
-reboots.</font>
-<br>&nbsp;
+can chose to include it in the kernel code (<b>y</b>), incorporate it
+as an optional module that will be loaded if needed (<b>m</b>) or to
+exclude it from the kernel code (<b>n</b>). To find out which optional
+modules have actually been loaded you can run <b>lsmod</b> when the system
+reboots.
+<br>
 <li>
-Now type:</font></li>
+Now type:</li>
 
-<p><tt>&nbsp;&nbsp;&nbsp; # make dep&nbsp;&nbsp;&nbsp;
-</tt>(to build source code dependencies)</font>
-<br><tt>&nbsp;&nbsp;&nbsp; # make clean&nbsp;&nbsp; </tt>(to
-delete all stale object files)</font>
-<br><tt>&nbsp;&nbsp;&nbsp; # make bzImage </tt>(to build
-the new kernel)</font>
-<br><tt>&nbsp;&nbsp;&nbsp; # make modules </tt>(to build
-the new optional modules)</font>
-<br><tt>&nbsp;&nbsp;&nbsp; # make modules_install </tt>(to
-install the modules)</font>
-<p>The file <tt>/usr/src/linux/arch/i386/boot/bzImage</tt>
-now contains your new kernel image. It remains only to install it.</font>
-<br>&nbsp;
+<p><b> # make dep
+</b>(to build source code dependencies)
+<br><b> # make clean </b>(to
+delete all stale object files)
+<br><b> # make bzImage </b>(to build
+the new kernel)
+<br><b> # make modules </b>(to build
+the new optional modules)
+<br><b> # make modules_install </b>(to
+install the modules)
+<p>The file <b>/usr/src/linux/arch/i386/boot/bzImage</b>
+now contains your new kernel image. It remains only to install it.
+<br>
 <li>
-Change directory to <tt>/usr/src/linux/arch/i386/boot</tt>.
-In the same directory should be a script called <tt>install.sh</tt> which
-will copy your kernel image into <tt>/boot/vmlinuz</tt>:</font></li>
+Change directory to <b>/usr/src/linux/arch/i386/boot</b>.
+In the same directory should be a script called <b>install.sh</b> which
+will copy your kernel image into <b>/boot/vmlinuz</b>:</li>
 
-<p><tt># install.sh </tt><i>version</i><tt> bzImage /boot/System.map
-/boot</tt></font>
+<p><b># install.sh </b><i>version</i><b> bzImage /boot/System.map
+/boot</b>
 <p>where <i>version</i> is the kernel version number (of
-form 2.2.xx).</font>
-<br>&nbsp;
+form 2.2.xx).
+<br>
 <li>
-Finally, you may need to update the <tt>/etc/lilo.conf</tt>
-file so that <tt>lilo</tt> (the Linux boot loader) includes an entry for
-your new kernel. Then run</font></li>
+Finally, you may need to update the <b>/etc/lilo.conf</b>
+file so that <b>lilo</b> (the Linux boot loader) includes an entry for
+your new kernel. Then run</li>
 
-<p><tt>&nbsp;&nbsp;&nbsp; # lilo</font></tt><img SRC="enter.gif" height=15 width=27>
+<p><b> # lilo</b><img SRC="enter.gif" height=15 width=27>
 <p>to update the changes. When you reboot your machine, you
-should be able to select your new kernel image from the <tt>lilo</tt> boot
-loader.</font></ul>
+should be able to select your new kernel image from the <b>lilo</b> boot
+loader.</ul>
 </blockquote>
 </div>
 <br>
@@ -334,61 +326,61 @@ loader.</font></ul>
 <br>
 
 <div class="text">
-<blockquote><tt>crond</tt> is a daemon that executes commands
+<blockquote><b>crond</b> is a daemon that executes commands
 that need to be run regularly according to some schedule. The schedule
-and corresponding commands are stored in the file <tt>/etc/crontab</tt>.</font>
-<p>Each entry in the <tt>/etc/crontab</tt> file entry contains
-six fields separated by spaces or tabs in the following form:</font>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>minute&nbsp;
-hour&nbsp; day_of_month&nbsp; month&nbsp; weekday&nbsp; command</i></font>
-<p>These fields accept the following values:</font>
-<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;minute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-0 through 59</tt></font>
-<br><tt>&nbsp;&nbsp;&nbsp; hour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-0 through 23</font></tt>
-<br><tt>&nbsp;&nbsp;&nbsp; day_of_month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-1 through 31</font></tt>
-<br><tt>&nbsp;&nbsp;&nbsp; month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-1 through 12</font></tt>
-<br><tt>&nbsp;&nbsp;&nbsp; weekday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-0 (Sun) through 6 (Sat)</font></tt>
-<br><tt>&nbsp;&nbsp;&nbsp; command&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-a shell command</font></tt>
+and corresponding commands are stored in the file <b>/etc/crontab</b>.
+<p>Each entry in the <b>/etc/crontab</b> file entry contains
+six fields separated by spaces or tabs in the following form:
+<p><i>minute
+hour day_of_month month weekday command</i>
+<p>These fields accept the following values:
+<p><b>minute
+0 through 59</b>
+<br><b> hour
+0 through 23</b>
+<br><b> day_of_month
+1 through 31</b>
+<br><b> month
+1 through 12</b>
+<br><b> weekday
+0 (Sun) through 6 (Sat)</b>
+<br><b> command
+a shell command</b>
 <p>You must specify a value for each field. Except for the
-command field, these fields can contain the following:</font>
+command field, these fields can contain the following:
 <ul>
 <li>
 A number in the specified range, e.g. to run a command in
-May, specify 5 in the <i>month</i> field.</font></li>
+May, specify 5 in the <i>month</i> field.</li>
 
 <li>
 Two numbers separated by a dash to indicate an inclusive
 range, e.g. to run a cron job on Tuesday through Friday, place 2-5 in the
 <i>weekday</i>
-field.</font></li>
+field.</li>
 
 <li>
 A list of numbers separated by commas, e.g. to run a command
 on the first and last day of January, you would specify 1,31 in the <i>day_of_month</i>
-field.</font></li>
+field.</li>
 
 <li>
-<tt>*</tt> (asterisk), meaning all allowed values, e.g. to
-run a job every hour, specify an asterisk in the <i>hour</i> field.</font></li>
+<b>*</b> (asterisk), meaning all allowed values, e.g. to
+run a job every hour, specify an asterisk in the <i>hour</i> field.</li>
 </ul>
 You can also specify some execution environment options at
-the top of the <tt>/etc/crontab</tt> file:</font>
-<p><tt>SHELL=/bin/bash</font></tt>
-<br><tt>PATH=/sbin:/bin:/usr/sbin:/usr/bin</font></tt>
-<br><tt>MAILTO=root</font></tt>
+the top of the <b>/etc/crontab</b> file:
+<p><b>SHELL=/bin/bash</b>
+<br><b>PATH=/sbin:/bin:/usr/sbin:/usr/bin</b>
+<br><b>MAILTO=root</b>
 <p>To run the calendar command at 6:30am. every Mon, Wed,
-and Fri, a suitable <tt>/etc/crontab</tt> entry would be:</font>
-<p><tt>30 6 * * 1,3,5 /usr/bin/calendar</font></tt>
+and Fri, a suitable <b>/etc/crontab</b> entry would be:
+<p><b>30 6 * * 1,3,5 /usr/bin/calendar</b>
 <p>The output of the command will be mailed to the user specified
-in the <tt>MAILTO</tt> environment option.</font>
-<p>You don't need to restart the cron daemon <tt>crond</tt>
+in the <b>MAILTO</b> environment option.
+<p>You don't need to restart the cron daemon <b>crond</b>
 after changing
-<tt>/etc/crontab</tt> - it automatically detects changes.</font></blockquote>
+<b>/etc/crontab</b> - it automatically detects changes.</blockquote>
 </div>
 <br>
 
@@ -403,15 +395,15 @@ after changing
 <div class="text">
 <blockquote>It is important that daemons related to mission
 critical services are immediately respawned if they fail for some reason.
-You can do this by adding your own entries to the <tt>/etc/inittab</tt>
-file. For example:</font>
-<p><tt>rs:2345:respawn:/home/sms/server/RingToneServer</font></tt>
-<p>Here <tt>rs</tt> is a 2 character code identifying the
+You can do this by adding your own entries to the <b>/etc/inittab</b>
+file. For example:
+<p><b>rs:2345:respawn:/home/sms/server/RingToneServer</b>
+<p>Here <b>rs</b> is a 2 character code identifying the
 service, and
-<tt>2345</tt> are the runlevels (to find about runlevels,
-type <tt>man runlevel</tt>) for which the process should be created. The<tt>
-init </tt>process will create the <tt>RingToneServer</tt> process at system
-startup, and respawn it should it die for any reason.</font></blockquote>
+<b>2345</b> are the runlevels (to find about runlevels,
+type <b>man runlevel</b>) for which the process should be created. The<b>
+init </b>process will create the <b>RingToneServer</b> process at system
+startup, and respawn it should it die for any reason.</blockquote>
 
 <p><a href="http:./index.html">
 (BACK TO COURSE CONTENTS)</a></p>
