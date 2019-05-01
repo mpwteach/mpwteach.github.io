@@ -60,353 +60,370 @@
         is restricted by a password (the root password). Because the root account
         has huge potential for destruction, the root password should be chosen
         carefully, only given to those who need it, and changed regularly.
-      <p>One way to become <b>root </b>is to log in as usual
+      </p>
+      <p>
+        One way to become <b>root </b>is to log in as usual
         using the username <b>root</b> and the root password (usually security
-measures are in place so that this is only possible if you are using a
-"secure" console and not connecting over a network). Using <b>root</b>
-as your default login in this way is not recommended, however, because
-normal safeguards that apply to other user accounts do not apply to <b>root</b>.
-Consequently using <b>root</b> for mundane tasks often results in a memory
-lapse or misplaced keystrokes having catastrophic effects (e.g. forgetting
-for a moment which directory you are in and accidentally deleting another
-user's files, or accidentally typing "<b>rm -rf * .txt</b>" instead of
-"<b>rm -rf *.txt</b>" ).
-<p>A better way to become root is to use the <b>su</b>
-utility. <b>su</b> (switch user) lets you become another user (at least
-as far as the computer is concerned). If you don't specify the name of
-the user you wish to become, the system will assume you want to become
-<b>root</b>.
-Using <b>su</b> does not usually change your current directory, unless
-you specify a "<b>-</b>" option which will run the target user's startup
-scripts and change into their home directory (provided you can supply the
-right password of course). So:
-<p><b> $ su -</b><img SRC="enter.gif" height=15 width=27>
-<br><b> Password: xxxxxxxx</b><img SRC="enter.gif" height=15 width=27>
-<br><b> #</b>
-<p>Note that the root account often displays a different
-prompt (usually a <b>#</b>). To return to your old self, simply type
-"<b>exit</b>" at the shell prompt.
-<p>You should avoid leaving a root window open while you
-are not at your machine. Consider this paragraph from a humorous 1986 Computer
-Language article by Alan Filipski:
-<p>"The prudent administrator should be aware of common techniques
-used to breach UNIX security. The most widely known and practised attack
-on the security of the UNIX brand operating system is elegant in its simplicity.
-The perpetrator simply hangs around the system console until the operator
-leaves to get a drink or go to the bathroom. The intruder lunges for the
-console and types <b>rm -rf /</b> before anyone can pry his or her hands
-off the keyboard. Amateur efforts are characterised by typing in things
-such as <b>ls</b> or <b>pwd</b>. A skilled UNIX brand operating system
-security expert would laugh at such attempts."</blockquote>
-</div>
-<br>
+        measures are in place so that this is only possible if you are using a
+        "secure" console and not connecting over a network). Using <b>root</b>
+        as your default login in this way is not recommended, however, because
+        normal safeguards that apply to other user accounts do not apply to <b>root</b>.
+        Consequently using <b>root</b> for mundane tasks often results in a memory
+        lapse or misplaced keystrokes having catastrophic effects (e.g. forgetting
+        for a moment which directory you are in and accidentally deleting another
+        user's files, or accidentally typing "<b>rm -rf * .txt</b>" instead of
+        "<b>rm -rf *.txt</b>" ).
+      </p>
+      <p>
+        A better way to become root is to use the <b>su</b>
+        utility. <b>su</b> (switch user) lets you become another user (at least
+        as far as the computer is concerned). If you don't specify the name of
+        the user you wish to become, the system will assume you want to become
+        <b>root</b>.
+        Using <b>su</b> does not usually change your current directory, unless
+        you specify a "<b>-</b>" option which will run the target user's startup
+        scripts and change into their home directory (provided you can supply the
+        right password of course). So:
+        <div class="terminal">
+          $ su -<br>
+          Password: xxxxxxxx<br>
+          #
+        </div>
+      <p>
+        Note that the root account often displays a different
+        prompt (usually a <b>#</b>). To return to your old self, simply type
+        "<b>exit</b>" at the shell prompt.
+      </p>
+      <p>
+        You should avoid leaving a root window open while you
+        are not at your machine. Consider this paragraph from a humorous 1986 Computer
+        Language article by Alan Filipski:
+      </p>
+      <p>
+        "The prudent administrator should be aware of common techniques
+        used to breach UNIX security. The most widely known and practised attack
+        on the security of the UNIX brand operating system is elegant in its simplicity.
+        The perpetrator simply hangs around the system console until the operator
+        leaves to get a drink or go to the bathroom. The intruder lunges for the
+        console and types <b>rm -rf /</b> before anyone can pry his or her hands
+        off the keyboard. Amateur efforts are characterised by typing in things
+        such as <b>ls</b> or <b>pwd</b>. A skilled UNIX brand operating system
+        security expert would laugh at such attempts."
+      </p>
+    </div>
 
-<div class="table">
-<div class="heading">
-7.3 Shutdown and System Start-up
-</div>
-</div>
+    <h2>7.3 Shutdown and System Start-up</h2>
 
-<br>
+    <div class="text">
+      <ul>
+        <li>Shutdown: <b>shutdown, halt</b>, <b>reboot </b>(in <b>/sbin</b>)</li>
 
-<div class="text">
-<blockquote>
-<ul>
-<li>
-Shutdown<b>: shutdown, halt</b>, <b>reboot </b>(in<b>
-/sbin</b>)</li>
+        <p>
+          <b>/sbin/shutdown </b>allows a UNIX system to shut
+          down gracefully and securely. All logged-in users are
+          notified that the system is going down, and new logins are
+          blocked. It is possible to shut the system down immediately
+          or after a specified delay and to specify what should happen after the
+          system has been shut down:
+          <div class="terminal">
+            # /sbin/shutdown -r now    (shutdown now and reboot)<br>
+            # /sbin/shutdown -h +5     (shut down in 5 minutes and halt)<br>
+            # /sbin/shutdown -k 17:00  (fake a shutdown at 5pm)
+          </div>
+        <p>
+          <b>halt</b> and <b>reboot</b> are equivalent to <b>shutdown -h</b>
+          and <b>shutdown -r</b> respectively.
+        </p>
+        <p>
+          If you have to shut a system down extremely urgently or
+          for some reason cannot use <b>shutdown</b>, it is at least a good idea
+          to first run the command:
+          <div class="terminal">
+            # sync
+          </div>
+        <p>
+          which forces the state of the file system to be brought up to date.
+        </p>
 
-<p><br><b>/sbin/shutdown </b>allows a UNIX system to shut
-down gracefully and securely. All logged-in users are
-notified that the system is going down, and new logins are
-blocked. It is possible to shut the system down immediately
-or after a specified delay and to specify what should happen after the
-system has been shut down:
-<p><b># /sbin/shutdown -r now<img SRC="enter.gif" height=15 width=27></b>(shut
-down now and reboot)
-<br><b># /sbin/shutdown -h +5<img SRC="enter.gif" height=15 width=27>
+        <li>System startup:</li>
 
-</b>(shut down in 5 minutes &amp; halt)
-<br><b># /sbin/shutdown -k 17:00<img SRC="enter.gif" height=15 width=27></b>(fake
-a shutdown at 5pm)
-<p><b>halt </b>and<b> reboot </b>are equivalent to<b>
-shutdown -h </b>and<b> shutdown -r </b>respectively.
-<p>If you have to shut a system down extremely urgently or
-for some reason cannot use <b>shutdown</b>, it is at least a good idea
-to first run the command:
-<p><b> # sync</b><img SRC="enter.gif" height=15 width=27>
-<p>which forces the state of the file system to be brought
-up to date.
-<br>
-<li>
-System startup:</li>
+        <p>
+          At system startup, the operating system performs various
+          low-level tasks, such as initialising the memory system, loading up device
+          drivers to communicate with hardware devices, mounting filesystems and
+          creating the <b>init</b> process (the parent of all processes). <b>init</b>'s
+          primary responsibility is to start up the system services as specified
+          in <b>/etc/inittab</b>. Typically these services include gettys (i.e.
+          virtual terminals where users can login), and the scripts in the directory
+          <b>/etc/rc.d/init.d</b> which usually spawn high-level daemons such as
+          <b>httpd</b> (the web server). On most UNIX systems you can type <b>dmesg</b> to see system
+          startup messages, or look in <b>/var/log/messages</b>.
+        </p>
+        <p>
+          If a mounted filesystem is not "clean" (e.g. the machine
+          was turned off without shutting down properly), a system utility <b>fsck</b> is
+          automatically run to repair it. Automatic running can only fix certain
+          errors, however, and you may have to run it manually:
+          <div class="terminal">
+            # fsck <i>filesys</i>
+          </div>
+        <p>
+          where <i>filesys</i> is the name of a device (e.g.<b>
+            /dev/hda1</b>) or a mount point (like <b>/</b>). "Lost" files recovered
+          during this process end up in the <b>lost+found</b> directory. Some more
+          modern filesystems called "journaling" file systems don't require <b>fsck</b>,
+          since they keep extensive logs of filesystem events and are able to recover
+          in a similar way to a transactional database.
+        </p>
+      </ul>
+    </div>
 
-<p>At system startup, the operating system performs various
-low-level tasks, such as initialising the memory system, loading up device
-drivers to communicate with hardware devices, mounting filesystems and
-creating the <b>init</b> process (the parent of all processes). <b>init</b>'s
-primary responsibility is to start up the system services as specified
-in <b>/etc/inittab</b>. Typically these services include gettys (i.e.
-virtual terminals where users can login), and the scripts in the directory
-<b>/etc/rc.d/init.d</b>
-which usually spawn high-level daemons such as
-<b>httpd</b> (the web
-server). On most UNIX systems you can type <b>dmesg</b> to see system
-startup messages, or look in <b>/var/log/messages</b>.
-<p>If a mounted filesystem is not "clean" (e.g. the machine
-was turned off without shutting down properly), a system utility <b>fsck
-</b>is
-automatically run to repair it. Automatic running can only fix certain
-errors, however, and you may have to run it manually:
-<p><b> # fsck </b><i>filesys</i><img SRC="enter.gif" height=15 width=27>
-<p>where <i>filesys</i> is the name of a device (e.g.<b>
-/dev/hda1</b>) or a mount point (like <b>/</b>). "Lost" files recovered
-during this process end up in the <b>lost+found</b> directory. Some more
-modern filesystems called "journaling" file systems don't require <b>fsck</b>,
-since they keep extensive logs of filesystem events and are able to recover
-in a similar way to a transactional database.</ul>
-</blockquote>
-</div>
-<br>
+    <h2>7.4 Adding Users</h2>
+    
+    <div class="text">
+      
+      <ul>
+        <li><b>useradd</b> (in <b>/usr/sbin</b>):</li>
 
-<div class="table">
-<div class="heading">
-7.4 Adding Users
-</div>
-</div>
+        <p>
+          <b>useradd</b> is a utility for adding new users
+          to a UNIX system. It adds new user information to the <b>/etc/passwd</b>
+          file and creates a new home directory for the user. When you add a new
+          user, you should also set their password (using the <b>-p</b> option
+          on <b>useradd</b>, or using the <b>passwd</b> utility):
+          <div class="terminal">
+            # useradd bob<br>
+            # passwd bob
+          </div>
+        </p>
+      </ul>
+    </div>
 
-<br>
 
-<div class="text">
-<blockquote>
-<ul>
-<li>
-<b>useradd</b> (in <b>/usr/sbin</b>):</li>
+    <h2>7.5 Controlling User Groups</h2>
 
-<p><b>useradd</b> is a utility for adding new users
-to a UNIX system. It adds new user information to the <b>/etc/passwd</b>
-file and creates a new home directory for the user. When you add a new
-user, you should also set their password (using the <b>-p</b> option
-on <b>useradd</b>, or using the <b>passwd</b> utility):
-<p><b> # useradd bob</b><img SRC="enter.gif" height=15 width=27>
-<br><b> # passwd bob</b><img SRC="enter.gif" height=15 width=27></ul>
-</blockquote>
-</div>
-<br>
+    <div class="text">
+      <ul>
+        <li><b>groupadd</b> (in <b>/usr/sbin</b>):</li>
+        <p>
+          <b>groupadd</b> creates a new user group and adds
+          the new information to <b>/etc/group</b>:
+          <div class="terminal">
+            # groupadd <i>groupname</i>
+          </div>
+        </p>
+	
+        <li><b>usermod</b> (in <b>/usr/sbin</b>):</li>
+        <p>
+          Every user belongs to a primary group and possibly
+          also to a set of supplementary groups. To modify the group permissions
+          of an existing user, use:
+          <div class="terminal">
+            # usermod -g <i>initialgroup username</i> -G <i>othergroups</i>
+          </div>
+        </p>
+        <p>
+          where <i>othergroups </i>is a list of supplementary group
+          names separated by commas (with no intervening whitespace).
+        </p>
 
-<div class="table">
-<div class="heading"> 
-7.5 Controlling User Groups
-</div>
-</div>
+        <li><b>groups</b></li>
+        <p>
+          You can find out which groups a user belongs to by
+          typing:
+          <div class="terminal">
+            # groups <i>username</i>
+          </div>
+        </p>
+      </ul>
+    </div>
 
-<br>
+    <h2>7.6 Reconfiguring and Recompiling the Linux Kernel</h2>
 
-<div class="text">
-<blockquote>
-<blockquote>
-<ul>
-<li>
-<b>groupadd</b> (in <b>/usr/sbin</b>):</li>
+    <div class="text">
+      <p>
+        Linux has a modular, customisable kernel with
+        several switchable options (e.g. support for multiple processors and device
+        drivers for various hardware devices). It may happen that some new hardware
+        is added to a Linux machine which requires you to recompile the kernel
+        so that it includes device driver support (and possibly new system calls)
+        for the new hardware. To do this, you will need to rebuild the Linux kernel
+        from scratch as follows:
+      </p>
+      <ul>
+        <li>
+          Look in <b>/usr/src/linux</b> for the kernel source code.
+          If it isn't there (or if there is just a message saying that only kernel
+          binaries have been installed), get hold of a copy of the latest kernel
+          source code from <a href="http://www.kernel.org">http://www.kernel.org</a>
+          and untar it into <b>/usr/src/linux</b>.
+        </li>
+        <p></p>
 
-<p><b>groupadd</b> creates a new user group and adds
-the new information to <b>/etc/group</b>:
-<p><b> # groupadd </b><i>groupname</i><img SRC="enter.gif" height=15 width=27>
-<br>
-<li>
-<b>usermod</b> (in <b>/usr/sbin</b>):</li>
+        <li>Change directory to <b>/usr/src/linux</b>.</li>
+        <p></p>
 
-<p>Every user belongs to a primary group and possibly
-also to a set of supplementary groups. To modify the group permissions
-of an existing user, use
-<p><b># usermod -g </b><i>initialgroup username</i><b>
--G </b><i>othergroups</i><img SRC="enter.gif" height=15 width=27>
-<p>where <i>othergroups </i>is a list of supplementary group
-names separated by commas (with no intervening whitespace).
-<br>
-<li>
-<b>groups</b></li>
+        <li>To configure the kernel type either</li>
+        <p>
+          <div class="terminal">
+            # make config      (simple text mode configuration), or<br>
+            # make menuconfig  (menu-driven text configuration), or<br>
+            # make xconfig     (graphical configuration for X)
+          </div>
+        </p>
+        <p>
+          You will be asked to select which modules (device drivers,
+          multiprocessor support etc.) you wish to include. For each module, you
+          can chose to include it in the kernel code (<b>y</b>), incorporate it
+          as an optional module that will be loaded if needed (<b>m</b>) or to
+          exclude it from the kernel code (<b>n</b>). To find out which optional
+          modules have actually been loaded you can run <b>lsmod</b> when the system
+          reboots.
+        </p>
 
-<p>You can find out which groups a user belongs to by
-typing:
-<p><b> # groups </b><i>username</i><img SRC="enter.gif" height=15 width=27></ul>
-</blockquote>
-</blockquote>
-</div>
-<br>
+        <li>Now type:</li>
 
-<div class="heading">
-<div class="table">
-7.6 Reconfiguring and Recompiling the Linux Kernel
-</div>
-</div>
+        <p>
+          <div class="terminal">
+            # make dep     (to build source code dependencies)<br>
+            # make clean   (to delete all stale object files)<br>
+            # make bzImage (to build the new kernel)<br>
+            # make modules (to build the new optional modules)<br>
+            # make modules_install (to install the modules)
+          </div>
+        </p>
+        <p>
+          The file <b>/usr/src/linux/arch/i386/boot/bzImage</b>
+          now contains your new kernel image. It remains only to install it.
+        </p>
 
-<br>
+        <li>
+          Change directory to <b>/usr/src/linux/arch/i386/boot</b>.
+          In the same directory should be a script called <b>install.sh</b> which
+          will copy your kernel image into <b>/boot/vmlinuz</b>:
+        </li>
 
-<div class="text">
-<blockquote>Linux has a modular, customisable kernel with
-several switchable options (e.g. support for multiple processors and device
-drivers for various hardware devices). It may happen that some new hardware
-is added to a Linux machine which requires you to recompile the kernel
-so that it includes device driver support (and possibly new system calls)
-for the new hardware. To do this, you will need to rebuild the Linux kernel
-from scratch as follows:
-<ul>
-<li>
-Look in <b>/usr/src/linux</b> for the kernel source code.
-If it isn't there (or if there is just a message saying that only kernel
-binaries have been installed), get hold of a copy of the latest kernel
-source code from <a href="http://www.kernel.org">http://www.kernel.org</a>
-and untar it into <b>/usr/src/linux</b>.</li>
+        <p>
+          <div class="terminal">
+            # install.sh <i>version</i> bzImage /boot/System.map/boot
+          </div>
+        </p>
+        <p>
+          where <i>version</i> is the kernel version number (of
+          form 2.2.xx).
+        </p>
 
-<p>
-<li>
-Change directory to <b>/usr/src/linux</b>.</li>
-<p>
-<li> To configure the kernel type either</li>
+        <li>
+          Finally, you may need to update the <b>/etc/lilo.conf</b>
+          file so that <b>lilo</b> (the Linux boot loader) includes an entry for
+          your new kernel. Then run
+        </li>
 
-<p><b> # make config
-</b>(simple text mode configuration), or
-<br><b> # make menuconfig </b>(menu-driven
-text configuration), or
-<br><b> # make xconfig </b>(graphical
-configuration for X)
-<p>You will be asked to select which modules (device drivers,
-multiprocessor support etc.) you wish to include. For each module, you
-can chose to include it in the kernel code (<b>y</b>), incorporate it
-as an optional module that will be loaded if needed (<b>m</b>) or to
-exclude it from the kernel code (<b>n</b>). To find out which optional
-modules have actually been loaded you can run <b>lsmod</b> when the system
-reboots.
-<br>
-<li>
-Now type:</li>
+        <p>
+          <div class="terminal">
+            # lilo
+          </div>
+        </p>
+        <p>
+          to update the changes. When you reboot your machine, you
+          should be able to select your new kernel image from the <b>lilo</b> boot
+          loader.
+        </p>
+      </ul>
+    </div>
 
-<p><b> # make dep
-</b>(to build source code dependencies)
-<br><b> # make clean </b>(to
-delete all stale object files)
-<br><b> # make bzImage </b>(to build
-the new kernel)
-<br><b> # make modules </b>(to build
-the new optional modules)
-<br><b> # make modules_install </b>(to
-install the modules)
-<p>The file <b>/usr/src/linux/arch/i386/boot/bzImage</b>
-now contains your new kernel image. It remains only to install it.
-<br>
-<li>
-Change directory to <b>/usr/src/linux/arch/i386/boot</b>.
-In the same directory should be a script called <b>install.sh</b> which
-will copy your kernel image into <b>/boot/vmlinuz</b>:</li>
+    <h2>7.7 Cron Jobs</h2>
 
-<p><b># install.sh </b><i>version</i><b> bzImage /boot/System.map
-/boot</b>
-<p>where <i>version</i> is the kernel version number (of
-form 2.2.xx).
-<br>
-<li>
-Finally, you may need to update the <b>/etc/lilo.conf</b>
-file so that <b>lilo</b> (the Linux boot loader) includes an entry for
-your new kernel. Then run</li>
+    <div class="text">
+      <p>
+        <b>crond</b> is a daemon that executes commands
+        that need to be run regularly according to some schedule. The schedule
+        and corresponding commands are stored in the file <b>/etc/crontab</b>.
+      </p>
+      <p>
+        Each entry in the <b>/etc/crontab</b> file entry contains
+        six fields separated by spaces or tabs in the following form:
+      </p>
+      <p><i>minute hour day_of_month month weekday command</i></p>
+      <p>
+        These fields accept the following values:
+      </p>
+      <p><i>minute</i>: 0 through 59</p>
+      <p><i>hour</i>: 0 through 23</p>
+      <p><i>day_of_month</i>: 1 through 31</p>
+      <p><i>month</i>: 1 through 12</p>
+      <p><i>weekday</i>: 0 (Sun) through 6 (Sat)</p>
+      <p><i>command</i>: a shell command</p>
+      <p>
+        You must specify a value for each field. Except for the
+        command field, these fields can contain the following:
+        <ul>
+          <li>
+            A number in the specified range, e.g. to run a command in
+            May, specify 5 in the <i>month</i> field.
+          </li>
+          <li>
+            Two numbers separated by a dash to indicate an inclusive
+            range, e.g. to run a cron job on Tuesday through Friday, place 2-5 in the
+            <i>weekday</i>
+            field.
+          </li>
+          <li>
+            A list of numbers separated by commas, e.g. to run a command
+            on the first and last day of January, you would specify 1,31 in the <i>day_of_month</i>
+            field.
+          </li>
+          <li>
+            <b>*</b> (asterisk), meaning all allowed values, e.g. to
+            run a job every hour, specify an asterisk in the <i>hour</i> field.
+          </li>
+        </ul>
+      </p>
+      <p>
+        You can also specify some execution environment options at
+        the top of the <b>/etc/crontab</b> file:
+        <div class="codeeg">
+          SHELL=/bin/bash</br>
+          PATH=/sbin:/bin:/usr/sbin:/usr/bin</br>
+          MAILTO=root
+        </div>
+      <p>
+        To run the calendar command at 6:30am. every Mon, Wed,
+        and Fri, a suitable <b>/etc/crontab</b> entry would be:
+        <div class="codeeg">
+          30 6 * * 1,3,5 /usr/bin/calendar
+        </div>
+      <p>
+        The output of the command will be mailed to the user specified
+        in the <b>MAILTO</b> environment option.
+      </p>
+      <p>
+        You don't need to restart the cron daemon <b>crond</b>
+        after changing <b>/etc/crontab</b> - it automatically detects changes.
+      </p>
+    </div>
 
-<p><b> # lilo</b><img SRC="enter.gif" height=15 width=27>
-<p>to update the changes. When you reboot your machine, you
-should be able to select your new kernel image from the <b>lilo</b> boot
-loader.</ul>
-</blockquote>
-</div>
-<br>
+    <h2>7.8 Keeping Essential Processes Alive</h2>
 
-<div class="heading">
-<div class="table">
-7.7 Cron Jobs
-</div>
-</div>
-<br>
+    <div class="text">
+      <p>
+        It is important that daemons related to mission
+        critical services are immediately respawned if they fail for some reason.
+        You can do this by adding your own entries to the <b>/etc/inittab</b>
+        file. For example:
+        <div class="codeeg">
+          rs:2345:respawn:/home/sms/server/RingToneServer
+        </div>
+      </p>
+      <p>
+        Here <b>rs</b> is a 2 character code identifying the
+        service, and <b>2345</b> are the runlevels (to find about runlevels,
+        type <b>man runlevel</b>) for which the process should be created. The
+        <b>init</b> process will create the <b>RingToneServer</b> process at system
+        startup, and respawn it should it die for any reason.
+      </p>
+    </div>
 
-<div class="text">
-<blockquote><b>crond</b> is a daemon that executes commands
-that need to be run regularly according to some schedule. The schedule
-and corresponding commands are stored in the file <b>/etc/crontab</b>.
-<p>Each entry in the <b>/etc/crontab</b> file entry contains
-six fields separated by spaces or tabs in the following form:
-<p><i>minute
-hour day_of_month month weekday command</i>
-<p>These fields accept the following values:
-<p><b>minute
-0 through 59</b>
-<br><b> hour
-0 through 23</b>
-<br><b> day_of_month
-1 through 31</b>
-<br><b> month
-1 through 12</b>
-<br><b> weekday
-0 (Sun) through 6 (Sat)</b>
-<br><b> command
-a shell command</b>
-<p>You must specify a value for each field. Except for the
-command field, these fields can contain the following:
-<ul>
-<li>
-A number in the specified range, e.g. to run a command in
-May, specify 5 in the <i>month</i> field.</li>
-
-<li>
-Two numbers separated by a dash to indicate an inclusive
-range, e.g. to run a cron job on Tuesday through Friday, place 2-5 in the
-<i>weekday</i>
-field.</li>
-
-<li>
-A list of numbers separated by commas, e.g. to run a command
-on the first and last day of January, you would specify 1,31 in the <i>day_of_month</i>
-field.</li>
-
-<li>
-<b>*</b> (asterisk), meaning all allowed values, e.g. to
-run a job every hour, specify an asterisk in the <i>hour</i> field.</li>
-</ul>
-You can also specify some execution environment options at
-the top of the <b>/etc/crontab</b> file:
-<p><b>SHELL=/bin/bash</b>
-<br><b>PATH=/sbin:/bin:/usr/sbin:/usr/bin</b>
-<br><b>MAILTO=root</b>
-<p>To run the calendar command at 6:30am. every Mon, Wed,
-and Fri, a suitable <b>/etc/crontab</b> entry would be:
-<p><b>30 6 * * 1,3,5 /usr/bin/calendar</b>
-<p>The output of the command will be mailed to the user specified
-in the <b>MAILTO</b> environment option.
-<p>You don't need to restart the cron daemon <b>crond</b>
-after changing
-<b>/etc/crontab</b> - it automatically detects changes.</blockquote>
-</div>
-<br>
-
-<div class="heading">
-<div class="table">
-7.8 Keeping Essential Processes Alive
-</div>
-</div>
-
-<br>
-
-<div class="text">
-<blockquote>It is important that daemons related to mission
-critical services are immediately respawned if they fail for some reason.
-You can do this by adding your own entries to the <b>/etc/inittab</b>
-file. For example:
-<p><b>rs:2345:respawn:/home/sms/server/RingToneServer</b>
-<p>Here <b>rs</b> is a 2 character code identifying the
-service, and
-<b>2345</b> are the runlevels (to find about runlevels,
-type <b>man runlevel</b>) for which the process should be created. The<b>
-init </b>process will create the <b>RingToneServer</b> process at system
-startup, and respawn it should it die for any reason.</blockquote>
-
-<p><a href="http:./index.html">
-(BACK TO COURSE CONTENTS)</a></p>
-</div>
-
+  </body>
 </html>
+
