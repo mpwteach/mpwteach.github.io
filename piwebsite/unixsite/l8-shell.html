@@ -65,413 +65,469 @@
     </div>
 
 
-   <h2>8.3 Shell Variables and the Environment</h2>
+    <h2>8.3 Shell Variables and the Environment</h2>
 
-   <div class="text">
-     <p>
-       A shell lets you define variables (like most
-       programming languages). A variable is a piece of data that is given a name.
-       Once you have assigned a value to a variable, you access its value by prepending
-       a <b>$</b> to the name:
-     </p>
-     <p class="terminal">
-       $ bob='hello world'
-       <br>$ echo $bob
-       <br>hello world
-       <br>$
-     </p>
-     <p>Variables created within a shell are local to that shell,
-       so only that shell can access them. The <b>set</b> command will show
-       you a list of all variables currently defined in a shell. If you wish a
-       variable to be accessible to commands outside the shell, you can <i>export</i>
-       it into the <i>environment</i>:
-     </p>
-     <p class="terminal">
-       $ export bob
-     </p>
-     <p>
-       (under <b>csh</b> use <b>setenv</b>). The environment
-       is the set of variables that are made available to commands (including
-       shells) when they are executed. UNIX commands and programs can read the
-       values of environment variables, and adjust their behaviour accordingly.
-       For example, the environment variable <b>PAGER</b> is used by the
-       <b>man</b>
-       command (and others) to see what command should be used to display multiple
-       pages. If you say:
-     </p>
-     <p class="terminal">
-       $ export PAGER=cat
-     </p>
-     <p>
-       and then try the <b>man</b> command (say <b>man pwd</b>),
-       the page will go flying past without stopping. If you now say:
-     <p class="terminal">
-       $ export PAGER=more
-     </p>
-     <p>
-       normal service should be resumed (since now <b>more</b>
-       will be used to display the pages one at a time). Another environment variable
-       that is commonly used is the <b>EDITOR</b> variable which specifies the
-       default editor to use (so you can set this to <b>vi</b> or <b>emacs</b>
-       or which ever other editor you prefer). To find out which environment variables
-       are used by a particular command, consult the <b>man</b> pages for that
-       command.
-     </p>
-     <P>
-       Another interesting environment variable is <b>PS1</b>,
-       the main shell prompt string which you can use to create your own custom
-       prompt. For example:
-     <p class="terminal">
-       $ export PS1="(\h) \w> "
-       <br>(lumberjack) ~&gt;
-     </p>
-     <p>
-       The shell often incorporates efficient mechanisms for
-       specifying common parts of the shell prompt (e.g. in <b>bash</b> you
-       can use <b>\h</b> for the current host, <b>\w</b> for the current working
-       directory, <b>\d</b> for the date, <b>\t</b> for the time, <b>\u</b>
-       for the current user and so on - see the <b>bash</b> man page).
-     </p>
-     <p>
-       Another important environment variable is <b>PATH</b>.
-       <b>PATH</b> is a list of directories that the shell uses to locate executable files
-       for commands. So if the <b>PATH</b> is set to:
-       <b>/bin:/usr/bin:/usr/local/bin:.</b>
-     </p>
-     <p>and you typed l<b>s</b>, the shell would look for <b>/bin/ls</b>,
-       <b>/usr/bin/ls</b> etc.
-       Note that the <b>PATH</b> contains'<b>.</b>', i.e. the current
-       working directory. This allows you to create a shell script or program
-       and run it as a command from your current directory without having to explicitly
-       say "<b>./</b><i>filename</i>".
-     </p>
-     <p>
-       Note that <b>PATH</b> has nothing to with filenames
-       that are specified as <i>arguments</i> to commands (e.g. <b>cat myfile.txt</b> would
-       only look for <b>./myfile.txt</b>, not for <b>/bin/myfile.txt</b>,
-       <b>/usr/bin/myfile.txt</b>etc.)
-     </p>
-   </div>
-
-
-   <h2>8.4 Simple Shell Scripting</h2>
+    <div class="text">
+      <p>
+	A shell lets you define variables (like most
+	programming languages). A variable is a piece of data that is given a name.
+	Once you have assigned a value to a variable, you access its value by prepending
+	a <b>$</b> to the name:
+      </p>
+      <p class="terminal">
+	$ bob='hello world'
+	<br>$ echo $bob
+	<br>hello world
+	<br>$
+      </p>
+      <p>Variables created within a shell are local to that shell,
+	so only that shell can access them. The <b>set</b> command will show
+	you a list of all variables currently defined in a shell. If you wish a
+	variable to be accessible to commands outside the shell, you can <i>export</i>
+	it into the <i>environment</i>:
+      </p>
+      <p class="terminal">
+	$ export bob
+      </p>
+      <p>
+	(under <b>csh</b> use <b>setenv</b>). The environment
+	is the set of variables that are made available to commands (including
+	shells) when they are executed. UNIX commands and programs can read the
+	values of environment variables, and adjust their behaviour accordingly.
+	For example, the environment variable <b>PAGER</b> is used by the
+	<b>man</b>
+	command (and others) to see what command should be used to display multiple
+	pages. If you say:
+      </p>
+      <p class="terminal">
+	$ export PAGER=cat
+      </p>
+      <p>
+	and then try the <b>man</b> command (say <b>man pwd</b>),
+	the page will go flying past without stopping. If you now say:
+      <p class="terminal">
+	$ export PAGER=more
+      </p>
+      <p>
+	normal service should be resumed (since now <b>more</b>
+	will be used to display the pages one at a time). Another environment variable
+	that is commonly used is the <b>EDITOR</b> variable which specifies the
+	default editor to use (so you can set this to <b>vi</b> or <b>emacs</b>
+	or which ever other editor you prefer). To find out which environment variables
+	are used by a particular command, consult the <b>man</b> pages for that
+	command.
+      </p>
+      <P>
+	Another interesting environment variable is <b>PS1</b>,
+	the main shell prompt string which you can use to create your own custom
+	prompt. For example:
+      <p class="terminal">
+	$ export PS1="(\h) \w> "
+	<br>(lumberjack) ~&gt;
+      </p>
+      <p>
+	The shell often incorporates efficient mechanisms for
+	specifying common parts of the shell prompt (e.g. in <b>bash</b> you
+	can use <b>\h</b> for the current host, <b>\w</b> for the current working
+	directory, <b>\d</b> for the date, <b>\t</b> for the time, <b>\u</b>
+	for the current user and so on - see the <b>bash</b> man page).
+      </p>
+      <p>
+	Another important environment variable is <b>PATH</b>.
+	<b>PATH</b> is a list of directories that the shell uses to locate executable files
+	for commands. So if the <b>PATH</b> is set to:
+	<b>/bin:/usr/bin:/usr/local/bin:.</b>
+      </p>
+      <p>and you typed l<b>s</b>, the shell would look for <b>/bin/ls</b>,
+	<b>/usr/bin/ls</b> etc.
+	Note that the <b>PATH</b> contains'<b>.</b>', i.e. the current
+	working directory. This allows you to create a shell script or program
+	and run it as a command from your current directory without having to explicitly
+	say "<b>./</b><i>filename</i>".
+      </p>
+      <p>
+	Note that <b>PATH</b> has nothing to with filenames
+	that are specified as <i>arguments</i> to commands (e.g. <b>cat myfile.txt</b> would
+	only look for <b>./myfile.txt</b>, not for <b>/bin/myfile.txt</b>,
+	<b>/usr/bin/myfile.txt</b>etc.)
+      </p>
+    </div>
 
 
-   <div class="text">
-     <p>
-       Consider the following simple shell script, which
-       has been created (using an editor) in a text file called <b>simple</b>:
-     <p class="codeeg">
-       #!/bin/bash
-       <br># this is a comment
-       <br>echo "The number of arguments is $#"
-       <br>echo "The arguments are $*"
-       <br>echo "The first is $1"
-       <br>echo "My process number is $$"
-       <br>echo "Enter a number from the keyboard: "
-       <br>read number
-       <br>echo "The number you entered was $number"
-     </p>
-     <p>
-       The shell script begins with the line <b>#!/bin/bash</b>
-       . Usually "<b>#</b>" denotes the start of a comment, but <b>#!</b>
-       is a special combination that tells UNIX to use the Bash shell (<b>bash</b>)
-       to interpret this script. The <b>#!</b> must be the first two characters
-       of the script. The arguments passed to the script can be accessed through
-       <b>$1</b>, <b>$2</b>, <b>$3</b> etc. <b>$*</b> stands for all the arguments, and <b>$#</b>
-       for the number of arguments. The process number of the shell executing
-       the script is given by <b>$$</b>. the <b>read</b> number statement
-       assigns keyboard input to the variable <b>number</b>.
-     </p>
-     <p>
-       To execute this script, we first have to make the file <b>simple</b>
-       executable:
-     </p>
-     <p class="terminal">
-       $ ls -l simple
-       <br>-rw-r--r-- 1 will finance 175 Dec 13 simple
-       <br>$ chmod +x simple
-       <br>$ ls -l simple
-       <br>-rwxr-xr-x 1 will finance 175 Dec 13 simple
-       <br>$ ./simple hello world
-       <br>The number of arguments is 2
-       <br>The arguments are hello world
-       <br>The first is hello
-       <br>My process number is 2669
-       <br>Enter a number from the keyboard:
-       <br> <b>5</b>
-       <br>The number you entered was 5
-       <br>$
-     </p>
-     <p>
-       We can use input and output redirection in the normal
-       way with scripts, so:
-     </p>
-     <p class="terminal">
-       $ echo 5 | simple hello world
-     </p>
-     <p>
-       would produce similar output but would not pause to read
-       a number from the keyboard.
-     </p>
-
-     <h2>8.5 More Advanced Shell Scripting</h2>
-
-     <div class="text">
-       <ul>
-         <li><b>if-then-else</b> statements</li>
-         <p>Shell scripts are able to perform simple conditional branches:
-         <p class="codesyntax">
-           <b>if [</b> <i>test</i> <b>]</b>
-           <br><b>then</b>
-           <br><b> </b><i>commands-if-test-is-true</i>
-           <br><b>else</b>
-           <br><b> </b><i>commands-if-test-is-false</i>
-           <br><b>fi</b>
-         </p>
-       
-         <p>
-           The <i>test</i> condition may involve file characteristics
-           or simple string or numerical comparisons. The <b>[</b> used here is
-           actually the name of a command (<b>/bin/[</b>) which performs the evaluation
-           of the test condition. Therefore there must be spaces before and after
-           it as well as before the closing bracket. Some common test conditions are:
-         </p>
-         <p class="codesyntax">
-           <b>-s </b><i>file</i>
-           <br><b> </b>true if <i>file</i> exists and is not empty
-           <br><b>-f </b><i>file</i>
-           <br><b> </b>true if <i>file</i> is an ordinary file
-           <br><b>-d </b><i>file</i>
-           <br><b> </b>true if <i>file</i> is a directory
-           <br><b>-r </b><i>file</i>
-           <br><b> </b>true if <i>file</i> is readable
-           <br><b>-w </b><i>file</i>
-           <br><b> </b>true if <i>file</i> is writable
-           <br><b>-x </b><i>file</i>
-           <br><b> </b>true if <i>file</i> is executable
-           <br><b>$X -eq $Y</b>
-           <br><b> </b>true if <b>X</b> equals <b>Y</b>
-           <br><b>$X -ne $Y</b>
-           <br><b> </b>true if <b>X</b> not equal to <b>Y</b>
-           <br><b>$X -lt $Y</b>
-           <br><b> </b>true if <b>X</b> less than <b>$Y</b>
-           <br><b>$X -gt $Y</b>
-           <br><b> </b>true <b>if</b> X greater than <b>$Y</b>
-           <br><b>$X -le $Y</b>
-           <br><b> </b>true if <b>X</b> less than or equal to <b>Y</b>
-           <br><b>$X -ge $Y</b>
-           <br><b> </b>true if <b>X</b> greater than or equal to <b>Y</b>
-           <br><b>"$A" = "$B"</b>
-           <br><b> </b>true if string <b>A</b> equals string <b>B</b>
-           <br><b>"$A" != "$B"</b>
-           <br><b> </b>true if string <b>A</b> not equal to string <b>B</b>
-           <br><b>$X ! -gt $Y</b>
-           <br><b> </b>true if string <b>X</b> is not greater than <b>Y</b>
-           <br><b>$E -a $F</b>
-           <br><b> </b>true if expressions<b>E</b> and <b>F</b> are both true
-           <br><b>$E -o $F</b>
-           <br><b> </b>true if either expression <b>E</b> or expression <b>F</b> is true
-           <br>
-         </p>
-           
-         <li><b>for</b> loops</li>
-
-         <p>
-           Sometimes we want to loop through a list of files, executing
-           some commands on each file. We can do this by using a <b>for</b> loop:
-         </p>
-         <p class="codesyntax"><b>for</b> <i>variable</i><b> in </b><i>list</i>
-           <br><b>do</b>
-           <br><b> </b><i>statements</i> (referring to <b>$</b><i>variable</i>)
-           <br><b>done</b>
-         </p>
-         <p>
-           The following script sorts each text files in the current
-           directory:
-         </p>
-         <p class="codeeg">
-           #!/bin/bash
-           <br>for f in *.txt
-           <br>do
-           <br>  echo sorting file $f
-           <br>  cat $f | sort > $f.sorted
-           <br>  echo sorted file has been output to $f.sorted
-           <br>done
-         </p>
-
-         <li><b>while</b> loops</li>
-
-         <p>
-           Another form of loop is the while loop:
-         </p>
-         <p class="codesyntax">
-           <b>while [</b> <i>test</i> <b>]</b>
-           <br><b>do</b>
-           <br><b> </b><i>statements</i> (to be executed while <i>test</i> is true)
-           <br><b>done</b>
-         </p>
-         <p>
-           The following script waits until a non-empty file <b>input.txt</b> has been created:
-         </p>
-         <p class="codeeg">
-           #!/bin/bash
-           <br>while [ ! -s input.txt ]
-           <br>do
-           <br>  echo waiting...
-           <br>  sleep 5
-           <br>done
-           <br>echo input.txt is ready
-         </p>
-         <p>
-           You can abort a shell script at any point using the <b>exit</b>
-           statement, so the following script is equivalent:
-         <p class="codeeg">
-           #!/bin/sh
-           <br>while true
-           <br>do
-           <br>  if [ -s input.txt ]
-           <br>  then
-           <br>    echo input.txt is ready
-           <br>    exit
-           <br>  fi
-           <br>  echo waiting...
-           <br>  sleep 5
-           <br>done
-         </p>
-         
-         <li><b>case</b> statements</li>
-
-<P><b>case</b> statements are a convenient way to perform
-multiway branches where one input pabern must be compared to several alternatives:
-<P><b>case </b><i>variable</i><b> in</b>
-<br><b> </b><i>pabern1</i><b>)</b>
-<br><b> </b><i>statement</i>
-(executed if <i>variable</i> matches <i>pabern1</i>)
-<br><b> ;;</b>
-<br><b> </b><i>pabern2</i><b>)</b>
-<br><b> </b><i>statement</i>
-<br><b> ;;</b>
-<br><b> </b><i>etc.</i>
-<br><b>esac</b>
-<P>The following script uses a <b>case</b> statement to
-have a guess at the type of non-directory non-executable files passed as
-arguments on the basis of their extensions (note how the "or" operator
-<b>|</b>
-can be used to denote multiple paberns, how "<b>*</b>" has been used
-as a catch-all, and the effect of the forward single quotes <b>`</b>):
-<P><b>#!/bin/sh</b>
-<br><b>for f in $*</b>
-<br><b>do</b>
-<br><b> if [ -f $f -a ! -x $f ]</b>
-<br><b> then</b>
-<br><b> case $f in</b>
-<br><b> core)</b>
-<br><b> echo "$f: a core dump
-file"</b>
-<br><b> ;;</b>
-<br><b> *.c)</b>
-<br><b> echo "$f: a C program"</b>
-<br><b> ;;</b>
-<br><b> *.cpp|*.cc|*.cxx)</b>
-<br><b> echo "$f: a C++ program"</b>
-<br><b> ;;</b>
-<br><b> *.txt)</b>
-<br><b> echo "$f: a text file"</b>
-<br><b> ;;</b>
-<br><b> *.pl)</b>
-<br><b> echo "$f: a PERL script"</b>
-<br><b> ;;</b>
-<br><b> *.html|*.htm)</b>
-<br><b> echo "$f: a web document"</b>
-<br><b> ;;</b>
-<br><b> *)</b>
-<br><b> echo "$f: appears
-to be "`file -b $f`</b>
-<br><b> ;;</b>
-<br><b> esac</b>
-<br><b> fi</b>
-<br><b>done</b>
-<br>
-<li>
-capturing command output</li>
-
-<P>Any UNIX command or program can be executed from a shell
-script just as if you would on the line command line. You can also capture
-the output of a command and assign it to a variable by using the forward
-single quotes
-<b>` `</b>:
-<P><b>#!\bin\sh</b>
-<br><b>lines=`wc -l $1`</b>
-<br><b>echo "the file $1 has $lines lines"</b>
-<P>This script outputs the number of lines in the file passed
-as the first parameter.
-<br>
-<li>
-arithmetic operations</li>
-
-<P>The Bourne shell doesn't have any built-in ability to
-evaluate simple mathematical expressions. Fortunately the UNIX <b>expr
-</b>command
-is available to do this. It is frequently used in shell scripts with forward
-single quotes to update the value of a variable. For example:
-<P><b> lines = `expr $lines + 1`</b>
-<P>adds 1 to the variable <b>lines</b>. <b>expr</b> supports
-the operators <b>+</b>, <b>-</b>, <b>*</b>, <b>/</b>, <b>%</b>
-(remainder),
-<b>&lt;</b>, <b>&lt;=</b>, <b>=</b>, <b>!=</b>, <b>>=</b>,
-<b>></b>,
-<b>|</b>
-(or) and <b>&amp;</b> (and).<ul>
-</blockquote>
-</div>
-<br>
-
-<div class="heading">
-<div class="table">
-8.6 Start-up Shell Scripts
-</div>
-</div>
-<br>
-
-<div class="text">
-<blockquote>When you first login to a shell, your shell runs
-a systemwide start-up script (usually called <b>/etc/profile</b> under
-<b>sh</b>,
-<b>bash</b>
-and <b>ksh</b> and <b>/etc/.login </b>under
-<b>csh</b>). It then
-looks in your home directory and runs your personal start-up script (<b>.profile</b>
-under <b>sh</b>,<b> bash</b> and
-<b>ksh</b> and
-<b>.cshrc</b> under
-<b>csh</b> and <b>tcsh</b>). Your personal start-up script is therefore
-usually a good place to set up environment variables such as <b>PATH</b>,
-<b>EDITOR</b> etc. For example with <b>bash</b>, to add the directory<b> ~/bin</b> to
-your <b>PATH</b>, you can include the line:
-<P><b> export PATH=$PATH:~/bin</b>
-<P>in your <b>.profile</b>. If you subsequently modify
-your <b>.profile</b> and you wish to import the changes into your current
-shell, type:
-<P><b> $ source .profile</b>
-<br>or
-<br><b> $ . ./profile</b>
-<P>The <b>source </b>command is built into the shell. It
-ensures that changes to the environment made in <b>.profile</b> affect
-the current shell, and not the shell that would otherwise be created to
-execute the
-<b>.profile</b> script.</blockquote>
-
-<blockquote><P>
-With <b>csh</b>, to add the directory<b> ~/bin</b> to
-your <b>PATH</b>, you can include the line:
-<P><b> set path = ( $PATH $HOME/bin )</b>
-<P>in your <b>.cshrc</b>.</blockquote>
-</div>
-<br>
+    <h2>8.4 Simple Shell Scripting</h2>
 
 
-<blockquote><P><A HREF="hbp:./index.html">
-(BACK TO COURSE CONTENTS)</A></P></blockquote>
+    <div class="text">
+      <p>
+	Consider the following simple shell script, which
+	has been created (using an editor) in a text file called <b>simple</b>:
+	<div class="codeeg">
+	  #!/bin/bash<br>
+	  # this is a comment<br>
+	  echo "The number of arguments is $#"<br>
+	  echo "The arguments are $*"<br>
+	  echo "The first is $1"<br>
+	  echo "My process number is $$"<br>
+	  echo "Enter a number from the keyboard: "<br>
+	  read number<br>
+	  echo "The number you entered was $number"
+	</div>
+      </p>
+      <p>
+	The shell script begins with the line <b>#!/bin/bash</b>
+	. Usually "<b>#</b>" denotes the start of a comment, but <b>#!</b>
+	is a special combination that tells UNIX to use the Bash shell (<b>bash</b>)
+	to interpret this script. The <b>#!</b> must be the first two characters
+	of the script. The arguments passed to the script can be accessed through
+	<b>$1</b>, <b>$2</b>, <b>$3</b> etc. <b>$*</b> stands for all the arguments, and <b>$#</b>
+	for the number of arguments. The process number of the shell executing
+	the script is given by <b>$$</b>. the <b>read</b> number statement
+	assigns keyboard input to the variable <b>number</b>.
+      </p>
+      <p>
+	To execute this script, we first have to make the file <b>simple</b>
+	executable:
+	<div class="terminal">
+	  $ ls -l simple<br>
+	  -rw-r--r-- 1 will finance 175 Dec 13 simple<br>
+	  $ chmod +x simple<br>
+	  $ ls -l simple<br>
+	  -rwxr-xr-x 1 will finance 175 Dec 13 simple<br>
+	  $ ./simple hello world<br>
+	  The number of arguments is 2<br>
+	  The arguments are hello world<br>
+	  The first is hello<br>
+	  My process number is 2669<br>
+	  Enter a number from the keyboard:<br>
+	  <b>5</b><br>
+	  The number you entered was 5<br>
+	  $
+	</div>
+      </p>
+      <p>
+	We can use input and output redirection in the normal
+	way with scripts, so:
+	<div class="terminal">
+	  $ echo 5 | simple hello world
+	</div>
+      </p>
+      <p>
+	would produce similar output but would not pause to read
+	a number from the keyboard.
+      </p>
+    </div>
 
+    <h2>8.5 More Advanced Shell Scripting</h2>
+
+    <div class="text">
+
+      <h3><b>if-then-else</b> statements</h3>
+
+      <p>
+	Shell scripts are able to perform simple conditional branches:
+	<div class="codesyntax">
+          <b>if [</b> <i>test</i> <b>]</b><br>
+          <b>then</b>
+	  <div class="tab1">
+            <i>commands-if-test-is-true</i>
+          </div>
+	  <b>else</b>
+	  <div class="tab1">
+            <i>commands-if-test-is-false</i>
+	  </div>
+          <b>fi</b>
+	</div>
+      </p>
+      
+      <p>
+        The <i>test</i> condition may involve file characteristics
+        or simple string or numerical comparisons. The <b>[</b> used here is
+        actually the name of a command (<b>/bin/[</b>) which performs the evaluation
+        of the test condition. Therefore there must be spaces before and after
+        it as well as before the closing bracket. Some common test conditions are:
+        
+        <div class="codesyntax">
+          <b>-s</b> <i>file</i><br>true if <i>file</i> exists and is not empty<br>
+          <b>-f</b> <i>file</i><br>true if <i>file</i> is an ordinary file <br>
+          <b>-d</b> <i>file</i><br>true if <i>file</i> is a directory<br>
+          <b>-r</b> <i>file</i><br>true if <i>file</i> is readable<br>
+	  <b>-w</b> <i>file</i><br>true if <i>file</i> is writable<br>
+	  <b>-x</b> <i>file</i><br>true if <i>file</i> is executable<br>
+	  <b>$X -eq $Y</b><br>true if <b>X</b> equals <b>Y</b><br>
+	  <b>$X -ne $Y</b><br>true if <b>X</b> not equal to <b>Y</b><br>
+	  <b>$X -lt $Y</b><br>true if <b>X</b> less than <b>$Y</b><br>
+	  <b>$X -gt $Y</b><br>true <b>if</b> X greater than <b>$Y</b><br>
+	  <b>$X -le $Y</b><br>true if <b>X</b> less than or equal to <b>Y</b><br>
+          <b>$X -ge $Y</b><br>true if <b>X</b> greater than or equal to <b>Y</b><br>
+          <b>"$A" = "$B"</b><br>true if string <b>A</b> equals string <b>B</b><br>
+	  <b>"$A" != "$B"</b><br>true if string <b>A</b> not equal to string <b>B</b><br>
+	  <b>$X ! -gt $Y</b><br>true if string <b>X</b> is not greater than <b>Y</b><br>
+	  <b>$E -a $F</b><br>true if expressions<b>E</b> and <b>F</b> are both true<br>
+          <b>$E -o $F</b><br>true if either expression <b>E</b> or expression <b>F</b> is true<br>
+	</div>
+      </p>
+      
+      <h3><b>for</b> loops</h3>
+
+      <p>
+        Sometimes we want to loop through a list of files, executing
+        some commands on each file. We can do this by using a <b>for</b> loop:
+	<div class="codesyntax">
+	  <b>for</b> <i>variable</i><b> in </b><i>list</i><br>
+          <b>do</b>
+          <div class="tab1">
+	    <i>statements</i> (referring to <b>$</b><i>variable</i>)
+	  </div>
+          <b>done</b>
+	</div>
+      </p>
+      <p>
+        The following script sorts each text files in the current
+        directory:
+        <div class="codeeg">
+          #!/bin/bash<br>
+          for f in *.txt<br>
+          do
+          <div class="tab1">
+	    echo sorting file $f<br>
+            cat $f | sort > $f.sorted<br>
+            echo sorted file has been output to $f.sorted<br>
+	  </div>
+          done
+	</div>
+      </p>
+      
+      <h3><b>while</b> loops</h3>
+
+      <p>
+        Another form of loop is the while loop:
+	<div class="codesyntax">
+          <b>while [</b> <i>test</i> <b>]</b><br>
+          <b>do</b>
+	  <div class="tab1">
+            <i>statements</i> (to be executed while <i>test</i> is true)
+	  </div>
+          <b>done</b>
+	</div>
+      </p>
+      <p>
+        The following script waits until a non-empty file <b>input.txt</b> has been created:
+	<div class="codeeg">
+          #!/bin/bash<br>
+	  while [ ! -s input.txt ]<br>
+	  do
+          <div class="tab1">
+	    echo waiting...<br>
+            sleep 5
+          </div>
+	  done<br>
+	  echo input.txt is ready
+	</div>
+      </p>
+      <p>
+        You can abort a shell script at any point using the <b>exit</b>
+        statement, so the following script is equivalent:
+	<div class="codeeg">
+	  #!/bin/sh<br>
+	  while true<br>
+	  do
+	  <div class="tab1">
+	    if [ -s input.txt ]<br>
+	    then
+	    <div class="tab2">
+	      echo input.txt is ready<br>
+	      exit
+	    </div>
+	    fi<br>
+	    echo waiting...<br>  
+	    sleep 5
+	  </div>
+	  done
+	</div>
+      </p>
+      
+      <h3><b>case</b> statements</h3>
+
+      <p>
+	<b>case</b> statements are a convenient way to perform
+	multiway branches where one input pabern must be compared to several alternatives:
+	<div class="codesyntax">
+	  <b>case</b> <i>variable</i> <b>in</b>
+	  <div class="tab1">
+	    <i>pabern1</i><b>)</b>
+	    <div class="tab2">
+	      <i>statement</i> (executed if <i>variable</i> matches <i>pabern1</i>)<br>
+	      <b>;;</b>
+	    </div>
+	    <i>pabern2</i><b>)</b>
+	    <div class="tab2">
+	      <i>statement</i><br>
+	      <b>;;</b>
+	    </div>
+	    <i>etc.</i>
+	  </div>
+	  <b>esac</b>
+	</div>
+      </p>
+      <p>
+	The following script uses a <b>case</b> statement to
+	have a guess at the type of non-directory non-executable files passed as
+	arguments on the basis of their extensions (note how the "or" operator
+	<b>|</b> can be used to denote multiple paberns, how "<b>*</b>" has been used
+	as a catch-all, and the effect of the forward single quotes <b>`</b>):
+	<div class="codeeg">
+	  #!/bin/bash<br>
+	  for f in $*<br>
+	  do<br>
+	  <div class="tab1">
+	    if [ -f $f -a ! -x $f ]<br>
+	    then
+	    <div class="tab2">
+	      case $f in<br>
+	      <div class="tab2">
+		core)
+		<div class="tab3">
+		  echo "$f: a core dump file"<br>
+		  ;;
+		</div>
+	      </div>
+	      <div class="tab2">
+		*.c)
+		<div class="tab3">
+		  echo "$f: a C program"<br>
+		  ;;
+		</div>
+	      </div>
+	      <div class="tab2">
+		*.cpp|*.cc|*.cxx)
+		<div class="tab3">
+		  echo "$f: a C++ program"<br>
+		  ;;
+		</div>
+	      </div>
+	      <div class="tab2">
+		*.txt)
+		<div class="tab3">
+		  echo "$f: a text file"<br>
+		  ;;
+		</div>
+	      </div>
+	      <div class="tab2">
+		*.pl)
+		<div class="tab3">
+		  echo "$f: a PERL script"<br>
+		  ;;
+		</div>
+	      </div>
+	      <div class="tab2">
+		*.html|*.htm)
+		<div class="tab3">
+		  echo "$f: a web document"<br>
+		  ;;
+		</div>
+	      </div>
+	      <div class="tab2">
+		*)
+		<div class="tab3">
+		  echo "$f: appears to be "`file -b $f`<br>
+		  ;;
+		</div>
+	      </div>
+	      esac
+	    </div>
+	    fi
+	  </div>
+	  done
+	</div>
+      </p>
+      
+      <h3>capturing command output</h3>
+
+      <p>
+	Any UNIX command or program can be executed from a shell
+	script just as if you would on the line command line. You can also capture
+	the output of a command and assign it to a variable by using the forward
+	single quotes
+	<b>` `</b>:
+	<div class="codeeg">
+	  #!/bin/bash<br>
+	  lines=`wc -l $1`<br>
+	  echo "the file $1 has $lines lines"<br>
+	</div>
+      </p>
+      <p>
+	This script outputs the number of lines in the file passed
+	as the first parameter.
+      </p>
+
+      <h3>arithmetic operations</h3>
+
+      <p>
+	The Bourne shell doesn't have any built-in ability to
+	evaluate simple mathematical expressions. Fortunately the UNIX <b>expr</b>command
+	is available to do this. It is frequently used in shell scripts with forward
+	single quotes to update the value of a variable. For example:
+	<div class="codeeg">
+	  lines = `expr $lines + 1`
+	</div>
+      </p>
+      <p>
+	adds 1 to the variable <b>lines</b>. <b>expr</b> supports
+	the operators <b>+</b>, <b>-</b>, <b>*</b>, <b>/</b>, <b>%</b>
+	(remainder),
+	<b>&lt;</b>, <b>&lt;=</b>, <b>=</b>, <b>!=</b>, <b>>=</b>,
+	<b>></b>,
+	<b>|</b>
+	(or) and <b>&amp;</b> (and).
+      </p>
+    </div>
+
+    <h2>8.6 Start-up Shell Scripts</h2>
+    
+
+    <div class="text">
+      <p>
+	When you first login to a shell, your shell runs
+	a system wide start-up script (usually called <b>/etc/profile</b> under
+	<b>sh</b>, <b>bash</b>, and <b>ksh</b> and <b>/etc/.login</b> under
+	<b>csh</b>). It then looks in your home directory and runs your personal 
+	start-up script (<b>.profile</b> under <b>sh</b>,<b> bash</b> and
+	<b>ksh</b> and <b>.cshrc</b> under
+	<b>csh</b> and <b>tcsh</b>). Your personal start-up script is therefore
+	usually a good place to set up environment variables such as <b>PATH</b>,
+	<b>EDITOR</b> etc. For example with <b>bash</b>, to add the directory<b> ~/bin</b> to
+	your <b>PATH</b>, you can include the line:
+      </p>
+      <div class="codeeg">
+	export PATH=$PATH:~/bin
+      </div>
+      <p>
+	in your <b>.profile</b>. If you subsequently modify
+	your <b>.profile</b> and you wish to import the changes into your current
+	shell, type:
+	<div class="terminal">
+	  $ source .profile<br>
+	  or<br>
+	  $ . ./profile
+	</div>
+      </p>
+      <p>
+	The <b>source </b>command is built into the shell. It
+	ensures that changes to the environment made in <b>.profile</b> affect
+	the current shell, and not the shell that would otherwise be created to
+	execute the
+	<b>.profile</b> script.
+      </p>
+      <p>
+	With <b>csh</b>, to add the directory<b> ~/bin</b> to
+	your <b>PATH</b>, you can include the line:
+	<div class="codeeg">
+	  set path = ( $PATH $HOME/bin )
+	</div>
+      </p>
+      <p>in your <b>.cshrc</b>.</p>
+    </div>
+
+  </body>
+</html>
 

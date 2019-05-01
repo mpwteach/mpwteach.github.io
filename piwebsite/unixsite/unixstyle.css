@@ -12,7 +12,6 @@ h1 {
 
 h2 {
   color: #003399;
-  //background-color: #000099;
   margin-left: 2px;
   margin-right: 2px;
   padding-left: 5px;
@@ -84,3 +83,8 @@ table th {
   box-shadow: 4px 4px 2px darkgray;
   font-family: "Courier New", sans-serif;
 }
+
+
+.tab1 { margin-left: 10px; }
+.tab2 { margin-left: 20px; }
+.tab3 { margin-left: 30px; }
