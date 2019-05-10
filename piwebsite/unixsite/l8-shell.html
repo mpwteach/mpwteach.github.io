@@ -255,10 +255,10 @@
 	  <b>-x</b> <i>file</i><br>true if <i>file</i> is executable<br>
 	  <b>$X -eq $Y</b><br>true if <b>X</b> equals <b>Y</b><br>
 	  <b>$X -ne $Y</b><br>true if <b>X</b> not equal to <b>Y</b><br>
-	  <b>$X -lt $Y</b><br>true if <b>X</b> less than <b>$Y</b><br>
-	  <b>$X -gt $Y</b><br>true <b>if</b> X greater than <b>$Y</b><br>
-	  <b>$X -le $Y</b><br>true if <b>X</b> less than or equal to <b>Y</b><br>
-          <b>$X -ge $Y</b><br>true if <b>X</b> greater than or equal to <b>Y</b><br>
+	  <b>$X -lt $Y</b><br>true if <b>X</b> is less than <b>$Y</b><br>
+	  <b>$X -gt $Y</b><br>true if <b>X</b> is greater than <b>$Y</b><br>
+	  <b>$X -le $Y</b><br>true if <b>X</b> is less than or equal to <b>Y</b><br>
+          <b>$X -ge $Y</b><br>true if <b>X</b> is greater than or equal to <b>Y</b><br>
           <b>"$A" = "$B"</b><br>true if string <b>A</b> equals string <b>B</b><br>
 	  <b>"$A" != "$B"</b><br>true if string <b>A</b> not equal to string <b>B</b><br>
 	  <b>$X ! -gt $Y</b><br>true if string <b>X</b> is not greater than <b>Y</b><br>
@@ -464,7 +464,7 @@
 
       <p>
 	The Bourne shell doesn't have any built-in ability to
-	evaluate simple mathematical expressions. Fortunately the UNIX <b>expr</b>command
+	evaluate simple mathematical expressions. Fortunately the UNIX <b>expr</b> command
 	is available to do this. It is frequently used in shell scripts with forward
 	single quotes to update the value of a variable. For example:
 	<div class="codeeg">
@@ -480,6 +480,24 @@
 	<b>|</b>
 	(or) and <b>&amp;</b> (and).
       </p>
+
+      <h3>exit status</h3>
+
+      <p>
+	Another useful bash variable is <b>$?</b> which gives the exit status of the
+	previous command.  Most UNIX commands return 0 after sucessful completion.
+	<div class="terminal">
+	  $ cat /etc/hosts<br>
+	  <i>display hosts file</i><br>
+	  $ echo $?<br>
+	  0<br><br>
+	  $ cat /etc/nofile<br>
+	  cat: /etc/nofile: No such file or directory<br>
+	  $ echo $?<br>
+	  1<br>
+	</div>
+      </p>
+
     </div>
 
     <h2>8.6 Start-up Shell Scripts</h2>
