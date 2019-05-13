@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Form Input 2</title>
+    <title>Pi Status</title>
   </head>
 
 
   <body>
 
-    <h1>Form Input - Demo 2</h1>
-    <p>Demo of how to take form input and pass it to a program - all in a single page</p>
+    <h1>Pi Status</h1>
+    <p>Check the status of class Pi's</p>
 
     <?php
        // define variables and set to empty values
-       $arg1 = $arg2 = $output = $retc = "";
+       $arg1 = $output = $retc = "";
 
        if ($_SERVER["REQUEST_METHOD"] == "POST") {
          $arg1 = test_input($_POST["arg1"]);
-         $arg2 = test_input($_POST["arg2"]);
-         exec("/usr/lib/cgi-bin/pi/argtest2 " . $arg1 . " " . $arg2, $output, $retc); 
+         exec("/usr/lib/cgi-bin/pi/rpisalive " . $arg1, $output, $retc); 
        }
 
        function test_input($data) {
@@ -29,21 +28,19 @@
     ?>
 
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-      Arg1: <input type="text" name="arg1"><br>
-      Arg2: <input type="text" name="arg2"><br>
+      Pi's to test: <input type="text" name="arg1"><br>
       <br>
-      <input type="submit" value="Go!">
+      <input type="submit" value="Check now!">
     </form>
 
+    <hr>
+  
     <?php
-       // only display if return code is numeric - i.e. exec has been called
        if (is_numeric($retc)) {
          echo "<h2>Your Input:</h2>";
          echo $arg1;
          echo "<br>";
-         echo $arg2;
-         echo "<br>";
-       
+        
          echo "<h2>Program Output (an array):</h2>";
          foreach ($output as $line) {
            echo $line;
