@@ -209,196 +209,216 @@
 
     <h2>5.9 Advanced Text File Processing</h2>
 
-    <ul>
-      <li><b>sed </b>(stream editor)</li>
+    <div class="text">
+      <ul>
+	<li><b>sed</b> (stream editor)</li>
 
-      <p>
-	<b>sed</b> allows you to perform basic text transformations
-	on an input stream (i.e. a file or input from a pipeline). For example,
-	you can delete lines containing particular string of text, or you can substitute
-	one pattern for another wherever it occurs in a file. Although <b>sed</b> is
-	a mini-programming language all on its own and can execute entire scripts,
-	its full language is obscure and probably best forgotten (being based on
-	the old and esoteric UNIX line editor <b>ed</b>). <b>sed</b> is probably
-	at its most useful when used directly from the command line with simple
-	parameters:
-      <p><b>$ sed "s/</b><i>pattern1</i><b>/</b><i>pattern2</i><b>/"
-	</b><i>inputfile</i><b>
-	  > </b><i>outputfile</i>
-	<br>(substitutes <i>pattern2</i> for <i>pattern1</i> once
-	per line)
-      <p><b>$ sed "s/</b><i>pattern1</i>/<i>pattern2</i><b>/g"
-	</b><i>inputfile</i><b>
-	  > </b><i>outputfile</i>
-	<br>(substitutes <i>pattern2</i> for <i>pattern1</i> for
-every <i>pattern1</i> per line)
-<p><b>$ sed "/</b><i>pattern1</i><b>/d" </b><i>inputfile</i><b>
-    > </b><i>outputfile</i>
-<br>(deletes all lines containing <i>pattern1</i>)
-<p><b>$ sed "y/</b><i>string1</i><b>/</b><i>string2</i><b>/"
-  </b><i>inputfile</i><b>
-    > </b><i>outputfile</i>
-<br>(substitutes characters in <i>string2</i> for those in
-<i>string1</i>)
-<br>&nbsp;
+	<p>
+	  <b>sed</b> allows you to perform basic text transformations
+	  on an input stream (i.e. a file or input from a pipeline). For example,
+	  you can delete lines containing particular string of text, or you can substitute
+	  one pattern for another wherever it occurs in a file. Although <b>sed</b> is
+	  a mini-programming language all on its own and can execute entire scripts,
+	  its full language is obscure and probably best forgotten (being based on
+	  the old and esoteric UNIX line editor <b>ed</b>). <b>sed</b> is probably
+	  at its most useful when used directly from the command line with simple
+	  parameters:
+	  <div class="terminal">
+	    $ sed "s/<i>pattern1</i>/<i>pattern2</i>/" <i>inputfile</i> <i>outputfile</i>
+	  </div>
+	</p>
+	<p>
+	  (substitutes <i>pattern2</i> for <i>pattern1</i> once per line)
+	</p>
+	<p>
+	  <div class="terminal">
+	    $ sed "s/<i>pattern1</i>/<i>pattern2</i>/g" <i>inputfile</i> <i>outputfile</i>
+	  </div>
+	</p>
+	<p>
+	  (substitutes <i>pattern2</i> for <i>pattern1</i> for every <i>pattern1</i> per line)
+	</p>
+	<p>
+	  <div class="terminal">
+	    $ sed "/<i>pattern1</i>/d" <i>inputfile</i> <i>outputfile</i>
+	  </div>
+	</p>
+	<p>
+	  (deletes all lines containing <i>pattern1</i>)
+	</p>
+	<p>
+	  <div class="terminal">
+	    $ sed "y/<i>string1</i>/<i>string2</i>/" <i>inputfile</i> <i>outputfile</i>
+	  </div>
+	</p>
+	<p>
+	  (substitutes characters in <i>string2</i> for those in <i>string1</i>)
+	</p>
 
-<li><b>awk</b> (Aho, Weinberger and Kernigan)</li>
+	<li><b>awk</b> (Aho, Weinberger and Kernigan)</li>
 
-<p><b>awk</b> is useful for manipulating files that contain
-  columns of data on a line by line basis. Like <b>sed</b>, you can either
-  pass <b>awk</b> statements directly on the command line, or you can write
-  a script file and let <b>awk</b> read the commands from the script.
-<p>Say we have a file of cricket scores called <b>cricket.dat</b>
-  containing columns for player number, name, runs and the way in which they
-  were dismissed:
-<p><b>1 atherton&nbsp;&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; bowled
-<br><b>2 hussain&nbsp;&nbsp;&nbsp;&nbsp; 20&nbsp;&nbsp;
-  caught
-<br><b>3 stewart&nbsp;&nbsp;&nbsp;&nbsp; 47&nbsp;&nbsp;
-  stumped
-<br><b>4 thorpe&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 33&nbsp;&nbsp;
-  lbw
-<br><b>5 gough&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  6&nbsp;&nbsp; run-out
-<p>To print out only the first and second columns we can say:
-<p><b>$ awk '{ print $1 " " $2 }' cricket.dat
-<br><b>atherton 0
-<br><b>hussain 20
-<br><b>stewart 47
-<br><b>thorpe 33
-<br><b>gough 6
-<br><b>$
-<p>Here <b>$</b><i>n</i> stands for the <i>n</i>th field
-  or column of each line in the data file. <b>$0 </b>can be used to denote
-  the whole line.
-<p>We can do much more with <b>awk</b>. For example, we
-  can write a script <b>cricket.awk</b> to calculate the team's batting
-  average and to check if Mike Atherton got another duck:
-<p><b>$ cat > cricket.awk
-<br><b>BEGIN { players = 0; runs = 0 }
-<br><b>{ players++; runs +=$3 }
-<br><b>/atherton/ { if (runs==0) print "atherton duck!"
-  }
-<br><b>END { print "the batting average is " runs/players
-  }
-<br>(ctrl-d)
-<br>$ <b>awk -f cricket.awk cricket.dat</b>
-<br><b>atherton duck!
-<br><b>the batting average is 21.2
-<br><b>$
-<p>The <b>BEGIN</b> clause is executed once at the start
-  of the script, the main clause once for every line, the <b>/atherton/
-  </b>clause
-  only if the word <b>atherton </b>occurs in the line and the
-  <b>END</b>
-  clause once at the end of the script.
-<p><b>awk</b> can do a lot more. See the manual pages for
-  details (type <b>man awk</b>).</ul>
-</blockquote>
+	<p>
+	  <b>awk</b> is useful for manipulating files that contain
+	  columns of data on a line by line basis. Like <b>sed</b>, you can either
+	  pass <b>awk</b> statements directly on the command line, or you can write
+	  a script file and let <b>awk</b> read the commands from the script.
+	</p>
+	<p>
+	  Say we have a file of cricket scores called <b>cricket.dat</b>
+	  containing columns for player number, name, runs and the way in which they
+	  were dismissed:
+	</p>
+	<pre>
+	  1 atherton   0   bowled
+	  2 hussain  20  caught
+	  3 stewart  47  stumped
+	  4 thorpe   33  lbw
+	  5 gough    6  run-out
+	</pre>
+	<p>
+	  To print out only the first and second columns we can say:
+	  <div class="terminal">
+	    $ awk '{ print $1 " " $2 }' cricket.dat<br>
+	    atherton 0<br>
+	    hussain 20<br>
+	    stewart 47<br>
+	    thorpe 33<br>
+	    gough 6<br>
+	    $
+	  </div>
+	</p>
+	<p>
+	  Here <b>$</b><i>n</i> stands for the <i>n</i>th field
+	  or column of each line in the data file. <b>$0</b> can be used to denote
+	  the whole line.
+	</p>
+	<p>
+	  We can do much more with <b>awk</b>. For example, we
+	  can write a script <b>cricket.awk</b> to calculate the team's batting
+	  average and to check if Mike Atherton got another duck:
+	</p>
+	<p>
+	  <div class="terminal">
+	    $ cat > cricket.awk<br>
+	    BEGIN { players = 0; runs = 0 }<br>
+	    { players++; runs +=$3 }<br>
+	    /atherton/ { if (runs==0) print "atherton duck!"<br>
+	    }<br>
+	    END { print "the batting average is " runs/players<br>
+	    }<br>
+	    (ctrl-d)<br>
+	    $<br>
+	    $ awk -f cricket.awk cricket.dat<br>
+	    atherton duck!<br>
+	    the batting average is 21.2<br>
+	    $<br>
+	  </div>
+	</p>
+	<p>
+	  The <b>BEGIN</b> clause is executed once at the start
+	  of the script, the main clause once for every line, the <b>/atherton/
+	  </b>clause only if the word <b>atherton</b> occurs in the line and the
+	  <b>END</b> clause once at the end of the script.
+	</p>
+	<p>
+	  <b>awk</b> can do a lot more. See the manual pages for
+	  details (type <b>man awk</b>).
+	</p>
+	
+      </ul>
+    </div>    
 
-</div>
+    
+    <h2>5.10 Target Directed Compilation</h2>
 
-<h2>5.10 Target Directed Compilation</h2>
- <div class="text">
-   <ul><li><b>make</b></li>
 
-     <p>
-       <b>make</b> is a utility which can determine automatically
-       which pieces of a large program need to be recompiled, and issue the commands&nbsp;
-       to recompile them. To use make, you need to create a file called <b>Makefile</b>
-       or <b>makefile</b> that describes&nbsp; the relationships among files
-       in your program, and the states the commands for updating each file.
-     <p>Here is an example of a simple makefile:
-     <p><b>scores.out: cricket.awk cricket.dat
-	 <br>[TAB]<b>awk -f cricket.awk cricket.dat > scores.out</b>
-<p>Here [TAB] indicates the TAB key. The interpretation of
-  this makefile is as follows:
-<ul>
-  <li>
-    <b>scores.out</b> is the target of the compilation</li>
+    <div class="text">
+      <ul>
+	<li><b>make</b></li>
 
-<li>
-  <b>scores.out</b> depends on <b>cricket.awk</b> and <b>cricket.dat</b></li>
+	<p>
+	  <b>make</b> is a utility which can determine automatically
+	  which pieces of a large program need to be recompiled, and issue the commands
+	  to recompile them. To use make, you need to create a file called <b>Makefile</b>
+	  or <b>makefile</b> that describes the relationships among files
+	  in your program, and the states the commands for updating each file.
+	</p>
+	<p>
+	  Here is an example of a simple makefile:
+	  <div class="terminal">
+	    scores.out: cricket.awk cricket.dat<br>
+	    [TAB]awk -f cricket.awk cricket.dat > scores.out
+	  </div>
+	</p>
+	<p>
+	  Here [TAB] indicates the TAB key. The interpretation of
+	  this makefile is as follows:
+	  <ul>
+	    <li><b>scores.out</b> is the target of the compilation</li>
 
-<li>
-  if either <b>cricket.awk</b> or <b>cricket.dat</b> have
-  been modified since <b>scores.out </b>was last modified or if <b>scores.out</b>
-  does not exist, update <b>scores.out</b> by executing the command:</li>
+	    <li><b>scores.out</b> depends on <b>cricket.awk</b> and <b>cricket.dat</b></li>
 
-<br><b>awk -f cricket.awk cricket.dat > scores.out<br>
-</ul>
-<b>make</b> is invoked simply by typing
-<p><b>$ make
-<br><b>awk -f cricket.awk cricket.dat > scores.out
-<br><b>$
-<p>Since <b>scores.out</b> did not exist, <b>make</b>
-  executed the commands to create it. If we now invoke make again, nothing
-  happens:
-<p><b>$ make
-<br><b>make: `scores.out' is up to date.
-<br><b>$
-<p>But if we modify <b>cricket.dat</b> and then run <b>make</b>
-  again, <b>scores.out</b> will be updated:
-<p><b>$ touch cricket.dat</b>(<b>touch
-  </b>simulates
-  file modification)
-<br><b>$ make
-<br><b>awk -f cricket.awk cricket.dat > scores.out
-<br><b>$
-<p><b>make</b> is mostly used when compiling large C, C++
-  or Java programs, but can (as we have seen) be used to automatically and
-  intelligently produce a target file of any kind.</ul>
-</blockquote>
+	    <li>if either <b>cricket.awk</b> or <b>cricket.dat</b> have
+	      been modified since <b>scores.out </b>was last modified or if <b>scores.out</b>
+	      does not exist, update <b>scores.out</b> by executing the command:</li>
+	    <p>awk -f cricket.awk cricket.dat > scores.out</p>
+	  </ul>
+	  <p>
+	    <b>make</b> is invoked simply by typing:
+	    <div class="terminal">
+	      $ make<br>
+	      awk -f cricket.awk cricket.dat > scores.out<br>
+	      $
+	    </div>
+	  </p>
+	  
+	<p>
+	  Since <b>scores.out</b> did not exist, <b>make</b>
+	  executed the commands to create it. If we now invoke make again, nothing
+	  happens:
+	  <div class="terminal">
+	    $ make<br>
+	    make: `scores.out' is up to date.<br>
+	    $
+	  </div>
+	</p>
+	<p>
+	  But if we modify <b>cricket.dat</b> and then run <b>make</b>
+	  again, <b>scores.out</b> will be updated:
+	  <div class="terminal">
+	    $ touch cricket.dat <i>(touch simulates file modification)</i><br>
+	    $ make<br>
+	    awk -f cricket.awk cricket.dat > scores.out<br>
+	    $
+	  </div>
+	<p>
+	  <b>make</b> is mostly used when compiling large C, C++
+	  or Java programs, but can (as we have seen) be used to automatically and
+	  intelligently produce a target file of any kind.
+	</p>
+      </ul>
+    </div>
 
-</div>
-
-<h2>5.11 Version control with CVS</h2>
+    <h2>5.11 Version control with Git</h2>
  
-<div class="text">
+    <div class="text">
 
+      
       <p>
-	<b>cvs</b> (Concurrent Versioning System) is a source code control system often used
+	<b>git</b> (Concurrent Versioning System) is a source code control system often used
 	on large programming projects to control the concurrent editing of source
 	files by multiple authors. It keeps old versions of files and maintains
 	a log of when, and why changes occurred, and who made them.
       </p>
-      <p>
-	<b>cvs</b> keeps a single copy of the master sources.
-	This copy is called the source ``repository''; it contains all the
-	information to permit extracting previous software releases at any time
-	based on either a symbolic revision tag, or a date in the past.
-      </p>
-      <p>
-	<b>cvs</b> has a large number of commands (type <b>info cvs</b> 
-	for a full <b>cvs</b> tutorial, including how to set up a repository
-	from scratch or from existing code). The most useful commands are:
-      </p>
-
+    
       <ul>
-	<li><b>cvs checkout</b> <i>modules</i></li>
-	<p>
-	  This gives you a private copy of source code that you can work on with
-	  without interfering with others.
-	</p>
-
-	<li><b>cvs update</b></li>
-	<p>
-	  This updates the code you have checked out, to reflect any changes
-	  that have subsequently been made by other developers.
-	</p>
-	
-	<li><b>cvs add</b> <i>files</i></li>
+	<li><b>git add</b> <i>files</i></li>
 	<p>
 	  You can use this to add new files into a repository that you have checked-out.
 	  Does not actually affect the repository until a "<b>cvs commit</b>" is
 	  performed.
 	</p>
 
-	<li><b>cvs remove</b> <i>files</i></li>
-	<p>
-	  Removes files from a checked-out repository. Doesn't affect the repository
-	  until a "<b>cvs commit</b>" is performed.
-	</p>
 	
 	<li><b>cvs commit</b> <i>files</i></li>
 	<p>
@@ -408,84 +428,97 @@ every <i>pattern1</i> per line)
       </ul>
     </div>
 
-</div>
 
-<h2>5.12 C/C++ compilation utilities</h2>
- <div class="text">
+    <h2>5.12 C/C++ compilation utilities</h2>
+
+    <div class="text">
 
      <ul>
-      <li>
-        <b>cc, gcc, CC, g++</li>
+      <li><b>cc, gcc, CC, g++</b></li>
 
-<p>UNIX installations usually come with a C and/or C++ compiler.
-  The C compiler is usually called <b>cc</b> or <b>gcc</b>, and the C++
-  compiler is usually called <b>CC</b> or <b>g++</b>. Most large C or
-  C++ programs will come with a <b>makefile</b> and will support the
-  <b>configure</b>
-  utility, so that compiling and installing a package is often as simple
-  as:
-<p><b>$ ./configure
-<br><b>$ make
-<br><b>$ make install
-<p>However, there is nothing to prevent you from writing
-  and compiling a simple C program yourself:
-<p><b>$ cat > hello.c
-<br><b>#include &lt;stdio.h>
-<br><b>int main() {
-<br><b>&nbsp; printf("hello world!\n");
-<br><b>&nbsp; return 0;
-<br><b>}
-<br>(ctrl-d)
-<br><b>$ cc hello.c -o hello
-<br><b>$ ./hello
-<br><b>hello world!
-<br><b>$
-<p>Here the C compiler (<b>cc</b>) takes as input the C
-  source file <b>hello.c</b> and produces as output an executable program
-  called
-  <b>hello</b>. The program <b>hello</b> may then be executed
-  (the <b>./
-  </b>tells the shell to look in the current directory to find
-  the <b>hello</b> program).</ul>
-</blockquote>
-
-</div>
+      <p>
+	UNIX installations usually come with a C and/or C++ compiler.
+	The C compiler is usually called <b>cc</b> or <b>gcc</b>, and the C++
+	compiler is usually called <b>CC</b> or <b>g++</b>. Most large C or
+	C++ programs will come with a <b>makefile</b> and will support the
+	<b>configure</b> utility, so that compiling and installing a package is often as simple
+	as:
+	
+	<div class="terminal">
+	  $ ./configure<br>
+	  $ make<br>
+	  $ make install
+	</div>
+      </p>
+      <p>
+	However, there is nothing to prevent you from writing
+	and compiling a simple C program yourself:
+	<div class="terminal">
+	  $ cat > hello.c<br>
+	  #include &lt;stdio.h&gt;<br>
+	  int main() {<br>
+	  printf("hello world!\n");<br>
+	  return 0;<br>
+	  }<br>
+	  (ctrl-d)<br>
+	  $ cc hello.c -o hello<br>
+	  $ ./hello<br>
+	  hello world!<br>
+	  $<br>
+	</div>
+      </p>
+      <p>
+	Here the C compiler (<b>cc</b>) takes as input the C
+	source file <b>hello.c</b> and produces as output an executable program
+	called <b>hello</b>. The program <b>hello</b> may then be executed
+	(the <b>./</b> tells the shell to look in the current directory to find
+	the <b>hello</b> program).
+     </ul>
 
     <h2>5.13 Manual Pages</h2>
   
     <ul>
       <li><b>man</b></li>
 
-<p>More information is available on most UNIX commands is
-  available via the online manual pages, which are accessible through the
-  <b>man</b>
-  command. The online documentation is in fact divided into sections. Traditionally,
-  they are
-<p><b>1 User-level commands
-<br><b>2 System calls
-<br><b>3 Library functions
-<br><b>4 Devices and device drivers
-<br><b>5 File formats
-<br><b>6 Games
-<br><b>7 Various miscellaneous stuff - macro packages etc.
-<br><b>8 System maintenance and operation commands
-<p>Sometimes <b>man</b> gives you a manual page from the
-  wrong section. For example, say you were writing a program and you needed
-  to use the <b>rmdir</b> system call. <b>man rmdir</b> gives you the
-  manual page for the user-level command <b>rmdir</b>. To force <b>man</b>
-  to look in Section 2 of the manual instead, type <b>man 2 rmdir</b> (or<b>man
-    -s2 rmdir</b> on some systems).
-<p><b>man</b> can also find manual pages which mention
-  a particular topic. For example, <b>man -k postscript </b>should produce
-  a list of utilities that can produce and manipulate postscript files.
-<br>&nbsp;
-<li>
-  <b>info</li>
+      <p>
+	More information is available on most UNIX commands is
+	available via the online manual pages, which are accessible through the
+	<b>man</b> command. The online documentation is in fact divided into sections. Traditionally,
+	they are
+      </p>
+      <ol>
+	<li>User-level commands</li>
+	<li>System calls</li>
+	<li>Library functions</li>
+	<li>Devices and device drivers</li>
+	<li>File formats</li>
+	<li>Games</li>
+	<li>Various miscellaneous stuff - macro packages etc.</li>
+	<li>System maintenance and operation commands</li>
+      </ol>
+      <p>
+	Sometimes <b>man</b> gives you a manual page from the
+	wrong section. For example, say you were writing a program and you needed
+	to use the <b>rmdir</b> system call. <b>man rmdir</b> gives you the
+	manual page for the user-level command <b>rmdir</b>. To force <b>man</b>
+	to look in Section 2 of the manual instead, type <b>man 2 rmdir</b> (or<b>man
+	  -s2 rmdir</b> on some systems).
+      </p>
+      <p>
+	<b>man</b> can also find manual pages which mention
+	a particular topic. For example, <b>man -k postscript </b>should produce
+	a list of utilities that can produce and manipulate postscript files.
+      </p>
 
-<p><b>info </b>is an interactive, somewhat more friendly
-  and helpful alternative to <b>man</b>. It may not be installed on all
-  systems, however.</ul>
-</div>
+      <li><b>info</b></li>
 
-</body>
+      <p>
+	<b>info</b> is an interactive, somewhat more friendly
+	and helpful alternative to <b>man</b>. It may not be installed on all
+	systems, however.
+      </p>
+    </ul>
+    </div>
+    
+  </body>
 </html>
