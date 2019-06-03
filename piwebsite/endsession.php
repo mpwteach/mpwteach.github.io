@@ -17,7 +17,7 @@
        session_destroy();
      ?>
 
-    <a href="session1.php">back</a>    
+    <a href="session.php">back</a>    
     
   </body>
 </html>

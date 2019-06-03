@@ -10,7 +10,7 @@
     <h1>Login</h1>
 
    
-    <form method="post" action="session1.php">
+    <form method="post" action="session.php">
       User Name: <input type="text" name="arg1"]><br>
       <input type="submit" value="Login">
     </form>
